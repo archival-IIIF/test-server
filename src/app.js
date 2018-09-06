@@ -5,6 +5,7 @@ const logo = require('./logo/logo.js');
 const rightsInformation = require('./rightsInformation/rightsInformation.js');
 const audioVideo = require('./audioVideo/audioVideo.js');
 const image = require('./image/image.js');
+const pdf = require('./pdf/pdf.js');
 const thumbnail = require('./thumbnail/thumbnail.js');
 const emptyFolder = require('./emptyFolder/emptyFolder.js');
 const homepage = require('./homepage/homepage.js');
@@ -36,6 +37,7 @@ app.use(thumbnail.routes());
 app.use(emptyCollection.routes());
 app.use(emptyFolder.routes());
 app.use(image.routes());
+app.use(pdf.routes());
 app.use(homepage.routes());
 app.use(common.routes());
 
