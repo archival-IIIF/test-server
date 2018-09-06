@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>archival IIIF test server</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<style>
+
+    body {
+        margin-top: 92px;
+    }
+
+    .icon {
+        width: 22px;
+        height: 22px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    #topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #eaeef2;
+        padding: 6px 12px;
+        font-size: 1.4em;
+        color: #0E7BA6;
+    }
+
+    #topbar > img {
+        width: 36px;
+    }
+
+    input {
+        margin-bottom: 32px;
+    }
+
+    .open-in-viewer {
+        display: none
+    }
+
+    td:nth-of-type(1) {
+        width: 140px;
+    }
+
+    td:nth-of-type(3) {
+        width: 90px;
+        text-align: right;
+    }
+
+</style>
+<body>
+
+<div id="topbar">
+    <img src="/public/iiif.png" /> archival IIIF test server
+</div>
+
+<div class="container">
+
+    <input id="viewer-url" type="url" class="form-control" placeholder="Add viewer url (e.g. http://localhost:3000/)" aria-label="viewer-url" aria-describedby="viewer-url" onkeyup="openInViewer(this.value)">
+
+    <table id="test-cases" class="table table-striped">
+        <thead>
+        <tr>
+            <td>Example ID</td>
+            <td>Description</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/jquery/jquery.slim.min.js"></script>
+<script type="text/javascript">
+
+    let testCases = {
+        audioVideo: 'Test case with audio and video files',
+        logo: 'Test case with a logo',
+        rightsInformation: 'Test case with license and attribution data',
+        emptyCollection: 'Empty collection test case',
+        emptyFolder: 'Empty folder test case',
+        image: 'Test case with images',
+        thumbnail: 'Test case with different thumbnail settings',
+        nestedStructure: 'Test case with a nested structure',
+        pdf: 'Test case with pdf files',
+        auth1: 'Token login test case with locked files',
+        auth2: 'Token login test case with a locked collection',
+        auth3: 'IP login test case with locked files',
+        auth4: 'IP-Login test case with a locked collection',
+        auth5: 'IP and token login test case with locked files',
+        auth6: 'IP and token login test case with a locked collection',
+    };
+
+
+    for (let id in testCases) {
+        let description = testCases[id];
+        let url = './presentation/' + id;
+        $('#test-cases > tbody').append(
+            '<tr>'+
+            '<td><a class="open" href="'+url+'" target="_blank">'+id+'</td>'+
+            '<td>'+description+'</td>'+
+            '<td>'+
+            '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>'+
+            '<a class="open-manifest" href="'+url+'" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>'+
+            '</td>' +
+            '</tr>'
+        );
+    }
+
+    let viewerUrl = localStorage.getItem('viewer-url');
+    if (viewerUrl) {
+        openInViewer(viewerUrl);
+        $('#viewer-url').val(viewerUrl);
+    }
+
+    function openInViewer(value) {
+        let $openInViewer = $('.open-in-viewer');
+        let $openManifest = $('.open-manifest');
+
+        if (value === '' || !isURL(value)) {
+            $openInViewer.hide();
+            localStorage.removeItem('viewer-url');
+            $openManifest.each(function () {
+                $(this).parent().parent().find('.open').attr('href', this.href);
+            });
+
+        } else {
+            $openInViewer.show();
+            localStorage.setItem('viewer-url', value);
+            $openManifest.each(function () {
+                let $element = $(this);
+                $element.parent().find('.open-in-viewer').attr('href', value + '?manifest=' + this.href);
+                $element.parent().parent().find('.open').attr('href', value + '?manifest=' + this.href);
+            });
+        }
+
+
+    }
+
+    function isURL(str) {
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return pattern.test(str);
+    }
+
+</script>
+
+</body>
+</html>
