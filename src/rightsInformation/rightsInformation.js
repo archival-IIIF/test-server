@@ -1,13 +1,6 @@
 const Router = require('koa-router');
 const router = new Router();
 
-const path = require('path');
-const mime = require('mime-types');
-const fs = require('fs');
-const {promisify} = require('util');
-const readFileAsync = promisify(fs.readFile);
-const HttpError = require('../lib/HttpError');
-
 router.get('/presentation/rightsInformation', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/presentation/rightsInformation',
