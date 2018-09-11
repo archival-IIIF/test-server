@@ -1,12 +1,8 @@
 const Router = require('koa-router');
 const router = new Router();
-
 const path = require('path');
-const mime = require('mime-types');
-const fs = require('fs');
-const {promisify} = require('util');
-const readFileAsync = promisify(fs.readFile);
-const HttpError = require('../lib/HttpError');
+const download = require('../lib/Download');
+
 
 router.get('/presentation/audioVideo', ctx => {
     ctx.body = {
@@ -83,14 +79,8 @@ router.get('/presentation/die_internationale_as_mp3', ctx => {
 });
 
 router.get('/file/die_internationale_as_mp3', async ctx => {
-    try {
-        let filePath = './src/audioVideo/die_internationale_as_mp3.mp3';
-        ctx.set('Content-Type', mime.contentType(path.basename(filePath)));
-        ctx.body = await readFileAsync(filePath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
+    const filePath = path.join(__dirname, 'die_internationale_as_mp3.mp3');
+    await download(ctx, filePath);
 });
 
 
@@ -139,14 +129,8 @@ router.get('/presentation/f113', ctx => {
 });
 
 router.get('/file/f113', async ctx => {
-    try {
-        let filePath = './src/audioVideo/f113.mp4';
-        ctx.set('Content-Type', mime.contentType(path.basename(filePath)));
-        ctx.body = await readFileAsync(filePath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
+    const filePath = path.join(__dirname, 'F113.mp4');
+    await download(ctx, filePath);
 });
 
 

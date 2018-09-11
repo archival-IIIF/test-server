@@ -1,12 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
-
 const path = require('path');
-const mime = require('mime-types');
-const fs = require('fs');
-const {promisify} = require('util');
-const readFileAsync = promisify(fs.readFile);
-const HttpError = require('../lib/HttpError');
+const download = require('../lib/Download');
 
 router.get('/presentation/pdf', ctx => {
     ctx.body = {
@@ -127,36 +122,18 @@ router.get('/presentation/pdfa', ctx => {
 
 
 router.get('/file/pdf1', async  ctx => {
-    try {
-        let filePath = './src/pdf/test.pdf';
-        ctx.set('Content-Type', mime.contentType(path.basename(filePath)));
-        ctx.body = await readFileAsync(filePath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
+    const filePath = path.join(__dirname, 'test.pdf');
+    await download(ctx, filePath);
 });
 
 router.get('/file/docx', async  ctx => {
-    try {
-        let filePath = './src/pdf/test.docx';
-        ctx.set('Content-Type', mime.contentType(path.basename(filePath)));
-        ctx.body = await readFileAsync(filePath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
+    const filePath = path.join(__dirname, 'test.docx');
+    await download(ctx, filePath);
 });
 
 router.get('/file/pdfa', async  ctx => {
-    try {
-        let filePath = './src/pdf/PDFa.pdf';
-        ctx.set('Content-Type', mime.contentType(path.basename(filePath)));
-        ctx.body = await readFileAsync(filePath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
+    const filePath = path.join(__dirname, 'PDFa.pdf');
+    await download(ctx, filePath);
 });
 
 module.exports = router;

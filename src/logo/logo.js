@@ -2,11 +2,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 const path = require('path');
-const mime = require('mime-types');
-const fs = require('fs');
-const {promisify} = require('util');
-const readFileAsync = promisify(fs.readFile);
-const HttpError = require('../lib/HttpError');
+const download = require('../lib/Download');
 
 router.get('/presentation/logo', ctx => {
     ctx.body = {
@@ -112,14 +108,8 @@ router.get('/presentation/fileWithoutLogo', ctx => {
 });
 
 router.get('/logo', async  ctx => {
-    try {
-        let logoPath = './src/logo/logo.png';
-        ctx.set('Content-Type', mime.contentType(path.basename(logoPath)));
-        ctx.body = await readFileAsync(logoPath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
+    const filePath = path.join(__dirname, 'logo.png');
+    await download(ctx, filePath);
 });
 
 module.exports = router;

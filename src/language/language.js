@@ -1,11 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
 const path = require('path');
-const mime = require('mime-types');
-const fs = require('fs');
-const {promisify} = require('util');
-const readFileAsync = promisify(fs.readFile);
-const HttpError = require('../lib/HttpError');
+const download = require('../lib/Download');
 
 router.get('/presentation/language', ctx => {
     ctx.body = {
@@ -83,35 +79,30 @@ router.get('/presentation/language5', ctx => {
     ctx.body = languageFilePresentation(ctx, 'language5', '流入數字館藏.docx');
 });
 
-async function languageFileDownload(ctx, filename) {
-    try {
-        let filePath = './src/language/' + filename;
-        ctx.set('Content-Type', mime.contentType(path.basename(filePath)));
-        ctx.body = await readFileAsync(filePath);
-    }
-    catch (err) {
-        throw new HttpError(404);
-    }
-}
 
 router.get('/file/language1', async  ctx => {
-    await languageFileDownload(ctx, 'colecções digitais afluência.docx')
+    const filePath = path.join(__dirname, 'colecções digitais afluência.docx');
+    await download(ctx, filePath);
 });
 
 router.get('/file/language2', async  ctx => {
-    await languageFileDownload(ctx, 'Приток цифровых коллекций.docx')
+    const filePath = path.join(__dirname, 'Приток цифровых коллекций.docx');
+    await download(ctx, filePath);
 });
 
 router.get('/file/language3', async  ctx => {
-    await languageFileDownload(ctx, 'مجموعه های دیجیتال جریان.docx')
+    const filePath = path.join(__dirname, 'مجموعه های دیجیتال جریان.docx');
+    await download(ctx, filePath);
 });
 
 router.get('/file/language4', async  ctx => {
-    await languageFileDownload(ctx, 'অন্তর্বাহ ডিজিটাল সংগ্রহ.docx')
+    const filePath = path.join(__dirname, 'অন্তর্বাহ ডিজিটাল সংগ্রহ.docx');
+    await download(ctx, filePath);
 });
 
 router.get('/file/language5', async  ctx => {
-    await languageFileDownload(ctx, '流入數字館藏.docx')
+    const filePath = path.join(__dirname, '流入數字館藏.docx');
+    await download(ctx, filePath);
 });
 
 module.exports = router;
