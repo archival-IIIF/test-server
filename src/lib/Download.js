@@ -12,7 +12,7 @@ async function download(ctx, filePath, fileName) {
             fileName = path.basename(filePath);
         }
         ctx.set('Content-Type', mime.contentType(filePath));
-        ctx.set('Content-Disposition', 'attachment; filename="' + fileName + '"');
+        ctx.set('Content-Disposition', 'inline; filename="' + fileName + '"');
         ctx.body = await readFileAsync(filePath);
     }
     catch (err) {
