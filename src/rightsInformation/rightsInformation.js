@@ -23,7 +23,7 @@ router.get('/presentation/rightsInformation', ctx => {
             {
                 '@id': ctx.request.origin + '/presentation/fileWithAttribution',
                 '@type': 'sc:Manifest',
-                label: 'File with attribution.',
+                label: 'File with attribution.txt',
             }
         ]
     };
@@ -34,7 +34,7 @@ router.get('/presentation/fileWithAttribution', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/presentation/fileWithAttribution',
         '@type': 'sc:Manifest',
-        'label': 'File with license.txt',
+        'label': 'File with attribution.txt',
         '@context': 'http://iiif.io/api/presentation/2/context.json',
         'attribution': 'Provided by Example Organization',
         'within': ctx.request.origin + '/presentation/rightsInformation',
