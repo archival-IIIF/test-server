@@ -12,27 +12,27 @@ router.get('/presentation/language', ctx => {
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/language1',
+                '@id': ctx.request.origin + '/presentation/languageFile1',
                 '@type': 'sc:Manifest',
                 label: 'colecções digitais afluência.docx',
             },
             {
-                '@id': ctx.request.origin + '/presentation/language2',
+                '@id': ctx.request.origin + '/presentation/languageFile2',
                 '@type': 'sc:Manifest',
                 label: 'Приток цифровых коллекций.docx',
             },
             {
-                '@id': ctx.request.origin + '/presentation/language3',
+                '@id': ctx.request.origin + '/presentation/languageFile3',
                 '@type': 'sc:Manifest',
                 label:  'مجموعه های دیجیتال جریان.docx',
             },
             {
-                '@id': ctx.request.origin + '/presentation/language4',
+                '@id': ctx.request.origin + '/presentation/languageFile4',
                 '@type': 'sc:Manifest',
                 label: 'অন্তর্বাহ ডিজিটাল সংগ্রহ.docx',
             },
             {
-                '@id': ctx.request.origin + '/presentation/language5',
+                '@id': ctx.request.origin + '/presentation/languageFile5',
                 '@type': 'sc:Manifest',
                 label: '流入數字館藏.docx',
             }
@@ -59,23 +59,23 @@ function languageFilePresentation(ctx, id, label) {
     };
 }
 
-router.get('/presentation/language1', ctx => {
+router.get('/presentation/languageFile1', ctx => {
     ctx.body = languageFilePresentation(ctx, 'language1', 'colecções digitais afluência.docx');
 });
 
-router.get('/presentation/language2', ctx => {
+router.get('/presentation/languageFile2', ctx => {
     ctx.body = languageFilePresentation(ctx, 'language2', 'Приток цифровых коллекций.docx');
 });
 
-router.get('/presentation/language3', ctx => {
+router.get('/presentation/languageFile3', ctx => {
     ctx.body = languageFilePresentation(ctx, 'language3', 'مجموعه های دیجیتال جریان.docx');
 });
 
-router.get('/presentation/language4', ctx => {
+router.get('/presentation/languageFile4', ctx => {
     ctx.body = languageFilePresentation(ctx, 'language4', 'অন্তর্বাহ ডিজিটাল সংগ্রহ.docx');
 });
 
-router.get('/presentation/language5', ctx => {
+router.get('/presentation/languageFile5', ctx => {
     ctx.body = languageFilePresentation(ctx, 'language5', '流入數字館藏.docx');
 });
 
