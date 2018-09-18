@@ -14,10 +14,13 @@ const language = require('./language/language.js');
 const contentLanguage = require('./language/contentLanguage.js');
 const emptyCollection = require('./emptyCollection/emptyCollection.js');
 const common = require('./common/common.js');
+const auth = require('./auth/auth.js');
+const auth2 = require('./auth2/auth2.js');
 const {fileIconsPath} = require('./lib/FileIcon');
 const serve = require('koa-static-server');
 const config = require('./lib/Config');
 const path = require('path');
+const bodyParser = require('koa-bodyparser');
 
 
 app.use(async (ctx, next) => {
@@ -33,6 +36,8 @@ app.use(async (ctx, next) => {
 app.use(serve({rootDir: fileIconsPath, rootPath: '/file-icon'}));
 app.use(serve({rootDir: path.join(__dirname, './public'), rootPath: '/public'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/jquery/dist/'), rootPath: '/jquery'}));
+app.use(serve({rootDir: path.join(__dirname, './../node_modules/bootstrap/dist/'), rootPath: '/bootstrap'}));
+app.use(bodyParser());
 app.use(logo.routes());
 app.use(rightsInformation.routes());
 app.use(audioVideo.routes());
@@ -46,6 +51,9 @@ app.use(image.routes());
 app.use(pdf.routes());
 app.use(homepage.routes());
 app.use(common.routes());
+app.use(auth.routes());
+app.use(auth2.routes());
+app.keys = ['secret'];
 
 
 app.listen(config.port);
