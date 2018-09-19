@@ -3,17 +3,17 @@ const router = new Router();
 const path = require('path');
 const download = require('../lib/Download');
 
-router.get('/presentation/pdf', ctx => {
+router.get('/collection/pdf', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/pdf',
+        '@id': ctx.request.origin + '/collection/pdf',
         '@type': 'sc:Collection',
         label: 'PDF test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         logo: ctx.request.origin + '/logo',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/pdf1',
+                '@id': ctx.request.origin + '/collection/pdf1',
                 '@type': 'sc:Manifest',
                 label: 'test.pdf',
                 thumbnail: {
@@ -22,7 +22,7 @@ router.get('/presentation/pdf', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/presentation/docx',
+                '@id': ctx.request.origin + '/collection/docx',
                 '@type': 'sc:Manifest',
                 label: 'test.docx',
                 thumbnail: {
@@ -31,7 +31,7 @@ router.get('/presentation/pdf', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/presentation/pdfa',
+                '@id': ctx.request.origin + '/collection/pdfa',
                 '@type': 'sc:Manifest',
                 label: 'PDFa.pdf',
                 thumbnail: {
@@ -44,15 +44,15 @@ router.get('/presentation/pdf', ctx => {
 });
 
 
-router.get('/presentation/pdf1', ctx => {
+router.get('/collection/pdf1', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/pdf1',
+        '@id': ctx.request.origin + '/collection/pdf1',
         '@type': 'sc:Manifest',
         'label': 'test.pdf',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/pdf',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/pdf1/sequence/0',
+            '@id': ctx.request.origin + '/collection/pdf1/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/pdf1',
@@ -70,15 +70,15 @@ router.get('/presentation/pdf1', ctx => {
 
 
 
-router.get('/presentation/docx', ctx => {
+router.get('/collection/docx', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/docx',
+        '@id': ctx.request.origin + '/collection/docx',
         '@type': 'sc:Manifest',
         'label': 'test.pdf',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/pdf',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/docx/sequence/0',
+            '@id': ctx.request.origin + '/collection/docx/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/docx',
@@ -95,15 +95,15 @@ router.get('/presentation/docx', ctx => {
 });
 
 
-router.get('/presentation/pdfa', ctx => {
+router.get('/collection/pdfa', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/pdfa',
+        '@id': ctx.request.origin + '/collection/pdfa',
         '@type': 'sc:Manifest',
         'label': 'test.pdf',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/pdf',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/pdf1/sequence/0',
+            '@id': ctx.request.origin + '/collection/pdf1/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/pdfa',

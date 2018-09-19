@@ -3,21 +3,21 @@ const router = new Router();
 const {hasAccess} = require('../lib/Security');
 
 
-router.get('/presentation/auth3', ctx => {
+router.get('/collection/auth3', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/presentation/auth3',
+        '@id': ctx.request.origin + '/collection/auth3',
         '@type': 'sc:Collection',
         label: 'Open Collection',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         collections: [
             {
-                '@id': ctx.request.origin + '/presentation/auth31',
+                '@id': ctx.request.origin + '/collection/auth31',
                 '@type': 'sc:Collection',
                 label: 'Subfolder with access restriction',
             },
             {
-                '@id': ctx.request.origin + '/presentation/auth32',
+                '@id': ctx.request.origin + '/collection/auth32',
                 '@type': 'sc:Manifest',
                 label: 'File with access restriction',
             }
@@ -32,14 +32,14 @@ router.get('/presentation/auth3', ctx => {
     ctx.body = collectionManifest;
 });
 
-router.get('/presentation/auth31', ctx => {
+router.get('/collection/auth31', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/presentation/auth31',
+        '@id': ctx.request.origin + '/collection/auth31',
         '@type': 'sc:Collection',
         label: 'Subfolder with access restriction',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        within: ctx.request.origin + '/presentation/auth3',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        within: ctx.request.origin + '/collection/auth3',
         service: [
             {
                 '@context': 'http://iiif.io/api/auth/1/context.json',
@@ -74,14 +74,14 @@ router.get('/presentation/auth31', ctx => {
     ctx.body = collectionManifest;
 });
 
-router.get('/presentation/auth32', ctx => {
+router.get('/collection/auth32', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/presentation/auth32',
+        '@id': ctx.request.origin + '/collection/auth32',
         '@type': 'sc:Manifest',
         label: 'File with access restriction',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        within: ctx.request.origin + '/presentation/auth3',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        within: ctx.request.origin + '/collection/auth3',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         service: [
             {

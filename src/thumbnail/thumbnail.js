@@ -1,15 +1,15 @@
 const Router = require('koa-router');
 const router = new Router();
 
-router.get('/presentation/thumbnail', ctx => {
+router.get('/collection/thumbnail', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/thumbnail',
+        '@id': ctx.request.origin + '/collection/thumbnail',
         '@type': 'sc:Collection',
         label: 'Thumbnail test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         collections: [
             {
-                '@id': ctx.request.origin + '/presentation/folderWithThumbnail',
+                '@id': ctx.request.origin + '/collection/folderWithThumbnail',
                 '@type': 'sc:Collection',
                 label: 'Folder with thumbnail',
                 thumbnail: {
@@ -18,12 +18,12 @@ router.get('/presentation/thumbnail', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/presentation/folderWithoutThumbnail',
+                '@id': ctx.request.origin + '/collection/folderWithoutThumbnail',
                 '@type': 'sc:Collection',
                 label: 'Folder without thumbnail',
             },
             {
-                '@id': ctx.request.origin + '/presentation/folderWithThumbnailService',
+                '@id': ctx.request.origin + '/collection/folderWithThumbnailService',
                 '@type': 'sc:Collection',
                 label: 'Folder with thumbnail service',
                 thumbnail: {
@@ -42,7 +42,7 @@ router.get('/presentation/thumbnail', ctx => {
         ],
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/fileWithoutThumbnail',
+                '@id': ctx.request.origin + '/collection/fileWithoutThumbnail',
                 '@type': 'sc:Manifest',
                 label: 'File without thumbnail',
             },
@@ -50,13 +50,13 @@ router.get('/presentation/thumbnail', ctx => {
     };
 });
 
-router.get('/presentation/folderWithThumbnail', ctx => {
+router.get('/collection/folderWithThumbnail', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/folderWithThumbnail',
+        '@id': ctx.request.origin + '/collection/folderWithThumbnail',
         '@type': 'sc:Collection',
         label: 'Folder with thumbnail',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/thumbnail',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/thumbnail',
         thumbnail: {
             '@id': ctx.request.origin + '/file-icon/folder.svg',
             format: 'image/svg+xml'
@@ -64,23 +64,23 @@ router.get('/presentation/folderWithThumbnail', ctx => {
     };
 });
 
-router.get('/presentation/folderWithoutThumbnail', ctx => {
+router.get('/collection/folderWithoutThumbnail', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/folderWithoutThumbnail',
+        '@id': ctx.request.origin + '/collection/folderWithoutThumbnail',
         '@type': 'sc:Collection',
         label: 'Folder without thumbnail',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/thumbnail',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/thumbnail',
     };
 });
 
-router.get('/presentation/folderWithThumbnailService', ctx => {
+router.get('/collection/folderWithThumbnailService', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/folderWithThumbnailService',
+        '@id': ctx.request.origin + '/collection/folderWithThumbnailService',
         '@type': 'sc:Collection',
         label: 'Folder without thumbnail',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/thumbnail',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/thumbnail',
         thumbnail: {
             '@id': ctx.request.origin + '/thumbnail/folderWithThumbnailService',
             format: 'image/svg+xml',
@@ -97,13 +97,13 @@ router.get('/presentation/folderWithThumbnailService', ctx => {
 });
 
 
-router.get('/presentation/fileWithoutThumbnail', ctx => {
+router.get('/collection/fileWithoutThumbnail', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/fileWithoutThumbnail',
+        '@id': ctx.request.origin + '/collection/fileWithoutThumbnail',
         '@type': 'sc:Manifest',
         label: 'File without thumbnail',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/thumbnail',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/thumbnail',
     };
 });
 

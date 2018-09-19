@@ -2,16 +2,16 @@ const Router = require('koa-router');
 const router = new Router();
 const {hasAccess} = require('../lib/Security');
 
-router.get('/presentation/auth2', ctx => {
+router.get('/collection/auth2', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/presentation/auth2',
+        '@id': ctx.request.origin + '/collection/auth2',
         '@type': 'sc:Collection',
         label: 'Collection with access restriction',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         collections: [
             {
-                '@id': ctx.request.origin + '/presentation/auth21',
+                '@id': ctx.request.origin + '/collection/auth21',
                 '@type': 'sc:Collection',
                 label: 'Subfolder with access restriction',
             }
@@ -51,14 +51,14 @@ router.get('/presentation/auth2', ctx => {
     ctx.body = collectionManifest;
 });
 
-router.get('/presentation/auth21', ctx => {
+router.get('/collection/auth21', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/presentation/auth21',
+        '@id': ctx.request.origin + '/collection/auth21',
         '@type': 'sc:Collection',
         label: 'Subfolder with access restriction',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        within: ctx.request.origin + '/presentation/auth2',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        within: ctx.request.origin + '/collection/auth2',
         service: [
             {
                 '@context': 'http://iiif.io/api/auth/1/context.json',

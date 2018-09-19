@@ -5,21 +5,21 @@ const imageWith = 1840;
 const imageHeight = 1450;
 
 
-router.get('/presentation/image', ctx => {
+router.get('/collection/image', ctx => {
 
     let arielPresentation = getArielPresentation(ctx);
     arielPresentation.within = undefined;
     arielPresentation.thumbnail = undefined;
 
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/image',
+        '@id': ctx.request.origin + '/collection/image',
         '@type': 'sc:Collection',
         label: 'Image test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/ariel',
+                '@id': ctx.request.origin + '/collection/ariel',
                 '@type': 'sc:Manifest',
                 label: 'Ariel_-_LoC_4a15521.jpg',
                 thumbnail: {
@@ -40,17 +40,17 @@ router.get('/presentation/image', ctx => {
     };
 });
 
-router.get('/presentation/ariel', ctx => {
+router.get('/collection/ariel', ctx => {
     ctx.body = getArielPresentation(ctx);
 });
 
 function getArielPresentation(ctx) {
     return {
-        '@id': ctx.request.origin + '/presentation/ariel',
+        '@id': ctx.request.origin + '/collection/ariel',
         '@type': 'sc:Manifest',
         label: 'Ariel_-_LoC_4a15521.jpg',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        within: ctx.request.origin + '/presentation/image',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        within: ctx.request.origin + '/collection/image',
         thumbnail: {
             '@id': ctx.request.origin + '/image/ariel/full/!100,100/0/default.jpg',
             '@type': "dctypes:Image",
@@ -79,15 +79,15 @@ function getArielPresentation(ctx) {
             }
         ],
         sequences: [{
-            '@id': ctx.request.origin + '/presentation/ariel/sequence/0',
+            '@id': ctx.request.origin + '/collection/ariel/sequence/0',
             '@type': 'sc:Sequence',
             canvases: [{
-                '@id': ctx.request.origin + '/presentation/ariel/canvas/0',
+                '@id': ctx.request.origin + '/collection/ariel/canvas/0',
                 '@type': 'sc:Canvas',
                 width: imageWith,
                 height: imageHeight,
                 images: [{
-                    '@id': ctx.request.origin + '/presentation/ariel/annotation/0',
+                    '@id': ctx.request.origin + '/collection/ariel/annotation/0',
                     '@type': 'oa:Annotation',
                     motivation: 'sc:painting',
                     resource: {
@@ -105,7 +105,7 @@ function getArielPresentation(ctx) {
                             profile: 'http://iiif.io/api/image/2/level2.json'
                         }
                     },
-                    "on": ctx.request.origin + '/presentation/ariel/canvas/0'
+                    "on": ctx.request.origin + '/collection/ariel/canvas/0'
                 }]
             }]
         }]

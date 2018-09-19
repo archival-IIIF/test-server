@@ -1,27 +1,27 @@
 const Router = require('koa-router');
 const router = new Router();
 
-router.get('/presentation/rightsInformation', ctx => {
+router.get('/collection/rightsInformation', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/rightsInformation',
+        '@id': ctx.request.origin + '/collection/rightsInformation',
         '@type': 'sc:Collection',
         label: 'Rights information test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/fileWithLicense',
+                '@id': ctx.request.origin + '/collection/fileWithLicense',
                 '@type': 'sc:Manifest',
                 label: 'File with license.txt',
             },
             {
-                '@id': ctx.request.origin + '/presentation/fileWithoutLicense',
+                '@id': ctx.request.origin + '/collection/fileWithoutLicense',
                 '@type': 'sc:Manifest',
                 label: 'File without license.txt',
             }
             ,
             {
-                '@id': ctx.request.origin + '/presentation/fileWithAttribution',
+                '@id': ctx.request.origin + '/collection/fileWithAttribution',
                 '@type': 'sc:Manifest',
                 label: 'File with attribution.txt',
             }
@@ -30,14 +30,14 @@ router.get('/presentation/rightsInformation', ctx => {
 });
 
 
-router.get('/presentation/fileWithAttribution', ctx => {
+router.get('/collection/fileWithAttribution', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/fileWithAttribution',
+        '@id': ctx.request.origin + '/collection/fileWithAttribution',
         '@type': 'sc:Manifest',
         'label': 'File with attribution.txt',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         'attribution': 'Provided by Example Organization',
-        'within': ctx.request.origin + '/presentation/rightsInformation',
+        'within': ctx.request.origin + '/collection/rightsInformation',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -53,7 +53,7 @@ router.get('/presentation/fileWithAttribution', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/fileWithAttribution/sequence/0',
+            '@id': ctx.request.origin + '/collection/fileWithAttribution/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',
@@ -70,14 +70,14 @@ router.get('/presentation/fileWithAttribution', ctx => {
 });
 
 
-router.get('/presentation/fileWithLicense', ctx => {
+router.get('/collection/fileWithLicense', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/fileWithLicense',
+        '@id': ctx.request.origin + '/collection/fileWithLicense',
         '@type': 'sc:Manifest',
         'label': 'File with license.txt',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-        'within': ctx.request.origin + '/presentation/rightsInformation',
+        'within': ctx.request.origin + '/collection/rightsInformation',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -93,7 +93,7 @@ router.get('/presentation/fileWithLicense', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/fileWithLicense/sequence/0',
+            '@id': ctx.request.origin + '/collection/fileWithLicense/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',
@@ -112,13 +112,13 @@ router.get('/presentation/fileWithLicense', ctx => {
 
 
 
-router.get('/presentation/fileWithoutLicense', ctx => {
+router.get('/collection/fileWithoutLicense', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/fileWithoutLicense',
+        '@id': ctx.request.origin + '/collection/fileWithoutLicense',
         '@type': 'sc:Manifest',
         'label': 'File without license.txt',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/rightsInformation',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/rightsInformation',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -134,7 +134,7 @@ router.get('/presentation/fileWithoutLicense', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/fileWithoutLicense/sequence/0',
+            '@id': ctx.request.origin + '/collection/fileWithoutLicense/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',

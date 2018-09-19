@@ -4,16 +4,16 @@ const path = require('path');
 const download = require('../lib/Download');
 
 
-router.get('/presentation/audioVideo', ctx => {
+router.get('/collection/audioVideo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/audioVideo',
+        '@id': ctx.request.origin + '/collection/audioVideo',
         '@type': 'sc:Collection',
         label: 'Audio & video test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/die_internationale_as_mp3',
+                '@id': ctx.request.origin + '/collection/die_internationale_as_mp3',
                 '@type': 'sc:Manifest',
                 label: 'Die Internationale as mp3.mp3',
                 thumbnail: {
@@ -22,7 +22,7 @@ router.get('/presentation/audioVideo', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/presentation/f113',
+                '@id': ctx.request.origin + '/collection/f113',
                 '@type': 'sc:Manifest',
                 label: 'F113.mp4',
                 thumbnail: {
@@ -35,14 +35,14 @@ router.get('/presentation/audioVideo', ctx => {
 });
 
 
-router.get('/presentation/die_internationale_as_mp3', ctx => {
+router.get('/collection/die_internationale_as_mp3', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/die_internationale_as_mp3',
+        '@id': ctx.request.origin + '/collection/die_internationale_as_mp3',
         '@type': 'sc:Manifest',
         'label': 'Die_Internationale as mp3.mp3',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         'license': 'http://creativecommons.org/licenses/by-sa/3.0/',
-        'within': ctx.request.origin + '/presentation/audioVideo',
+        'within': ctx.request.origin + '/collection/audioVideo',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -62,7 +62,7 @@ router.get('/presentation/die_internationale_as_mp3', ctx => {
             format: 'image/svg+xml'
         },
         'mediaSequences': [{
-            '@id': ctx.request.origin + '/presentation/die_internationale_as_mp3/sequence/0',
+            '@id': ctx.request.origin + '/collection/die_internationale_as_mp3/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/die_internationale_as_mp3',
@@ -85,14 +85,14 @@ router.get('/file/die_internationale_as_mp3', async ctx => {
 
 
 
-router.get('/presentation/f113', ctx => {
+router.get('/collection/f113', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/f113',
+        '@id': ctx.request.origin + '/collection/f113',
         '@type': 'sc:Manifest',
         'label': 'F113.mp4',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         'license': 'http://creativecommons.org/licenses/by-sa/3.0/',
-        'within': ctx.request.origin + '/presentation/audioVideo',
+        'within': ctx.request.origin + '/collection/audioVideo',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -112,7 +112,7 @@ router.get('/presentation/f113', ctx => {
             format: 'image/svg+xml'
         },
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/f113/sequence/0',
+            '@id': ctx.request.origin + '/collection/f113/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/f113',

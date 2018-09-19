@@ -1,12 +1,12 @@
 const Router = require('koa-router');
 const router = new Router();
 
-router.get('/presentation/emptyCollection', ctx => {
+router.get('/collection/emptyCollection', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/emptyCollection',
+        '@id': ctx.request.origin + '/collection/emptyCollection',
         '@type': 'sc:Collection',
         label: 'Empty collection test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json'
+        '@context': 'http://iiif.io/api/collection/2/context.json'
     };
 });
 

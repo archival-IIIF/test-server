@@ -4,22 +4,22 @@ const router = new Router();
 const path = require('path');
 const download = require('../lib/Download');
 
-router.get('/presentation/logo', ctx => {
+router.get('/collection/logo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/logo',
+        '@id': ctx.request.origin + '/collection/logo',
         '@type': 'sc:Collection',
         label: 'Logo test case',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
         logo: ctx.request.origin + '/logo',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/presentation/fileWithLogo',
+                '@id': ctx.request.origin + '/collection/fileWithLogo',
                 '@type': 'sc:Manifest',
                 label: 'File with logo.txt',
             },
             {
-                '@id': ctx.request.origin + '/presentation/fileWithoutLogo',
+                '@id': ctx.request.origin + '/collection/fileWithoutLogo',
                 '@type': 'sc:Manifest',
                 label: 'File without logo.txt',
             }
@@ -28,14 +28,14 @@ router.get('/presentation/logo', ctx => {
 });
 
 
-router.get('/presentation/fileWithLogo', ctx => {
+router.get('/collection/fileWithLogo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/fileWithLogo',
+        '@id': ctx.request.origin + '/collection/fileWithLogo',
         '@type': 'sc:Manifest',
         logo: ctx.request.origin + '/logo',
         'label': 'File with logo.txt',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/logo',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/logo',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -51,7 +51,7 @@ router.get('/presentation/fileWithLogo', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/fileWithLogo/sequence/0',
+            '@id': ctx.request.origin + '/collection/fileWithLogo/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',
@@ -69,13 +69,13 @@ router.get('/presentation/fileWithLogo', ctx => {
 
 
 
-router.get('/presentation/fileWithoutLogo', ctx => {
+router.get('/collection/fileWithoutLogo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/presentation/fileWithoutLogo',
+        '@id': ctx.request.origin + '/collection/fileWithoutLogo',
         '@type': 'sc:Manifest',
         'label': 'File without logo.txt',
-        '@context': 'http://iiif.io/api/presentation/2/context.json',
-        'within': ctx.request.origin + '/presentation/logo',
+        '@context': 'http://iiif.io/api/collection/2/context.json',
+        'within': ctx.request.origin + '/collection/logo',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -91,7 +91,7 @@ router.get('/presentation/fileWithoutLogo', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/presentation/fileWithoutLogo/sequence/0',
+            '@id': ctx.request.origin + '/collection/fileWithoutLogo/sequence/0',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',
