@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const router = new Router();
-const {AccessState, hasAccess} = require('../lib/Security');
+const {hasAccess} = require('../lib/Security');
 
 router.get('/presentation/auth2', ctx => {
 
@@ -42,9 +42,7 @@ router.get('/presentation/auth2', ctx => {
         ]
     };
 
-    const access = hasAccess(ctx);
-
-    if (access.state === AccessState.CLOSED) {
+    if (!hasAccess(ctx)) {
         ctx.status = 401;
         collectionManifest.label = 'Access denied';
         collectionManifest.collections = [];
@@ -87,9 +85,7 @@ router.get('/presentation/auth21', ctx => {
         ]
     };
 
-    const access = hasAccess(ctx);
-
-    if (access.state === AccessState.CLOSED) {
+    if (!hasAccess(ctx)) {
         ctx.status = 401;
         collectionManifest.label = 'Access denied';
         ctx.body = collectionManifest;

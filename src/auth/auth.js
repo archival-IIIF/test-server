@@ -2,7 +2,7 @@ const {createReadStream} = require('fs');
 const path = require('path');
 const moment = require('moment');
 const Router = require('koa-router');
-const {DefaultAccessId, AccessState, hasAccess, UserToken, ViewerToken} = require('../lib/Security');
+const {DefaultAccessId, hasAccess, UserToken, ViewerToken} = require('../lib/Security');
 
 const router = new Router();
 
@@ -30,7 +30,7 @@ router.get('/token', async ctx => {
     const message = {};
 
     const access = hasAccess(ctx);
-    if (access.state === AccessState.OPEN) {
+    if (access.state) {
         message.accessToken = ViewerToken;
         message.expiresIn = 3600;
     }
