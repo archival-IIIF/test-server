@@ -86,22 +86,26 @@ router.get('/file/languageFile1', async  ctx => {
 
 router.get('/file/languageFile2', async  ctx => {
     const filePath = path.join(__dirname, 'Приток цифровых коллекций.docx');
-    await download(ctx, filePath);
+    // decoding problem!
+    await download(ctx, filePath, 'languageFile2');
 });
 
 router.get('/file/languageFile3', async  ctx => {
     const filePath = path.join(__dirname, 'مجموعه های دیجیتال جریان.docx');
-    await download(ctx, filePath);
+    // decoding problem!
+    await download(ctx, filePath, 'languageFile3');
 });
 
 router.get('/file/languageFile4', async  ctx => {
     const filePath = path.join(__dirname, 'অন্তর্বাহ ডিজিটাল সংগ্রহ.docx');
-    await download(ctx, filePath);
+    // decoding problem!
+    await download(ctx, filePath, 'languageFile4');
 });
 
 router.get('/file/languageFile5', async  ctx => {
     const filePath = path.join(__dirname, '流入數字館藏.docx');
-    await download(ctx, filePath);
+    // decoding problem!
+    await download(ctx, filePath, 'languageFile5');
 });
 
 module.exports = router;
