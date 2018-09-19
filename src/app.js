@@ -17,6 +17,7 @@ const common = require('./common/common.js');
 const auth = require('./auth/auth.js');
 const auth2 = require('./auth2/auth2.js');
 const auth3 = require('./auth3/auth3.js');
+const manifestErrors = require('./manifestErrors/manifestErrors.js');
 const {fileIconsPath} = require('./lib/FileIcon');
 const serve = require('koa-static-server');
 const config = require('./lib/Config');
@@ -55,6 +56,7 @@ app.use(common.routes());
 app.use(auth.routes());
 app.use(auth2.routes());
 app.use(auth3.routes());
+app.use(manifestErrors.routes());
 app.keys = ['secret'];
 
 
