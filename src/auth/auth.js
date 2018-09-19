@@ -29,8 +29,7 @@ router.post('/login', async ctx => {
 router.get('/token', async ctx => {
     const message = {};
 
-    const access = hasAccess(ctx);
-    if (access.state) {
+    if (hasAccess(ctx)) {
         message.accessToken = ViewerToken;
         message.expiresIn = 3600;
     }
