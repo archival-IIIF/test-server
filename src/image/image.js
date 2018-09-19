@@ -19,7 +19,7 @@ router.get('/collection/image', ctx => {
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/collection/ariel',
+                '@id': ctx.request.origin + '/manifest/ariel',
                 '@type': 'sc:Manifest',
                 label: 'Ariel_-_LoC_4a15521.jpg',
                 thumbnail: {
@@ -40,13 +40,13 @@ router.get('/collection/image', ctx => {
     };
 });
 
-router.get('/collection/ariel', ctx => {
+router.get('/manifest/ariel', ctx => {
     ctx.body = getArielPresentation(ctx);
 });
 
 function getArielPresentation(ctx) {
     return {
-        '@id': ctx.request.origin + '/collection/ariel',
+        '@id': ctx.request.origin + '/manifest/ariel',
         '@type': 'sc:Manifest',
         label: 'Ariel_-_LoC_4a15521.jpg',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -79,15 +79,15 @@ function getArielPresentation(ctx) {
             }
         ],
         sequences: [{
-            '@id': ctx.request.origin + '/collection/ariel/sequence/0',
+            '@id': ctx.request.origin + '/sequence/ariel',
             '@type': 'sc:Sequence',
             canvases: [{
-                '@id': ctx.request.origin + '/collection/ariel/canvas/0',
+                '@id': ctx.request.origin + '/canvas/ariel',
                 '@type': 'sc:Canvas',
                 width: imageWith,
                 height: imageHeight,
                 images: [{
-                    '@id': ctx.request.origin + '/collection/ariel/annotation/0',
+                    '@id': ctx.request.origin + '/annotation/ariel/',
                     '@type': 'oa:Annotation',
                     motivation: 'sc:painting',
                     resource: {
@@ -105,7 +105,7 @@ function getArielPresentation(ctx) {
                             profile: 'http://iiif.io/api/image/2/level2.json'
                         }
                     },
-                    "on": ctx.request.origin + '/collection/ariel/canvas/0'
+                    "on": ctx.request.origin + '/canvas/ariel'
                 }]
             }]
         }]

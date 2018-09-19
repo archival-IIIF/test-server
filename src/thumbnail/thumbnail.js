@@ -42,7 +42,7 @@ router.get('/collection/thumbnail', ctx => {
         ],
         manifests: [
             {
-                '@id': ctx.request.origin + '/collection/fileWithoutThumbnail',
+                '@id': ctx.request.origin + '/manifest/fileWithoutThumbnail',
                 '@type': 'sc:Manifest',
                 label: 'File without thumbnail',
             },
@@ -97,9 +97,9 @@ router.get('/collection/folderWithThumbnailService', ctx => {
 });
 
 
-router.get('/collection/fileWithoutThumbnail', ctx => {
+router.get('/manifest/fileWithoutThumbnail', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/fileWithoutThumbnail',
+        '@id': ctx.request.origin + '/manifest/fileWithoutThumbnail',
         '@type': 'sc:Manifest',
         label: 'File without thumbnail',
         '@context': 'http://iiif.io/api/collection/2/context.json',

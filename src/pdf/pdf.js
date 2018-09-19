@@ -13,7 +13,7 @@ router.get('/collection/pdf', ctx => {
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/collection/pdf1',
+                '@id': ctx.request.origin + '/manifest/pdf1',
                 '@type': 'sc:Manifest',
                 label: 'test.pdf',
                 thumbnail: {
@@ -22,7 +22,7 @@ router.get('/collection/pdf', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/collection/docx',
+                '@id': ctx.request.origin + '/manifest/docx',
                 '@type': 'sc:Manifest',
                 label: 'test.docx',
                 thumbnail: {
@@ -31,7 +31,7 @@ router.get('/collection/pdf', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/collection/pdfa',
+                '@id': ctx.request.origin + '/manifest/pdfa',
                 '@type': 'sc:Manifest',
                 label: 'PDFa.pdf',
                 thumbnail: {
@@ -44,15 +44,15 @@ router.get('/collection/pdf', ctx => {
 });
 
 
-router.get('/collection/pdf1', ctx => {
+router.get('/manifest/pdf1', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/pdf1',
+        '@id': ctx.request.origin + '/manifest/pdf1',
         '@type': 'sc:Manifest',
         'label': 'test.pdf',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         'within': ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/collection/pdf1/sequence/0',
+            '@id': ctx.request.origin + '/sequence/pdf1',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/pdf1',
@@ -70,15 +70,15 @@ router.get('/collection/pdf1', ctx => {
 
 
 
-router.get('/collection/docx', ctx => {
+router.get('/manifest/docx', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/docx',
+        '@id': ctx.request.origin + '/manifest/docx',
         '@type': 'sc:Manifest',
         'label': 'test.pdf',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         'within': ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/collection/docx/sequence/0',
+            '@id': ctx.request.origin + '/sequence/docx',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/docx',
@@ -95,15 +95,15 @@ router.get('/collection/docx', ctx => {
 });
 
 
-router.get('/collection/pdfa', ctx => {
+router.get('/manifest/pdfa', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/pdfa',
+        '@id': ctx.request.origin + '/manifest/pdfa',
         '@type': 'sc:Manifest',
         'label': 'test.pdf',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         'within': ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/collection/pdf1/sequence/0',
+            '@id': ctx.request.origin + '/sequence/pdfa',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/pdfa',

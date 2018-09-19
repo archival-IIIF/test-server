@@ -14,12 +14,12 @@ router.get('/collection/logo', ctx => {
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/collection/fileWithLogo',
+                '@id': ctx.request.origin + '/manifest/fileWithLogo',
                 '@type': 'sc:Manifest',
                 label: 'File with logo.txt',
             },
             {
-                '@id': ctx.request.origin + '/collection/fileWithoutLogo',
+                '@id': ctx.request.origin + '/manifest/fileWithoutLogo',
                 '@type': 'sc:Manifest',
                 label: 'File without logo.txt',
             }
@@ -28,9 +28,9 @@ router.get('/collection/logo', ctx => {
 });
 
 
-router.get('/collection/fileWithLogo', ctx => {
+router.get('/manifest/fileWithLogo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/fileWithLogo',
+        '@id': ctx.request.origin + '/manifest/fileWithLogo',
         '@type': 'sc:Manifest',
         logo: ctx.request.origin + '/logo',
         'label': 'File with logo.txt',
@@ -51,7 +51,7 @@ router.get('/collection/fileWithLogo', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/collection/fileWithLogo/sequence/0',
+            '@id': ctx.request.origin + '/sequence/fileWithLogo',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',
@@ -71,7 +71,7 @@ router.get('/collection/fileWithLogo', ctx => {
 
 router.get('/collection/fileWithoutLogo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/fileWithoutLogo',
+        '@id': ctx.request.origin + '/manifest/fileWithoutLogo',
         '@type': 'sc:Manifest',
         'label': 'File without logo.txt',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -91,7 +91,7 @@ router.get('/collection/fileWithoutLogo', ctx => {
             }
         ],
         mediaSequences: [{
-            '@id': ctx.request.origin + '/collection/fileWithoutLogo/sequence/0',
+            '@id': ctx.request.origin + '/sequence/fileWithoutLogo',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/txt',

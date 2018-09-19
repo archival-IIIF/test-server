@@ -16,8 +16,10 @@ router.get('/collection/auth3', ctx => {
                 '@type': 'sc:Collection',
                 label: 'Subfolder with access restriction',
             },
+        ],
+        manifests: [
             {
-                '@id': ctx.request.origin + '/collection/auth32',
+                '@id': ctx.request.origin + '/manifest/auth32',
                 '@type': 'sc:Manifest',
                 label: 'File with access restriction',
             }
@@ -26,7 +28,7 @@ router.get('/collection/auth3', ctx => {
 
     if (!hasAccess(ctx)) {
         collectionManifest.collections[0].label = 'Access denied';
-        collectionManifest.collections[1].label = 'Access denied';
+        collectionManifest.manifests[0].label = 'Access denied';
     }
 
     ctx.body = collectionManifest;
@@ -74,10 +76,10 @@ router.get('/collection/auth31', ctx => {
     ctx.body = collectionManifest;
 });
 
-router.get('/collection/auth32', ctx => {
+router.get('/manifest/auth32', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/collection/auth32',
+        '@id': ctx.request.origin + '/manifest/auth32',
         '@type': 'sc:Manifest',
         label: 'File with access restriction',
         '@context': 'http://iiif.io/api/collection/2/context.json',
