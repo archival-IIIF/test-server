@@ -113,7 +113,7 @@ function getArielPresentation(ctx) {
 }
 
 
-router.get('/image/ariel', ctx => {
+router.get('/image/ariel/info.json', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/image/ariel',
         "protocol": "http://iiif.io/api/image",
