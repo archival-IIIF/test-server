@@ -9,7 +9,6 @@ router.get('/collection/pdf', ctx => {
         '@type': 'sc:Collection',
         label: 'PDF test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        logo: ctx.request.origin + '/logo',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
@@ -48,20 +47,20 @@ router.get('/manifest/pdf1', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/manifest/pdf1',
         '@type': 'sc:Manifest',
-        'label': 'test.pdf',
+        label: 'test.pdf',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        'within': ctx.request.origin + '/collection/pdf',
+        within: ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
             '@id': ctx.request.origin + '/sequence/pdf1',
             '@type': 'ixif:MediaSequence',
-            'elements': [{
+            elements: [{
                 '@id': ctx.request.origin + '/file/pdf1',
                 '@type': 'foaf:Document',
-                'format': 'application/pdf',
-                'rendering': {
+                format: 'application/pdf',
+                rendering: {
                     '@id': ctx.request.origin + '/file/pdf1/original',
-                    'label': 'Original copy',
-                    'format': 'application/pdf'
+                    label: 'Original copy',
+                    format: 'application/pdf'
                 }
             }]
         }]
@@ -74,20 +73,20 @@ router.get('/manifest/docx', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/manifest/docx',
         '@type': 'sc:Manifest',
-        'label': 'test.pdf',
+        label: 'test.pdf',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        'within': ctx.request.origin + '/collection/pdf',
+        within: ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
             '@id': ctx.request.origin + '/sequence/docx',
             '@type': 'ixif:MediaSequence',
-            'elements': [{
+            elements: [{
                 '@id': ctx.request.origin + '/file/docx',
                 '@type': 'foaf:Document',
-                'format': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'rendering': {
+                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                rendering: {
                     '@id': ctx.request.origin + '/file/docx/original',
-                    'label': 'Original copy',
-                    'format': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                    label: 'Original copy',
+                    format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 }
             }]
         }]
@@ -99,20 +98,20 @@ router.get('/manifest/pdfa', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/manifest/pdfa',
         '@type': 'sc:Manifest',
-        'label': 'test.pdf',
+        label: 'test.pdf',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        'within': ctx.request.origin + '/collection/pdf',
+        within: ctx.request.origin + '/collection/pdf',
         mediaSequences: [{
             '@id': ctx.request.origin + '/sequence/pdfa',
             '@type': 'ixif:MediaSequence',
-            'elements': [{
+            elements: [{
                 '@id': ctx.request.origin + '/file/pdfa',
                 '@type': 'foaf:Document',
-                'format': 'application/pdf',
-                'rendering': {
+                format: 'application/pdf',
+                rendering: {
                     '@id': ctx.request.origin + '/file/pdf1/original',
-                    'label': 'Original copy',
-                    'format': 'application/pdf'
+                    label: 'Original copy',
+                    format: 'application/pdf'
                 }
             }]
         }]
