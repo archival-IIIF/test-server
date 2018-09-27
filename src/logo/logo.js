@@ -69,7 +69,7 @@ router.get('/manifest/fileWithLogo', ctx => {
 
 
 
-router.get('/collection/fileWithoutLogo', ctx => {
+router.get('/manifest/fileWithoutLogo', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/manifest/fileWithoutLogo',
         '@type': 'sc:Manifest',
