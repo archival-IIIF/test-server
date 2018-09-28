@@ -37,21 +37,21 @@ router.get('/manifest/download', ctx => {
             elements: [{
                 '@id': ctx.request.origin + '/file/download',
                 '@type': 'foaf:Document',
-                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                rendering: [
-                    {
-                        '@id': ctx.request.origin + '/file/download/original',
-                        label: 'Original copy',
-                        format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                    },
-                    {
-                        '@id': ctx.request.origin + '/file/download/accesss',
-                        label: 'Access copy',
-                        format: 'application/pdf'
-                    }
-                ]
+                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
             }]
-        }]
+        }],
+        rendering: [
+            {
+                '@id': ctx.request.origin + '/file/download/original',
+                label: 'Original copy',
+                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            },
+            {
+                '@id': ctx.request.origin + '/file/download/accesss',
+                label: 'Access copy',
+                format: 'application/pdf'
+            }
+        ]
     };
 });
 
