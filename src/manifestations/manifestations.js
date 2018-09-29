@@ -1,18 +1,18 @@
 const Router = require('koa-router');
 const router = new Router();
 const path = require('path');
-const download = require('../lib/Download');
+const download = require('../lib/download');
 
-router.get('/collection/downloads', ctx => {
+router.get('/collection/manifestations', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/downloads',
+        '@id': ctx.request.origin + '/collection/manifestations',
         '@type': 'sc:Collection',
-        label: 'Download test case',
+        label: 'manifestation test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/manifest/download',
+                '@id': ctx.request.origin + '/manifest/manifestation',
                 '@type': 'sc:Manifest',
                 label: 'test.docx',
                 thumbnail: {
@@ -24,48 +24,48 @@ router.get('/collection/downloads', ctx => {
     };
 });
 
-router.get('/manifest/download', ctx => {
+router.get('/manifest/manifestation', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/manifest/download',
+        '@id': ctx.request.origin + '/manifest/manifestation',
         '@type': 'sc:Manifest',
         label: 'test.docx',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: ctx.request.origin + '/collection/downloads',
+        within: ctx.request.origin + '/collection/manifestations',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/sequence/download',
+            '@id': ctx.request.origin + '/sequence/manifestation',
             '@type': 'ixif:MediaSequence',
             elements: [{
-                '@id': ctx.request.origin + '/file/download',
+                '@id': ctx.request.origin + '/file/manifestation',
                 '@type': 'foaf:Document',
                 format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
             }]
         }],
         rendering: [
             {
-                '@id': ctx.request.origin + '/file/download/original',
-                label: 'Original copy',
-                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                '@id': ctx.request.origin + '/file/manifestation/access',
+                label: 'test.pdf (Access copy)',
+                format: 'application/pdf'
             },
             {
-                '@id': ctx.request.origin + '/file/download/accesss',
-                label: 'Access copy',
-                format: 'application/pdf'
+                '@id': ctx.request.origin + '/file/manifestation/original',
+                label: 'test.docx (Original file)',
+                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
             }
         ]
     };
 });
 
-router.get('/file/download', async  ctx => {
+router.get('/file/manifestation', async  ctx => {
     const filePath = path.join(__dirname, '../pdf/PDFa.pdf');
     await download(ctx, filePath);
 });
 
-router.get('/file/download/original', async  ctx => {
+router.get('/file/manifestation/original', async  ctx => {
     const filePath = path.join(__dirname, '../pdf/test.docx');
     await download(ctx, filePath);
 });
 
-router.get('/file/download/access', async  ctx => {
+router.get('/file/manifestation/access', async  ctx => {
     const filePath = path.join(__dirname, '../pdf/PDFa.pdf');
     await download(ctx, filePath);
 });
