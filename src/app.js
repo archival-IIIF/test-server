@@ -20,6 +20,7 @@ const auth3 = require('./auth3/auth3.js');
 const auth4 = require('./auth4/auth4.js');
 const manifestErrors = require('./manifestErrors/manifestErrors.js');
 const manifestations = require('./manifestations/manifestations.js');
+const universalViewer = require('./universalViewer/universalViewer.js');
 const {fileIconsPath} = require('./lib/FileIcon');
 const serve = require('koa-static-server');
 const config = require('./lib/Config');
@@ -41,6 +42,7 @@ app.use(serve({rootDir: fileIconsPath, rootPath: '/file-icon'}));
 app.use(serve({rootDir: path.join(__dirname, './public'), rootPath: '/public'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/jquery/dist/'), rootPath: '/jquery'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/bootstrap/dist/'), rootPath: '/bootstrap'}));
+app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/uv/'), rootPath: '/uv'}));
 app.use(bodyParser());
 app.use(logo.routes());
 app.use(rightsInformation.routes());
@@ -61,6 +63,7 @@ app.use(auth3.routes());
 app.use(auth4.routes());
 app.use(manifestations.routes());
 app.use(manifestErrors.routes());
+app.use(universalViewer.routes());
 app.keys = ['secret'];
 
 

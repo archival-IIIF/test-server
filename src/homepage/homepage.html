@@ -46,8 +46,17 @@
         }
 
         td:nth-of-type(3) {
-            width: 90px;
+            width: 120px;
             text-align: right;
+        }
+
+        .universal-viewer {
+            font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+            background-color: #3e114e;
+            color: white !important;
+            font-size: 0.7em;
+            padding:5px;
+            margin-left: 6px;
         }
 
     </style>
@@ -67,10 +76,10 @@
         <tr>
             <td>Example ID</td>
             <td>Description</td>
-            <td></td>
+            <td />
         </tr>
         </thead>
-        <tbody></tbody>
+        <tbody />
     </table>
 </div>
 
@@ -109,6 +118,8 @@
     for (let id in testCases) {
         let description = testCases[id];
         let url = './collection/' + id;
+        let baseUrl = window.location.href;
+        let uvUrl = baseUrl + 'universalViewer?manifest=' + baseUrl + 'collection/' + id;
         $('#test-cases > tbody').append(
             '<tr>'+
             '<td><a class="open" href="'+url+'" target="_blank">'+id+'</td>'+
@@ -116,6 +127,7 @@
             '<td>'+
             '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>'+
             '<a class="open-manifest" href="'+url+'" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>'+
+            '<a class="universal-viewer" href="' +uvUrl +'" target="_blank">UV</div>' +
             '</td>' +
             '</tr>'
         );
