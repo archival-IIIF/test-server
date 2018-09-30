@@ -83,7 +83,10 @@ router.get('/file/die_internationale_as_mp3', async ctx => {
     await download(ctx, filePath);
 });
 
-
+router.get('/file/die_internationale_as_mp3/original', async ctx => {
+    const filePath = path.join(__dirname, 'die_internationale_as_mp3.mp3');
+    await download(ctx, filePath);
+});
 
 router.get('/manifest/f113', ctx => {
     ctx.body = {
