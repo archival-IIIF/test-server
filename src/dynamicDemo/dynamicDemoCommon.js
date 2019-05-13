@@ -19,6 +19,18 @@ class DynamicDemoCommon {
             };
         }
 
+        if (extension === '.jpg') {
+            const relativePath = this.getRelativePath(objectPath);
+            return {
+                type: 'dctypes:Image',
+                format: 'image/jpeg',
+                thumbnail: {
+                    '@id': this.getIIIFThumbnail(relativePath, ctx),
+                    format: 'image/jpeg'
+                }
+            };
+        }
+
         if (extension === '.m4v') {
             return {
                 type: 'dctypes:Document',
@@ -38,7 +50,7 @@ class DynamicDemoCommon {
     }
 
     static getFullId(ctx, objectPath) {
-        const relativePath = this.encode(objectPath.substr(this.getDemoPath().length+1));
+        const relativePath = this.getRelativePath(objectPath);
 
         if (fs.lstatSync(objectPath).isDirectory()) {
             return ctx.request.origin + '/collection/dynamicDemo/' + relativePath;
@@ -47,14 +59,33 @@ class DynamicDemoCommon {
         return ctx.request.origin + '/manifest/dynamicDemo/' + relativePath;
     }
 
+    static getRelativePath(objectPath) {
+        return this.encode(objectPath.substr(this.getDemoPath().length+1));
+    }
+
+    static getIIIFThumbnail(relativePath, ctx) {
+        return ctx.request.origin + '/image/dynamicDemo/'+relativePath+'/full/!100,100/0/default.jpg'
+    }
+
     static getSequenceId(ctx, objectPath) {
-        const relativePath = this.encode(objectPath.substr(this.getDemoPath().length+1));
+        const relativePath = this.getRelativePath(objectPath);
 
         return ctx.request.origin + '/sequence/dynamicDemo/' + relativePath;
     }
 
+    static getUriByObjectPath(objectPath, ctx, type) {
+
+        if (!type) {
+            type = 'collection';
+        }
+
+        const relativePath = this.getRelativePath(objectPath);
+
+        return ctx.request.origin + '/'+type+'/dynamicDemo/' + relativePath;
+    }
+
     static getFileId(ctx, objectPath) {
-        const relativePath = this.encode(objectPath.substr(this.getDemoPath().length+1));
+        const relativePath = this.getRelativePath(objectPath);
 
         return ctx.request.origin + '/f/dynamicDemo/' + relativePath;
     }
@@ -73,7 +104,10 @@ class DynamicDemoCommon {
         return encodeURIComponent(input);
     }
 
-
+    static getFullPath(input) {
+        const id = this.decode(input);
+        return path.join(this.getDemoPath(), id);
+    }
 }
 
 module.exports = DynamicDemoCommon;

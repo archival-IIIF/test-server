@@ -66,7 +66,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
                 output.manifests = [];
             }
 
-            const mediaTypeAndFormat = dynamicDemoCommon.getMediaTypeAndFormat(name, ctx);
+            const mediaTypeAndFormat = dynamicDemoCommon.getMediaTypeAndFormat(subObjectPath, ctx);
 
             let manifest = {
                 '@id': dynamicDemoCommon.getFullId(ctx, subObjectPath),
