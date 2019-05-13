@@ -58,7 +58,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
             );
 
         } else {
-            if (name === 'metadata.json') {
+            if (name.endsWith('metadata.json')) {
                 return;
             }
 
@@ -67,14 +67,23 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
             }
 
             const mediaTypeAndFormat = getMediaTypeAndFormat(name, ctx);
-            output.manifests.push(
-                {
-                    '@id': getFullId(ctx, subObjectPath),
-                    '@type': 'sc:Manifest',
-                    label: name,
-                    thumbnail: mediaTypeAndFormat.thumbnail
-                }
-            );
+
+            let manifest = {
+                '@id': getFullId(ctx, subObjectPath),
+                '@type': 'sc:Manifest',
+                label: name,
+                thumbnail: mediaTypeAndFormat.thumbnail,
+            };
+
+            const metadataPath = subObjectPath + '.metadata.json';
+            if (fs.existsSync(metadataPath)) {
+                let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+                manifest = Object.assign(manifest, additionalMetadata);
+            }
+
+            output.manifests.push(manifest);
+
+
         }
     });
     ctx.body = output;
@@ -123,7 +132,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
         }]
     };
 
-    const metadataPath = objectPath + '/metadata.json';
+    const metadataPath = objectPath + '.metadata.json';
     if (fs.existsSync(metadataPath)) {
         let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
         output = Object.assign(output, additionalMetadata);
