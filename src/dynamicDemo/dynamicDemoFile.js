@@ -66,8 +66,6 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
 });
 
 router.get('/image/dynamicDemo/:image/info.json', ctx => {
-    //const imageWith = 1674;
-    //const imageHeight = 381;
     const dimensions = sizeOf(dynamicDemoCommon.getFullPath(ctx.params.image));
     const imageWith = dimensions.width;
     const imageHeight = dimensions.height;
