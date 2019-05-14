@@ -1,5 +1,25 @@
 const fs = require('fs');
 const path = require('path');
+const filesize = require('filesize');
+
+const pronoms = {
+    mp3: {
+        id: 687,
+        name: 'MPEG 1/2 Audio Layer 3'
+    },
+    jpg: {
+        id: 667,
+        name: 'JPEG File Interchange Format'
+    },
+    txt: {
+        id: 163,
+        name: 'Plain Text File'
+    },
+    mp4: {
+        id: 924,
+        name: 'MPEG-4 Media File'
+    }
+};
 
 class DynamicDemoCommon {
 
@@ -43,7 +63,7 @@ class DynamicDemoCommon {
             };
         }
 
-        if (extension === '.m4v') {
+        if (extension === '.m4v' || extension === '.mp4') {
             return {
                 type: 'dctypes:Document',
                 format: 'video/mp4',
@@ -62,11 +82,11 @@ class DynamicDemoCommon {
     }
 
     static getRelativePath(objectPath) {
-        return this.encode(objectPath.substr(this.getDemoDataPath().length+1));
+        return this.encode(objectPath.substr(this.getDemoDataPath().length + 1));
     }
 
     static getIIIFThumbnail(relativePath, ctx) {
-        return ctx.request.origin + '/image/dynamicDemo/'+relativePath+'/full/!100,100/0/default.jpg'
+        return ctx.request.origin + '/image/dynamicDemo/' + relativePath + '/full/!100,100/0/default.jpg'
     }
 
     static getUriByObjectPath(objectPath, ctx, type) {
@@ -77,7 +97,7 @@ class DynamicDemoCommon {
 
         const relativePath = this.getRelativePath(objectPath);
 
-        return ctx.request.origin + '/'+type+'/dynamicDemo/' + relativePath;
+        return ctx.request.origin + '/' + type + '/dynamicDemo/' + relativePath;
     }
 
     static getFileId(ctx, objectPath) {
@@ -103,7 +123,7 @@ class DynamicDemoCommon {
     }
 
     static getLogoUri(ctx) {
-        return  ctx.request.origin + '/dynamicDemo/logo.png';
+        return ctx.request.origin + '/dynamicDemo/logo.png';
     }
 
     static getLogoPath() {
@@ -132,13 +152,50 @@ class DynamicDemoCommon {
             output = Object.assign(output, additionalMetadata);
         }
 
-        const metadataPath = objectPath + '/manifest.json';
+
+
+        let metadataPath;
+        if (fs.lstatSync(objectPath).isDirectory()) {
+            metadataPath =  objectPath + '/manifest.json';
+        } else {
+            metadataPath =  objectPath + '.manifest.json';
+        }
+
         if (fs.existsSync(metadataPath)) {
             let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
             output = Object.assign(output, additionalMetadata);
         }
 
+
         return output;
+    }
+
+    static getMetadata(objectPath) {
+
+        let metadata = [];
+
+        const extension = path.extname(objectPath).substr(1);
+
+        if (pronoms.hasOwnProperty(extension)) {
+            const pronom = pronoms[extension];
+            metadata.push({
+                label: 'Original file type',
+                value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status='+
+                'detailReport&id=' + pronom.id + '\"> '+pronom.name+' (.' + extension + ')</a>'
+            });
+        }
+
+        const stats = fs.statSync(objectPath);
+        metadata.push({
+            label: 'Original file size',
+            value: filesize(stats.size)
+        });
+        metadata.push({
+            label: 'Original modification date',
+            value: stats.mtime.toLocaleString()
+        });
+
+        return metadata;
     }
 }
 

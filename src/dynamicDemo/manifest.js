@@ -30,6 +30,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
         '@context': 'http://iiif.io/api/collection/2/context.json',
         within: dynamicDemoCommon.getUriByObjectPath(parentPath, ctx, 'collection'),
         thumbnail: mediaTypeAndFormat.thumbnail,
+        metadata: dynamicDemoCommon.getMetadata(objectPath)
     };
 
     if (dynamicDemoCommon.hasLogo()) {
@@ -89,6 +90,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
     }
 
     output = dynamicDemoCommon.addMetadata(output, objectPath);
+    console.log(output);
 
     ctx.body = output;
 

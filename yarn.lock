@@ -125,6 +125,11 @@
   dependencies:
     "@types/jquery" "^2.0.40"
 
+"@types/filesize@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/filesize/-/filesize-4.1.0.tgz#da49e71ccb6bf5b024ced2bcad30528a8eebd46d"
+  integrity sha512-PsogPt8wYP5406gh7hscvg3jdcEGeeHeG+qGpwSK3wUTgiT2WvKbT8la/SxSglfLTqxJcLwPcXvhenNGOAdHuw==
+
 "@types/jquery@*":
   version "3.3.29"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.29.tgz#680a2219ce3c9250483722fccf5570d1e2d08abd"
@@ -729,6 +734,11 @@ file-icon-vectors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/file-icon-vectors/-/file-icon-vectors-1.0.0.tgz#eccdc849d8d3a815dd8b653b2e68eacc6f4b07c3"
   integrity sha512-me+C0t1IU+ggE31CpZNImXID8HV8/eD4eO8go4RwLLZdMaIFr25x23m1xmzYBZH3r/FxyMbbQkD0SNGnRC4meg==
+
+filesize@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-4.1.2.tgz#fcd570af1353cea97897be64f56183adb995994b"
+  integrity sha512-iSWteWtfNcrWQTkQw8ble2bnonSl7YJImsn9OZKpE2E4IHhXI78eASpDYUljXZZdYj36QsEKjOs/CsiDqmKMJw==
 
 forever-agent@~0.6.1:
   version "0.6.1"
