@@ -60,17 +60,11 @@ class DynamicDemoCommon {
     }
 
     static getRelativePath(objectPath) {
-        return this.encode(objectPath.substr(this.getDemoPath().length+1));
+        return this.encode(objectPath.substr(this.getDemoDataPath().length+1));
     }
 
     static getIIIFThumbnail(relativePath, ctx) {
         return ctx.request.origin + '/image/dynamicDemo/'+relativePath+'/full/!100,100/0/default.jpg'
-    }
-
-    static getSequenceId(ctx, objectPath) {
-        const relativePath = this.getRelativePath(objectPath);
-
-        return ctx.request.origin + '/sequence/dynamicDemo/' + relativePath;
     }
 
     static getUriByObjectPath(objectPath, ctx, type) {
@@ -94,6 +88,22 @@ class DynamicDemoCommon {
         return path.join(__dirname, '..', '..', 'demo');
     }
 
+    static getDemoDataPath() {
+        return path.join(this.getDemoPath(), 'data');
+    }
+
+    static hasLogo() {
+        return fs.existsSync(this.getLogoPath());
+    }
+
+    static getLogoUri(ctx) {
+        return  ctx.request.origin + '/dynamicDemo/logo.png';
+    }
+
+    static getLogoPath() {
+        return path.join(this.getDemoPath(), 'logo.png');
+    }
+
     static decode(input) {
         input = decodeURIComponent(input);
         return input.replace(/\+\+/g, '\\');
@@ -106,7 +116,7 @@ class DynamicDemoCommon {
 
     static getFullPath(input) {
         const id = this.decode(input);
-        return path.join(this.getDemoPath(), id);
+        return path.join(this.getDemoDataPath(), id);
     }
 }
 

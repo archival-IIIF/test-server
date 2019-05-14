@@ -10,7 +10,7 @@ const sizeOf = require('image-size');
 router.get('/f/dynamicDemo/:id', async ctx => {
 
     const id = dynamicDemoCommon.decode(ctx.params.id);
-    const objectPath = path.join(dynamicDemoCommon.getDemoPath(), id);
+    const objectPath = path.join(dynamicDemoCommon.getDemoDataPath(), id);
 
 
     if (!fs.existsSync(objectPath)) {
@@ -42,7 +42,7 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
     }
 
     const id = dynamicDemoCommon.decode(ctx.params.image);
-    const objectPath = path.join(dynamicDemoCommon.getDemoPath(), id);
+    const objectPath = path.join(dynamicDemoCommon.getDemoDataPath(), id);
     const item = {
         uri: objectPath
     };

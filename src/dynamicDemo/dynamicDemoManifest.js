@@ -8,7 +8,7 @@ const sizeOf = require('image-size');
 router.get('/manifest/dynamicDemo/:id', ctx => {
 
     const id = dynamicDemoCommon.decode(ctx.params.id);
-    const objectPath = path.join(dynamicDemoCommon.getDemoPath(), id);
+    const objectPath = path.join(dynamicDemoCommon.getDemoDataPath(), id);
 
 
     if (!fs.existsSync(objectPath)) {
@@ -69,7 +69,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
         }]
     } else {
         output.mediaSequences = [{
-            '@id': dynamicDemoCommon.getSequenceId(ctx, parentPath),
+            '@id': dynamicDemoCommon.getUriByObjectPath(parentPath, ctx, 'sequence'),
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': dynamicDemoCommon.getFileId(ctx, objectPath),

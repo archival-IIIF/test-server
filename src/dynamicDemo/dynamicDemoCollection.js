@@ -11,7 +11,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
         id = dynamicDemoCommon.decode(ctx.params.id);
     }
 
-    const objectPath = path.join(dynamicDemoCommon.getDemoPath(), id);
+    const objectPath = path.join(dynamicDemoCommon.getDemoDataPath(), id);
 
 
     if (!fs.existsSync(objectPath)) {
@@ -32,6 +32,10 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
     if (id !== '/') {
         const parentPath = path.resolve(objectPath, '..');
         output.within = dynamicDemoCommon.getFullId(ctx, parentPath);
+    }
+
+    if (dynamicDemoCommon.hasLogo()) {
+        output.logo = dynamicDemoCommon.getLogoUri(ctx);
     }
 
     const metadataPath = objectPath + '/metadata.json';
