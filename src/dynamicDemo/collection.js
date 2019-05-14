@@ -38,12 +38,6 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
         output.logo = dynamicDemoCommon.getLogoUri(ctx);
     }
 
-    const metadataPath = objectPath + '/metadata.json';
-    if (fs.existsSync(metadataPath)) {
-        let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
-        output = Object.assign(output, additionalMetadata);
-    }
-
     fs.readdirSync(objectPath).map(name => {
 
         const subObjectPath = path.join(objectPath, name);
@@ -62,11 +56,11 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
             );
 
         } else {
-            if (name.endsWith('metadata.json')) {
+            if (name.endsWith('manifest.json')) {
                 return;
             }
 
-            if (!output.hasOwnProperty('manifests')) {
+            if (!output.hasOwnProperty('manifest')) {
                 output.manifests = [];
             }
 
@@ -79,17 +73,16 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
                 thumbnail: mediaTypeAndFormat.thumbnail,
             };
 
-            const metadataPath = subObjectPath + '.metadata.json';
-            if (fs.existsSync(metadataPath)) {
-                let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
-                manifest = Object.assign(manifest, additionalMetadata);
-            }
+            manifest = dynamicDemoCommon.addMetadata(manifest, subObjectPath);
 
             output.manifests.push(manifest);
 
 
         }
     });
+
+    output = dynamicDemoCommon.addMetadata(output, objectPath);
+
     ctx.body = output;
 
 });

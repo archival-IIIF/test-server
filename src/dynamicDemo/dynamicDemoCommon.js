@@ -124,6 +124,22 @@ class DynamicDemoCommon {
         const id = this.decode(input);
         return path.join(this.getDemoDataPath(), id);
     }
+
+    static addMetadata(output, objectPath) {
+        const globalMetadataPath = this.getDemoPath() + '/manifest.json';
+        if (fs.existsSync(globalMetadataPath)) {
+            let additionalMetadata = JSON.parse(fs.readFileSync(globalMetadataPath, 'utf8'));
+            output = Object.assign(output, additionalMetadata);
+        }
+
+        const metadataPath = objectPath + '/manifest.json';
+        if (fs.existsSync(metadataPath)) {
+            let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+            output = Object.assign(output, additionalMetadata);
+        }
+
+        return output;
+    }
 }
 
 module.exports = DynamicDemoCommon;

@@ -88,11 +88,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
         }]
     }
 
-    const metadataPath = objectPath + '.metadata.json';
-    if (fs.existsSync(metadataPath)) {
-        let additionalMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
-        output = Object.assign(output, additionalMetadata);
-    }
+    output = dynamicDemoCommon.addMetadata(output, objectPath);
 
     ctx.body = output;
 
