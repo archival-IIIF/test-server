@@ -27,7 +27,6 @@ router.get('/f/dynamicDemo/:id', async ctx => {
 router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format', async ctx => {
 
     const tilePath = path.join(
-        __dirname,
         dynamicDemoCommon.getCachePath(),
         ctx.params.image,
         ctx.params.region,
