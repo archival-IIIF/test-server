@@ -60,6 +60,10 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
                 return;
             }
 
+            if (name.startsWith('___')) {
+                return;
+            }
+
             if (!output.hasOwnProperty('manifests')) {
                 output.manifests = [];
             }
@@ -76,8 +80,6 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
             manifest = dynamicDemoCommon.addMetadata(manifest, subObjectPath);
 
             output.manifests.push(manifest);
-
-
         }
     });
 

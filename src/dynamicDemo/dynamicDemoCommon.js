@@ -74,6 +74,17 @@ class DynamicDemoCommon {
             };
         }
 
+        if (extension === '.docx') {
+            return {
+                type: 'foaf:Document',
+                format: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                thumbnail: {
+                    '@id': ctx.request.origin + '/file-icon/docx.svg',
+                    format: 'image/svg+xml'
+                }
+            };
+        }
+
         return {
             type: 'foaf:Document',
             format: 'text/plain',
