@@ -60,7 +60,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
                 return;
             }
 
-            if (!output.hasOwnProperty('manifest')) {
+            if (!output.hasOwnProperty('manifests')) {
                 output.manifests = [];
             }
 
