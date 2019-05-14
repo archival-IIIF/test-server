@@ -26,14 +26,6 @@ router.get('/f/dynamicDemo/:id', async ctx => {
 
 router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format', async ctx => {
 
-
-    const id = dynamicDemoCommon.decode(ctx.params.image);
-    const objectPath = path.join(dynamicDemoCommon.getDemoPath(), id);
-
-    const item = {
-        uri: objectPath
-    };
-
     const tilePath = path.join(
         __dirname,
         '../../cache',
@@ -46,24 +38,30 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
 
     if (fs.existsSync(tilePath)) {
         await download(ctx, tilePath);
-    } else {
-        let result = await serveImage(item, {
-            region: ctx.params.region,
-            size: ctx.params.size,
-            rotation: ctx.params.rotation,
-            quality: ctx.params.quality,
-            format: ctx.params.format
-        });
-
-        ctx.body = result.image;
-        ctx.status = result.status;
-        ctx.set('Content-Type', result.contentType);
-        ctx.set('Content-Length', result.contentLength);
-
-
-        fs.mkdirSync(path.dirname(tilePath), {recursive: true});
-        fs.writeFileSync(tilePath, result.image);
+        return;
     }
+
+    const id = dynamicDemoCommon.decode(ctx.params.image);
+    const objectPath = path.join(dynamicDemoCommon.getDemoPath(), id);
+    const item = {
+        uri: objectPath
+    };
+    let result = await serveImage(item, {
+        region: ctx.params.region,
+        size: ctx.params.size,
+        rotation: ctx.params.rotation,
+        quality: ctx.params.quality,
+        format: ctx.params.format
+    });
+
+    ctx.body = result.image;
+    ctx.status = result.status;
+    ctx.set('Content-Type', result.contentType);
+    ctx.set('Content-Length', result.contentLength);
+
+
+    fs.mkdirSync(path.dirname(tilePath), {recursive: true});
+    fs.writeFileSync(tilePath, result.image);
 
 });
 
