@@ -132,11 +132,13 @@ class DynamicDemoCommon {
 
     static decode(input) {
         input = decodeURIComponent(input);
-        return input.replace(/\+\+/g, '\\');
+        input = input.replace(/\+\+/g, '\\');
+        return input.replace(/--/g, '\/');
     }
 
     static encode(input) {
         input = input.replace(/\\/g, '++');
+        input = input.replace(/\//g, '--');
         return encodeURIComponent(input);
     }
 
