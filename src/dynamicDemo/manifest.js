@@ -24,11 +24,11 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
     const mediaTypeAndFormat = dynamicDemoCommon.getMediaTypeAndFormat(objectPath, ctx);
 
     let output = {
-        '@id': dynamicDemoCommon.getFullId(ctx, objectPath),
+        '@id': dynamicDemoCommon.getUriByObjectPath(objectPath, ctx, 'manifest'),
         '@type': 'sc:Manifest',
         label: path.basename(objectPath),
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: dynamicDemoCommon.getFullId(ctx, parentPath),
+        within: dynamicDemoCommon.getUriByObjectPath(parentPath, ctx, 'collection'),
         thumbnail: mediaTypeAndFormat.thumbnail,
     };
 
@@ -36,7 +36,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
         output.logo = dynamicDemoCommon.getLogoUri(ctx);
     }
 
-    if (objectPath.endsWith('.jpg')) {
+    if (mediaTypeAndFormat.type === 'dctypes:Image') {
         const dimensions = sizeOf(objectPath);
         const imageWith = dimensions.width;
         const imageHeight = dimensions.height;
