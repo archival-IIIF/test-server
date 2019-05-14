@@ -34,18 +34,37 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
         uri: objectPath
     };
 
-    let result = await serveImage(item, {
-        region: ctx.params.region,
-        size: ctx.params.size,
-        rotation: ctx.params.rotation,
-        quality: ctx.params.quality,
-        format: ctx.params.format
-    });
+    const tilePath = path.join(
+        __dirname,
+        '../../cache',
+        ctx.params.image,
+        ctx.params.region,
+        ctx.params.size,
+        ctx.params.rotation,
+        ctx.params.quality + '.' + ctx.params.format
+    );
 
-    ctx.body = result.image;
-    ctx.status = result.status;
-    ctx.set('Content-Type', result.contentType);
-    ctx.set('Content-Length', result.contentLength);
+    if (fs.existsSync(tilePath)) {
+        await download(ctx, tilePath);
+    } else {
+        let result = await serveImage(item, {
+            region: ctx.params.region,
+            size: ctx.params.size,
+            rotation: ctx.params.rotation,
+            quality: ctx.params.quality,
+            format: ctx.params.format
+        });
+
+        ctx.body = result.image;
+        ctx.status = result.status;
+        ctx.set('Content-Type', result.contentType);
+        ctx.set('Content-Length', result.contentLength);
+
+
+        fs.mkdirSync(path.dirname(tilePath), {recursive: true});
+        fs.writeFileSync(tilePath, result.image);
+    }
+
 });
 
 router.get('/image/dynamicDemo/:image/info.json', ctx => {
