@@ -1,4 +1,5 @@
 const {RequestError} = require('./errors');
+const sharp = require('sharp');
 
 class SizeRequest {
     constructor(request) {
@@ -88,8 +89,12 @@ class SizeRequest {
 
     executeImageProcessing(image) {
         if (this.requiresImageProcessing()) {
-            image.resize(this.newSize.width, this.newSize.height);
-            if (this.bestFit) image.max();
+
+            if (this.bestFit) {
+                image.resize(this.newSize.width, this.newSize.height, { fit: sharp.fit.inside });
+            } else {
+                image.resize(this.newSize.width, this.newSize.height);
+            }
         }
     }
 }
