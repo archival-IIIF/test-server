@@ -23,7 +23,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
     }
 
     let output = {
-        '@id': dynamicDemoCommon.getFullId(ctx, objectPath),
+        '@id': dynamicDemoCommon.getUriByObjectPath(objectPath, ctx, 'collection'),
         '@type': 'sc:Collection',
         label: path.basename(objectPath),
         '@context': 'http://iiif.io/api/collection/2/context.json'
@@ -31,7 +31,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
 
     if (id !== '/') {
         const parentPath = path.resolve(objectPath, '..');
-        output.within = dynamicDemoCommon.getFullId(ctx, parentPath);
+        output.within = dynamicDemoCommon.getUriByObjectPath(parentPath, ctx, 'collection');
     }
 
     if (dynamicDemoCommon.hasLogo()) {
@@ -55,7 +55,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
 
             output.collections.push(
                 {
-                    '@id': dynamicDemoCommon.getFullId(ctx, subObjectPath),
+                    '@id': dynamicDemoCommon.getUriByObjectPath(subObjectPath, ctx, 'collection'),
                     '@type': 'sc:Collection',
                     label: name,
                 }
@@ -73,7 +73,7 @@ router.get('/collection/dynamicDemo/:id?', ctx => {
             const mediaTypeAndFormat = dynamicDemoCommon.getMediaTypeAndFormat(subObjectPath, ctx);
 
             let manifest = {
-                '@id': dynamicDemoCommon.getFullId(ctx, subObjectPath),
+                '@id': dynamicDemoCommon.getUriByObjectPath(subObjectPath, ctx, 'manifest'),
                 '@type': 'sc:Manifest',
                 label: name,
                 thumbnail: mediaTypeAndFormat.thumbnail,
