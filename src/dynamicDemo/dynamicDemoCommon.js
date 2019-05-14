@@ -31,6 +31,18 @@ class DynamicDemoCommon {
             };
         }
 
+        if (extension === '.png') {
+            const relativePath = this.getRelativePath(objectPath);
+            return {
+                type: 'dctypes:Image',
+                format: 'image/png',
+                thumbnail: {
+                    '@id': this.getIIIFThumbnail(relativePath, ctx),
+                    format: 'image/png'
+                }
+            };
+        }
+
         if (extension === '.m4v') {
             return {
                 type: 'dctypes:Document',
@@ -47,16 +59,6 @@ class DynamicDemoCommon {
             format: 'text/plain',
             thumbnail: undefined
         };
-    }
-
-    static getFullId(ctx, objectPath) {
-        const relativePath = this.getRelativePath(objectPath);
-
-        if (fs.lstatSync(objectPath).isDirectory()) {
-            return ctx.request.origin + '/collection/dynamicDemo/' + relativePath;
-        }
-
-        return ctx.request.origin + '/manifest/dynamicDemo/' + relativePath;
     }
 
     static getRelativePath(objectPath) {
@@ -86,6 +88,10 @@ class DynamicDemoCommon {
 
     static getDemoPath() {
         return path.join(__dirname, '..', '..', 'demo');
+    }
+
+    static getCachePath() {
+        return path.join(this.getDemoPath(), 'cache');
     }
 
     static getDemoDataPath() {
