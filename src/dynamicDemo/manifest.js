@@ -32,6 +32,10 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
         thumbnail: mediaTypeAndFormat.thumbnail,
     };
 
+    if (dynamicDemoCommon.hasLogo()) {
+        output.logo = dynamicDemoCommon.getLogoUri(ctx);
+    }
+
     if (objectPath.endsWith('.jpg')) {
         const dimensions = sizeOf(objectPath);
         const imageWith = dimensions.width;
