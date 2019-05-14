@@ -90,7 +90,6 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
     }
 
     output = dynamicDemoCommon.addMetadata(output, objectPath);
-    console.log(output);
 
     ctx.body = output;
 
