@@ -3,7 +3,7 @@ import * as Router from 'koa-router';
 const router: Router = new Router();
 
 const fs = require('fs');
-const path = require('path');
+import * as path from 'path';
 const dynamicDemoCommon = require('./dynamicDemoCommon');
 const sizeOf = require('image-size');
 

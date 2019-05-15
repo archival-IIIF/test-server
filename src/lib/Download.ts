@@ -1,6 +1,6 @@
 import * as Router from 'koa-router';
 
-const path = require('path');
+import * as path from 'path';
 const mime = require('mime-types');
 const fs = require('fs');
 const {promisify} = require('util');

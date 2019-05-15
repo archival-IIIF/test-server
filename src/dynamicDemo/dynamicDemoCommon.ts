@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 import Pronoms from "./pronoms";
 
 const fs = require('fs');
-const path = require('path');
+import * as path from 'path';
 const filesize = require('filesize');
 
 class DynamicDemoCommon {

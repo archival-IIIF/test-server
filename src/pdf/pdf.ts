@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 
 const router: Router = new Router();
 
-const path = require('path');
+import * as path from 'path';
 import download from '../lib/Download';
 
 router.get('/collection/pdf', ctx => {

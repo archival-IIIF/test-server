@@ -2,8 +2,8 @@ import * as Router from 'koa-router';
 
 const router: Router = new Router();
 
-const path = require('path');
-const download = require('../lib/download');
+import * as path from 'path';
+import download from '../lib/download';
 
 router.get('/collection/manifestations', ctx => {
     ctx.body = {

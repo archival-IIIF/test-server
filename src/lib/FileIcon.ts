@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = require('path');
+import * as path from 'path';
 const {promisify} = require('util');
 
 const readdirAsync = promisify(fs.readdir);

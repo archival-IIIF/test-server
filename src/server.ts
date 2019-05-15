@@ -34,7 +34,7 @@ const app: Koa = new Koa();
 const {fileIconsPath} = require('./lib/FileIcon');
 const serve = require('koa-static-server');
 const config = require('./lib/Config');
-const path = require('path');
+import * as path from 'path';
 const bodyParser = require('koa-bodyparser');
 
 
