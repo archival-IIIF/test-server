@@ -1,7 +1,7 @@
 import * as Router from 'koa-router';
 
 const router: Router = new Router();
-const {hasAccess} = require('../lib/Security');
+import {hasAccess} from '../lib/Security';
 
 router.get('/collection/auth2', ctx => {
 

@@ -1,6 +1,5 @@
 import * as Router from 'koa-router';
-
-const {hasAccess} = require('../lib/Security');
+import {hasAccess} from '../lib/Security';
 
 const router: Router = new Router();
 

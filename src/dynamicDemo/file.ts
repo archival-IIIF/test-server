@@ -1,13 +1,13 @@
 import * as Router from 'koa-router';
+import * as fs from 'fs';
+import * as path from 'path';
+import download from '../lib/Download';
+import dynamicDemoCommon from './dynamicDemoCommon';
+import serveImage from '../image/internal';
+import * as sizeOf from 'image-size';
 
 const router: Router = new Router();
 
-const fs = require('fs');
-import * as path from 'path';
-import download from '../lib/Download';
-const dynamicDemoCommon = require('./dynamicDemoCommon');
-const serveImage = require('../image/internal');
-const sizeOf = require('image-size');
 
 router.get('/f/dynamicDemo/:id', async ctx => {
 
@@ -58,7 +58,7 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
     ctx.body = result.image;
     ctx.status = result.status;
     ctx.set('Content-Type', result.contentType);
-    ctx.set('Content-Length', result.contentLength);
+    ctx.set('Content-Length', result.contentLength.toString());
 
 
     fs.mkdirSync(path.dirname(tilePath), {recursive: true});

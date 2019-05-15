@@ -1,10 +1,10 @@
 import * as Router from 'koa-router';
 
-const DefaultAccessId = '4321';
-const UserToken = '1234';
-const ViewerToken = 'abcd';
+export const DefaultAccessId = '4321';
+export const UserToken = '1234';
+export const ViewerToken = 'abcd';
 
-function hasAccess(ctx: Router.RouterContext) {
+export function hasAccess(ctx: Router.RouterContext) {
 
     const accessId = ctx.cookies.get('access');
     if (accessId === DefaultAccessId) {
@@ -21,10 +21,4 @@ function hasAccess(ctx: Router.RouterContext) {
     return false;
 }
 
-
-module.exports = {
-    hasAccess,
-    DefaultAccessId,
-    UserToken,
-    ViewerToken
-};
+export default {hasAccess, DefaultAccessId, UserToken, ViewerToken};

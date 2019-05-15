@@ -1,7 +1,7 @@
 import * as Router from 'koa-router';
 import Pronoms from "./pronoms";
 
-const fs = require('fs');
+import * as fs from 'fs';
 import * as path from 'path';
 const filesize = require('filesize');
 

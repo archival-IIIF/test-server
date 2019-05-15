@@ -1,10 +1,8 @@
 import * as Router from 'koa-router';
 import * as path from 'path';
 import {createReadStream} from 'fs';
-
-
-const moment = require('moment');
-const {DefaultAccessId, hasAccess, UserToken, ViewerToken} = require('../lib/Security');
+import {DefaultAccessId, hasAccess, UserToken, ViewerToken} from '../lib/Security';
+import * as moment from 'moment';
 
 const router: Router = new Router();
 

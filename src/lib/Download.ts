@@ -1,11 +1,10 @@
 import * as Router from 'koa-router';
-
 import * as path from 'path';
-const mime = require('mime-types');
-const fs = require('fs');
-const {promisify} = require('util');
+import * as mime from 'mime-types';
+import * as fs from 'fs';
+import {promisify} from 'util';
 const readFileAsync = promisify(fs.readFile);
-const HttpError = require('../lib/HttpError');
+import HttpError from '../lib/HttpError';
 
 
 async function download(ctx: Router.RouterContext, filePath: string, fileName?: string) {
@@ -13,7 +12,10 @@ async function download(ctx: Router.RouterContext, filePath: string, fileName?: 
         if (!fileName) {
             fileName = path.basename(filePath);
         }
-        ctx.set('Content-Type', mime.contentType(filePath));
+        const contentType = mime.contentType(filePath);
+        if (contentType) {
+            ctx.set('Content-Type', contentType);
+        }
         ctx.set('Content-Disposition', 'inline; filename="' + fileName + '"');
         ctx.body = await readFileAsync(filePath);
     }

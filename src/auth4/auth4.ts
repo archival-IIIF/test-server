@@ -1,12 +1,10 @@
 import * as Router from 'koa-router';
+import {hasAccess} from '../lib/Security';
+import serveImage from '../image/internal';
 
-const {hasAccess} = require('../lib/Security');
-
-const router: Router = new Router();
-
-const serveImage = require('../image/internal');
 const imageWith = 1840;
 const imageHeight = 1450;
+const router: Router = new Router();
 
 
 router.get('/collection/auth4', ctx => {
@@ -168,7 +166,7 @@ router.get('/image/auth41/:region/:size/:rotation/:quality.:format', async ctx =
     ctx.body = result.image;
     ctx.status = result.status;
     ctx.set('Content-Type', result.contentType);
-    ctx.set('Content-Length', result.contentLength);
+    ctx.set('Content-Length', result.contentLength.toString());
 });
 
 

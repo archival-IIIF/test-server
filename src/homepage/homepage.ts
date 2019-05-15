@@ -1,9 +1,9 @@
 import * as Router from 'koa-router';
+import {createReadStream} from 'fs';
+import * as path from 'path';
 
 const router: Router = new Router();
 
-const {createReadStream} = require('fs');
-import * as path from 'path';
 
 router.get('/', async ctx => {
     ctx.type = 'text/html';

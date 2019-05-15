@@ -1,11 +1,11 @@
 import * as Router from 'koa-router';
+import * as fs from 'fs';
+import * as path from 'path';
+import dynamicDemoCommon from './dynamicDemoCommon';
+import * as sizeOf from 'image-size';
 
 const router: Router = new Router();
 
-const fs = require('fs');
-import * as path from 'path';
-const dynamicDemoCommon = require('./dynamicDemoCommon');
-const sizeOf = require('image-size');
 
 router.get('/manifest/dynamicDemo/:id', ctx => {
 

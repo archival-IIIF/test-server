@@ -1,12 +1,8 @@
 import * as Router from 'koa-router';
+import download from '../lib/Download';
+import dynamicDemoCommon from './dynamicDemoCommon';
 
 const router: Router = new Router();
-
-const fs = require('fs');
-import * as path from 'path';
-import download from '../lib/Download';
-const dynamicDemoCommon = require('./dynamicDemoCommon');
-
 
 router.get('/dynamicDemo/logo.png', async ctx => {
 
