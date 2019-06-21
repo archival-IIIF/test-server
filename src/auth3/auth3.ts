@@ -23,6 +23,10 @@ router.get('/collection/auth3', ctx => {
                 '@id': ctx.request.origin + '/manifest/auth32',
                 '@type': 'sc:Manifest',
                 label: 'File with access restriction',
+                thumbnail: {
+                    '@id': ctx.request.origin + '/file-icon/pdf.svg',
+                    format: 'image/svg+xml'
+                }
             }
         ]
     };
@@ -30,6 +34,7 @@ router.get('/collection/auth3', ctx => {
     if (!hasAccess(ctx)) {
         collectionManifest.collections[0].label = 'Access denied';
         collectionManifest.manifests[0].label = 'Access denied';
+        collectionManifest.manifests[0].thumbnail = undefined;
     }
 
     ctx.body = collectionManifest;
@@ -86,6 +91,10 @@ router.get('/manifest/auth32', ctx => {
         '@context': 'http://iiif.io/api/collection/2/context.json',
         within: ctx.request.origin + '/collection/auth3',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
+        thumbnail: {
+            '@id': ctx.request.origin + '/file-icon/pdf.svg',
+            format: 'image/svg+xml'
+        },
         service: [
             {
                 '@context': 'http://iiif.io/api/auth/1/context.json',
@@ -116,6 +125,7 @@ router.get('/manifest/auth32', ctx => {
         ctx.status = 401;
         collectionManifest.label = 'Access denied';
         collectionManifest.license = undefined;
+        collectionManifest.thumbnail = undefined;
     }
 
     ctx.body = collectionManifest;
