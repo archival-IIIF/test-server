@@ -23,7 +23,6 @@ import pdf from './pdf/pdf';
 import nestedStructure from './nestedStructure/nestedStructure';
 import thumbnail from './thumbnail/thumbnail';
 import language from './language/language';
-import contentLanguage from './language/contentLanguage';
 import common from './common/common';
 
 import dynamicDemo from './dynamicDemo/routes';
@@ -74,7 +73,6 @@ app.use(rightsInformation);
 app.use(thumbnail);
 app.use(nestedStructure);
 app.use(language);
-app.use(contentLanguage);
 
 app.use(image);
 app.use(pdf);
