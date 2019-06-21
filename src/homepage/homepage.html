@@ -46,8 +46,7 @@
         }
 
         td:nth-of-type(3) {
-            width: 120px;
-            text-align: right;
+            width: 140px;
         }
 
         .universal-viewer {
@@ -121,6 +120,13 @@
         let url = './collection/' + id;
         let baseUrl = window.location.href;
         let uvUrl = baseUrl + 'universalViewer?manifest=' + baseUrl + 'collection/' + id;
+        let mirador = '';
+        if (id === 'image') {
+            const mirardorUrl = baseUrl + 'mirador?manifest=' + baseUrl + 'manifest/ariel';
+            mirador =  '<a class="mirador" href="' +mirardorUrl +'" target="_blank">'+
+                '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
+                '</a>';
+        }
         $('#test-cases > tbody').append(
             '<tr>'+
             '<td><a class="open" href="'+url+'" target="_blank">'+id+'</td>'+
@@ -128,7 +134,8 @@
             '<td>'+
             '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>'+
             '<a class="open-manifest" href="'+url+'" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>'+
-            '<a class="universal-viewer" href="' +uvUrl +'" target="_blank">UV</div>' +
+            '<a class="universal-viewer" href="' +uvUrl +'" target="_blank">UV</a>' +
+            mirador +
             '</td>' +
             '</tr>'
         );

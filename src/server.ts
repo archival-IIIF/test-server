@@ -29,6 +29,7 @@ import common from './common/common';
 import dynamicDemo from './dynamicDemo/routes';
 import manifestErrors from './manifestErrors/manifestErrors';
 import universalViewer from './universalViewer/universalViewer'
+import mirador from './mirador/mirador'
 
 const app: Koa = new Koa();
 const {fileIconsPath} = require('./lib/FileIcon');
@@ -53,6 +54,7 @@ app.use(serve({rootDir: path.join(__dirname, './public'), rootPath: '/public'}))
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/jquery/dist/'), rootPath: '/jquery'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/bootstrap/dist/'), rootPath: '/bootstrap'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/dist/'), rootPath: '/uv'}));
+app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'), rootPath: '/miradorJS'}));
 app.use(bodyParser());
 
 app.use(audioVideo);
@@ -82,6 +84,7 @@ app.use(dynamicDemo);
 app.use(manifestations);
 app.use(manifestErrors);
 app.use(universalViewer);
+app.use(mirador);
 app.keys = ['secret'];
 
 

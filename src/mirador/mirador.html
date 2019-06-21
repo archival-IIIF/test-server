@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <script src="/miradorJS/mirador.min.js"></script>
+    <title>Mirador</title>
+</head>
+<body>
+
+<div id="mirador"></div>
+
+<script>
+
+    function gup( name, url ) {
+        if (!url) url = location.href;
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( url );
+        return results == null ? null : results[1];
+    }
+    const manifest = gup('manifest', window.location.href);
+    const args = {
+        id: 'mirador',
+        "windows": [
+            {
+                "loadedManifest": manifest
+            }
+        ]
+    };
+    args[manifest] = {
+        "http://localhost:3333/manifest/ariel": {
+            "provider": "Wikipedia"
+        }
+    };
+
+
+    Mirador.viewer(args);
+
+
+</script>
+
+</body>
+</html>
