@@ -11,9 +11,10 @@ router.get('/login', (ctx: Router.RouterContext) => {
     ctx.body = createReadStream(path.join(__dirname, 'token-login.html'));
 });
 
-router.post('/login', async (ctx: Router.RouterContext) => {
+router.post('/login', async (ctx: any) => {
 
-    const token = ctx.body.token;
+    const token = ctx.request.body.token;
+
     if (token === UserToken) {
         ctx.cookies.set('access', DefaultAccessId, {
             signed: true,
