@@ -5,6 +5,7 @@ import auth from './auth/auth';
 import auth2 from './auth2/auth2';
 import auth3 from './auth3/auth3';
 import auth4 from './auth4/auth4';
+import authExternal from './authExternal/authExternal';
 
 import emptyCollection from './emptyCollection/emptyCollection';
 import emptyFolder from './emptyFolder/emptyFolder';
@@ -61,6 +62,7 @@ app.use(auth);
 app.use(auth2);
 app.use(auth3);
 app.use(auth4);
+app.use(authExternal);
 
 app.use(emptyCollection);
 app.use(emptyFolder);
