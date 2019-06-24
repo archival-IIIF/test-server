@@ -27,6 +27,15 @@ router.get('/collection/noLabel', ctx => {
     };
 });
 
+router.get('/collection/wrongManifestType', ctx => {
+    ctx.body = {
+        '@id': ctx.request.origin + '/collection/wrongManifestType',
+        '@type': 'sc:Abc',
+        label: 'Collection with wrong manifest type',
+        '@context': 'http://iiif.io/api/collection/2/context.json'
+    };
+});
+
 router.get('/collection/missingSubfolder', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/collection/missingSubfolder',
