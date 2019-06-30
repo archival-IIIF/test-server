@@ -97,7 +97,7 @@ router.get('/manifest/fileWithLicense', ctx => {
             '@id': ctx.request.origin + '/sequence/fileWithLicense',
             '@type': 'ixif:MediaSequence',
             'elements': [{
-                '@id': ctx.request.origin + '/file/txt',
+                '@id': ctx.request.origin + '/file/loreIpsum',
                 '@type': 'foaf:Document',
                 'format': 'text/plain',
                 'rendering': {

@@ -11,4 +11,9 @@ router.get('/file/txt', async  ctx => {
     await download(ctx, filePath);
 });
 
+router.get('/file/loreIpsum', async  ctx => {
+    const filePath = path.join(__dirname, 'lore_ipsum.txt');
+    await download(ctx, filePath);
+});
+
 export default router.routes();
