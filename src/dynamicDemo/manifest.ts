@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 import * as fs from 'fs';
 import * as path from 'path';
 import dynamicDemoCommon from './dynamicDemoCommon';
-import * as sizeOf from 'image-size';
+import {imageSize} from 'image-size';
 
 const router: Router = new Router();
 
@@ -40,7 +40,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
     }
 
     if (mediaTypeAndFormat.type === 'dctypes:Image') {
-        const dimensions = sizeOf(objectPath);
+        const dimensions = imageSize(objectPath);
         const imageWith = dimensions.width;
         const imageHeight = dimensions.height;
         output.sequences = [{

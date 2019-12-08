@@ -4,7 +4,7 @@ import * as path from 'path';
 import download from '../lib/Download';
 import dynamicDemoCommon from './dynamicDemoCommon';
 import serveImage from '../image/internal';
-import * as sizeOf from 'image-size';
+import {imageSize} from 'image-size';
 
 const router: Router = new Router();
 
@@ -67,7 +67,7 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
 });
 
 router.get('/image/dynamicDemo/:image/info.json', ctx => {
-    const dimensions = sizeOf(dynamicDemoCommon.getFullPath(ctx.params.image));
+    const dimensions = imageSize(dynamicDemoCommon.getFullPath(ctx.params.image));
     const imageWith = dimensions.width;
     const imageHeight = dimensions.height;
     ctx.body = {
