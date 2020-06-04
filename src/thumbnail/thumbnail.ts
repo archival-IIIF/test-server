@@ -79,7 +79,7 @@ router.get('/collection/folderWithThumbnailService', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + '/collection/folderWithThumbnailService',
         '@type': 'sc:Collection',
-        label: 'Folder without thumbnail',
+        label: 'Folder with image service thumbnail',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         'within': ctx.request.origin + '/collection/thumbnail',
         thumbnail: {
