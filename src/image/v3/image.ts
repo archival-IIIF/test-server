@@ -24,16 +24,16 @@ router.get('/collection/image', ctx => {
                 type: 'Manifest',
                 label: 'Ariel_-_LoC_4a15521.jpg',
                 thumbnail: {
-                    id: ctx.request.origin + '/image/ariel/full/!100,100/0/default.jpg',
+                    id: ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
                     type: "dctypes:Image",
                     format: "image/jpeg",
                     service: {
                         id: ctx.request.origin + '/image-service/v3/ariel',
-                        protocol: "http://iiif.io/api/image",
+                        type: "ImageService3",
                         width: imageWith,
                         height: imageHeight,
                         sizes: [],
-                        profile: "http://iiif.io/api/image/2/level2.json"
+                        profile: "level2"
                     }
                 }
             },
@@ -53,7 +53,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
         '@context': "http://iiif.io/api/presentation/3/context.json",
         partOf: ctx.request.origin + prefix + '/collection/image',
         thumbnail: {
-            id: ctx.request.origin + '/image/ariel/full/!100,100/0/default.jpg',
+            id: ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
             type: "dctypes:Image",
             format: "image/jpeg",
             service: {
@@ -91,7 +91,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
                     type: 'oa:Annotation',
                     motivation: 'sc:painting',
                     resource: {
-                        id: ctx.request.origin + '/image/ariel/full/full/0/default.jpg',
+                        id: ctx.request.origin + '/image-service/v3/ariel/full/full/0/default.jpg',
                         type: 'dctypes:Image',
                         format: 'image/jpeg',
                         width: imageWith,
