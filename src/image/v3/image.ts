@@ -50,7 +50,10 @@ function getArielPresentation(ctx: Router.RouterContext) {
         id: ctx.request.origin + ctx.request.url,
         type: 'Manifest',
         label: 'Ariel_-_LoC_4a15521.jpg',
-        '@context': "http://iiif.io/api/presentation/3/context.json",
+        "@context": [
+            "http://www.w3.org/ns/anno.jsonld",
+            "http://iiif.io/api/presentation//context.json"
+        ],
         partOf: ctx.request.origin + prefix + '/collection/image',
         thumbnail: {
             id: ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
@@ -78,36 +81,42 @@ function getArielPresentation(ctx: Router.RouterContext) {
                 value: "March 1st 2012"
             }
         ],
-        sequences: [{
-            id: ctx.request.origin + '/sequence/ariel',
-            type: 'sc:Sequence',
-            canvases: [{
+        items: [
+            {
                 id: ctx.request.origin + '/canvas/ariel',
-                type: 'sc:Canvas',
+                type: "Canvas",
                 width: imageWith,
                 height: imageHeight,
-                images: [{
-                    id: ctx.request.origin + '/annotation/ariel/',
-                    type: 'oa:Annotation',
-                    motivation: 'sc:painting',
-                    resource: {
-                        id: ctx.request.origin + '/image-service/v3/ariel/full/full/0/default.jpg',
-                        type: 'dctypes:Image',
-                        format: 'image/jpeg',
-                        width: imageWith,
-                        height: imageHeight,
-                        service: {
-                            id: ctx.request.origin + '/image-service/v3/ariel',
-                            protocol: 'http://iiif.io/api/image',
-                            width: imageWith,
-                            height: imageHeight,
-                            profile: 'http://iiif.io/api/image/2/level2.json'
-                        }
-                    },
-                    "on": ctx.request.origin + '/canvas/ariel'
-                }]
-            }]
-        }]
+                items: [
+                    {
+                        id: ctx.request.origin + '/annotationPage/ariel',
+                        type: "AnnotationPage",
+                        items: [
+                            {
+                                id: ctx.request.origin + '/annotation/ariel',
+                                type: "Annotation",
+                                motivation: "painting",
+                                body: {
+                                    id: ctx.request.origin + '/image-service/v3/ariel/full/full/0/default.jpg',
+                                    type: "Image",
+                                    format: "image/jpg",
+                                    height: imageHeight,
+                                    width: imageWith,
+                                    service: [{
+                                        "id": ctx.request.origin + '/image-service/v3/ariel',
+                                        "type": "ImageService3",
+                                        "profile": "level2",
+                                        height: imageHeight,
+                                        width: imageWith
+                                    }],
+                                },
+                                target: ctx.request.origin + '/canvas/ariel'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     };
 }
 
