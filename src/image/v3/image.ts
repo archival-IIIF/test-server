@@ -97,7 +97,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
                                 type: "Annotation",
                                 motivation: "painting",
                                 body: {
-                                    id: ctx.request.origin + '/image-service/v3/ariel/full/full/0/default.jpg',
+                                    id:  ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
                                     type: "Image",
                                     format: "image/jpg",
                                     height: imageHeight,
