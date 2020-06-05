@@ -21,6 +21,7 @@ import manifestations from './manifestations/manifestations';
 import rightsInformation from './rightsInformation/rightsInformation';
 import image from './image/image';
 import image3 from './image/v3/image';
+import imageService3 from './image/v3/image-service';
 import pdf from './pdf/pdf';
 import nestedStructure from './nestedStructure/nestedStructure';
 import thumbnail from './thumbnail/thumbnail';
@@ -79,6 +80,8 @@ app.use(language);
 
 app.use(image);
 app.use(image3);
+app.use(imageService3);
+
 app.use(pdf);
 app.use(common);
 

@@ -28,7 +28,7 @@ router.get('/collection/image', ctx => {
                     type: "dctypes:Image",
                     format: "image/jpeg",
                     service: {
-                        id: ctx.request.origin + '/image/ariel',
+                        id: ctx.request.origin + '/image-service/v3/ariel',
                         protocol: "http://iiif.io/api/image",
                         width: imageWith,
                         height: imageHeight,
@@ -57,7 +57,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
             type: "dctypes:Image",
             format: "image/jpeg",
             service: {
-                id: ctx.request.origin + '/image/ariel',
+                id: ctx.request.origin + '/image-service/v3/ariel',
                 protocol: "http://iiif.io/api/image",
                 width: imageWith,
                 height: imageHeight,
@@ -97,7 +97,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
                         width: imageWith,
                         height: imageHeight,
                         service: {
-                            id: ctx.request.origin + '/image/ariel',
+                            id: ctx.request.origin + '/image-service/v3/ariel',
                             protocol: 'http://iiif.io/api/image',
                             width: imageWith,
                             height: imageHeight,
@@ -110,22 +110,5 @@ function getArielPresentation(ctx: Router.RouterContext) {
         }]
     };
 }
-
-
-router.get('/image/ariel/info.json', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + '/image/ariel',
-        type: "ImageService3",
-        protocol: "http://iiif.io/api/image",
-        width: imageWith,
-        height: imageHeight,
-        sizes: [],
-        "@context": "http://iiif.io/api/image/3/context.json",
-        "preferredFormats": [ "jpg"],
-        "extraFormats": ["jpg", "png", "gif", "webp"],
-        "extraFeatures": ["canonicalLinkHeader", "profileLinkHeader", "mirroring", "rotationArbitrary", "regionSquare"],
-        "extraQualities": ["default", "color", "gray", "bitonal"]
-    };
-});
 
 export default router.routes();
