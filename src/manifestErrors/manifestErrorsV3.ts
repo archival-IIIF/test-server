@@ -65,7 +65,7 @@ router.get('/collection/missingParent', ctx => {
         type: 'Collection',
         label: 'Missing parent test case',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + prefix + '/collection/missingParent2',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/missingParent2', type: 'Collection'}],
     };
 });
 
@@ -129,7 +129,7 @@ router.get('/manifest/missingInfoJson', ctx => {
         type: 'Manifest',
         label: 'missing.jpg',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + prefix + '/collection/missingInfoJson',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/missingInfoJson', type: 'Collection'}],
         thumbnail: {
             id: ctx.request.origin + '/image/missing/full/!100,100/0/default.jpg',
             type: "dctypes:Image",

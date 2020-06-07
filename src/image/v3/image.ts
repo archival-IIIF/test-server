@@ -54,7 +54,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
             "http://www.w3.org/ns/anno.jsonld",
             "http://iiif.io/api/presentation/3/context.json"
         ],
-        partOf: ctx.request.origin + prefix + '/collection/image',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/image', type: 'Collection'}],
         thumbnail: {
             id: ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
             type: "dctypes:Image",

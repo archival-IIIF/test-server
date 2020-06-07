@@ -49,7 +49,7 @@ router.get('/manifest/fileWithLogo', ctx => {
         },
         label: 'File with logo.txt',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + prefix + '/collection/logo',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/logo', type: 'Collection'}],
         metadata: [
             {
                 label: {en: ['Original file type']},
@@ -89,7 +89,7 @@ router.get('/manifest/fileWithoutLogo', ctx => {
         type: 'Manifest',
         label: 'File without logo.txt',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + prefix + '/collection/logo',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/logo', type: 'Collection'}],
         metadata: [
             {
                 label: {en: ['Original file type']},

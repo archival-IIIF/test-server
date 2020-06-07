@@ -87,7 +87,7 @@ router.get('/manifest/docx', ctx => {
         type: 'Manifest',
         label: 'test.pdf',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + prefix + '/collection/pdf',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/pdf', type: 'Collection'}],
         mediaSequences: [{
             id: ctx.request.origin + prefix + '/sequence/docx',
             type: 'ixif:MediaSequence',
@@ -112,7 +112,7 @@ router.get('/manifest/pdfa', ctx => {
         type: 'Manifest',
         label: 'test.pdf',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + prefix + '/collection/pdf',
+        partOf: [{id: ctx.request.origin + prefix + '/collection/pdf', type: 'Collection'}],
         mediaSequences: [{
             id: ctx.request.origin + prefix + '/sequence/pdfa',
             type: 'ixif:MediaSequence',
