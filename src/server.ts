@@ -17,7 +17,8 @@ import homepage from './homepage/homepage';
 import logoV2 from './logo/logoV2';
 import logoV3 from './logo/logoV3';
 
-import manifestations from './manifestations/manifestations';
+import manifestationsV2 from './manifestations/manifestationsV2';
+import manifestationsV3 from './manifestations/manifestationsV3';
 
 
 import rightsInformationV2 from './rightsInformation/rightsInformationV2';
@@ -104,7 +105,8 @@ app.use(common);
 app.use(validation);
 
 app.use(dynamicDemo);
-app.use(manifestations);
+app.use(manifestationsV2);
+app.use(manifestationsV3);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);
 app.use(universalViewer);
