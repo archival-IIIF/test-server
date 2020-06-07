@@ -78,7 +78,7 @@ router.get('/manifest/fileWithLicense', ctx => {
         label: 'File with license.txt',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         rights: 'http://creativecommons.org/licenses/by-sa/3.0/',
-        partOf: ctx.request.origin + '/collection/rightsInformation',
+        partOf: ctx.request.origin + prefix + '/collection/rightsInformation',
         metadata: [
             {
                 label: 'Original file type',
@@ -117,7 +117,7 @@ router.get('/manifest/fileWithoutLicense', ctx => {
         type: 'Manifest',
         label: 'File without license.txt',
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: ctx.request.origin + '/collection/rightsInformation',
+        partOf: ctx.request.origin + prefix + '/collection/rightsInformation',
         metadata: [
             {
                 label: 'Original file type',
