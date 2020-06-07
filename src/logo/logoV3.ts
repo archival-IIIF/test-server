@@ -10,7 +10,7 @@ router.get('/collection/logo', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Logo test case',
+        label: {en: ['Logo test case']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         logo: {
             id: ctx.request.origin + '/logo',
@@ -23,12 +23,12 @@ router.get('/collection/logo', ctx => {
             {
                 id: ctx.request.origin + prefix + '/manifest/fileWithLogo',
                 type: 'Manifest',
-                label: 'File with logo.txt',
+                label: {en: ['File with logo.txt']}
             },
             {
                 id: ctx.request.origin + prefix + '/manifest/fileWithoutLogo',
                 type: 'Manifest',
-                label: 'File without logo.txt',
+                label: {en: ['File without logo.txt']}
             }
         ],
         rights: 'http://creativecommons.org/licenses/by-sa/3.0/',
@@ -52,15 +52,15 @@ router.get('/manifest/fileWithLogo', ctx => {
         partOf: ctx.request.origin + prefix + '/collection/logo',
         metadata: [
             {
-                label: 'Original file type',
+                label: {en: ['Original file type']},
                 value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>'
             },
             {
-                label: 'Original file size',
+                label: {en: ['Original file size']},
                 value: '1 KB'
             },
             {
-                label: 'Original modification date',
+                label: {en: ['Original modification date']},
                 value: 'July 11th 2018'
             }
         ],
@@ -92,15 +92,15 @@ router.get('/manifest/fileWithoutLogo', ctx => {
         partOf: ctx.request.origin + prefix + '/collection/logo',
         metadata: [
             {
-                label: 'Original file type',
+                label: {en: ['Original file type']},
                 value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>'
             },
             {
-                label: 'Original file size',
+                label: {en: ['Original file size']},
                 value: '1 KB'
             },
             {
-                label: 'Original modification date',
+                label: {en: ['Original modification date']},
                 value: 'July 11th 2018'
             }
         ],
