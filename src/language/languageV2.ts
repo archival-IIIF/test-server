@@ -54,7 +54,7 @@ function languageFilePresentation(ctx: Router.RouterContext, id: string, label: 
         'elements': [{
             '@id': ctx.request.origin + '/file/' + id,
             '@type': 'foaf:Document',
-            'format': 'text/plain'
+            'format': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         }]
     }]
     };

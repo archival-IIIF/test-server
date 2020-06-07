@@ -32,7 +32,8 @@ import nestedStructureV2 from './nestedStructure/nestedStructureV2';
 import nestedStructureV3 from './nestedStructure/nestedStructureV3';
 import thumbnailV2 from './thumbnail/thumbnailV2';
 import thumbnailV3 from './thumbnail/thumbnailV3';
-import language from './language/language';
+import languageV2 from './language/languageV2';
+import languageV3 from './language/languageV3';
 import common from './common/common';
 
 import dynamicDemo from './dynamicDemo/routes';
@@ -89,7 +90,8 @@ app.use(thumbnailV2);
 app.use(thumbnailV3);
 app.use(nestedStructureV2);
 app.use(nestedStructureV3);
-app.use(language);
+app.use(languageV2);
+app.use(languageV3);
 
 app.use(image);
 app.use(image3);
