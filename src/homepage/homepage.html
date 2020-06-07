@@ -79,11 +79,12 @@
 
     <table id="test-cases" class="table table-striped">
         <thead>
-        <tr>
-            <td>Example ID</td>
-            <td>Description</td>
-            <td />
-        </tr>
+            <tr>
+                <th>Example ID</th>
+                <th>Description</th>
+                <th>IIIF V2</th>
+                <th>IIIF V3</th>
+            </tr>
         </thead>
         <tbody />
     </table>
@@ -93,61 +94,60 @@
 <script type="text/javascript">
 
     let testCases = {
-        audioVideo: 'Test case with audio and video files',
-        logo: 'Test case with a logo',
-        rightsInformation: 'Test case with license and attribution data',
-        emptyCollection: 'Empty collection test case',
-        emptyFolder: 'Empty folder test case',
-        image: 'Test case with images',
-        thumbnail: 'Test case with different thumbnail settings',
-        nestedStructure: 'Test case with a nested structure',
-        language: 'Test case with files in different languages',
-        pdf: 'Test case with pdf files',
-        //auth1: 'Token login test case with locked files',
-        auth2: 'Token login test case with a locked collection',
-        auth3: 'Token login test case with a locked sub files and folders',
-        auth4: 'Token login test case with a locked info.json',
-        authExternalAccept: 'External auth test (accept)',
-        authExternalDeny: 'External auth test (deny)',
-        dynamicDemo: 'Dynamic demo',
-        missingManifest: 'Missing manifest',
-        noJson: 'No json output',
-        noId: 'Missing id in manifest',
-        noLabel: 'Missing label in manifest',
-        wrongManifestType: 'Wrong manifest type',
-        missingSubfolder: 'Missing subfolder in manifest',
-        missingParent: 'Missing parent in manifest',
-        missingInfoJson: 'Missing info.json',
-        loop: 'Loop',
-        manifestations: 'File with two manifestations',
+        'General': {
+            audioVideo: 'Test case with audio and video files',
+            logo: 'Test case with a logo',
+            rightsInformation: 'Test case with license and attribution data',
+            emptyCollection: 'Empty collection test case',
+            emptyFolder: 'Empty folder test case',
+            image: 'Test case with images',
+            thumbnail: 'Test case with different thumbnail settings',
+            nestedStructure: 'Test case with a nested structure',
+            language: 'Test case with files in different languages',
+            pdf: 'Test case with pdf files',
+            manifestations: 'File with two manifestations',
+            dynamicDemo: 'Dynamic demo',
+        },
+        'Authentication': {
+            //auth1: 'Token login test case with locked files',
+            auth2: 'Token login test case with a locked collection',
+            auth3: 'Token login test case with a locked sub files and folders',
+            auth4: 'Token login test case with a locked info.json',
+            authExternalAccept: 'External auth test (accept)',
+            authExternalDeny: 'External auth test (deny)',
+        },
+        'Invalid manifests': {
+            missingManifest: 'Missing manifest',
+            noJson: 'No json output',
+            noId: 'Missing id in manifest',
+            noLabel: 'Missing label in manifest',
+            wrongManifestType: 'Wrong manifest type',
+            missingSubfolder: 'Missing subfolder in manifest',
+            missingParent: 'Missing parent in manifest',
+            missingInfoJson: 'Missing info.json',
+            loop: 'Loop',
+        }
     };
 
-
-    for (let id in testCases) {
-        let description = testCases[id];
-        let url = './collection/' + id;
-        let baseUrl = window.location.href;
-        let uvUrl = baseUrl + 'universalViewer?manifest=' + baseUrl + 'collection/' + id;
-        let mirador = '';
-        if (id === 'image') {
-            const mirardorUrl = baseUrl + 'mirador?manifest=' + baseUrl + 'manifest/ariel';
-            mirador =  '<a class="mirador" href="' +mirardorUrl +'" target="_blank">'+
-                '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
-                '</a>';
+    let table = '';
+    for (let groupLabel in testCases) {
+        const testCasesGroup = testCases[groupLabel];
+        table += '<tr><th colspan="4"><strong>' + groupLabel + '</strong></th></tr>';
+        for (let id in testCasesGroup) {
+            const description = testCases[groupLabel][id];
+            let baseUrl = window.location.href;
+            let manifestUrlV2 = baseUrl + 'collection/' + id;
+            let manifestUrlV3 = baseUrl + 'iiif/v3/collection/' + id;
+            table +=
+                '<tr>' +
+                '<td><a class="open" href="' + manifestUrlV2 + '" target="_blank">' + id + '</td>' +
+                '<td>' + description + '</td>' +
+                getLinks(manifestUrlV2, id) +
+                getLinks(manifestUrlV3, id) +
+                '</tr>';
         }
-        $('#test-cases > tbody').append(
-            '<tr>'+
-            '<td><a class="open" href="'+url+'" target="_blank">'+id+'</td>'+
-            '<td>'+description+'</td>'+
-            '<td>'+
-            '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>'+
-            '<a class="open-manifest" href="'+url+'" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>'+
-            '<a class="universal-viewer" href="' +uvUrl +'" target="_blank">UV</a>' +
-            mirador +
-            '</td>' +
-            '</tr>'
-        );
     }
+    $('#test-cases > tbody').append(table);
 
     let viewerUrl = localStorage.getItem('viewer-url');
     if (viewerUrl) {
@@ -187,6 +187,26 @@
             '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
             '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
         return pattern.test(str);
+    }
+
+    function getLinks(manifestUrl, id) {
+
+        let mirador = '';
+        let baseUrl = window.location.href;
+        let uvUrl = baseUrl + 'universalViewer?manifest=' + manifestUrl;
+        if (id === 'image') {
+            const mirardorUrl = baseUrl + 'mirador?manifest=' + baseUrl + 'manifest/ariel';
+            mirador = '<a class="mirador" href="' + mirardorUrl + '" target="_blank">' +
+                '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
+                '</a>';
+        }
+
+        return '<td>' +
+        '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>' +
+        '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>' +
+        '<a class="universal-viewer" href="' + uvUrl + '" target="_blank">UV</a>' +
+        mirador +
+        '</td>';
     }
 
 </script>

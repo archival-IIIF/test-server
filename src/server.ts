@@ -13,7 +13,8 @@ import emptyFolder from './emptyFolder/emptyFolder';
 import homepage from './homepage/homepage';
 
 
-import logo from './logo/logo';
+import logoV2 from './logo/logoV2';
+import logoV3 from './logo/logoV3';
 
 import manifestations from './manifestations/manifestations';
 
@@ -72,7 +73,8 @@ app.use(emptyFolder);
 app.use(homepage);
 
 
-app.use(logo);
+app.use(logoV2);
+app.use(logoV3);
 app.use(rightsInformation);
 app.use(thumbnail);
 app.use(nestedStructure);

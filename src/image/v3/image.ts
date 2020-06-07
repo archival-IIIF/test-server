@@ -52,7 +52,7 @@ function getArielPresentation(ctx: Router.RouterContext) {
         label: 'Ariel_-_LoC_4a15521.jpg',
         "@context": [
             "http://www.w3.org/ns/anno.jsonld",
-            "http://iiif.io/api/presentation//context.json"
+            "http://iiif.io/api/presentation/3/context.json"
         ],
         partOf: ctx.request.origin + prefix + '/collection/image',
         thumbnail: {
