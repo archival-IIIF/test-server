@@ -19,7 +19,8 @@ import logoV3 from './logo/logoV3';
 import manifestations from './manifestations/manifestations';
 
 
-import rightsInformation from './rightsInformation/rightsInformation';
+import rightsInformationV2 from './rightsInformation/rightsInformationV2';
+import rightsInformationV3 from './rightsInformation/rightsInformationV3';
 import image from './image/image';
 import image3 from './image/v3/image';
 import imageService3 from './image/v3/image-service';
@@ -75,7 +76,8 @@ app.use(homepage);
 
 app.use(logoV2);
 app.use(logoV3);
-app.use(rightsInformation);
+app.use(rightsInformationV2);
+app.use(rightsInformationV3);
 app.use(thumbnail);
 app.use(nestedStructure);
 app.use(language);
