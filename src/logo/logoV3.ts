@@ -47,21 +47,21 @@ router.get('/manifest/fileWithLogo', ctx => {
             height: 100,
             width: 120
         },
-        label: 'File with logo.txt',
+        label: {en: ['File with logo.txt']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         partOf: [{id: ctx.request.origin + prefix + '/collection/logo', type: 'Collection'}],
         metadata: [
             {
                 label: {en: ['Original file type']},
-                value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>'
+                value: {none: ['<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>']}
             },
             {
                 label: {en: ['Original file size']},
-                value: '1 KB'
+                value: {none: ['1 KB']}
             },
             {
                 label: {en: ['Original modification date']},
-                value: 'July 11th 2018'
+                value: {none: ['July 11th 2018']}
             }
         ],
         mediaSequences: [{
@@ -73,7 +73,7 @@ router.get('/manifest/fileWithLogo', ctx => {
                 format: 'text/plain',
                 rendering: {
                     id: ctx.request.origin + '/file/txt/original',
-                    label: 'Original copy',
+                    label: {en: ['Original copy']},
                     format: 'text/plain'
                 }
             }]
@@ -87,21 +87,21 @@ router.get('/manifest/fileWithoutLogo', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Manifest',
-        label: 'File without logo.txt',
+        label: {en: ['File without logo.txt']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         partOf: [{id: ctx.request.origin + prefix + '/collection/logo', type: 'Collection'}],
         metadata: [
             {
                 label: {en: ['Original file type']},
-                value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>'
+                value: {none: ['<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>']}
             },
             {
                 label: {en: ['Original file size']},
-                value: '1 KB'
+                value:  {none: ['1 KB']}
             },
             {
                 label: {en: ['Original modification date']},
-                value: 'July 11th 2018'
+                value:  {none: ['July 11th 2018']}
             }
         ],
         mediaSequences: [{
@@ -113,7 +113,7 @@ router.get('/manifest/fileWithoutLogo', ctx => {
                 format: 'text/plain',
                 rendering: {
                     id: ctx.request.origin + '/file/txt/original',
-                    label: 'Original copy',
+                    label: {en: ['Original copy']},
                     format: 'text/plain'
                 }
             }]

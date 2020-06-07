@@ -81,6 +81,9 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
                     result[item.id] = 'Loop';
                     continue;
                 }
+                if (item.type !== 'Manifest' && item.type !== 'Collection') {
+                    continue;
+                }
                 const childResult = await validateUrl(item.id, result);
                 result = Object.assign(result, childResult);
             }

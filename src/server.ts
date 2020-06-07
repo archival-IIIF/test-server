@@ -8,7 +8,8 @@ import auth4 from './auth4/auth4';
 import authExternal from './authExternal/authExternal';
 
 import emptyCollection from './emptyCollection/emptyCollection';
-import emptyFolder from './emptyFolder/emptyFolder';
+import emptyFolderV2 from './emptyFolder/emptyFolderV2';
+import emptyFolderV3 from './emptyFolder/emptyFolderV3';
 
 import homepage from './homepage/homepage';
 
@@ -29,7 +30,8 @@ import pdfV2 from './pdf/pdfV2';
 import pdfV3 from './pdf/pdfV3';
 import nestedStructureV2 from './nestedStructure/nestedStructureV2';
 import nestedStructureV3 from './nestedStructure/nestedStructureV3';
-import thumbnail from './thumbnail/thumbnail';
+import thumbnailV2 from './thumbnail/thumbnailV2';
+import thumbnailV3 from './thumbnail/thumbnailV3';
 import language from './language/language';
 import common from './common/common';
 
@@ -73,7 +75,8 @@ app.use(auth4);
 app.use(authExternal);
 
 app.use(emptyCollection);
-app.use(emptyFolder);
+app.use(emptyFolderV2);
+app.use(emptyFolderV3);
 
 app.use(homepage);
 
@@ -82,7 +85,8 @@ app.use(logoV2);
 app.use(logoV3);
 app.use(rightsInformationV2);
 app.use(rightsInformationV3);
-app.use(thumbnail);
+app.use(thumbnailV2);
+app.use(thumbnailV3);
 app.use(nestedStructureV2);
 app.use(nestedStructureV3);
 app.use(language);

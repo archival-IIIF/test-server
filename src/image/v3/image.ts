@@ -15,27 +15,26 @@ router.get('/collection/image', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Image test case',
+        label: {en: ['Image test case']},
         '@context': "http://iiif.io/api/presentation/3/context.json",
         rights: 'http://creativecommons.org/licenses/by-sa/3.0/',
         items: [
             {
                 id: ctx.request.origin + prefix + '/manifest/ariel',
                 type: 'Manifest',
-                label: 'Ariel_-_LoC_4a15521.jpg',
-                thumbnail: {
+                label: {en: ['Ariel_-_LoC_4a15521.jpg']},
+                thumbnail: [{
                     id: ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
-                    type: "dctypes:Image",
+                    type: "Image",
                     format: "image/jpeg",
-                    service: {
+                    service: [{
                         id: ctx.request.origin + '/image-service/v3/ariel',
                         type: "ImageService3",
                         width: imageWith,
                         height: imageHeight,
-                        sizes: [],
                         profile: "level2"
-                    }
-                }
+                    }]
+                }]
             },
         ]
     };
@@ -49,36 +48,37 @@ function getArielPresentation(ctx: Router.RouterContext) {
     return {
         id: ctx.request.origin + ctx.request.url,
         type: 'Manifest',
-        label: 'Ariel_-_LoC_4a15521.jpg',
+        label: {en: ['Ariel_-_LoC_4a15521.jpg']},
         "@context": [
             "http://www.w3.org/ns/anno.jsonld",
             "http://iiif.io/api/presentation/3/context.json"
         ],
         partOf: [{id: ctx.request.origin + prefix + '/collection/image', type: 'Collection'}],
-        thumbnail: {
+        thumbnail: [{
             id: ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
-            type: "dctypes:Image",
+            type: "Image",
             format: "image/jpeg",
-            service: {
+            service: [{
                 id: ctx.request.origin + '/image-service/v3/ariel',
                 protocol: "http://iiif.io/api/image",
                 width: imageWith,
                 height: imageHeight,
-                profile: "http://iiif.io/api/image/2/level2.json"
-            }
-        },
+                type: "ImageService3",
+                profile: "level2"
+            }]
+        }],
         metadata: [
             {
-                label: "Original file type",
-                value: "<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=729\">Windows Bitmap (.bmp, .dib)</a>"
+                label: {en: ["Original file type"]},
+                value: {none: ["<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=729\">Windows Bitmap (.bmp, .dib)</a>"]}
             },
             {
-                label: "Original file size",
-                value: "1.28 MB"
+                label: {en: ["Original file size"]},
+                value: {none: ["1.28 MB"]}
             },
             {
-                label: "Original modification date",
-                value: "March 1st 2012"
+                label: {en: ["Original modification date"]},
+                value: {none: ["March 1st 2012"]}
             }
         ],
         items: [

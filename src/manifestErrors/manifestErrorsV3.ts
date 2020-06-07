@@ -17,7 +17,7 @@ router.get('/collection/noJson', ctx => {
 router.get('/collection/noId', ctx => {
     ctx.body = {
         type: 'Collection',
-        label: 'Collection without id',
+        label: {en: ['Collection without id']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
     };
 });
@@ -36,7 +36,7 @@ router.get('/collection/wrongManifestType', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Abc',
-        label: 'Collection with wrong manifest type',
+        label: {en: ['Collection with wrong manifest type']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
     };
 });
@@ -46,13 +46,13 @@ router.get('/collection/missingSubfolder', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Missing subfolder test case',
+        label: {en: ['Missing subfolder test case']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        collections: [
+        items: [
             {
                 id: ctx.request.origin + prefix + '/collection/missingSubfolder2',
                 type: 'Collection',
-                label: 'Missing subfolder',
+                label: {en: ['Missing subfolder']},
             }
         ]
     };
@@ -63,7 +63,7 @@ router.get('/collection/missingParent', ctx => {
     ctx.body = {
         id:ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Missing parent test case',
+        label: {en: ['Missing parent test case']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         partOf: [{id: ctx.request.origin + prefix + '/collection/missingParent2', type: 'Collection'}],
     };
@@ -93,27 +93,27 @@ router.get('/collection/missingInfoJson', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Missing info.json test case',
+        label: {en: ['Missing info.json test case']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         rights: 'http://creativecommons.org/licenses/by-sa/3.0/',
         items: [
             {
                 id: ctx.request.origin + prefix + '/manifest/missingInfoJson',
                 type: 'Manifest',
-                label: 'missing.jpg',
-                thumbnail: {
+                label: {en: ['missing.jpg']},
+                thumbnail: [{
                     id: ctx.request.origin + '/image/missing/full/!100,100/0/default.jpg',
-                    type: "dctypes:Image",
+                    type: "Image",
                     format: "image/jpeg",
-                    service: {
+                    service: [{
                         id: ctx.request.origin + prefix +'/image/missing',
                         protocol: "http://iiif.io/api/image",
                         width: 100,
                         height: 100,
-                        sizes: [],
-                        profile: "http://iiif.io/api/image/2/level2.json"
-                    }
-                }
+                        type: 'ImageService3',
+                        profile: "level2"
+                    }]
+                }]
             },
         ]
     };
@@ -127,22 +127,22 @@ router.get('/manifest/missingInfoJson', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Manifest',
-        label: 'missing.jpg',
+        label: {en: ['missing.jpg']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         partOf: [{id: ctx.request.origin + prefix + '/collection/missingInfoJson', type: 'Collection'}],
-        thumbnail: {
+        thumbnail: [{
             id: ctx.request.origin + '/image/missing/full/!100,100/0/default.jpg',
-            type: "dctypes:Image",
+            type: "Image",
             format: "image/jpeg",
-            service: {
+            service: [{
                 id: ctx.request.origin + '/image/missing',
                 protocol: "http://iiif.io/api/image",
                 width: imageWith,
                 height: imageHeight,
-                sizes: [],
-                profile: "http://iiif.io/api/image/2/level2.json"
-            }
-        },
+                type: 'ImageService3',
+                profile: "level2"
+            }]
+        }],
         items: [{
             id: ctx.request.origin + prefix + '/canvas/missingInfoJson',
             type: "Canvas",
@@ -153,22 +153,23 @@ router.get('/manifest/missingInfoJson', ctx => {
                 type: 'AnnotationPage',
                 items: [{
                     id: ctx.request.origin + '/annotation/missingInfoJson/',
-                    type: 'oa:Annotation',
-                    motivation: 'sc:painting',
+                    type: 'Annotation',
+                    motivation: 'painting',
                     body: {
                         id: ctx.request.origin + '/image/missing/full/full/0/default.jpg',
-                        type: 'dctypes:Image',
+                        type: 'Image',
                         format: 'image/jpeg',
                         width: imageWith,
                         height: imageHeight,
-                        service: {
+                        service: [{
                             id: ctx.request.origin + '/image/missing',
                             protocol: 'http://iiif.io/api/image',
                             width: imageWith,
                             height: imageHeight,
                             sizes: [],
+                            type: 'ImageService3',
                             profile: 'level2',
-                        }
+                        }]
                     },
                     target: ctx.request.origin + prefix + '/canvas/missingInfoJson'
                 }]
