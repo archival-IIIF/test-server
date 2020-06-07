@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "ajv": "^6.12.2",
     "bootstrap": "^4.5.0",
     "dotenv": "^8.2.0",
     "file-icon-vectors": "^1.0.0",

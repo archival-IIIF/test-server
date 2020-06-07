@@ -23,6 +23,7 @@ import rightsInformationV2 from './rightsInformation/rightsInformationV2';
 import rightsInformationV3 from './rightsInformation/rightsInformationV3';
 import image from './image/image';
 import image3 from './image/v3/image';
+import validation from './validation/validation';
 import imageService3 from './image/v3/image-service';
 import pdf from './pdf/pdf';
 import nestedStructureV2 from './nestedStructure/nestedStructureV2';
@@ -91,6 +92,8 @@ app.use(imageService3);
 
 app.use(pdf);
 app.use(common);
+
+app.use(validation);
 
 app.use(dynamicDemo);
 app.use(manifestations);

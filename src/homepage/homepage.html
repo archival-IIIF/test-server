@@ -235,6 +235,11 @@
             '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>' +
             '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>';
 
+        if (version === 'v3') {
+            const validationUrl = baseUrl + 'validate?manifest=' + manifestUrl;
+            output += '<a href="' + validationUrl + '" target="_blank"><img class="icon" title="Validate" alt="Validate" src="/public/check-circle-regular.svg" /></a>';
+        }
+
         if (testCase.uv === true) {
             let uvUrl = baseUrl + 'universalViewer?manifest=' + manifestUrl;
             output += '<a class="universal-viewer" href="' + uvUrl + '" target="_blank">UV</a>';

@@ -7,25 +7,24 @@ router.get('/collection/rightsInformation', (ctx: Router.RouterContext) => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Rights information test case',
+        label: {en: ['Rights information test case']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         rights: 'http://creativecommons.org/licenses/by-sa/3.0/',
         items: [
             {
                 id: ctx.request.origin + prefix + '/manifest/fileWithLicense',
                 type: 'Manifest',
-                label: 'File with license.txt',
+                label: {en: ['File with license.txt']}
             },
             {
                 id: ctx.request.origin + prefix + '/manifest/fileWithoutLicense',
                 type: 'Manifest',
-                label: 'File without license.txt',
-            }
-            ,
+                label: {en: ['File without license.txt']}
+            },
             {
                 id: ctx.request.origin + prefix + '/manifest/fileWithAttribution',
                 type: 'Manifest',
-                label: 'File with attribution.txt',
+                label: {en: ['File with attribution.txt']}
             }
         ]
     };
