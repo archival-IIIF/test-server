@@ -25,13 +25,15 @@ import image from './image/image';
 import image3 from './image/v3/image';
 import imageService3 from './image/v3/image-service';
 import pdf from './pdf/pdf';
-import nestedStructure from './nestedStructure/nestedStructure';
+import nestedStructureV2 from './nestedStructure/nestedStructureV2';
+import nestedStructureV3 from './nestedStructure/nestedStructureV3';
 import thumbnail from './thumbnail/thumbnail';
 import language from './language/language';
 import common from './common/common';
 
 import dynamicDemo from './dynamicDemo/routes';
-import manifestErrors from './manifestErrors/manifestErrors';
+import manifestErrorsV2 from './manifestErrors/manifestErrorsV2';
+import manifestErrorsV3 from './manifestErrors/manifestErrorsV3';
 import universalViewer from './universalViewer/universalViewer'
 import mirador from './mirador/mirador'
 
@@ -79,7 +81,8 @@ app.use(logoV3);
 app.use(rightsInformationV2);
 app.use(rightsInformationV3);
 app.use(thumbnail);
-app.use(nestedStructure);
+app.use(nestedStructureV2);
+app.use(nestedStructureV3);
 app.use(language);
 
 app.use(image);
@@ -91,7 +94,8 @@ app.use(common);
 
 app.use(dynamicDemo);
 app.use(manifestations);
-app.use(manifestErrors);
+app.use(manifestErrorsV2);
+app.use(manifestErrorsV3);
 app.use(universalViewer);
 app.use(mirador);
 app.keys = ['secret'];

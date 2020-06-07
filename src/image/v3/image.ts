@@ -83,17 +83,17 @@ function getArielPresentation(ctx: Router.RouterContext) {
         ],
         items: [
             {
-                id: ctx.request.origin + '/canvas/ariel',
+                id: ctx.request.origin + prefix + '/canvas/ariel',
                 type: "Canvas",
                 width: imageWith,
                 height: imageHeight,
                 items: [
                     {
-                        id: ctx.request.origin + '/annotationPage/ariel',
+                        id: ctx.request.origin + prefix + '/annotationPage/ariel',
                         type: "AnnotationPage",
                         items: [
                             {
-                                id: ctx.request.origin + '/annotation/ariel',
+                                id: ctx.request.origin + prefix + '/annotation/ariel',
                                 type: "Annotation",
                                 motivation: "painting",
                                 body: {
@@ -103,14 +103,14 @@ function getArielPresentation(ctx: Router.RouterContext) {
                                     height: imageHeight,
                                     width: imageWith,
                                     service: [{
-                                        "id": ctx.request.origin + '/image-service/v3/ariel',
-                                        "type": "ImageService3",
-                                        "profile": "level2",
+                                        id: ctx.request.origin + '/image-service/v3/ariel',
+                                        type: "ImageService3",
+                                        profile: "level2",
                                         height: imageHeight,
                                         width: imageWith
                                     }],
                                 },
-                                target: ctx.request.origin + '/canvas/ariel'
+                                target: ctx.request.origin + prefix + '/canvas/ariel'
                             }
                         ]
                     }

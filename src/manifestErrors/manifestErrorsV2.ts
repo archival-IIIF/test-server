@@ -7,6 +7,7 @@ router.get('/collection/missingManifest', ctx => {
     ctx.body = 'Missing';
 });
 
+
 router.get('/collection/noJson', ctx => {
     ctx.body = 'No json';
 });
@@ -19,26 +20,29 @@ router.get('/collection/noId', ctx => {
     };
 });
 
+
 router.get('/collection/noLabel', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/noLabel',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         '@context': 'http://iiif.io/api/collection/2/context.json'
     };
 });
 
+
 router.get('/collection/wrongManifestType', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/wrongManifestType',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Abc',
         label: 'Collection with wrong manifest type',
         '@context': 'http://iiif.io/api/collection/2/context.json'
     };
 });
 
+
 router.get('/collection/missingSubfolder', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/missingSubfolder',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Missing subfolder test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -52,9 +56,10 @@ router.get('/collection/missingSubfolder', ctx => {
     };
 });
 
+
 router.get('/collection/missingParent', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/missingParent',
+        '@id':ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Missing parent test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -62,9 +67,10 @@ router.get('/collection/missingParent', ctx => {
     };
 });
 
+
 router.get('/collection/loop', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/loop',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Loop test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -80,11 +86,10 @@ router.get('/collection/loop', ctx => {
 });
 
 
-
 router.get('/collection/missingInfoJson', ctx => {
 
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/missingInfoJson',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Missing info.json test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -118,7 +123,7 @@ router.get('/manifest/missingInfoJson', ctx => {
     const imageHeight = 1450;
 
     ctx.body = {
-        '@id': ctx.request.origin + '/manifest/missingInfoJson',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Manifest',
         label: 'missing.jpg',
         '@context': 'http://iiif.io/api/collection/2/context.json',
