@@ -25,7 +25,8 @@ import image from './image/image';
 import image3 from './image/v3/image';
 import validation from './validation/validation';
 import imageService3 from './image/v3/image-service';
-import pdf from './pdf/pdf';
+import pdfV2 from './pdf/pdfV2';
+import pdfV3 from './pdf/pdfV3';
 import nestedStructureV2 from './nestedStructure/nestedStructureV2';
 import nestedStructureV3 from './nestedStructure/nestedStructureV3';
 import thumbnail from './thumbnail/thumbnail';
@@ -90,7 +91,8 @@ app.use(image);
 app.use(image3);
 app.use(imageService3);
 
-app.use(pdf);
+app.use(pdfV2);
+app.use(pdfV3);
 app.use(common);
 
 app.use(validation);
