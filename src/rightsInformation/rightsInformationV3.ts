@@ -35,21 +35,21 @@ router.get('/manifest/fileWithAttribution', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Manifest',
-        label: 'File with attribution.txt',
+        label: {en: ['File with attribution.txt']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         requiredStatement: 'Provided by Example Organization',
         partOf: ctx.request.origin + prefix + '/collection/rightsInformation',
         metadata: [
             {
-                label: 'Original file type',
+                label: {en: ['Original file type']},
                 value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>'
             },
             {
-                label: 'Original file size',
+                label: {en: ['Original file size']},
                 value: '1 KB'
             },
             {
-                label: 'Original modification date',
+                label: {en: ['Original modification date']},
                 value: 'July 11th 2018'
             }
         ],
@@ -62,7 +62,7 @@ router.get('/manifest/fileWithAttribution', ctx => {
                 format: 'text/plain',
                 rendering: {
                     id: ctx.request.origin + '/file/txt/original',
-                    label: 'Original copy',
+                    label: {en: ['Original copy']},
                     format: 'text/plain'
                 }
             }]
@@ -75,21 +75,21 @@ router.get('/manifest/fileWithLicense', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Manifest',
-        label: 'File with license.txt',
+        label: {en: ['File with license.txt']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         rights: 'http://creativecommons.org/licenses/by-sa/3.0/',
         partOf: ctx.request.origin + prefix + '/collection/rightsInformation',
         metadata: [
             {
-                label: 'Original file type',
+                label: {en: ['Original file type']},
                 value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=163\">Plain Text File (.txt)</a>'
             },
             {
-                label: 'Original file size',
+                label: {en: ['Original file size']},
                 value: '1 KB'
             },
             {
-                label: 'Original modification date',
+                label: {en: ['Original modification date']},
                 value: 'July 11th 2018'
             }
         ],
@@ -102,7 +102,7 @@ router.get('/manifest/fileWithLicense', ctx => {
                 format: 'text/plain',
                 rendering: {
                     id: ctx.request.origin + '/file/txt/original',
-                    label: 'Original copy',
+                    label: {en: ['Original copy']},
                     format: 'text/plain'
                 }
             }]
@@ -135,7 +135,7 @@ router.get('/manifest/fileWithoutLicense', ctx => {
         mediaSequences: [{
             id: ctx.request.origin + prefix + '/sequence/fileWithoutLicense',
             type: 'ixif:MediaSequence',
-            'elements': [{
+            elements: [{
                 id: ctx.request.origin + '/file/txt',
                 type: 'foaf:Document',
                 format: 'text/plain',
