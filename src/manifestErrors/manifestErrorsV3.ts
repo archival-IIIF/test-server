@@ -74,14 +74,14 @@ router.get('/collection/loop', ctx => {
     ctx.body = {
         id: ctx.request.origin + ctx.request.url,
         type: 'Collection',
-        label: 'Loop test case',
+        label: {en: ['Loop test case']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         parOf: ctx.request.origin + '/collection/loop',
         items: [
             {
                 id: ctx.request.origin + prefix + '/collection/loop',
                 type: 'Collection',
-                label: 'Loop subfolder'
+                label: {en: ['Loop subfolder']}
             }
         ]
     };

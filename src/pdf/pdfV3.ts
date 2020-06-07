@@ -52,10 +52,7 @@ router.get('/manifest/pdf1', ctx => {
             'http://iiif.io/api/presentation/3/context.json',
             'http://wellcomelibrary.org/ixif/0/context.json'
         ],
-        partOf: [{
-            id: ctx.request.origin + prefix + '/collection/pdf',
-            type: 'Collection'
-        }],
+        partOf: [{id: ctx.request.origin + prefix + '/collection/pdf', type: 'Collection'}],
         mediaSequences: [{
             id: ctx.request.origin + prefix + '/sequence/pdf1',
             type: 'ixif:MediaSequence',
