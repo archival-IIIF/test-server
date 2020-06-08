@@ -22,14 +22,15 @@ export default class ImageManifest extends Manifest {
         this.setThumbnail(new ThumbnailService(imageServiceIds[0]));
 
         const items: Canvas[] = [];
+        let i = 1;
         for (let imageServiceId0 of imageServiceIds) {
             const canvas = new Canvas(
-                id + '/canvas',
+                id + '/' + i.toString() + '/canvas',
                 imageWith,
                 imageHeight
             );
             const annotationPage = new AnnotationPage(
-                id + '/annotationPage'
+                id + '/' + i.toString() + '/annotationPage'
             );
             const service = new Service(
                 imageServiceId0,
@@ -37,16 +38,17 @@ export default class ImageManifest extends Manifest {
                 'level2'
             );
             const resource = new Resource(
-                imageServiceId + '/full/!100,100/0/default.jpg',
+                imageServiceId0 + '/full/!100,100/0/default.jpg',
                 'Image',
                 'image/jpg',
             );
             resource.setService(service);
             const annotation = new Annotation(id + '/annotation', resource);
-            annotation.target = id + '/canvas';
+            annotation.target = id + '/' + i.toString() +'/canvas';
             annotationPage.setItems(annotation);
             canvas.setItems(annotationPage);
             items.push(canvas)
+            i++;
         }
 
         this.setItems(items)
