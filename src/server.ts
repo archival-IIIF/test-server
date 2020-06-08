@@ -24,10 +24,12 @@ import manifestationsV3 from './manifestations/manifestationsV3';
 
 import rightsInformationV2 from './rightsInformation/rightsInformationV2';
 import rightsInformationV3 from './rightsInformation/rightsInformationV3';
-import image from './image/image';
-import image3 from './image/v3/image';
+import imageV2 from './image/imageV2';
+import imageV3 from './image/imageV3';
+import multiPageV3 from './multiPage/multiPageV3';
 import validation from './validation/validation';
-import imageService3 from './image/v3/image-service';
+import imageServiceV2 from './imageService/imageServiceV2';
+import imageServiceV3 from './imageService/imageServiceV3';
 import pdfV2 from './pdf/pdfV2';
 import pdfV3 from './pdf/pdfV3';
 import nestedStructureV2 from './nestedStructure/nestedStructureV2';
@@ -96,9 +98,11 @@ app.use(nestedStructureV3);
 app.use(languageV2);
 app.use(languageV3);
 
-app.use(image);
-app.use(image3);
-app.use(imageService3);
+app.use(imageV2);
+app.use(imageV3);
+app.use(imageServiceV2);
+app.use(imageServiceV3);
+app.use(multiPageV3);
 
 app.use(pdfV2);
 app.use(pdfV3);

@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import download from '../lib/Download';
 import dynamicDemoCommon from './dynamicDemoCommon';
-import serveImage from '../image/internal';
+import serveImage from '../imageService/internal';
 import {imageSize} from 'image-size';
 
 const router: Router = new Router();

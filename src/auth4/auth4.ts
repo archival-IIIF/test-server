@@ -1,6 +1,6 @@
 import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
-import serveImage from '../image/internal';
+import serveImage from '../imageService/internal';
 
 const imageWith = 1840;
 const imageHeight = 1450;
