@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 
-import audioVideo from './audioVideo/audioVideo';
+import audioVideoV2 from './audioVideo/audioVideoV2';
+import audioVideoV3 from './audioVideo/audioVideoV3';
 import auth from './auth/auth';
 import auth2 from './auth2/auth2';
 import auth3 from './auth3/auth3';
@@ -69,7 +70,8 @@ app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'), rootPath: '/miradorJS'}));
 app.use(bodyParser());
 
-app.use(audioVideo);
+app.use(audioVideoV2);
+app.use(audioVideoV3);
 app.use(auth);
 app.use(auth2);
 app.use(auth3);
