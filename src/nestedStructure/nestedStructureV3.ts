@@ -1,81 +1,34 @@
 import * as Router from 'koa-router';
+import {
+    getNestedStructure,
+    getNestedStructure11,
+    getNestedStructure111,
+    getNestedStructure1111,
+    getNestedStructure12
+} from "./nestedStructure";
 
 const prefix = '/iiif/v3';
 const router: Router = new Router({prefix});
 
 router.get('/collection/nestedStructure', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + ctx.request.url,
-        type: 'Collection',
-        label: {en: ['Folder Level 1']},
-        '@context': 'http://iiif.io/api/presentation/3/context.json',
-        items: [
-            {
-                id: ctx.request.origin + prefix + '/collection/nestedStructure11',
-                type: 'Collection',
-                label: {en: ['Folder Level 1.1']}
-            },
-            {
-                id: ctx.request.origin + prefix + '/collection/nestedStructure12',
-                type: 'Collection',
-                label: {en: ['Folder Level 1.2']}
-            }
-        ]
-    };
+    ctx.body = getNestedStructure(ctx, prefix);
 });
 
 router.get('/collection/nestedStructure11', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + ctx.request.url,
-        type: 'Collection',
-        label: {en: ['Folder Level 1.1']},
-        '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: [{id: ctx.request.origin + prefix + '/collection/nestedStructure', type: 'Collection'}],
-        items: [
-            {
-                id: ctx.request.origin + prefix + '/collection/nestedStructure111',
-                type: 'Collection',
-                label: {en: ['Folder Level 1.1.1']}
-            }
-        ]
-    };
+    ctx.body = getNestedStructure11(ctx, prefix);
 });
 
 router.get('/collection/nestedStructure111', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + ctx.request.url,
-        type: 'Collection',
-        label: {en: ['Folder Level 1.1.1']},
-        '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: [{id: ctx.request.origin + prefix + '/collection/nestedStructure11', type: 'Collection'}],
-        items: [
-            {
-                id: ctx.request.origin + prefix + '/collection/nestedStructure1111',
-                type: 'Collection',
-                label: {en: ['Folder Level 1.1.1.1']}
-            }
-        ]
-    };
+    ctx.body = getNestedStructure111(ctx, prefix);
 });
 
 router.get('/collection/nestedStructure1111', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + ctx.request.url,
-        type: 'Collection',
-        label: {en: ['Folder Level 1.1.1.1']},
-        '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: [{id: ctx.request.origin + prefix + '/collection/nestedStructure111', type: 'Collection'}],
-    };
+    ctx.body = getNestedStructure1111(ctx, prefix);
 });
 
 router.get('/collection/nestedStructure12', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + ctx.request.url,
-        type: 'Collection',
-        label: {en: ['Folder Level 1.2']},
-        '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: [{id: ctx.request.origin + prefix + '/collection/nestedStructure', type: 'Collection'}],
-    };
+    ctx.body = getNestedStructure12(ctx, prefix);
 });
+
 
 export default router.routes();
