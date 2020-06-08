@@ -67,6 +67,7 @@ router.get('/manifest/die_internationale_as_mp3', ctx => {
             {
                 id: ctx.request.origin + '/canvas/die_internationale_as_mp3',
                 type: 'Canvas',
+                duration: 15.464,
                 items: [
                     {
                         id: ctx.request.origin + '/annotationPage/die_internationale_as_mp3',
@@ -79,7 +80,8 @@ router.get('/manifest/die_internationale_as_mp3', ctx => {
                                 body: {
                                     id: ctx.request.origin + '/file/die_internationale_as_mp3',
                                     type: 'Audio',
-                                    format: 'audio/mpeg'
+                                    format: 'audio/mp3',
+                                    duration: 15.464
                                 },
                                 target: ctx.request.origin + '/canvas/die_internationale_as_mp3'
                             }
