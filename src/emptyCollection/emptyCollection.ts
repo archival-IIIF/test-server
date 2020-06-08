@@ -1,23 +1,20 @@
 import * as Router from 'koa-router';
+import Collection from "../presentation-builder/v3/Collection";
+import {ParameterizedContext} from "koa";
+import {transformCollectionToV2} from "../lib/Transform";
 
 const router: Router = new Router();
 
-router.get('/collection/emptyCollection', ctx => {
-    ctx.body = {
-        '@id': ctx.request.origin + ctx.request.url,
-        '@type': 'sc:Collection',
-        label: 'Empty collection test case',
-        '@context': 'http://iiif.io/api/collection/2/context.json'
-    };
+router.get('/iiif/v2/collection/emptyCollection', ctx => {
+    ctx.body = transformCollectionToV2(getEmptyCollection(ctx));
 });
 
 router.get('/iiif/v3/collection/emptyCollection', ctx => {
-    ctx.body = {
-        id: ctx.request.origin + ctx.request.url,
-        type: 'Collection',
-        label: {en: ['Empty collection test case']},
-        '@context': 'http://iiif.io/api/presentation/3/context.json',
-    };
+    ctx.body = getEmptyCollection(ctx);
 });
+
+function getEmptyCollection(ctx: ParameterizedContext) {
+    return new Collection(ctx.request.origin + ctx.request.url, 'Empty collection test case')
+}
 
 export default router.routes();

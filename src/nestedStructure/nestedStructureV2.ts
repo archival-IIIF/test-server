@@ -1,6 +1,7 @@
 import * as Router from 'koa-router';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 router.get('/collection/nestedStructure', ctx => {
     ctx.body = {

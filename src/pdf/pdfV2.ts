@@ -1,6 +1,7 @@
 import * as Router from 'koa-router';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 import * as path from 'path';
 import download from '../lib/Download';

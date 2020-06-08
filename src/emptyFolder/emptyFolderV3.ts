@@ -1,23 +1,15 @@
 import * as Router from 'koa-router';
-import Collection from "../presentation-builder/v3/Collection";
+import {getEmptyFolder, getEmptyFolderContainer} from "./emptyFolder";
 
 const prefix = '/iiif/v3';
 const router: Router = new Router({prefix});
 
 router.get('/collection/emptyFolder', ctx => {
-    const c = new Collection(ctx.request.origin + ctx.request.url, 'Empty folder test case');
-    c.setContext('http://iiif.io/api/presentation/3/context.json');
-    c.setItems([
-        new Collection(ctx.request.origin + prefix + '/collection/emptyFolder2', 'Empty folder')
-    ])
-    ctx.body = c;
+    ctx.body = getEmptyFolderContainer(ctx, prefix);
 });
 
 router.get('/collection/emptyFolder2', ctx => {
-    const c = new Collection(ctx.request.origin + ctx.request.url, 'Empty folder');
-    c.setContext('http://iiif.io/api/presentation/3/context.json');
-    c.setParent(ctx.request.origin + prefix + '/collection/emptyFolder', 'Collection');
-    ctx.body = c;
+    ctx.body = getEmptyFolder(ctx, prefix);
 });
 
 export default router.routes();

@@ -1,7 +1,8 @@
 import * as Router from 'koa-router';
 import {hasAccess, ViewerToken} from '../lib/Security';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 interface IMessage {
     accessToken?: string;

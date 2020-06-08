@@ -4,19 +4,20 @@ import serveImage from '../imageService/internal';
 
 const imageWith = 1840;
 const imageHeight = 1450;
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 
 router.get('/collection/auth4', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/collection/auth4',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Open Collection with a locked info-json',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         manifests: [
             {
-                '@id': ctx.request.origin + '/manifest/auth41',
+                '@id': ctx.request.origin + prefix + '/manifest/auth41',
                 '@type': 'sc:Manifest',
                 label: 'test.png',
                 thumbnail: {
@@ -41,7 +42,7 @@ router.get('/collection/auth4', ctx => {
 router.get('/manifest/auth41', ctx => {
 
     ctx.body = {
-        '@id': ctx.request.origin + '/manifest/auth41',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Manifest',
         label: 'test.png',
         '@context': 'http://iiif.io/api/collection/2/context.json',

@@ -2,7 +2,8 @@ import * as Router from 'koa-router';
 import * as path from 'path';
 import download from '../lib/Download';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 router.get('/collection/audioVideo', ctx => {
     ctx.body = {
@@ -13,7 +14,7 @@ router.get('/collection/audioVideo', ctx => {
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/manifest/die_internationale_as_mp3',
+                '@id': ctx.request.origin + prefix + '/manifest/die_internationale_as_mp3',
                 '@type': 'sc:Manifest',
                 label: 'Die Internationale as mp3.mp3',
                 thumbnail: {
@@ -22,7 +23,7 @@ router.get('/collection/audioVideo', ctx => {
                 }
             },
             {
-                '@id': ctx.request.origin + '/manifest/f113',
+                '@id': ctx.request.origin + prefix + '/manifest/f113',
                 '@type': 'sc:Manifest',
                 label: 'F113.mp4',
                 thumbnail: {
@@ -37,7 +38,7 @@ router.get('/collection/audioVideo', ctx => {
 
 router.get('/manifest/die_internationale_as_mp3', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/manifest/die_internationale_as_mp3',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Manifest',
         'label': 'Die_Internationale as mp3.mp3',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -90,7 +91,7 @@ router.get('/file/die_internationale_as_mp3/original', async ctx => {
 
 router.get('/manifest/f113', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/manifest/f113',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Manifest',
         'label': 'F113.mp4',
         '@context': 'http://iiif.io/api/collection/2/context.json',

@@ -1,26 +1,26 @@
 import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
 
-const router: Router = new Router();
-
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 router.get('/collection/auth3', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/collection/auth3',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Open Collection',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         collections: [
             {
-                '@id': ctx.request.origin + '/collection/auth31',
+                '@id': ctx.request.origin + prefix + '/collection/auth31',
                 '@type': 'sc:Collection',
                 label: 'Subfolder with access restriction',
             },
         ],
         manifests: [
             {
-                '@id': ctx.request.origin + '/manifest/auth32',
+                '@id': ctx.request.origin + prefix + '/manifest/auth32',
                 '@type': 'sc:Manifest',
                 label: 'File with access restriction',
                 thumbnail: {
@@ -43,11 +43,11 @@ router.get('/collection/auth3', ctx => {
 router.get('/collection/auth31', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/collection/auth31',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Subfolder with access restriction',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: ctx.request.origin + '/collection/auth3',
+        within: ctx.request.origin + prefix + '/collection/auth3',
         service: [
             {
                 '@context': 'http://iiif.io/api/auth/1/context.json',
@@ -85,7 +85,7 @@ router.get('/collection/auth31', ctx => {
 router.get('/manifest/auth32', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/manifest/auth32',
+        '@id': ctx.request.origin + prefix +'/manifest/auth32',
         '@type': 'sc:Manifest',
         label: 'File with access restriction',
         '@context': 'http://iiif.io/api/collection/2/context.json',

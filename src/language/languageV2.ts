@@ -1,6 +1,7 @@
 import * as Router from 'koa-router';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 import * as path from 'path';
 import download from '../lib/Download';
@@ -13,27 +14,27 @@ router.get('/collection/language', ctx => {
         '@context': 'http://iiif.io/api/collection/2/context.json',
         manifests: [
             {
-                '@id': ctx.request.origin + '/manifest/languageFile1',
+                '@id': ctx.request.origin + prefix + '/manifest/languageFile1',
                 '@type': 'sc:Manifest',
                 label: 'colecções digitais afluência.docx',
             },
             {
-                '@id': ctx.request.origin + '/manifest/languageFile2',
+                '@id': ctx.request.origin + prefix + '/manifest/languageFile2',
                 '@type': 'sc:Manifest',
                 label: 'Приток цифровых коллекций.docx',
             },
             {
-                '@id': ctx.request.origin + '/manifest/languageFile3',
+                '@id': ctx.request.origin + prefix +'/manifest/languageFile3',
                 '@type': 'sc:Manifest',
                 label:  'مجموعه های دیجیتال جریان.docx',
             },
             {
-                '@id': ctx.request.origin + '/manifest/languageFile4',
+                '@id': ctx.request.origin + prefix +'/manifest/languageFile4',
                 '@type': 'sc:Manifest',
                 label: 'অন্তর্বাহ ডিজিটাল সংগ্রহ.docx',
             },
             {
-                '@id': ctx.request.origin + '/manifest/languageFile5',
+                '@id': ctx.request.origin + prefix +'/manifest/languageFile5',
                 '@type': 'sc:Manifest',
                 label: '流入數字館藏.docx',
             }

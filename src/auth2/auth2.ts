@@ -1,12 +1,13 @@
 import * as Router from 'koa-router';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 import {hasAccess} from '../lib/Security';
 
 router.get('/collection/auth2', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/collection/auth2',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Collection with access restriction',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -55,7 +56,7 @@ router.get('/collection/auth2', ctx => {
 router.get('/collection/auth21', ctx => {
 
     let collectionManifest = {
-        '@id': ctx.request.origin + '/collection/auth21',
+        '@id': ctx.request.origin + ctx.request.url,
         '@type': 'sc:Collection',
         label: 'Subfolder with access restriction',
         '@context': 'http://iiif.io/api/collection/2/context.json',

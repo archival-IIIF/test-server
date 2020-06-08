@@ -229,12 +229,7 @@
     function getLinks(testCase, version) {
 
         let baseUrl = window.location.href;
-        let manifestUrl = '';
-        if (version === 'v2') {
-            manifestUrl = baseUrl + 'collection/' + testCase.id;
-        } else {
-            manifestUrl = baseUrl + 'iiif/'+version+'/collection/' + testCase.id;
-        }
+        let manifestUrl = baseUrl + 'iiif/'+version+'/collection/' + testCase.id;
 
         let output = '<td>' +
             '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>' +

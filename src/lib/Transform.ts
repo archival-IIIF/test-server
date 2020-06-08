@@ -20,11 +20,14 @@ export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
         c2['@context'] = 'http://iiif.io/api/collection/2/context.json';
     }
 
-    for(const item of c3.items) {
-        if (item.type === 'Manifest') {
-            c2.addManifest(transformRefToV2(item))
+    if (c3.items) {
+        for(const item of c3.items) {
+            if (item.type === 'Manifest') {
+                c2.addManifest(transformRefToV2(item))
+            }
         }
     }
+
 
     return c2;
 }

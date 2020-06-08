@@ -2,7 +2,8 @@ import * as Router from 'koa-router';
 import * as path from 'path';
 
 import download from '../lib/Download';
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 
 router.get('/collection/logo', ctx => {
