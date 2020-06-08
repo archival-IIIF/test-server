@@ -4,7 +4,7 @@ import Service from "../presentation-builder/v3/Service";
 export default class ThumbnailService extends Resource {
 
     constructor(id: string) {
-        super(id, 'Image', 'image/jpeg' + '/full/!100,100/0/default.jpg');
+        super(id + '/full/!100,100/0/default.jpg', 'Image', 'image/jpeg');
 
         const service = new Service(
             id,

@@ -26,6 +26,7 @@ import rightsInformationV2 from './rightsInformation/rightsInformationV2';
 import rightsInformationV3 from './rightsInformation/rightsInformationV3';
 import imageV2 from './image/imageV2';
 import imageV3 from './image/imageV3';
+import multiPageV2 from './multiPage/multiPageV2';
 import multiPageV3 from './multiPage/multiPageV3';
 import validation from './validation/validation';
 import imageServiceV2 from './imageService/imageServiceV2';
@@ -102,6 +103,7 @@ app.use(imageV2);
 app.use(imageV3);
 app.use(imageServiceV2);
 app.use(imageServiceV3);
+app.use(multiPageV2);
 app.use(multiPageV3);
 
 app.use(pdfV2);
