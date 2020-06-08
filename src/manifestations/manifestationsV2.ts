@@ -8,14 +8,14 @@ import download from '../lib/download';
 
 router.get('/collection/manifestations', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/manifestations',
+        '@id': ctx.request.origin + prefix + '/collection/manifestations',
         '@type': 'sc:Collection',
         label: 'manifestation test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         license: 'http://creativecommons.org/licenses/by-sa/3.0/',
         manifests: [
             {
-                '@id': ctx.request.origin + '/manifest/manifestation',
+                '@id': ctx.request.origin + prefix + '/manifest/manifestation',
                 '@type': 'sc:Manifest',
                 label: 'test.docx',
                 thumbnail: {
@@ -29,13 +29,13 @@ router.get('/collection/manifestations', ctx => {
 
 router.get('/manifest/manifestation', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/manifest/manifestation',
+        '@id': ctx.request.origin + prefix + '/manifest/manifestation',
         '@type': 'sc:Manifest',
         label: 'test.docx',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: ctx.request.origin + '/collection/manifestations',
+        within: ctx.request.origin + prefix + '/collection/manifestations',
         mediaSequences: [{
-            '@id': ctx.request.origin + '/sequence/manifestation',
+            '@id': ctx.request.origin + prefix + '/sequence/manifestation',
             '@type': 'ixif:MediaSequence',
             elements: [{
                 '@id': ctx.request.origin + '/file/manifestation',
@@ -56,21 +56,6 @@ router.get('/manifest/manifestation', ctx => {
             }
         ]
     };
-});
-
-router.get('/file/manifestation', async  ctx => {
-    const filePath = path.join(__dirname, '../pdf/PDFa.pdf');
-    await download(ctx, filePath);
-});
-
-router.get('/file/manifestation/original', async  ctx => {
-    const filePath = path.join(__dirname, '../pdf/test.docx');
-    await download(ctx, filePath);
-});
-
-router.get('/file/manifestation/access', async  ctx => {
-    const filePath = path.join(__dirname, '../pdf/PDFa.pdf');
-    await download(ctx, filePath);
 });
 
 export default router.routes();

@@ -7,7 +7,7 @@ const router: Router = new Router({prefix});
 
 router.get('/collection/audioVideo', ctx => {
     ctx.body = {
-        '@id': ctx.request.origin + '/collection/audioVideo',
+        '@id': ctx.request.origin + prefix + '/collection/audioVideo',
         '@type': 'sc:Collection',
         label: 'Audio & video test case',
         '@context': 'http://iiif.io/api/collection/2/context.json',
@@ -43,7 +43,7 @@ router.get('/manifest/die_internationale_as_mp3', ctx => {
         'label': 'Die_Internationale as mp3.mp3',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         'license': 'http://creativecommons.org/licenses/by-sa/3.0/',
-        'within': ctx.request.origin + '/collection/audioVideo',
+        'within': ctx.request.origin + prefix + '/collection/audioVideo',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -63,7 +63,7 @@ router.get('/manifest/die_internationale_as_mp3', ctx => {
             format: 'image/svg+xml'
         },
         'mediaSequences': [{
-            '@id': ctx.request.origin + '/sequence/die_internationale_as_mp3',
+            '@id': ctx.request.origin + prefix + '/sequence/die_internationale_as_mp3',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/die_internationale_as_mp3',
@@ -79,16 +79,6 @@ router.get('/manifest/die_internationale_as_mp3', ctx => {
     };
 });
 
-router.get('/file/die_internationale_as_mp3', async ctx => {
-    const filePath = path.join(__dirname, 'die_internationale_as_mp3.mp3');
-    await download(ctx, filePath);
-});
-
-router.get('/file/die_internationale_as_mp3/original', async ctx => {
-    const filePath = path.join(__dirname, 'die_internationale_as_mp3.mp3');
-    await download(ctx, filePath);
-});
-
 router.get('/manifest/f113', ctx => {
     ctx.body = {
         '@id': ctx.request.origin + ctx.request.url,
@@ -96,7 +86,7 @@ router.get('/manifest/f113', ctx => {
         'label': 'F113.mp4',
         '@context': 'http://iiif.io/api/collection/2/context.json',
         'license': 'http://creativecommons.org/licenses/by-sa/3.0/',
-        'within': ctx.request.origin + '/collection/audioVideo',
+        'within': ctx.request.origin + prefix + '/collection/audioVideo',
         'metadata': [
             {
                 'label': 'Original file type',
@@ -116,7 +106,7 @@ router.get('/manifest/f113', ctx => {
             format: 'image/svg+xml'
         },
         mediaSequences: [{
-            '@id': ctx.request.origin + '/sequence/f113',
+            '@id': ctx.request.origin + prefix + '/sequence/f113',
             '@type': 'ixif:MediaSequence',
             'elements': [{
                 '@id': ctx.request.origin + '/file/f113',
@@ -130,11 +120,6 @@ router.get('/manifest/f113', ctx => {
             }]
         }]
     };
-});
-
-router.get('/file/f113', async ctx => {
-    const filePath = path.join(__dirname, 'F113.mp4');
-    await download(ctx, filePath);
 });
 
 export default router.routes();

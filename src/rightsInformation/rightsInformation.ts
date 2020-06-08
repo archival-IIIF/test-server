@@ -27,7 +27,7 @@ export function getFileWithAttribution(ctx: ParameterizedContext, prefix: string
 
 export function getFileWithLicense(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/manifest/fileWithLicense';
-    const c = new FileManifest(url, ctx.request.origin + '/file/loreIpsum', 'File with license.txt', 'Text', 'text/plain');
+    const c = new FileManifest(url, ctx.request.origin + '/file/txt', 'File with license.txt', 'Text', 'text/plain');
     c.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
     c.setParent(ctx.request.origin + prefix + '/collection/rightsInformation', 'Collection');
 
@@ -36,7 +36,7 @@ export function getFileWithLicense(ctx: ParameterizedContext, prefix: string) {
 
 export function getFileWithoutLicense(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/manifest/fileWithoutLicense';
-    const c = new FileManifest(url, ctx.request.origin + '/file/loreIpsum', 'File without license.txt', 'Text', 'text/plain');
+    const c = new FileManifest(url, ctx.request.origin + '/file/txt', 'File without license.txt', 'Text', 'text/plain');
     c.setParent(ctx.request.origin + prefix + '/collection/rightsInformation', 'Collection');
 
     return c;

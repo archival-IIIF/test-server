@@ -2,6 +2,7 @@ import * as Koa from 'koa';
 
 import audioVideoV2 from './audioVideo/audioVideoV2';
 import audioVideoV3 from './audioVideo/audioVideoV3';
+import audioVideoFiles from './audioVideo/audioVideoFiles';
 import auth from './auth/auth';
 import auth2 from './auth2/auth2';
 import auth3 from './auth3/auth3';
@@ -20,6 +21,8 @@ import logoV3 from './logo/logoV3';
 
 import manifestationsV2 from './manifestations/manifestationsV2';
 import manifestationsV3 from './manifestations/manifestationsV3';
+import manifestationsFiles from "./manifestations/manifestationsFiles";
+
 
 
 import rightsInformationV2 from './rightsInformation/rightsInformationV2';
@@ -53,6 +56,8 @@ const {fileIconsPath} = require('./lib/FileIcon');
 const serve = require('koa-static-server');
 const config = require('./lib/Config');
 import * as path from 'path';
+import languageFiles from "./language/languageFiles";
+import logoFiles from "./logo/logoFiles";
 const bodyParser = require('koa-bodyparser');
 
 
@@ -76,6 +81,7 @@ app.use(bodyParser());
 
 app.use(audioVideoV2);
 app.use(audioVideoV3);
+app.use(audioVideoFiles);
 app.use(auth);
 app.use(auth2);
 app.use(auth3);
@@ -91,6 +97,7 @@ app.use(homepage);
 
 app.use(logoV2);
 app.use(logoV3);
+app.use(logoFiles);
 app.use(rightsInformationV2);
 app.use(rightsInformationV3);
 app.use(thumbnailV2);
@@ -99,6 +106,7 @@ app.use(nestedStructureV2);
 app.use(nestedStructureV3);
 app.use(languageV2);
 app.use(languageV3);
+app.use(languageFiles);
 
 app.use(imageV2);
 app.use(imageV3);
@@ -117,6 +125,7 @@ app.use(validation);
 app.use(dynamicDemo);
 app.use(manifestationsV2);
 app.use(manifestationsV3);
+app.use(manifestationsFiles);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);
 app.use(universalViewer);

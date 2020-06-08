@@ -13,7 +13,7 @@ router.get('/collection/auth2', ctx => {
         '@context': 'http://iiif.io/api/collection/2/context.json',
         collections: [
             {
-                '@id': ctx.request.origin + '/collection/auth21',
+                '@id': ctx.request.origin + prefix + '/collection/auth21',
                 '@type': 'sc:Collection',
                 label: 'Subfolder with access restriction',
             }
@@ -60,7 +60,7 @@ router.get('/collection/auth21', ctx => {
         '@type': 'sc:Collection',
         label: 'Subfolder with access restriction',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: ctx.request.origin + '/collection/auth2',
+        within: ctx.request.origin + prefix + '/collection/auth2',
         service: [
             {
                 '@context': 'http://iiif.io/api/auth/1/context.json',

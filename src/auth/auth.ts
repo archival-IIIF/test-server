@@ -4,8 +4,7 @@ import {createReadStream} from 'fs';
 import {DefaultAccessId, hasAccess, UserToken, ViewerToken} from '../lib/Security';
 import * as moment from 'moment';
 
-const prefix = '/iiif/v2';
-const router: Router = new Router({prefix});
+const router: Router = new Router();
 
 router.get('/login', (ctx: Router.RouterContext) => {
     ctx.type = 'text/html';

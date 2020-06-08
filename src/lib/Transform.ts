@@ -5,6 +5,7 @@ import ManifesV2 from "../presentation-builder/v2/Manifest";
 import {Internationalized as InternationalizedV3, Ref as RefV3} from "../presentation-builder/v3/Base";
 import ResourceV2 from "../presentation-builder/v2/Resource";
 import ImageV2 from "../presentation-builder/v2/Image";
+import BaseV2, {Ref} from "../presentation-builder/v2/Base";
 import SequenceV2 from "../presentation-builder/v2/Sequence";
 import CanvasV2 from "../presentation-builder/v2/Canvas";
 import AnnotationV2 from "../presentation-builder/v2/Annotation";
@@ -27,9 +28,16 @@ export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
             if (item.type === 'Manifest') {
                 c2.addManifest(transformRefToV2(item))
             }
+            if (item.type === 'Collection') {
+                c2.addCollection(transformRefToV2(item))
+            }
         }
     }
 
+    if (c3.logo && c3.logo.length > 0) {
+        const logo = c3.logo[0];
+        c2.setLogo(new ResourceV2(logo.id, logo.width, logo.height, logo.format, logo.type));
+    }
 
     return c2;
 }
@@ -40,6 +48,16 @@ export function transformManifestToV2(m3: ManifestV3): ManifesV2 {
     m2.setThumbnail(transformThumbnailToV2(m3.thumbnail));
     if (m3.partOf && m3.partOf.length > 0) {
         m2.within = m3.partOf[0].id;
+    }
+
+    if (m3.logo && m3.logo.length > 0) {
+        const logo = m3.logo[0];
+        m2.setLogo(new ResourceV2(logo.id, logo.width, logo.height, logo.format, logo.type));
+    }
+
+    m2.setLicense(m3.rights);
+    if (m3.requiredStatement && m3.requiredStatement.value) {
+        m2.setAttribution(getInternational(m3.requiredStatement.value));
     }
 
     if (m3.metadata) {
@@ -84,7 +102,7 @@ export function transformImageManifestToV2(m3: ManifestV3): ManifesV2 {
 
 export function transformFileManifestToV2(m3: FileManifest): ManifesV2 {
 
-    const m2 = new ManifesV2(m3.id, getInternational(m3.label));
+    const m2 = transformManifestToV2(m3);
     m2.setThumbnail(transformThumbnailToV2(m3.thumbnail));
     if (m3.partOf && m3.partOf.length > 0) {
         m2.within = m3.partOf[0].id;
@@ -108,7 +126,7 @@ export function transformFileManifestToV2(m3: FileManifest): ManifesV2 {
     return m2;
 }
 
-export function transformRefToV2(m3: RefV3): ManifesV2 {
+export function transformRefToV2(m3: RefV3): any {
 
     const m2 = new ManifesV2(m3.id, getInternational(m3.label));
     const any: any = m3;

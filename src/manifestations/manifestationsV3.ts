@@ -31,7 +31,7 @@ router.get('/manifest/manifestation', ctx => {
         type: 'Manifest',
         label: {none: ['test.docx']},
         '@context': 'http://iiif.io/api/presentation/3/context.json',
-        partOf: [{id: ctx.request.origin + '/collection/manifestations', type: 'Collection'}],
+        partOf: [{id: ctx.request.origin + prefix + '/collection/manifestations', type: 'Collection'}],
         rendering: [
             {
                 id: ctx.request.origin + '/file/manifestation/access',
