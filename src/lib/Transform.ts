@@ -11,6 +11,8 @@ import AnnotationV2 from "../presentation-builder/v2/Annotation";
 import CanvasV3 from "../presentation-builder/v3/Canvas";
 import AnnotationV3 from "../presentation-builder/v3/Annotation";
 import ResourceV3 from "../presentation-builder/v3/Resource";
+import FileManifest from "./FileManifest";
+import MediaSequenceV2 from "../presentation-builder/v2/MediaSequence";
 
 export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
 
@@ -39,6 +41,19 @@ export function transformManifestToV2(m3: ManifestV3): ManifesV2 {
     if (m3.partOf && m3.partOf.length > 0) {
         m2.within = m3.partOf[0].id;
     }
+
+    if (m3.metadata) {
+        for (const metaData of m3.metadata) {
+            m2.addMetadata(getInternational(metaData.label), getInternational(metaData.value));
+        }
+    }
+
+    return m2;
+}
+
+export function transformImageManifestToV2(m3: ManifestV3): ManifesV2 {
+
+    const m2 = transformManifestToV2(m3);
     const sequence2: SequenceV2 = new SequenceV2(m3.id + '/sequence', null);
     for (const item of m3.items) {
         const itemAny: any = item;
@@ -58,9 +73,36 @@ export function transformManifestToV2(m3: ManifestV3): ManifesV2 {
     }
     m2.setSequence(sequence2);
 
+    if (m3.metadata) {
+        for (const metaData of m3.metadata) {
+            m2.addMetadata(getInternational(metaData.label), getInternational(metaData.value));
+        }
+    }
 
-    for(const metaData of m3.metadata) {
-        m2.addMetadata(getInternational(metaData.label), getInternational(metaData.value));
+    return m2;
+}
+
+export function transformFileManifestToV2(m3: FileManifest): ManifesV2 {
+
+    const m2 = new ManifesV2(m3.id, getInternational(m3.label));
+    m2.setThumbnail(transformThumbnailToV2(m3.thumbnail));
+    if (m3.partOf && m3.partOf.length > 0) {
+        m2.within = m3.partOf[0].id;
+    }
+    const mediaSequence2 = new MediaSequenceV2(m3.id + '/sequence', null);
+    for (const item of m3.items) {
+        const itemAny: any = item;
+        const canvas3: CanvasV3 = itemAny;
+        const annotation3: AnnotationV3 = itemAny.items[0].items[0];
+        const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
+        mediaSequence2.addElement(resource2);
+    }
+    m2.setMediaSequence(mediaSequence2);
+
+    if (m3.metadata) {
+        for (const metaData of m3.metadata) {
+            m2.addMetadata(getInternational(metaData.label), getInternational(metaData.value));
+        }
     }
 
     return m2;

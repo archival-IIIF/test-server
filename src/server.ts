@@ -33,6 +33,7 @@ import imageServiceV2 from './imageService/imageServiceV2';
 import imageServiceV3 from './imageService/imageServiceV3';
 import pdfV2 from './pdf/pdfV2';
 import pdfV3 from './pdf/pdfV3';
+import pdfFiles from "./pdf/pdfFiles";
 import nestedStructureV2 from './nestedStructure/nestedStructureV2';
 import nestedStructureV3 from './nestedStructure/nestedStructureV3';
 import thumbnailV2 from './thumbnail/thumbnailV2';
@@ -106,6 +107,7 @@ app.use(imageServiceV3);
 app.use(multiPageV2);
 app.use(multiPageV3);
 
+app.use(pdfFiles);
 app.use(pdfV2);
 app.use(pdfV3);
 app.use(common);
