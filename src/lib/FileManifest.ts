@@ -18,7 +18,7 @@ export default class FileManifest extends Manifest {
 
         this.setContext('http://iiif.io/api/presentation/3/context.json');
 
-        const canvas = new Canvas(id + '/canvas', 1, 1);
+        const canvas = new Canvas(id + '/canvas');
         const annotationPage = new AnnotationPage(id + '/annotationPage');
         const resource = new Resource(fileId, type, format);
         const annotation = new Annotation(id + '/annotation', resource);

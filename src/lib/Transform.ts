@@ -66,6 +66,10 @@ export function transformManifestToV2(m3: ManifestV3): ManifesV2 {
         }
     }
 
+    if (m3['@context'] === 'http://iiif.io/api/presentation/3/context.json') {
+        m2['@context'] = 'http://iiif.io/api/collection/2/context.json';
+    }
+
     return m2;
 }
 
@@ -116,7 +120,15 @@ export function transformFileManifestToV2(m3: FileManifest): ManifesV2 {
         const itemAny: any = item;
         const canvas3: CanvasV3 = itemAny;
         const annotation3: AnnotationV3 = itemAny.items[0].items[0];
-        const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
+        const resource2: ResourceV2 = new ResourceV2(
+            annotation3.body.id,
+            canvas3.width,
+            canvas3.height,
+            annotation3.body.format,
+            'foaf:Document'
+        );
+        if (annotation3.body.format)
+
         if (canvas3.rendering && canvas3.rendering.length > 0) {
             for (const rendering3 of canvas3.rendering) {
                 resource2.addRendering(
