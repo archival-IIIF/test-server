@@ -5,10 +5,10 @@ import ManifesV2 from "../presentation-builder/v2/Manifest";
 import {Internationalized as InternationalizedV3, Ref as RefV3} from "../presentation-builder/v3/Base";
 import ResourceV2 from "../presentation-builder/v2/Resource";
 import ImageV2 from "../presentation-builder/v2/Image";
-import BaseV2, {Ref} from "../presentation-builder/v2/Base";
 import SequenceV2 from "../presentation-builder/v2/Sequence";
 import CanvasV2 from "../presentation-builder/v2/Canvas";
 import AnnotationV2 from "../presentation-builder/v2/Annotation";
+import RenderingV2 from "../presentation-builder/v2/Rendering";
 import CanvasV3 from "../presentation-builder/v3/Canvas";
 import AnnotationV3 from "../presentation-builder/v3/Annotation";
 import ResourceV3 from "../presentation-builder/v3/Resource";
@@ -117,6 +117,14 @@ export function transformFileManifestToV2(m3: FileManifest): ManifesV2 {
         const canvas3: CanvasV3 = itemAny;
         const annotation3: AnnotationV3 = itemAny.items[0].items[0];
         const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
+        if (canvas3.rendering && canvas3.rendering.length > 0) {
+            for (const rendering3 of canvas3.rendering) {
+                resource2.addRendering(
+                    new RenderingV2(rendering3.id, getInternational(rendering3.label), rendering3.format)
+                );
+            }
+        }
+
         mediaSequence2.addElement(resource2);
     }
     m2.setMediaSequence(mediaSequence2);
