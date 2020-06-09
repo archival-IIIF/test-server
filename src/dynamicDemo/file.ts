@@ -5,6 +5,8 @@ import download from '../lib/Download';
 import dynamicDemoCommon from './dynamicDemoCommon';
 import serveImage from '../imageService/internal';
 import {imageSize} from 'image-size';
+import {info} from "../imageService/imageServiceV2";
+import {responseFile} from "../imageService/imageService";
 
 const router: Router = new Router();
 
@@ -44,48 +46,21 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
 
     const id = dynamicDemoCommon.decode(ctx.params.image);
     const objectPath = path.join(dynamicDemoCommon.getDemoDataPath(), id);
-    const item = {
-        uri: objectPath
-    };
-    let result = await serveImage(item, {
-        region: ctx.params.region,
-        size: ctx.params.size,
-        rotation: ctx.params.rotation,
-        quality: ctx.params.quality,
-        format: ctx.params.format
-    });
 
-    ctx.body = result.image;
-    ctx.status = result.status;
-    ctx.set('Content-Type', result.contentType);
-    ctx.set('Content-Length', result.contentLength.toString());
-
+    const dimensions = imageSize(dynamicDemoCommon.getFullPath(ctx.params.image));
+    const result = await responseFile(ctx, objectPath, dimensions.width, dimensions.height);
 
     fs.mkdirSync(path.dirname(tilePath), {recursive: true});
     fs.writeFileSync(tilePath, result.image);
-
 });
 
 router.get('/image/dynamicDemo/:image/info.json', ctx => {
     const dimensions = imageSize(dynamicDemoCommon.getFullPath(ctx.params.image));
-    const imageWith = dimensions.width;
-    const imageHeight = dimensions.height;
-    ctx.body = {
-        '@id': ctx.request.origin + '/image/dynamicDemo/' + ctx.params.image,
-        "protocol": "http://iiif.io/api/image",
-        "width": imageWith,
-        "height": imageHeight,
-        "sizes": [],
-        "@context": "http://iiif.io/api/image/2/context.json",
-        "profile": [
-            "http://iiif.io/api/image/2/level2.json",
-            {
-                "supports": ["canonicalLinkHeader", "profileLinkHeader", "mirroring", "rotationArbitrary", "regionSquare"],
-                "qualities": ["default", "color", "gray", "bitonal"],
-                "formats": ["jpg", "png", "gif", "webp"]
-            }
-        ]
-    };
+    ctx.body = info(
+        ctx.request.origin + '/image/dynamicDemo/' + ctx.params.image,
+        dimensions.width,
+        dimensions.height
+    );
 });
 
 export default router.routes();
