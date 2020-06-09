@@ -23,7 +23,7 @@ export function getAuthLoginSubFolder(ctx: ParameterizedContext, prefix: string)
     return c;
 }
 
-function getAuthService(ctx: ParameterizedContext) {
+export function getAuthService(ctx: ParameterizedContext) {
     const authService = new AuthService(
         ctx.request.origin + '/login',
         undefined,

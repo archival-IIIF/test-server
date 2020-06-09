@@ -6,7 +6,6 @@ import audioVideoFiles from './audioVideo/audioVideoFiles';
 import auth from './auth/auth';
 import authLoginV2 from "./authLogin/authLoginV2";
 import authLoginV3 from "./authLogin/authLoginV3";
-import auth3 from './auth3/auth3';
 import auth4 from './auth4/auth4';
 import authExternal from './authExternal/authExternal';
 
@@ -52,6 +51,8 @@ import mirador from './mirador/mirador'
 import * as path from 'path';
 import languageFiles from "./language/languageFiles";
 import logoFiles from "./logo/logoFiles";
+import authLoginPartlyV3 from "./authLoginPartly/authLoginPartlyV3";
+import auth3 from "./authLoginPartly/authLoginPartlyV2";
 
 
 const app: Koa = new Koa();
@@ -84,6 +85,7 @@ app.use(audioVideoFiles);
 app.use(auth);
 app.use(authLoginV2);
 app.use(authLoginV3);
+app.use(authLoginPartlyV3);
 app.use(auth3);
 app.use(auth4);
 app.use(authExternal);
