@@ -1,10 +1,8 @@
 import * as Router from 'koa-router';
-
-const router: Router = new Router();
-
 import download from '../lib/Download';
 import * as path from 'path';
 
+const router: Router = new Router();
 
 router.get('/file/txt', async  ctx => {
     const filePath = path.join(__dirname, 'test.txt');
