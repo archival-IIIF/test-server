@@ -10,7 +10,7 @@ export function getRightsInformation(ctx: ParameterizedContext, prefix: string) 
     c.setItems([
         getFileWithAttribution(ctx, prefix),
         getFileWithLicense(ctx, prefix),
-        getFileWithoutLicense(ctx, prefix),
+        getFileWithoutLicense(ctx, prefix)
     ]);
 
     return c;
@@ -36,7 +36,7 @@ export function getFileWithLicense(ctx: ParameterizedContext, prefix: string) {
 
 export function getFileWithoutLicense(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/manifest/fileWithoutLicense';
-    const c = new FileManifest(url, ctx.request.origin + '/file/txt', 'File without license.txt', 'Text', 'text/plain');
+    const c = new FileManifest(url, ctx.request.origin + '/file/loreIpsum', 'File without license.txt', 'Text', 'text/plain');
     c.setParent(ctx.request.origin + prefix + '/collection/rightsInformation', 'Collection');
 
     return c;
