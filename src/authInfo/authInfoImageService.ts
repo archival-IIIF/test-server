@@ -15,7 +15,7 @@ router.get('/image-service/v2/authInfo/info.json', ctx => {
         ctx.status = 401;
     }
 
-    const output: any = info(ctx.request.origin + '/image-service/v2/authInfo');
+    const output: any = info(ctx.request.origin + '/image-service/v2/authInfo', imageWith, imageHeight);
     output.service = [getAuthLoginService(ctx)];
 
     ctx.body = output;
