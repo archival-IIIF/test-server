@@ -46,7 +46,7 @@ router.get('/manifest/auth41', ctx => {
         '@type': 'sc:Manifest',
         label: 'test.png',
         '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: ctx.request.origin + '/collection/auth4',
+        within: ctx.request.origin + prefix + '/collection/auth4',
         thumbnail: {
             '@id': ctx.request.origin + '/image/auth41/full/!100,100/0/default.jpg',
             '@type': 'dctypes:Image',

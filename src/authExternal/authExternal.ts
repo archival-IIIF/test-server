@@ -14,32 +14,32 @@ interface IMessage {
 
 router.get('/collection/authExternalAccept', ctx => {
 
-    const id = ctx.request.origin + '/collection/authExternalAccept';
-    const subId = ctx.request.origin + '/collection/authExternalAcceptSub';
+    const id = ctx.request.origin + prefix + '/collection/authExternalAccept';
+    const subId = ctx.request.origin + prefix + '/collection/authExternalAcceptSub';
 
     ctx = collection(ctx, true, id, subId);
 });
 
 router.get('/collection/authExternalAcceptSub', ctx => {
 
-    const id = ctx.request.origin + '/collection/authExternalAccept';
-    const subId = ctx.request.origin + '/collection/authExternalAcceptSub';
+    const id = ctx.request.origin + prefix + '/collection/authExternalAccept';
+    const subId = ctx.request.origin + prefix + '/collection/authExternalAcceptSub';
 
     ctx = subCollection(ctx, true, id, subId);
 });
 
 router.get('/collection/authExternalDeny', ctx => {
 
-    const id = ctx.request.origin + '/collection/authExternalDeny';
-    const subId = ctx.request.origin + '/collection/authExternalDenySub';
+    const id = ctx.request.origin + prefix + '/collection/authExternalDeny';
+    const subId = ctx.request.origin + prefix + '/collection/authExternalDenySub';
 
     ctx = collection(ctx, false, id, subId);
 });
 
 router.get('/collection/authExternalDenySub', ctx => {
 
-    const id = ctx.request.origin + '/collection/authExternalDeny';
-    const subId = ctx.request.origin + '/collection/authExternalDenySub';
+    const id = ctx.request.origin + prefix + '/collection/authExternalDeny';
+    const subId = ctx.request.origin + prefix + '/collection/authExternalDenySub';
 
     ctx = subCollection(ctx, false, id, subId);
 });
