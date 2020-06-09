@@ -17,4 +17,6 @@ export async function responseFile(ctx: ParameterizedContext, uri: string, width
     ctx.status = result.status;
     ctx.set('Content-Type', result.contentType);
     ctx.set('Content-Length', result.contentLength.toString());
+
+    return result;
 }

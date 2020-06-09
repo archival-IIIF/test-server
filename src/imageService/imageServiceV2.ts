@@ -8,19 +8,19 @@ const imageWith = 1840;
 const imageHeight = 1450;
 
 router.get('/ariel', ctx => {
-    ctx.body = info(ctx.request.origin + prefix + '/ariel');
+    ctx.body = info(ctx.request.origin + prefix + '/ariel', imageWith, imageHeight);
 });
 
 router.get('/ariel/info.json', ctx => {
-    ctx.body = info(ctx.request.origin + prefix + '/ariel');
+    ctx.body = info(ctx.request.origin + prefix + '/ariel', imageWith, imageHeight);
 });
 
 router.get('/arielDark', ctx => {
-    ctx.body = info(ctx.request.origin + prefix + '/ariel');
+    ctx.body = info(ctx.request.origin + prefix + '/ariel', imageWith, imageHeight);
 });
 
 router.get('/arielDark/info.json', ctx => {
-    ctx.body = info(ctx.request.origin + prefix + '/arielDark');
+    ctx.body = info(ctx.request.origin + prefix + '/arielDark', imageWith, imageHeight);
 });
 
 
@@ -32,12 +32,13 @@ router.get('/arielDark/:region/:size/:rotation/:quality.:format', async ctx => {
     await responseFile(ctx, __dirname + '/Ariel_-_LoC_4a15521_dark.jpg', imageWith, imageHeight);
 });
 
-export function info(id: string): any {
+export function info(id: string, width: number, height: number): any {
+
     return {
         '@id': id,
         protocol: "http://iiif.io/api/image",
-        width: imageWith,
-        height: imageHeight,
+        width,
+        height,
         sizes: [],
         "@context": "http://iiif.io/api/image/2/context.json",
         profile: [
@@ -51,28 +52,8 @@ export function info(id: string): any {
     };
 }
 
-
 router.get('/ariel/:region/:size/:rotation/:quality.:format', async ctx => {
-
-
-    const item = {
-        uri: __dirname + '/Ariel_-_LoC_4a15521.jpg',
-        width: imageWith,
-        height: imageHeight
-    };
-
-    let result = await serveImage(item, {
-        region: ctx.params.region,
-        size: ctx.params.size,
-        rotation: ctx.params.rotation,
-        quality: ctx.params.quality,
-        format: ctx.params.format
-    });
-
-    ctx.body = result.image;
-    ctx.status = result.status;
-    ctx.set('Content-Type', result.contentType);
-    ctx.set('Content-Length', result.contentLength.toString());
+    await responseFile(ctx, __dirname + '/Ariel_-_LoC_4a15521.jpg', imageWith, imageHeight);
 });
 
 export default router.routes();
