@@ -32,7 +32,7 @@ router.get('/arielDark/:region/:size/:rotation/:quality.:format', async ctx => {
     await responseFile(ctx, __dirname + '/Ariel_-_LoC_4a15521_dark.jpg', imageWith, imageHeight);
 });
 
-function info(id: string): any {
+export function info(id: string): any {
     return {
         '@id': id,
         protocol: "http://iiif.io/api/image",

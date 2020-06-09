@@ -6,7 +6,6 @@ import audioVideoFiles from './audioVideo/audioVideoFiles';
 import auth from './auth/auth';
 import authLoginV2 from "./authLogin/authLoginV2";
 import authLoginV3 from "./authLogin/authLoginV3";
-import auth4 from './auth4/auth4';
 import authExternal from './authExternal/authExternal';
 
 import emptyCollection from './emptyCollection/emptyCollection';
@@ -53,6 +52,9 @@ import languageFiles from "./language/languageFiles";
 import logoFiles from "./logo/logoFiles";
 import authLoginPartlyV3 from "./authLoginPartly/authLoginPartlyV3";
 import auth3 from "./authLoginPartly/authLoginPartlyV2";
+import authInfoV2 from "./authInfo/authInfoV2";
+import authInfoV3 from "./authInfo/authInfoV3";
+import authInfoImageService from "./authInfo/authInfoImageService";
 
 
 const app: Koa = new Koa();
@@ -87,7 +89,9 @@ app.use(authLoginV2);
 app.use(authLoginV3);
 app.use(authLoginPartlyV3);
 app.use(auth3);
-app.use(auth4);
+app.use(authInfoV2);
+app.use(authInfoV3);
+app.use(authInfoImageService);
 app.use(authExternal);
 
 app.use(emptyCollection);

@@ -9,7 +9,7 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
     c.setItems([
         getAuthLoginSubFolder(ctx, prefix),
     ]);
-    c.setService(getAuthService(ctx));
+    c.setService(getAuthLoginService(ctx));
 
     return c;
 }
@@ -17,13 +17,13 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
 export function getAuthLoginSubFolder(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authLoginSubfolder';
     const c = new RootCollection(url, 'Subfolder with access restriction');
-    c.setService(getAuthService(ctx));
+    c.setService(getAuthLoginService(ctx));
     c.setParent(ctx.request.origin + prefix + '/collection/authLogin', 'Collection');
 
     return c;
 }
 
-export function getAuthService(ctx: ParameterizedContext) {
+export function getAuthLoginService(ctx: ParameterizedContext) {
     const authService = new AuthService(
         ctx.request.origin + '/login',
         undefined,
