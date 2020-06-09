@@ -38,9 +38,11 @@ export default class ImageManifest extends Manifest {
                 'level2'
             );
             const resource = new Resource(
-                imageServiceId0 + '/full/!100,100/0/default.jpg',
+                imageServiceId0 + '/full/!200,100/0/default.jpg',
                 'Image',
-                'image/jpg',
+                'image/jpeg',
+                imageWith,
+                imageHeight
             );
             resource.setService(service);
             const annotation = new Annotation(id + '/annotation', resource);
