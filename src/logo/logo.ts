@@ -1,15 +1,15 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import Resource from "../presentation-builder/v3/Resource";
 import FileManifest from "../lib/FileManifest";
+import RootCollection from "../lib/RootCollection";
 
 export function getLogo(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/logo';
-    const c = new Collection(url, 'Logo test case');
+    const c = new RootCollection(url, 'Logo test case');
     c.setItems([
-        new CollectionItem(getFileWithLogo(ctx, prefix)),
-        new CollectionItem(getFileWithoutLogo(ctx, prefix)),
+        getFileWithLogo(ctx, prefix),
+        getFileWithoutLogo(ctx, prefix),
     ]);
     c.setLogo(new Resource(
         ctx.request.origin + '/logo',

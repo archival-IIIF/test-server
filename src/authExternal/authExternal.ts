@@ -1,8 +1,9 @@
 import * as Router from 'koa-router';
 import {hasAccess, ViewerToken} from '../lib/Security';
+import RootCollection from "../lib/RootCollection";
+import AuthService from "../presentation-builder/v3/AuthService";
 
-const prefix = '/iiif/v2';
-const router: Router = new Router({prefix});
+const router: Router = new Router();
 
 interface IMessage {
     accessToken?: string;
@@ -12,37 +13,31 @@ interface IMessage {
     messageId?: string;
 }
 
-router.get('/collection/authExternalAccept', ctx => {
+const prefixes = ['/iiif/v2', '/iiif/v3'];
+const testCases = [
+    {id: 'authExternalAccept', accespt: true},
+    {id: 'authExternalDeny', accespt: false},
+];
+for (const prefix of prefixes) {
+    for (const testCase of testCases) {
+        router.get(prefix + '/collection/' + testCase.id, ctx => {
+            if (!hasAccess(ctx)) {
+                ctx.status = 401;
+            }
+            const id = ctx.request.origin + prefix +  '/collection/' + testCase.id;
+            ctx.body = collection(ctx, testCase.accespt, id);
+        });
 
-    const id = ctx.request.origin + prefix + '/collection/authExternalAccept';
-    const subId = ctx.request.origin + prefix + '/collection/authExternalAcceptSub';
+        router.get(prefix + '/collection/' + testCase.id + 'Sub', ctx => {
+            if (!hasAccess(ctx)) {
+                ctx.status = 401;
+            }
+            const id = ctx.request.origin + prefix + '/collection/' + testCase.id;
+            ctx.body = subCollection(ctx, testCase.accespt, id);
+        });
+    }
+}
 
-    ctx = collection(ctx, true, id, subId);
-});
-
-router.get('/collection/authExternalAcceptSub', ctx => {
-
-    const id = ctx.request.origin + prefix + '/collection/authExternalAccept';
-    const subId = ctx.request.origin + prefix + '/collection/authExternalAcceptSub';
-
-    ctx = subCollection(ctx, true, id, subId);
-});
-
-router.get('/collection/authExternalDeny', ctx => {
-
-    const id = ctx.request.origin + prefix + '/collection/authExternalDeny';
-    const subId = ctx.request.origin + prefix + '/collection/authExternalDenySub';
-
-    ctx = collection(ctx, false, id, subId);
-});
-
-router.get('/collection/authExternalDenySub', ctx => {
-
-    const id = ctx.request.origin + prefix + '/collection/authExternalDeny';
-    const subId = ctx.request.origin + prefix + '/collection/authExternalDenySub';
-
-    ctx = subCollection(ctx, false, id, subId);
-});
 
 
 router.get('/auth/external/accept/token', async (ctx: Router.RouterContext) => {
@@ -61,54 +56,32 @@ router.get('/auth/external/deny/token', async (ctx: Router.RouterContext) => {
     ctx.body = message;
 });
 
-function collection(ctx: any, accept: boolean, id: string, subId: string) {
+function collection(ctx: any, accept: boolean, id: string) {
 
-    let collectionManifest = {
-        '@id': id,
-        '@type': 'sc:Collection',
-        label: 'Collection with access restriction',
-        '@context': 'http://iiif.io/api/collection/2/context.json',
-        collections: [
-            {
-                '@id': subId,
-                '@type': 'sc:Collection',
-                label: 'Subfolder with access restriction',
-            }
-        ],
-        service: getAuthService(ctx, accept)
-    };
+    const c = new RootCollection(id, 'Collection with access restriction');
+    c.setItems(subCollection(ctx, accept, id));
+    c.setService(getAuthService(ctx, accept));
 
     if (!hasAccess(ctx)) {
-        ctx.status = 401;
-        collectionManifest.label = 'Access denied';
-        collectionManifest.collections = [];
+        c.setLabel('Access denied');
+        c.setItems([]);
     }
 
-    ctx.body = collectionManifest;
-
-    return ctx;
+    return c;
 }
 
-function subCollection(ctx: any, accept: boolean, id: string, subId: string) {
-    let collectionManifest = {
-        '@id': subId,
-        '@type': 'sc:Collection',
-        label: 'Subfolder with access restriction',
-        '@context': 'http://iiif.io/api/collection/2/context.json',
-        within: id,
-        service: getAuthService(ctx, accept)
-    };
+function subCollection(ctx: any, accept: boolean, id: string) {
+
+    const c = new RootCollection(id + 'Sub', 'Collection with access restriction');
+    c.setService(getAuthService(ctx, accept));
+    c.setParent(id, 'Collection');
 
     if (!hasAccess(ctx)) {
-        ctx.status = 401;
-        collectionManifest.label = 'Access denied';
-        ctx.body = collectionManifest;
-        return;
+        c.setLabel('Access denied');
+        c.setItems([]);
     }
 
-    ctx.body = collectionManifest;
-
-    return ctx;
+    return c;
 }
 
 function getAuthService(ctx: any, accept: boolean) {
@@ -120,27 +93,28 @@ function getAuthService(ctx: any, accept: boolean) {
         tokenUrl = ctx.request.origin + '/auth/external/deny/token';
     }
 
-    return [
-        {
-            '@context': 'http://iiif.io/api/auth/1/context.json',
-            '@id': ctx.request.origin + '/external',
-            profile: 'http://iiif.io/api/auth/1/external',
-            label: 'External Authentication Required',
-            failureHeader: 'Restricted Material',
-            failureDescription: 'This material is not viewable without prior agreement!',
-            service: [
-                {
-                    '@id': tokenUrl,
-                    'profile': 'http://iiif.io/api/auth/1/token'
-                },
-                {
-                    '@id': ctx.request.origin + '/logout',
-                    profile: 'http://iiif.io/api/auth/1/logout',
-                    label: 'Logout from Example Institution'
-                }
-            ]
-        }
-    ]
+    const authService = new AuthService(
+        ctx.request.origin + '/external',
+        '',
+        'http://iiif.io/api/auth/1/external'
+    );
+    authService.label = 'External Authentication Required';
+    authService.failureHeader = 'Restricted Material';
+    authService.failureDescription = 'This material is not viewable without prior agreement!';
+    const tokenService = new AuthService(
+        tokenUrl,
+        undefined,
+        'http://iiif.io/api/auth/1/token'
+    );
+    const logoutService = new AuthService(
+        ctx.request.origin + '/logout',
+        undefined,
+        'http://iiif.io/api/auth/1/logout'
+    );
+    authService.service = [tokenService, logoutService];
+
+
+    return authService;
 }
 
 export default router.routes();

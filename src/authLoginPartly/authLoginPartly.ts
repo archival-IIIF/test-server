@@ -1,19 +1,17 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
-import AuthService from "../presentation-builder/v3/AuthService";
 import {getAuthService} from "../authLogin/authLogin";
 import Manifest from "../presentation-builder/v3/Manifest";
 import Resource from "../presentation-builder/v3/Resource";
 import {hasAccess} from "../lib/Security";
+import RootCollection from "../lib/RootCollection";
 
 export function getAuthLoginPartly(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authLoginPartly';
-    const c = new Collection(url, 'Open Collection');
-    c.setContext('http://iiif.io/api/presentation/3/context.json');
+    const c = new RootCollection(url, 'Open Collection');
     c.setItems([
-        new CollectionItem(getAuthLoginPartly1(ctx, prefix)),
-        new CollectionItem(getAuthLoginPartly2(ctx, prefix))
+        getAuthLoginPartly1(ctx, prefix),
+        getAuthLoginPartly2(ctx, prefix)
     ]);
     return c;
 }
@@ -27,8 +25,7 @@ export function getAuthLoginPartly1(ctx: ParameterizedContext, prefix: string) {
     }
 
     const url = ctx.request.origin + prefix + '/collection/authLoginPartly1';
-    const c = new Collection(url, label);
-    c.setContext('http://iiif.io/api/presentation/3/context.json');
+    const c = new RootCollection(url, label);
     c.setService(getAuthService(ctx));
     c.setParent(ctx.request.origin + prefix + '/collection/authLoginPartly', 'Collection');
 

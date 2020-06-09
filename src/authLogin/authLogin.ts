@@ -1,13 +1,13 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import AuthService from "../presentation-builder/v3/AuthService";
+import RootCollection from "../lib/RootCollection";
 
 export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authLogin';
-    const c = new Collection(url, 'Collection with access restriction');
+    const c = new RootCollection(url, 'Collection with access restriction');
     c.setItems([
-        new CollectionItem(getAuthLoginSubFolder(ctx, prefix)),
+        getAuthLoginSubFolder(ctx, prefix),
     ]);
     c.setService(getAuthService(ctx));
 
@@ -16,7 +16,7 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
 
 export function getAuthLoginSubFolder(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authLoginSubfolder';
-    const c = new Collection(url, 'Subfolder with access restriction');
+    const c = new RootCollection(url, 'Subfolder with access restriction');
     c.setService(getAuthService(ctx));
     c.setParent(ctx.request.origin + prefix + '/collection/authLogin', 'Collection');
 

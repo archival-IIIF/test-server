@@ -1,11 +1,11 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
+import RootCollection from "../lib/RootCollection";
 
 export function getEmptyFolderContainer(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/emptyFolder';
-    const c = new Collection(url, 'Empty collection test case');
-    c.setItems(new CollectionItem(getEmptyFolder(ctx, prefix)))
+    const c = new RootCollection(url, 'Empty collection test case');
+    c.setItems(getEmptyFolder(ctx, prefix));
 
     return c;
 }

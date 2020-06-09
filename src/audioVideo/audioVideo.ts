@@ -1,15 +1,15 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import Resource from "../presentation-builder/v3/Resource";
 import FileManifest from "../lib/FileManifest";
+import RootCollection from "../lib/RootCollection";
 
 export function getAudioVideo(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/audioVideo';
-    const c = new Collection(url, 'Audio & video test case');
+    const c = new RootCollection(url, 'Audio & video test case');
     c.setItems([
-        new CollectionItem(getDieInternationale(ctx, prefix)),
-        new CollectionItem(getF113(ctx, prefix)),
+        getDieInternationale(ctx, prefix),
+        getF113(ctx, prefix),
     ]);
 
     return c;

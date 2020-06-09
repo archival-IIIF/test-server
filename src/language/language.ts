@@ -1,17 +1,17 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import FileManifest from "../lib/FileManifest";
+import RootCollection from "../lib/RootCollection";
 
 export function getLanguage(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/language';
-    const c = new Collection(url, 'Language test case');
+    const c = new RootCollection(url, 'Language test case');
     c.setItems([
-        new CollectionItem(getLanguageFile1(ctx, prefix)),
-        new CollectionItem(getLanguageFile2(ctx, prefix)),
-        new CollectionItem(getLanguageFile3(ctx, prefix)),
-        new CollectionItem(getLanguageFile4(ctx, prefix)),
-        new CollectionItem(getLanguageFile5(ctx, prefix)),
+        getLanguageFile1(ctx, prefix),
+        getLanguageFile2(ctx, prefix),
+        getLanguageFile3(ctx, prefix),
+        getLanguageFile4(ctx, prefix),
+        getLanguageFile5(ctx, prefix),
     ]);
 
     return c;

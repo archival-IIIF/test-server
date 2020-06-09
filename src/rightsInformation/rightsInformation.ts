@@ -1,16 +1,16 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import FileManifest from "../lib/FileManifest";
+import RootCollection from "../lib/RootCollection";
 
 export function getRightsInformation(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/rightsInformation';
-    const c = new Collection(url, 'Rights information test case');
+    const c = new RootCollection(url, 'Rights information test case');
     c.setRights('http://creativecommons.org/licenses/by-sa/3.0/'),
     c.setItems([
-        new CollectionItem(getFileWithAttribution(ctx, prefix)),
-        new CollectionItem(getFileWithLicense(ctx, prefix)),
-        new CollectionItem(getFileWithoutLicense(ctx, prefix)),
+        getFileWithAttribution(ctx, prefix),
+        getFileWithLicense(ctx, prefix),
+        getFileWithoutLicense(ctx, prefix),
     ]);
 
     return c;

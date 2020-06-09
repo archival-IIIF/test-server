@@ -1,16 +1,16 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import Resource from "../presentation-builder/v3/Resource";
 import FileManifest from "../lib/FileManifest";
+import RootCollection from "../lib/RootCollection";
 
 export function getPdf(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/pdf';
-    const c = new Collection(url, 'PDF test case');
+    const c = new RootCollection(url, 'PDF test case');
     c.setItems([
-        new CollectionItem(getPdf1(ctx, prefix)),
-        new CollectionItem(getDocx(ctx, prefix)),
-        new CollectionItem(getPdfa(ctx, prefix)),
+        getPdf1(ctx, prefix),
+        getDocx(ctx, prefix),
+        getPdfa(ctx, prefix),
     ]);
 
     return c;

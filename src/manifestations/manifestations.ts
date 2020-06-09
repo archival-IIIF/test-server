@@ -1,14 +1,14 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import Resource from "../presentation-builder/v3/Resource";
 import FileManifest from "../lib/FileManifest";
+import RootCollection from "../lib/RootCollection";
 
 export function getManifestations(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/manifestations';
-    const c = new Collection(url, 'manifestation test case');
+    const c = new RootCollection(url, 'manifestation test case');
     c.setItems([
-        new CollectionItem(getManifestation(ctx, prefix)),
+        getManifestation(ctx, prefix),
     ]);
 
     return c;

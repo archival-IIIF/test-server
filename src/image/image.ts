@@ -2,7 +2,7 @@ import {ParameterizedContext} from "koa";
 import Manifest from "../presentation-builder/v3/Manifest";
 import ImageManifest from "../lib/ImageManifest";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
+import RootCollection from "../lib/RootCollection";
 
 const imageWith = 1840;
 const imageHeight = 1450;
@@ -23,10 +23,9 @@ const metadata = [
 ];
 
 export function getImage(ctx: ParameterizedContext, prefix: string): Manifest {
-    const c = new Collection(ctx.request.origin + ctx.request.url, 'Image test case');
-    c.setContext('http://iiif.io/api/presentation/3/context.json');
+    const c = new RootCollection(ctx.request.origin + ctx.request.url, 'Image test case');
     c.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
-    c.setItems(new CollectionItem(getAriel(ctx, prefix)));
+    c.setItems(getAriel(ctx, prefix));
 
     return c;
 }

@@ -1,18 +1,18 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import CollectionItem from "../lib/CollectionItem";
 import Resource from "../presentation-builder/v3/Resource";
 import FileManifest from "../lib/FileManifest";
 import Service from "../presentation-builder/v3/Service";
+import RootCollection from "../lib/RootCollection";
 
 export function getThumbnail(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/thumbnail';
-    const c = new Collection(url, 'Thumbnail test case');
+    const c = new RootCollection(url, 'Thumbnail test case');
     c.setItems([
-        new CollectionItem(getFolderWithThumbnail(ctx, prefix)),
-        new CollectionItem(getFolderWithoutThumbnail(ctx, prefix)),
-        new CollectionItem(getFolderWithThumbnailService(ctx, prefix)),
-        new CollectionItem(getFileWithoutThumbnail(ctx, prefix)),
+        getFolderWithThumbnail(ctx, prefix),
+        getFolderWithoutThumbnail(ctx, prefix),
+        getFolderWithThumbnailService(ctx, prefix),
+        getFileWithoutThumbnail(ctx, prefix),
     ]);
 
     return c;
