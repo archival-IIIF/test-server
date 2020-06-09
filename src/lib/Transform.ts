@@ -79,8 +79,12 @@ export function transformImageManifestToV2(m3: ManifestV3): ManifesV2 {
         const annotation3: AnnotationV3 = itemAny.items[0].items[0];
 
         const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
-        const imageService2 = new ImageV2(annotation3.body.service[0].id, canvas3.width, canvas3.height);
-        if (imageService2.profile === 'level') {
+        const imageService2 = new ImageV2(
+            annotation3.body.service[0].id.replace('/v3/', '/v2/'),
+            canvas3.width,
+            canvas3.height
+        );
+        if (imageService2.profile === 'level2') {
             imageService2.profile = 'http://iiif.io/api/image/2/level2.json'
         }
         resource2.setService(imageService2);

@@ -1,5 +1,6 @@
 import * as Router from 'koa-router';
 import serveImage from './internal';
+import {responseFile} from "./imageService";
 
 const prefix = '/image-service/v2'
 const router: Router = new Router({prefix});
@@ -12,6 +13,23 @@ router.get('/ariel', ctx => {
 
 router.get('/ariel/info.json', ctx => {
     ctx.body = info(ctx.request.origin + prefix + '/ariel');
+});
+
+router.get('/arielDark', ctx => {
+    ctx.body = info(ctx.request.origin + prefix + '/ariel');
+});
+
+router.get('/arielDark/info.json', ctx => {
+    ctx.body = info(ctx.request.origin + prefix + '/arielDark');
+});
+
+
+router.get('/ariel/:region/:size/:rotation/:quality.:format', async ctx => {
+    await responseFile(ctx, __dirname + '/Ariel_-_LoC_4a15521.jpg', imageWith, imageHeight);
+});
+
+router.get('/arielDark/:region/:size/:rotation/:quality.:format', async ctx => {
+    await responseFile(ctx, __dirname + '/Ariel_-_LoC_4a15521_dark.jpg', imageWith, imageHeight);
 });
 
 function info(id: string): any {

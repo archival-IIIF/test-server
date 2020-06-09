@@ -35,7 +35,7 @@ export function getImage(ctx: ParameterizedContext, prefix: string): Manifest {
 export function getAriel(ctx: ParameterizedContext, prefix: string): Manifest {
     const m = new ImageManifest(
         ctx.request.origin + prefix + '/manifest/ariel',
-        ctx.request.origin + '/image-service/v2/ariel',
+        ctx.request.origin + '/image-service/v3/ariel',
         'Ariel_-_LoC_4a15521.jpg',
         imageWith,
         imageHeight
