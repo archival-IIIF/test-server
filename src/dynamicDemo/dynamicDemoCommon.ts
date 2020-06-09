@@ -69,9 +69,31 @@ class DynamicDemoCommon {
             };
         }
 
+        if (extension === '.txt') {
+            return {
+                type: 'foaf:Document',
+                format: 'text/plain',
+                thumbnail: {
+                    '@id': ctx.request.origin + '/file-icon/txt.svg',
+                    format: 'image/svg+xml'
+                }
+            };
+        }
+
+        if (extension === '.pdf') {
+            return {
+                type: 'foaf:Document',
+                format: 'application/pdf',
+                thumbnail: {
+                    '@id': ctx.request.origin + '/file-icon/pdf.svg',
+                    format: 'image/svg+xml'
+                }
+            };
+        }
+
         return {
             type: 'foaf:Document',
-            format: 'text/plain',
+            format: 'unknown',
             thumbnail: undefined
         };
     }
@@ -84,7 +106,7 @@ class DynamicDemoCommon {
         return ctx.request.origin + '/image/dynamicDemo/' + relativePath + '/full/!100,100/0/default.jpg'
     }
 
-    static getUriByObjectPath(objectPath: string, ctx: Router.RouterContext, type: string) {
+    static getUriByObjectPath(objectPath: string, ctx: Router.RouterContext, type: string, hasPrefix?: boolean) {
 
         if (!type) {
             type = 'collection';
@@ -92,7 +114,12 @@ class DynamicDemoCommon {
 
         const relativePath = this.getRelativePath(objectPath);
 
-        return ctx.request.origin + '/' + type + '/dynamicDemo/' + relativePath;
+        let prefix = ''
+        if (hasPrefix !== false) {
+            prefix = '/iiif/v2';
+        }
+
+        return ctx.request.origin + prefix + '/' + type + '/dynamicDemo/' + relativePath;
     }
 
     static getFileId(ctx: Router.RouterContext, objectPath: string) {

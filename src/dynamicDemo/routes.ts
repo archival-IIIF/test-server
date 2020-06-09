@@ -1,7 +1,6 @@
 import * as Router from 'koa-router';
 
-const prefix = '/iiif/v2';
-const router: Router = new Router({prefix});
+const router: Router = new Router();
 
 import manifest from './manifest';
 import file from './file';

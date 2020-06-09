@@ -138,7 +138,10 @@
             emptyCollection: 'Empty collection test case',
             emptyFolder: 'Empty folder test case',
             nestedStructure: 'Test case with a nested structure',
-            dynamicDemo: 'Dynamic demo',
+            dynamicDemo: {
+                label: 'Dynamic demo',
+                v3: false
+            },
         },
         'Authentication': {
             authLogin: 'Token login test case with a locked collection',
@@ -229,6 +232,10 @@
     }
 
     function getLinks(testCase, version) {
+
+        if (testCase.hasOwnProperty(version) && testCase[version] === false) {
+            return '<td></td>'
+        }
 
         let baseUrl = window.location.href;
         let manifestUrl = baseUrl + 'iiif/'+version+'/collection/' + testCase.id;

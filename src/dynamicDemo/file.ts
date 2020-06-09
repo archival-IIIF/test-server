@@ -3,7 +3,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import download from '../lib/Download';
 import dynamicDemoCommon from './dynamicDemoCommon';
-import serveImage from '../imageService/internal';
 import {imageSize} from 'image-size';
 import {info} from "../imageService/imageServiceV2";
 import {responseFile} from "../imageService/imageService";

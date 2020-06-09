@@ -4,8 +4,8 @@ import * as path from 'path';
 import dynamicDemoCommon from './dynamicDemoCommon';
 import {imageSize} from 'image-size';
 
-const router: Router = new Router();
-
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 router.get('/manifest/dynamicDemo/:id', ctx => {
 
@@ -62,7 +62,7 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
                         width: imageWith,
                         height: imageHeight,
                         service: {
-                            '@id': dynamicDemoCommon.getUriByObjectPath(objectPath, ctx, 'image'),
+                            '@id': dynamicDemoCommon.getUriByObjectPath(objectPath, ctx, 'image', false),
                             protocol: 'http://iiif.io/api/image',
                             width: imageWith,
                             height: imageHeight,
@@ -83,9 +83,9 @@ router.get('/manifest/dynamicDemo/:id', ctx => {
                 '@type': mediaTypeAndFormat.type,
                 'format': mediaTypeAndFormat.format,
                 'rendering': {
-                    '@id': ctx.request.origin + '/file/txt/original',
+                    '@id': dynamicDemoCommon.getFileId(ctx, objectPath),
                     'label': 'Original copy',
-                    'format': 'text/plain'
+                    'format': mediaTypeAndFormat.format
                 }
             }]
         }]

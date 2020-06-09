@@ -3,7 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import dynamicDemoCommon from './dynamicDemoCommon';
 
-const router: Router = new Router();
+const prefix = '/iiif/v2';
+const router: Router = new Router({prefix});
 
 
 router.get('/collection/dynamicDemo/:id?', ctx => {
