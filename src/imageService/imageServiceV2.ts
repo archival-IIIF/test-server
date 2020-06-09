@@ -1,31 +1,40 @@
 import * as Router from 'koa-router';
 import serveImage from './internal';
 
-const router: Router = new Router();
+const prefix = '/image-service/v2'
+const router: Router = new Router({prefix});
 const imageWith = 1840;
 const imageHeight = 1450;
 
-router.get('/image/ariel/info.json', ctx => {
-    ctx.body = {
-        '@id': ctx.request.origin + '/image/ariel',
-        "protocol": "http://iiif.io/api/image",
-        "width": imageWith,
-        "height": imageHeight,
-        "sizes": [],
+router.get('/ariel', ctx => {
+    ctx.body = info(ctx.request.origin + prefix + '/ariel');
+});
+
+router.get('/ariel/info.json', ctx => {
+    ctx.body = info(ctx.request.origin + prefix + '/ariel');
+});
+
+function info(id: string): any {
+    return {
+        '@id': id,
+        protocol: "http://iiif.io/api/image",
+        width: imageWith,
+        height: imageHeight,
+        sizes: [],
         "@context": "http://iiif.io/api/image/2/context.json",
-        "profile": [
+        profile: [
             "http://iiif.io/api/image/2/level2.json",
             {
-                "supports": ["canonicalLinkHeader", "profileLinkHeader", "mirroring", "rotationArbitrary", "regionSquare"],
-                "qualities": ["default", "color", "gray", "bitonal"],
-                "formats": ["jpg", "png", "gif", "webp"]
+                supports: ["canonicalLinkHeader", "profileLinkHeader", "mirroring", "rotationArbitrary", "regionSquare"],
+                qualities: ["default", "color", "gray", "bitonal"],
+                formats: ["jpg", "png", "gif", "webp"]
             }
         ]
     };
-});
+}
 
 
-router.get('/image/ariel/:region/:size/:rotation/:quality.:format', async ctx => {
+router.get('/ariel/:region/:size/:rotation/:quality.:format', async ctx => {
 
 
     const item = {

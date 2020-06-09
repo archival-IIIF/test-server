@@ -247,9 +247,7 @@
 
         if (testCase.mirador ) {
             let prefix = '';
-            if (version !== 'v2') {
-                prefix += 'iiif/' + version + '/';
-            }
+            prefix += 'iiif/' + version + '/';
             const mirardorUrl = baseUrl + 'mirador?manifest=' + baseUrl + prefix + testCase.mirador;
             output += '<a class="mirador" href="' + mirardorUrl + '" target="_blank">' +
                 '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
