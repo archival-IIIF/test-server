@@ -4,7 +4,8 @@ import audioVideoV2 from './audioVideo/audioVideoV2';
 import audioVideoV3 from './audioVideo/audioVideoV3';
 import audioVideoFiles from './audioVideo/audioVideoFiles';
 import auth from './auth/auth';
-import auth2 from './auth2/auth2';
+import authLoginV2 from "./authLogin/authLoginV2";
+import authLoginV3 from "./authLogin/authLoginV3";
 import auth3 from './auth3/auth3';
 import auth4 from './auth4/auth4';
 import authExternal from './authExternal/authExternal';
@@ -15,15 +16,12 @@ import emptyFolderV3 from './emptyFolder/emptyFolderV3';
 
 import homepage from './homepage/homepage';
 
-
 import logoV2 from './logo/logoV2';
 import logoV3 from './logo/logoV3';
 
 import manifestationsV2 from './manifestations/manifestationsV2';
 import manifestationsV3 from './manifestations/manifestationsV3';
 import manifestationsFiles from "./manifestations/manifestationsFiles";
-
-
 
 import rightsInformationV2 from './rightsInformation/rightsInformationV2';
 import rightsInformationV3 from './rightsInformation/rightsInformationV3';
@@ -51,15 +49,16 @@ import manifestErrorsV3 from './manifestErrors/manifestErrorsV3';
 import universalViewer from './universalViewer/universalViewer'
 import mirador from './mirador/mirador'
 
+import * as path from 'path';
+import languageFiles from "./language/languageFiles";
+import logoFiles from "./logo/logoFiles";
+
+
 const app: Koa = new Koa();
 const {fileIconsPath} = require('./lib/FileIcon');
 const serve = require('koa-static-server');
 const config = require('./lib/Config');
-import * as path from 'path';
-import languageFiles from "./language/languageFiles";
-import logoFiles from "./logo/logoFiles";
 const bodyParser = require('koa-bodyparser');
-
 
 app.use(async (ctx: Koa.Context, next: Function) => {
     ctx.set('Access-Control-Allow-Origin', '*');
@@ -83,7 +82,8 @@ app.use(audioVideoV2);
 app.use(audioVideoV3);
 app.use(audioVideoFiles);
 app.use(auth);
-app.use(auth2);
+app.use(authLoginV2);
+app.use(authLoginV3);
 app.use(auth3);
 app.use(auth4);
 app.use(authExternal);
