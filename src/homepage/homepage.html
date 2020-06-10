@@ -178,11 +178,11 @@
             } else {
                 testCase = {id, label: testCases[groupLabel][id]};
             }
-            let baseUrl = window.location.href;
-            let manifestUrlV2 = baseUrl + 'collection/' + testCase.id;
+            const baseUrl = window.location.href;
+            const manifestUrlV3 = baseUrl + 'iiif/v3/collection/' + testCase.id;
             table +=
                 '<tr>' +
-                '<td><a class="open" href="' + manifestUrlV2 + '" target="_blank">' + id + '</td>' +
+                '<td><a class="open" href="' + manifestUrlV3 + '" target="_blank">' + id + '</td>' +
                 '<td>' + testCase.label + '</td>' +
                 getLinks(testCase, 'v2') +
                 getLinks(testCase, 'v3') +
