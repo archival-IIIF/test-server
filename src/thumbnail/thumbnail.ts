@@ -20,7 +20,7 @@ export function getThumbnail(ctx: ParameterizedContext, prefix: string) {
 
 export function getFolderWithThumbnail(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/folderWithThumbnail';
-    const c = new Collection(url, 'Folder with thumbnail');
+    const c = new RootCollection(url, 'Folder with thumbnail');
     c.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
     c.setThumbnail(new Resource(
         ctx.request.origin + '/file-icon/folder.svg',
@@ -33,7 +33,7 @@ export function getFolderWithThumbnail(ctx: ParameterizedContext, prefix: string
 
 export function getFolderWithoutThumbnail(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/folderWithoutThumbnail';
-    const c = new Collection(url, 'Folder without thumbnail');
+    const c = new RootCollection(url, 'Folder without thumbnail');
     c.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
 
     return c;
@@ -41,7 +41,7 @@ export function getFolderWithoutThumbnail(ctx: ParameterizedContext, prefix: str
 
 export function getFolderWithThumbnailService(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/folderWithThumbnailService';
-    const c = new Collection(url, 'Folder with image thumbnail service');
+    const c = new RootCollection(url, 'Folder with image thumbnail service');
     c.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
     const service = new Service(
         ctx.request.origin + '/image-service/v3/ariel',

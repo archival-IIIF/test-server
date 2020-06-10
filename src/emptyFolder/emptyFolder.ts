@@ -12,7 +12,7 @@ export function getEmptyFolderContainer(ctx: ParameterizedContext, prefix: strin
 
 export function getEmptyFolder(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/emptyFolder2';
-    const c = new Collection(url, 'Empty folder');
+    const c = new RootCollection(url, 'Empty folder');
     c.setParent(ctx.request.origin + prefix + '/collection/emptyFolder', 'Collection')
 
     return c;

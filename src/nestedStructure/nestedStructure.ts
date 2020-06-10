@@ -24,7 +24,7 @@ export function getNestedStructure11(ctx: ParameterizedContext, prefix: string) 
 
 export function getNestedStructure12(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/nestedStructure12';
-    const c = new Collection(url, 'Folder Level 1.2');
+    const c = new RootCollection(url, 'Folder Level 1.2');
     c.setParent(ctx.request.origin + prefix + '/collection/nestedStructure', 'Collection');
 
     return c;
@@ -41,7 +41,7 @@ export function getNestedStructure111(ctx: ParameterizedContext, prefix: string)
 
 export function getNestedStructure1111(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/nestedStructure1111';
-    const c = new Collection(url, 'Folder Level 1.1.1.1');
+    const c = new RootCollection(url, 'Folder Level 1.1.1.1');
     c.setParent(ctx.request.origin + prefix + '/collection/nestedStructure111', 'Collection');
 
     return c;
