@@ -5,21 +5,37 @@ export const DefaultAccessId = '4321';
 export const UserToken = '1234';
 export const ViewerToken = 'abcd';
 
-export function hasAccess(ctx: Router.RouterContext | ParameterizedContext) {
+export function hasAccess(
+    ctx: Router.RouterContext | ParameterizedContext,
+    cookieName?: string,
+    cookieToken?: string,
+    viewerToken?: string) {
 
-    const accessId = ctx.cookies.get('access');
-    if (accessId === DefaultAccessId) {
+    if (!cookieName) {
+        cookieName = 'access';
+    }
+
+    if (!cookieToken) {
+        cookieToken = DefaultAccessId;
+    }
+
+    let cookieValue = ctx.cookies.get(cookieName);
+    if (cookieValue === cookieToken) {
         return true;
     }
 
+    if (!viewerToken) {
+        viewerToken = ViewerToken;
+    }
+
+
     if (ctx.headers.hasOwnProperty('authorization')) {
-        const accessToken = ctx.headers.authorization.replace('Bearer', '').trim();
-        if (accessToken === ViewerToken) {
+        const headerToken = ctx.headers.authorization.replace('Bearer', '').trim();
+
+        if (headerToken === viewerToken) {
             return true;
         }
     }
 
     return false;
 }
-
-export default {hasAccess, DefaultAccessId, UserToken, ViewerToken};

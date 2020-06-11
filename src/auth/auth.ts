@@ -1,22 +1,13 @@
-import * as Router from 'koa-router';
 import * as path from 'path';
 import {createReadStream} from 'fs';
-import {DefaultAccessId, hasAccess, UserToken, ViewerToken} from '../lib/Security';
+import {hasAccess} from '../lib/Security';
 import * as moment from 'moment';
+import {ParameterizedContext} from "koa";
 
-const router: Router = new Router();
+export function loginPage(ctx: ParameterizedContext, cookieName?: string, cookieToken?: string) {
 
-router.get('/login', (ctx: Router.RouterContext) => {
-    ctx.type = 'text/html';
-    ctx.body = createReadStream(path.join(__dirname, 'token-login.html'));
-});
-
-router.post('/login', async (ctx: any) => {
-
-    const token = ctx.request.body.token;
-
-    if (token === UserToken) {
-        ctx.cookies.set('access', DefaultAccessId, {
+    if (cookieName) {
+        ctx.cookies.set(cookieName, cookieToken, {
             signed: true,
             maxAge: 86400000,
             expires: moment().add(1, 'd').toDate(),
@@ -25,9 +16,10 @@ router.post('/login', async (ctx: any) => {
     }
     ctx.type = 'text/html';
     ctx.body = createReadStream(path.join(__dirname, 'close-window.html'));
-});
 
-interface IMessage {
+}
+
+export interface IMessage {
     accessToken?: string;
     expiresIn?: number;
     error?: string;
@@ -36,14 +28,20 @@ interface IMessage {
 
 }
 
-router.get('/token', async (ctx: Router.RouterContext) => {
+
+export function logoutPage(ctx: ParameterizedContext, cookieName: string) {
+    ctx.cookies.set(cookieName);
+    ctx.type = 'text/html';
+    ctx.body = createReadStream(path.join(__dirname, 'logout.html'));
+}
+
+export function tokenPage(ctx: ParameterizedContext, cookieName: string, cookieToken: string, viewerToken: string) {
     const message: IMessage = {};
 
-    if (hasAccess(ctx)) {
-        message.accessToken = ViewerToken;
+    if (hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
+        message.accessToken = viewerToken;
         message.expiresIn = 3600;
-    }
-    else {
+    } else {
         message.error = 'missingCredentials';
         message.description = 'No access cookie found!';
     }
@@ -62,15 +60,4 @@ router.get('/token', async (ctx: Router.RouterContext) => {
     else {
         ctx.body = message;
     }
-});
-
-router.get('/logout', async (ctx: Router.RouterContext) => {
-    ctx.cookies.set('access');
-
-    ctx.type = 'text/html';
-    ctx.body = createReadStream(path.join(__dirname, 'logout.html'));
-});
-
-
-
-export default router.routes();
+}

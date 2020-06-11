@@ -1,5 +1,5 @@
 import * as Router from 'koa-router';
-import {getAuthInfo, getAuthInfo2} from "./authInfo";
+import {getAuthInfo, getAuthInfo2} from "./authInfoCommon";
 import {transformCollectionToV2, transformImageManifestToV2} from "../lib/Transform";
 
 const prefix = '/iiif/v2';

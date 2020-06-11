@@ -1,28 +1,12 @@
-import ImageManifest from "../lib/ImageManifest";
-import RootCollection from "../lib/RootCollection";
-import {ParameterizedContext} from "koa";
+import * as Router from 'koa-router';
+import authInfoV2 from "./authInfoV2";
+import authLoginV3 from "../authLogin/authLoginV3";
+import authInfoImageService from "./authInfoImageService";
 
-const imageWith = 1840;
-const imageHeight = 1450;
+const router: Router = new Router();
 
-export function getAuthInfo(ctx: ParameterizedContext, prefix: string) {
-    const c = new RootCollection(ctx.request.origin + ctx.request.url, 'Open Collection with a locked info-json');
-    c.setItems([getAuthInfo2(ctx, prefix)]);
+router.use(authInfoV2);
+router.use(authLoginV3);
+router.use(authInfoImageService);
 
-    return c;
-}
-
-export function getAuthInfo2(ctx: ParameterizedContext, prefix: string) {
-    const m = new ImageManifest(
-        ctx.request.origin + prefix + '/manifest/authInfo2',
-        ctx.request.origin + '/image-service/v2/authInfo',
-        'test.png',
-        imageWith,
-        imageHeight
-    );
-    m.setParent(ctx.request.origin + prefix + '/collection/authInfo', 'Collection');
-
-    return m;
-}
-
-
+export default router.routes();

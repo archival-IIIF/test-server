@@ -1,5 +1,5 @@
 import * as Router from 'koa-router';
-import {hasAccess, ViewerToken} from '../lib/Security';
+import {hasAccess} from '../lib/Security';
 import RootCollection from "../lib/RootCollection";
 import AuthService from "../presentation-builder/v3/AuthService";
 
@@ -12,7 +12,7 @@ interface IMessage {
     description?: string;
     messageId?: string;
 }
-
+export const viewerToken = 'external-viewer-123';
 const prefixes = ['/iiif/v2', '/iiif/v3'];
 const testCases = [
     {id: 'authExternalAccept', accespt: true},
@@ -21,7 +21,7 @@ const testCases = [
 for (const prefix of prefixes) {
     for (const testCase of testCases) {
         router.get(prefix + '/collection/' + testCase.id, ctx => {
-            if (!hasAccess(ctx)) {
+            if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
                 ctx.status = 401;
             }
             const id = ctx.request.origin + prefix +  '/collection/' + testCase.id;
@@ -29,7 +29,7 @@ for (const prefix of prefixes) {
         });
 
         router.get(prefix + '/collection/' + testCase.id + 'Sub', ctx => {
-            if (!hasAccess(ctx)) {
+            if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
                 ctx.status = 401;
             }
             const id = ctx.request.origin + prefix + '/collection/' + testCase.id;
@@ -42,7 +42,7 @@ for (const prefix of prefixes) {
 
 router.get('/auth/external/accept/token', async (ctx: Router.RouterContext) => {
     const message: IMessage = {};
-    message.accessToken = ViewerToken;
+    message.accessToken = viewerToken;
     message.expiresIn = 3600;
     ctx.body = message;
 });
@@ -62,7 +62,7 @@ function collection(ctx: any, accept: boolean, id: string) {
     c.setItems(subCollection(ctx, accept, id));
     c.setService(getAuthService(ctx, accept));
 
-    if (!hasAccess(ctx)) {
+    if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
         c.setLabel('Access denied');
         c.setItems([]);
     }
@@ -76,7 +76,7 @@ function subCollection(ctx: any, accept: boolean, id: string) {
     c.setService(getAuthService(ctx, accept));
     c.setParent(id, 'Collection');
 
-    if (!hasAccess(ctx)) {
+    if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
         c.setLabel('Access denied');
         c.setItems([]);
     }
