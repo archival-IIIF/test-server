@@ -1,60 +1,48 @@
 import * as Koa from 'koa';
-
+import * as path from 'path';
+import audioVideoFiles from './audioVideo/audioVideoFiles';
 import audioVideoV2 from './audioVideo/audioVideoV2';
 import audioVideoV3 from './audioVideo/audioVideoV3';
-import audioVideoFiles from './audioVideo/audioVideoFiles';
-import auth from './auth/auth';
-import authLoginV2 from "./authLogin/authLoginV2";
-import authLoginV3 from "./authLogin/authLoginV3";
+import authClickThrough from './authClickThrough/authClickThrough';
 import authExternal from './authExternal/authExternal';
-
+import authInfo from "./authInfo/authInfo";
+import authLoginPartly from "./authLoginPartly/authLoginPartly";
+import authLogin from "./authLogin/authLogin";
+import common from './common/common';
+import dynamicDemo from './dynamicDemo/routes';
 import emptyCollection from './emptyCollection/emptyCollection';
 import emptyFolderV2 from './emptyFolder/emptyFolderV2';
 import emptyFolderV3 from './emptyFolder/emptyFolderV3';
-
 import homepage from './homepage/homepage';
-
-import logoV2 from './logo/logoV2';
-import logoV3 from './logo/logoV3';
-
-import manifestationsV2 from './manifestations/manifestationsV2';
-import manifestationsV3 from './manifestations/manifestationsV3';
-import manifestationsFiles from "./manifestations/manifestationsFiles";
-
-import rightsInformationV2 from './rightsInformation/rightsInformationV2';
-import rightsInformationV3 from './rightsInformation/rightsInformationV3';
-import imageV2 from './image/imageV2';
-import imageV3 from './image/imageV3';
-import multiPageV2 from './multiPage/multiPageV2';
-import multiPageV3 from './multiPage/multiPageV3';
-import validation from './validation/validation';
 import imageServiceV2 from './imageService/imageServiceV2';
 import imageServiceV3 from './imageService/imageServiceV3';
-import pdfV2 from './pdf/pdfV2';
-import pdfV3 from './pdf/pdfV3';
-import pdfFiles from "./pdf/pdfFiles";
-import nestedStructureV2 from './nestedStructure/nestedStructureV2';
-import nestedStructureV3 from './nestedStructure/nestedStructureV3';
-import thumbnailV2 from './thumbnail/thumbnailV2';
-import thumbnailV3 from './thumbnail/thumbnailV3';
+import imageV2 from './image/imageV2';
+import imageV3 from './image/imageV3';
+import languageFiles from "./language/languageFiles";
 import languageV2 from './language/languageV2';
 import languageV3 from './language/languageV3';
-import common from './common/common';
-
-import dynamicDemo from './dynamicDemo/routes';
+import logoFiles from "./logo/logoFiles";
+import logoV2 from './logo/logoV2';
+import logoV3 from './logo/logoV3';
 import manifestErrorsV2 from './manifestErrors/manifestErrorsV2';
 import manifestErrorsV3 from './manifestErrors/manifestErrorsV3';
-import universalViewer from './universalViewer/universalViewer'
+import manifestationsFiles from "./manifestations/manifestationsFiles";
+import manifestationsV2 from './manifestations/manifestationsV2';
+import manifestationsV3 from './manifestations/manifestationsV3';
 import mirador from './mirador/mirador'
-
-import * as path from 'path';
-import languageFiles from "./language/languageFiles";
-import logoFiles from "./logo/logoFiles";
-import authLoginPartlyV3 from "./authLoginPartly/authLoginPartlyV3";
-import authLoginPartlyV2 from "./authLoginPartly/authLoginPartlyV2";
-import authInfoV2 from "./authInfo/authInfoV2";
-import authInfoV3 from "./authInfo/authInfoV3";
-import authInfoImageService from "./authInfo/authInfoImageService";
+import multiPageV2 from './multiPage/multiPageV2';
+import multiPageV3 from './multiPage/multiPageV3';
+import nestedStructureV2 from './nestedStructure/nestedStructureV2';
+import nestedStructureV3 from './nestedStructure/nestedStructureV3';
+import pdfFiles from "./pdf/pdfFiles";
+import pdfV2 from './pdf/pdfV2';
+import pdfV3 from './pdf/pdfV3';
+import rightsInformationV2 from './rightsInformation/rightsInformationV2';
+import rightsInformationV3 from './rightsInformation/rightsInformationV3';
+import thumbnailV2 from './thumbnail/thumbnailV2';
+import thumbnailV3 from './thumbnail/thumbnailV3';
+import universalViewer from './universalViewer/universalViewer'
+import validation from './validation/validation';
 
 
 const app: Koa = new Koa();
@@ -85,15 +73,11 @@ app.use(audioVideoV2);
 app.use(audioVideoV3);
 app.use(audioVideoFiles);
 
-app.use(auth);
-app.use(authLoginV2);
-app.use(authLoginV3);
-app.use(authLoginPartlyV2);
-app.use(authLoginPartlyV3);
-app.use(authInfoV2);
-app.use(authInfoV3);
-app.use(authInfoImageService);
+app.use(authLogin);
+app.use(authLoginPartly);
+app.use(authInfo);
 app.use(authExternal);
+app.use(authClickThrough);
 
 app.use(emptyCollection);
 app.use(emptyFolderV2);
