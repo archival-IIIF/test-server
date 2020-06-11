@@ -106,12 +106,7 @@ function getAuthService(ctx: any, accept: boolean) {
         undefined,
         'http://iiif.io/api/auth/1/token'
     );
-    const logoutService = new AuthService(
-        ctx.request.origin + '/logout',
-        undefined,
-        'http://iiif.io/api/auth/1/logout'
-    );
-    authService.service = [tokenService, logoutService];
+    authService.service = [tokenService];
 
 
     return authService;
