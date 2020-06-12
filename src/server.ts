@@ -44,6 +44,7 @@ import thumbnailV3 from './thumbnail/thumbnailV3';
 import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
 import authMixed from "./authMixed/authMixed";
+import authKiosk from "./authKiosk/authKiosk";
 
 
 const app: Koa = new Koa();
@@ -79,6 +80,7 @@ app.use(authLoginPartly);
 app.use(authInfo);
 app.use(authExternal);
 app.use(authClickThrough);
+app.use(authKiosk);
 app.use(authMixed);
 
 app.use(emptyCollection);
