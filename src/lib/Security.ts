@@ -7,10 +7,13 @@ export function hasAccess(
     cookieToken?: string,
     viewerToken?: string) {
 
-    let cookieValue = ctx.cookies.get(cookieName);
-    if (cookieToken && cookieValue === cookieToken) {
-        return true;
+    if (cookieName) {
+        let cookieValue = ctx.cookies.get(cookieName);
+        if (cookieToken && cookieValue === cookieToken) {
+            return true;
+        }
     }
+
 
 
     if (ctx.headers.hasOwnProperty('authorization')) {
