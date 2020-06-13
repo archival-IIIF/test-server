@@ -15,7 +15,7 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
 
     c.setService(getAuthLoginService(ctx));
 
-    if (!hasAccess(ctx)) {
+    if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
         c.setLabel('Access denied');
     } else {
@@ -33,7 +33,7 @@ export function getAuthLoginSubFolder(ctx: ParameterizedContext, prefix: string,
     c.setService(getAuthLoginService(ctx));
     c.setParent(ctx.request.origin + prefix + '/collection/authLogin', 'Collection');
 
-    if (!hasAccess(ctx)) {
+    if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         if (isChild !== true) {
             ctx.status = 401;
         }

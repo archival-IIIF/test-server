@@ -6,7 +6,6 @@ import {createReadStream} from "fs";
 import * as path from 'path';
 import {ParameterizedContext} from "koa";
 import {loginPage, logoutPage, tokenPage} from "../auth/auth";
-import {UserToken} from "../lib/Security";
 
 const router: Router = new Router();
 
