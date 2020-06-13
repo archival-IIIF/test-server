@@ -5,6 +5,7 @@ import Manifest from "../presentation-builder/v3/Manifest";
 import Resource from "../presentation-builder/v3/Resource";
 import {hasAccess} from "../lib/Security";
 import RootCollection from "../lib/RootCollection";
+import RootManifest from "../lib/RootManifest";
 
 export function getAuthLoginPartly(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authLoginPartly';
@@ -47,7 +48,7 @@ export function getAuthLoginPartly2(ctx: ParameterizedContext, prefix: string, i
     }
 
     const url = ctx.request.origin + prefix + '/manifest/authLoginPartly2';
-    const m = new Manifest(url, label);
+    const m = new RootManifest(url, label);
     m.setService(getAuthLoginService(ctx));
     m.setParent(ctx.request.origin + prefix + '/collection/authLoginPartly', 'Collection');
     if (hasAccess0) {
