@@ -24,7 +24,7 @@ export function getAuthMixedLogin(ctx: ParameterizedContext, prefix: string, isC
 
     let label = 'Subfolder with login access restriction';
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
-        label = 'Access denied';
+        label = 'Access denied (login)';
         if (isChild !== true) {
             ctx.status = 401;
         }
@@ -48,7 +48,7 @@ export function getAuthMixedClickThrough(ctx: ParameterizedContext, prefix: stri
         if (isChild !== true) {
             ctx.status = 401;
         }
-        c.setLabel( 'Access denied');
+        c.setLabel('Access denied (kiosk)');
     }
 
     return c;
