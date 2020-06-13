@@ -1,7 +1,6 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
 import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../authLogin/authLoginCommon";
-import Manifest from "../presentation-builder/v3/Manifest";
 import Resource from "../presentation-builder/v3/Resource";
 import {hasAccess} from "../lib/Security";
 import RootCollection from "../lib/RootCollection";
