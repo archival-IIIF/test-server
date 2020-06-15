@@ -1,8 +1,8 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../presentation-builder/v3/Collection";
 import AuthService from "../presentation-builder/v3/AuthService";
 import RootCollection from "../lib/RootCollection";
 import {hasAccess} from "../lib/Security";
+import {getArielBase} from "../image/image";
 
 export const cookieName = 'access-click-through';
 export const cookieToken = 'click-through-cookie-abc';
@@ -13,31 +13,30 @@ export function getAuthClickThrough(ctx: ParameterizedContext, prefix: string) {
     const c = new RootCollection(url, 'Collection with access restriction');
 
     c.setService(getAuthClickThroughService(ctx));
+    c.setItems([
+        getAuthClickThroughImage(ctx, prefix),
+    ]);
 
-    if (hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
-        c.setItems([
-            getAuthClickThroughSubFolder(ctx, prefix),
-        ]);
-    } else{
+    if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
-        c.setLabel('Access denied');
     }
 
     return c;
 }
 
-export function getAuthClickThroughSubFolder(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/authClickThroughSubfolder';
-    const c = new RootCollection(url, 'Subfolder with access restriction');
-    c.setService(getAuthClickThroughService(ctx));
-    c.setParent(ctx.request.origin + prefix + '/collection/authClickThrough', 'Collection');
+export function getAuthClickThroughImage(ctx: ParameterizedContext, prefix: string) {
 
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
-        c.setLabel( 'Access denied');
     }
 
-    return c;
+    return getArielBase(
+        ctx,
+        prefix,
+        '/manifest/authClickThroughImage',
+        '/collection/authClickThrough',
+        getAuthClickThroughService(ctx)
+    );
 }
 
 export function getAuthClickThroughService(ctx: ParameterizedContext) {
