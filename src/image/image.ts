@@ -3,6 +3,7 @@ import Manifest from "../presentation-builder/v3/Manifest";
 import ImageManifest from "../lib/ImageManifest";
 import Collection from "../presentation-builder/v3/Collection";
 import RootCollection from "../lib/RootCollection";
+import AuthService from "../presentation-builder/v3/AuthService";
 
 const imageWith = 1840;
 const imageHeight = 1450;
@@ -35,7 +36,12 @@ export function getAriel(ctx: ParameterizedContext, prefix: string): Manifest {
     return getArielBase(ctx, prefix, '/manifest/ariel', '/collection/image');
 }
 
-export function getArielBase(ctx: ParameterizedContext, prefix: string, idPath: string, parentPath?: string): Manifest {
+export function getArielBase(
+    ctx: ParameterizedContext,
+    prefix: string, idPath: string,
+    parentPath?: string,
+    service?: AuthService
+): Manifest {
     const m = new ImageManifest(
         ctx.request.origin + prefix + idPath,
         ctx.request.origin + '/image-service/v3/ariel',
@@ -46,6 +52,10 @@ export function getArielBase(ctx: ParameterizedContext, prefix: string, idPath: 
     if (parentPath) {
         m.setParent(ctx.request.origin + prefix + parentPath, 'Collection');
     }
+    if (service) {
+        m.setService(service);
+    }
+
     m.setMetadata(metadata);
 
     return m;

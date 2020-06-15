@@ -2,6 +2,7 @@ import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
 import RootCollection from "../lib/RootCollection";
 import AuthService from "../presentation-builder/v3/AuthService";
+import {getArielBase} from "../image/image";
 
 const router: Router = new Router();
 
@@ -24,16 +25,15 @@ for (const prefix of prefixes) {
             if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
                 ctx.status = 401;
             }
-            const id = ctx.request.origin + prefix +  '/collection/' + testCase.id;
-            ctx.body = collection(ctx, testCase.accespt, id);
+
+            ctx.body = collection(ctx, testCase.accespt, testCase.id, prefix);
         });
 
         router.get(prefix + '/collection/' + testCase.id + 'Sub', ctx => {
             if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
                 ctx.status = 401;
             }
-            const id = ctx.request.origin + prefix + '/collection/' + testCase.id;
-            ctx.body = subCollection(ctx, testCase.accespt, id);
+            ctx.body = image(ctx, testCase.accespt, testCase.id, prefix);
         });
     }
 }
@@ -56,35 +56,21 @@ router.get('/auth/external/deny/token', async (ctx: Router.RouterContext) => {
     ctx.body = message;
 });
 
-function collection(ctx: any, accept: boolean, id: string) {
-
+function collection(ctx: any, accept: boolean, idPath: string, prefix: string) {
+    const id = ctx.request.origin + prefix +  '/collection/' + idPath;
     const c = new RootCollection(id, 'Collection with access restriction');
-    c.setItems(subCollection(ctx, accept, id));
+    c.setItems(image(ctx, accept, id, prefix));
     c.setService(getAuthService(ctx, accept));
-
-    if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
-        c.setLabel('Access denied');
-        c.setItems([]);
-    }
 
     return c;
 }
 
-function subCollection(ctx: any, accept: boolean, id: string) {
-
-    const c = new RootCollection(id + 'Sub', 'Collection with access restriction');
-    c.setService(getAuthService(ctx, accept));
-    c.setParent(id, 'Collection');
-
-    if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
-        c.setLabel('Access denied');
-        c.setItems([]);
-    }
-
-    return c;
+function image(ctx: any, accept: boolean, idPath: string, prefix: string) {
+    const id = ctx.request.origin + prefix + '/manifest/' + idPath;
+    return getArielBase(ctx, prefix, '/manifest/withoutParent', id, getAuthService(ctx, accept));
 }
 
-function getAuthService(ctx: any, accept: boolean) {
+function getAuthService(ctx: any, accept: boolean): AuthService {
 
     let tokenUrl;
     if (accept) {
