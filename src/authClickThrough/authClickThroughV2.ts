@@ -12,7 +12,7 @@ router.get('/collection/authClickThrough', ctx => {
     ctx.body = transformCollectionToV2(getAuthClickThrough(ctx, prefix));
 });
 
-router.get('/collection/authClickThroughImage', ctx => {
+router.get('/manifest/authClickThroughImage', ctx => {
     ctx.body = transformImageManifestToV2( getAuthClickThroughImage(ctx, prefix));
 });
 

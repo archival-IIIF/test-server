@@ -8,7 +8,7 @@ router.get('/collection/authClickThrough', ctx => {
     ctx.body = getAuthClickThrough(ctx, prefix);
 });
 
-router.get('/collection/authClickThroughImage', ctx => {
+router.get('/manifest/authClickThroughImage', ctx => {
     ctx.body = getAuthClickThroughImage(ctx, prefix);
 });
 
