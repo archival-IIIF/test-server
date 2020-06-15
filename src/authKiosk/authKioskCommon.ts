@@ -3,6 +3,7 @@ import Collection from "../presentation-builder/v3/Collection";
 import AuthService from "../presentation-builder/v3/AuthService";
 import RootCollection from "../lib/RootCollection";
 import {hasAccess} from "../lib/Security";
+import {getArielBase} from "../image/image";
 
 export const cookieName = 'access-kiosk';
 export const cookieToken = 'kiosk-cookie-abc';
@@ -13,31 +14,29 @@ export function getAuthKiosk(ctx: ParameterizedContext, prefix: string) {
     const c = new RootCollection(url, 'Collection with access restriction');
 
     c.setService(getAuthKioskService(ctx));
+    c.setItems([
+        getAuthKioskImage(ctx, prefix),
+    ]);
 
-    if (hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
-        c.setItems([
-            //getAuthKioskSubFolder(ctx, prefix),
-        ]);
-    } else{
+    if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
-        c.setLabel('Access denied');
     }
 
     return c;
 }
 
-export function getAuthKioskSubFolder(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/authKioskSubfolder';
-    const c = new RootCollection(url, 'Subfolder with access restriction');
-    c.setService(getAuthKioskService(ctx));
-    c.setParent(ctx.request.origin + prefix + '/collection/authKiosk', 'Collection');
-
+export function getAuthKioskImage(ctx: ParameterizedContext, prefix: string) {
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
-        c.setLabel( 'Access denied');
     }
 
-    return c;
+    return getArielBase(
+        ctx,
+        prefix,
+        '/manifest/authKioskImage',
+        '/collection/authKiosk',
+        getAuthKioskService(ctx)
+    );
 }
 
 export function getAuthKioskService(ctx: ParameterizedContext) {
