@@ -45,6 +45,7 @@ import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
 import authMixed from "./authMixed/authMixed";
 import authKiosk from "./authKiosk/authKiosk";
+import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
 
 
 const app: Koa = new Koa();
@@ -77,6 +78,7 @@ app.use(audioVideoFiles);
 
 app.use(authLogin);
 app.use(authLoginPartly);
+app.use(authLoginRestrictedLabels);
 app.use(authInfo);
 app.use(authExternal);
 app.use(authClickThrough);

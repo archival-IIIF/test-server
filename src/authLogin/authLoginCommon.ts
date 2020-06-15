@@ -17,7 +17,6 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
 
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
-        c.setLabel('Access denied');
     } else {
         c.setItems([
             getAuthLoginSubFolder(ctx, prefix, true),
@@ -37,7 +36,6 @@ export function getAuthLoginSubFolder(ctx: ParameterizedContext, prefix: string,
         if (isChild !== true) {
             ctx.status = 401;
         }
-        c.setLabel( 'Access denied');
     }
 
     return c;
