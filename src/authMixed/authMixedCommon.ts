@@ -22,16 +22,14 @@ export function getAuthMixed(ctx: ParameterizedContext, prefix: string) {
 
 export function getAuthMixedLogin(ctx: ParameterizedContext, prefix: string, isChild?: boolean) {
 
-    let label = 'Subfolder with login access restriction';
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
-        label = 'Access denied (login)';
         if (isChild !== true) {
             ctx.status = 401;
         }
     }
 
     const url = ctx.request.origin + prefix + '/collection/authMixedLogin';
-    const c = new RootCollection(url, label);
+    const c = new RootCollection(url, 'Subfolder with login access restriction');
     c.setService(getAuthLoginService(ctx));
     c.setParent(ctx.request.origin + prefix + '/collection/authMixed', 'Collection');
 
@@ -48,7 +46,6 @@ export function getAuthMixedClickThrough(ctx: ParameterizedContext, prefix: stri
         if (isChild !== true) {
             ctx.status = 401;
         }
-        c.setLabel('Access denied (kiosk)');
     }
 
     return c;
