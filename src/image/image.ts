@@ -32,14 +32,20 @@ export function getImage(ctx: ParameterizedContext, prefix: string): Manifest {
 
 
 export function getAriel(ctx: ParameterizedContext, prefix: string): Manifest {
+    return getArielBase(ctx, prefix, '/manifest/ariel', '/collection/image');
+}
+
+export function getArielBase(ctx: ParameterizedContext, prefix: string, idPath: string, parentPath?: string): Manifest {
     const m = new ImageManifest(
-        ctx.request.origin + prefix + '/manifest/ariel',
+        ctx.request.origin + prefix + idPath,
         ctx.request.origin + '/image-service/v3/ariel',
         'Ariel_-_LoC_4a15521.jpg',
         imageWith,
         imageHeight
     );
-    m.setParent(ctx.request.origin + prefix + '/collection/image', 'Collection');
+    if (parentPath) {
+        m.setParent(ctx.request.origin + prefix + parentPath, 'Collection');
+    }
     m.setMetadata(metadata);
 
     return m;

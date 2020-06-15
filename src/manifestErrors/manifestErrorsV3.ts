@@ -1,4 +1,6 @@
 import * as Router from 'koa-router';
+import FileManifest from "../lib/FileManifest";
+import {getArielBase} from "../image/image";
 
 const prefix = '/iiif/v3';
 const router: Router = new Router({prefix});
@@ -69,6 +71,9 @@ router.get('/collection/missingParent', ctx => {
     };
 });
 
+router.get('/manifest/withoutParent', ctx => {
+    ctx.body = getArielBase(ctx, prefix, '/manifest/withoutParent');
+});
 
 router.get('/collection/loop', ctx => {
     ctx.body = {
