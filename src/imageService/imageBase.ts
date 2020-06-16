@@ -172,6 +172,11 @@ export function addImageRoute(
         });
 
         router.get(imagePath + '/:region/:size/:rotation/:quality.:format', async ctx => {
+            if (cookieName && cookieToken && viewerToken && !hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
+                ctx.status = 401;
+                return;
+            }
+
             await responseFile(ctx, filePath, width, height);
         });
     }
