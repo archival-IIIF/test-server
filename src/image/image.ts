@@ -1,6 +1,6 @@
 import * as Router from 'koa-router';
 import {transformCollectionToV2} from "../lib/Transform";
-import {addArialRoute, addImageRoute, getArielBase} from "../imageService/imageBase";
+import {addArialRoute, addImageRoute, getArielManifestChild} from "../imageService/imageBase";
 import {ParameterizedContext} from "koa";
 import Manifest from "../presentation-builder/v3/Manifest";
 import RootCollection from "../lib/RootCollection";
@@ -24,7 +24,7 @@ addImageRoute(router, 'arielDark', '/collection/image',
 function getImage(ctx: ParameterizedContext, prefix: string): Manifest {
     const c = new RootCollection(ctx.request.origin + ctx.request.url, 'Image test case');
     c.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
-    c.setItems(getArielBase(ctx, prefix, '/manifest/ariel', '/collection/image'));
+    c.setItems(getArielManifestChild(ctx, prefix, 'ariel'));
 
     return c;
 }

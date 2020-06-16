@@ -1,9 +1,8 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../presentation-builder/v3/Collection";
 import AuthService from "../presentation-builder/v3/AuthService";
 import RootCollection from "../lib/RootCollection";
 import {hasAccess} from "../lib/Security";
-import {getArielBase} from "../imageService/imageBase";
+import {getArielManifestChild} from "../imageService/imageBase";
 
 export const cookieName = 'access-kiosk';
 export const cookieToken = 'kiosk-cookie-abc';
@@ -15,7 +14,7 @@ export function getAuthKiosk(ctx: ParameterizedContext, prefix: string) {
 
     c.setService(getAuthKioskService(ctx));
     c.setItems([
-        getAuthKioskImage(ctx, prefix),
+        getArielManifestChild(ctx, prefix, 'authKioskImage'),
     ]);
 
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
@@ -23,20 +22,6 @@ export function getAuthKiosk(ctx: ParameterizedContext, prefix: string) {
     }
 
     return c;
-}
-
-export function getAuthKioskImage(ctx: ParameterizedContext, prefix: string) {
-    if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
-        ctx.status = 401;
-    }
-
-    return getArielBase(
-        ctx,
-        prefix,
-        '/manifest/authKioskImage',
-        '/collection/authKiosk',
-        getAuthKioskService(ctx)
-    );
 }
 
 export function getAuthKioskService(ctx: ParameterizedContext) {
