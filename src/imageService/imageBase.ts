@@ -87,10 +87,10 @@ export function getImageManifest(
 }
 
 
-export function getArielBaseChild(ctx: ParameterizedContext, prefix: string, idPath: string,): Manifest {
-    let imageServicePath = '/image-service/v3/ariel';
+export function getArielManifestChild(ctx: ParameterizedContext, prefix: string, name: string,): Manifest {
+    let imageServicePath = '/image-service/'+prefix.replace('/iiif/', '')+'/' + name;
     const m = new Manifest(
-        ctx.request.origin + prefix + idPath,
+        ctx.request.origin + prefix + '/manifest/' + name,
         'Ariel_-_LoC_4a15521.jpg',
     );
     m.setThumbnail(new ThumbnailService(ctx.request.origin + imageServicePath));

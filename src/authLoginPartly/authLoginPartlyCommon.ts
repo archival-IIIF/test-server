@@ -3,14 +3,14 @@ import Collection from "../presentation-builder/v3/Collection";
 import {getAuthLoginService, viewerToken} from "../authLogin/authLoginCommon";
 import {hasAccess} from "../lib/Security";
 import RootCollection from "../lib/RootCollection";
-import {getArielBaseChild} from "../imageService/imageBase";
+import {getArielManifestChild} from "../imageService/imageBase";
 
 export function getAuthLoginPartly(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authLoginPartly';
     const c = new RootCollection(url, 'Open Collection');
     c.setItems([
         getAuthLoginPartly1(ctx, prefix, true),
-        getArielBaseChild(ctx, prefix, '/manifest/authLoginPartly2')
+        getArielManifestChild(ctx, prefix, 'authLoginPartly2')
     ]);
     return c;
 }
