@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
 import RootCollection from "../lib/RootCollection";
 import AuthService from "../presentation-builder/v3/AuthService";
-import {getArielBase} from "../imageService/imageBase";
+import {addArialRoute, getArielManifestChild} from "../imageService/imageBase";
 
 const router: Router = new Router();
 
@@ -16,11 +16,11 @@ interface IMessage {
 export const viewerToken = 'external-viewer-123';
 const prefixes = ['/iiif/v2', '/iiif/v3'];
 const testCases = [
-    {id: 'authExternalAccept', accespt: true},
-    {id: 'authExternalDeny', accespt: false},
+    {id: 'authExternalAccept', accespt: true, authServiceFunc: getAuthServiceAccept},
+    {id: 'authExternalDeny', accespt: false, authServiceFunc: getAuthServiceDeny},
 ];
-for (const prefix of prefixes) {
-    for (const testCase of testCases) {
+for (const testCase of testCases) {
+    for (const prefix of prefixes) {
         router.get(prefix + '/collection/' + testCase.id, ctx => {
             if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
                 ctx.status = 401;
@@ -29,12 +29,15 @@ for (const prefix of prefixes) {
             ctx.body = collection(ctx, testCase.accespt, testCase.id, prefix);
         });
 
-        router.get(prefix + '/collection/' + testCase.id + 'Sub', ctx => {
-            if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
-                ctx.status = 401;
-            }
-            ctx.body = image(ctx, testCase.accespt, testCase.id, prefix);
-        });
+        addArialRoute(
+            router,
+            testCase.id,
+            '/collection/' + testCase.id,
+            testCase.authServiceFunc,
+            undefined,
+            undefined,
+            viewerToken
+        );
     }
 }
 
@@ -59,16 +62,19 @@ router.get('/auth/external/deny/token', async (ctx: Router.RouterContext) => {
 function collection(ctx: any, accept: boolean, idPath: string, prefix: string) {
     const id = ctx.request.origin + prefix +  '/collection/' + idPath;
     const c = new RootCollection(id, 'Collection with access restriction');
-    c.setItems(image(ctx, accept, id, prefix));
+    c.setItems(getArielManifestChild(ctx, prefix, idPath));
     c.setService(getAuthService(ctx, accept));
 
     return c;
 }
-
-function image(ctx: any, accept: boolean, idPath: string, prefix: string) {
-    const id = ctx.request.origin + prefix + '/manifest/' + idPath;
-    return getArielBase(ctx, prefix, '/manifest/withoutParent', id, getAuthService(ctx, accept));
+function getAuthServiceAccept(ctx: any): AuthService {
+    return getAuthService(ctx, true);
 }
+
+function getAuthServiceDeny(ctx: any): AuthService {
+    return getAuthService(ctx, false);
+}
+
 
 function getAuthService(ctx: any, accept: boolean): AuthService {
 
