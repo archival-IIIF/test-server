@@ -1,9 +1,8 @@
 import * as Router from 'koa-router';
 import {loginPage, tokenPage, logoutPage} from "../auth/auth";
 import {ParameterizedContext} from "koa";
-import {cookieName, cookieToken, getAuthClickThrough, viewerToken} from "./authClickThroughCommon";
+import {cookieName, cookieToken, getAuthClickThrough, viewerToken, getAuthClickThroughService} from "./authClickThroughCommon";
 import {addArialRoute} from "../imageService/imageBase";
-import {getAuthLoginService} from "../authLogin/authLoginCommon";
 import {transformCollectionToV2} from "../lib/Transform";
 
 const router: Router = new Router();
@@ -21,12 +20,12 @@ router.get('/logout/clickThrough',  (ctx: ParameterizedContext) => {
 });
 
 let prefix = '/iiif/v2';
-router.get('/collection/authClickThrough', ctx => {
+router.get(prefix +'/collection/authClickThrough', ctx => {
     ctx.body = transformCollectionToV2(getAuthClickThrough(ctx, prefix));
 });
 
 prefix = '/iiif/v3';
-router.get('/collection/authClickThrough', ctx => {
+router.get(prefix + '/collection/authClickThrough', ctx => {
     ctx.body = getAuthClickThrough(ctx, prefix);
 });
 
@@ -34,7 +33,7 @@ addArialRoute(
     router,
     'authClickThroughImage',
     '/collection/authClickThrough',
-    getAuthLoginService,
+    getAuthClickThroughService,
     cookieName,
     cookieToken,
     viewerToken
