@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
 import RootCollection from "../lib/RootCollection";
 import AuthService from "../presentation-builder/v3/AuthService";
-import {getArielBase} from "../image/image";
+import {getArielBase} from "../imageService/imageBase";
 
 const router: Router = new Router();
 

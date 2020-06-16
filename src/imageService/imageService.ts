@@ -1,7 +1,15 @@
 import {ParameterizedContext} from "koa";
 import serveImage from "./internal";
+import {imageSize} from "image-size";
 
-export async function responseFile(ctx: ParameterizedContext, uri: string, width: number, height: number) {
+export async function responseFile(ctx: ParameterizedContext, uri: string, width?: number, height?: number) {
+
+    if (!width) {
+        const dimensions = imageSize(uri);
+        width = dimensions.width;
+        height = dimensions.height;
+    }
+
 
     const item = {uri, width, height};
 

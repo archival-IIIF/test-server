@@ -2,7 +2,7 @@ import {ParameterizedContext} from "koa";
 import AuthService from "../presentation-builder/v3/AuthService";
 import RootCollection from "../lib/RootCollection";
 import {hasAccess} from "../lib/Security";
-import {getArielBase} from "../image/image";
+import {getArielBase} from "../imageService/imageBase";
 
 export const cookieName = 'access-click-through';
 export const cookieToken = 'click-through-cookie-abc';

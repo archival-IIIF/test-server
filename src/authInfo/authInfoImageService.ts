@@ -1,8 +1,8 @@
 import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
 import {responseFile} from "../imageService/imageService";
-import {info} from "../imageService/imageServiceV2";
 import {cookieName, cookieToken, viewerToken, getAuthLoginService} from "../authLogin/authLoginCommon";
+import {infoV2} from "../imageService/imageBase";
 
 
 const imageWith = 1840;
@@ -15,7 +15,7 @@ router.get('/image-service/v2/authInfo/info.json', ctx => {
         ctx.status = 401;
     }
 
-    const output: any = info(ctx.request.origin + '/image-service/v2/authInfo', imageWith, imageHeight);
+    const output: any = infoV2(ctx.request.origin + '/image-service/v2/authInfo', imageWith, imageHeight);
     output.service = [getAuthLoginService(ctx)];
 
     ctx.body = output;

@@ -14,10 +14,7 @@ import emptyCollection from './emptyCollection/emptyCollection';
 import emptyFolderV2 from './emptyFolder/emptyFolderV2';
 import emptyFolderV3 from './emptyFolder/emptyFolderV3';
 import homepage from './homepage/homepage';
-import imageServiceV2 from './imageService/imageServiceV2';
-import imageServiceV3 from './imageService/imageServiceV3';
-import imageV2 from './image/imageV2';
-import imageV3 from './image/imageV3';
+import image from './image/image';
 import languageFiles from "./language/languageFiles";
 import languageV2 from './language/languageV2';
 import languageV3 from './language/languageV3';
@@ -105,10 +102,7 @@ app.use(languageV2);
 app.use(languageV3);
 app.use(languageFiles);
 
-app.use(imageV2);
-app.use(imageV3);
-app.use(imageServiceV2);
-app.use(imageServiceV3);
+app.use(image);
 app.use(multiPageV2);
 app.use(multiPageV3);
 

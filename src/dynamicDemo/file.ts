@@ -4,8 +4,8 @@ import * as path from 'path';
 import download from '../lib/Download';
 import dynamicDemoCommon from './dynamicDemoCommon';
 import {imageSize} from 'image-size';
-import {info} from "../imageService/imageServiceV2";
 import {responseFile} from "../imageService/imageService";
+import {infoV2} from "../imageService/imageBase";
 
 const router: Router = new Router();
 
@@ -55,7 +55,7 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
 
 router.get('/image/dynamicDemo/:image/info.json', ctx => {
     const dimensions = imageSize(dynamicDemoCommon.getFullPath(ctx.params.image));
-    ctx.body = info(
+    ctx.body = infoV2(
         ctx.request.origin + '/image/dynamicDemo/' + ctx.params.image,
         dimensions.width,
         dimensions.height

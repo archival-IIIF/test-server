@@ -1,7 +1,7 @@
 import * as Router from 'koa-router';
 import FileManifest from "../lib/FileManifest";
 import {transformFileManifestToV2, transformImageManifestToV2} from "../lib/Transform";
-import {getArielBase} from "../image/image";
+import {getArielBase} from "../imageService/imageBase";
 
 const prefix = '/iiif/v2';
 const router: Router = new Router({prefix});

@@ -3,7 +3,7 @@ import Collection from "../presentation-builder/v3/Collection";
 import AuthService from "../presentation-builder/v3/AuthService";
 import RootCollection from "../lib/RootCollection";
 import {hasAccess} from "../lib/Security";
-import {getArielBase} from "../image/image";
+import {getArielBase} from "../imageService/imageBase";
 
 export const cookieName = 'access-kiosk';
 export const cookieToken = 'kiosk-cookie-abc';
