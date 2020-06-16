@@ -98,7 +98,7 @@ export function getArielManifestChild(ctx: ParameterizedContext, prefix: string,
     return m;
 }
 
-export function addArialRoute(
+export function addArielRoute(
     router: Router,
     name: string,
     parentPath: string,

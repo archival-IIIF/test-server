@@ -1,6 +1,6 @@
 import * as Router from 'koa-router';
 import {transformCollectionToV2} from "../lib/Transform";
-import {addArialRoute, addImageRoute, getArielManifestChild} from "../imageService/imageBase";
+import {addArielRoute, addImageRoute, getArielManifestChild} from "../imageService/imageBase";
 import {ParameterizedContext} from "koa";
 import Manifest from "../presentation-builder/v3/Manifest";
 import RootCollection from "../lib/RootCollection";
@@ -17,7 +17,7 @@ router.get(prefix + '/collection/image', ctx => {
     ctx.body = getImage(ctx, prefix);
 });
 
-addArialRoute(router, 'ariel', '/collection/image')
+addArielRoute(router, 'ariel', '/collection/image')
 addImageRoute(router, 'arielDark', '/collection/image',
     __dirname + '/Ariel_-_LoC_4a15521_dark.jpg')
 
