@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 import {hasAccess} from '../lib/Security';
 import RootCollection from "../lib/RootCollection";
 import AuthService from "../presentation-builder/v3/AuthService";
-import {addArialRoute, getArielManifestChild} from "../imageService/imageBase";
+import {addArielRoute, getArielManifestChild} from "../imageService/imageBase";
 
 const router: Router = new Router();
 
@@ -29,7 +29,7 @@ for (const testCase of testCases) {
             ctx.body = collection(ctx, testCase.accespt, testCase.id, prefix);
         });
 
-        addArialRoute(
+        addArielRoute(
             router,
             testCase.id,
             '/collection/' + testCase.id,
