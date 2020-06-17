@@ -1,11 +1,17 @@
 import * as Router from 'koa-router';
-import authLoginV2 from "./authLoginV2";
-import authLoginV3 from "./authLoginV3";
-import {cookieName, cookieToken, viewerToken, userToken} from "./authLoginCommon";
+import {
+    cookieName,
+    cookieToken,
+    viewerToken,
+    userToken,
+    getAuthLoginService,
+} from "./authLoginCommon";
 import {createReadStream} from "fs";
 import * as path from 'path';
 import {ParameterizedContext} from "koa";
 import {loginPage, logoutPage, tokenPage} from "../auth/auth";
+import RootCollection from "../lib/RootCollection";
+import {addCollectionRoute} from "../lib/Route";
 
 const router: Router = new Router();
 
@@ -35,7 +41,15 @@ router.get('/logout', async (ctx: ParameterizedContext) => {
 });
 
 
-router.use(authLoginV2);
-router.use(authLoginV3);
+const subFolder = new RootCollection('/collection/authLoginSubfolder', 'Subfolder with access restriction');
+subFolder.setService(getAuthLoginService());
+
+const folder = new RootCollection('/collection/authLogin', 'Collection with access restriction');
+folder.setService(getAuthLoginService());
+folder.setItems([subFolder]);
+subFolder.setParent(folder.id);
+
+addCollectionRoute(router, folder, cookieName, cookieToken, viewerToken);
+addCollectionRoute(router, subFolder, cookieName, cookieToken, viewerToken);
 
 export default router.routes();

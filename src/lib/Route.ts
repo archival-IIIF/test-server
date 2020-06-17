@@ -3,6 +3,7 @@ import Collection from "../presentation-builder/v3/Collection";
 import {transformCollectionToV2} from "./Transform";
 import Base from "../presentation-builder/v3/Base";
 import {hasAccess} from "./Security";
+import {cloneDeep} from 'lodash';
 
 export function addCollectionRoute(
     router: Router,
@@ -23,12 +24,13 @@ export function addCollectionRoute(
                 }
             }
 
-            collection = addOriginToManifest(collection, ctx.request.origin, prefix);
+            const collectionWithOrigin = cloneDeep(collection)
+            addOriginToManifest(collectionWithOrigin, ctx.request.origin, prefix);
 
             if (version === 'v2') {
-                ctx.body = transformCollectionToV2(collection);
+                ctx.body = transformCollectionToV2(collectionWithOrigin);
             } else {
-                ctx.body = collection;
+                ctx.body = collectionWithOrigin;
             }
         });
     }
