@@ -1,5 +1,5 @@
 import Collection from "../presentation-builder/v3/Collection";
-import Base, {Ref} from "../presentation-builder/v3/Base";
+import Base from "../presentation-builder/v3/Base";
 
 export default class RootCollection extends Collection {
 
