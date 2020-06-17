@@ -14,13 +14,12 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string) {
     const c = new RootCollection(url, 'Collection with access restriction');
 
     c.setService(getAuthLoginService(ctx));
+    c.setItems([
+        getAuthLoginSubFolder(ctx, prefix, true),
+    ]);
 
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         ctx.status = 401;
-    } else {
-        c.setItems([
-            getAuthLoginSubFolder(ctx, prefix, true),
-        ]);
     }
 
     return c;
