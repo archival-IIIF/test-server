@@ -1,5 +1,5 @@
 import Collection from "../presentation-builder/v3/Collection";
-import Base from "../presentation-builder/v3/Base";
+import Base, {Internationalized} from "../presentation-builder/v3/Base";
 
 export default class RootCollection extends Collection {
 
@@ -22,6 +22,10 @@ export default class RootCollection extends Collection {
         }
 
         super.setItems(children);
+    }
+
+    setParent(id: string, type?: string, label?: Internationalized) {
+        super.setParent(id, type ?? 'Collection', label);
     }
 }
 
