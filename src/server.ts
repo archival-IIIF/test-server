@@ -42,6 +42,7 @@ import authMixed from "./authMixed/authMixed";
 import authKiosk from "./authKiosk/authKiosk";
 import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
 import nestedStructure from "./nestedStructure/nestedStructure";
+import authLoginRestrictedLabels2 from "./authLoginRestrictedLabels2/authLoginRestrictedLabels2";
 
 
 const app: Koa = new Koa();
@@ -75,6 +76,7 @@ app.use(audioVideoFiles);
 app.use(authLogin);
 app.use(authLoginPartly);
 app.use(authLoginRestrictedLabels);
+app.use(authLoginRestrictedLabels2);
 app.use(authInfo);
 app.use(authExternal);
 app.use(authClickThrough);
