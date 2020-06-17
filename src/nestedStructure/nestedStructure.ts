@@ -1,48 +1,36 @@
-import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
 import RootCollection from "../lib/RootCollection";
+import * as Router from "koa-router";
+import {addCollectionRoute} from "../lib/Route";
 
-export function getNestedStructure(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/nestedStructure';
-    const c = new RootCollection(url, 'Folder Level 1');
-    c.setItems([
-        getNestedStructure11(ctx, prefix),
-        getNestedStructure12(ctx, prefix)
-    ]);
+const router: Router = new Router();
 
-    return c;
-}
+const c1111 = new RootCollection('/collection/nestedStructure1111', 'Folder Level 1.1.1.1');
+c1111.setParent('/collection/nestedStructure111', 'Collection');
+addCollectionRoute(router, c1111);
 
-export function getNestedStructure11(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/nestedStructure11';
-    const c = new RootCollection(url, 'Folder Level 1.1');
-    c.setParent(ctx.request.origin + prefix + '/collection/nestedStructure', 'Collection');
-    c.setItems(getNestedStructure111(ctx, prefix));
+const c111 = new RootCollection('/collection/nestedStructure111', 'Folder Level 1.1.1');
+c111.setParent('/collection/nestedStructure11', 'Collection');
+c111.setItems(c1111)
+addCollectionRoute(router, c111);
 
-    return c;
-}
+const c12 = new RootCollection('/collection/nestedStructure12', 'Folder Level 1.2');
+c12.setParent('/collection/nestedStructure', 'Collection');
+addCollectionRoute(router, c12);
 
-export function getNestedStructure12(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/nestedStructure12';
-    const c = new RootCollection(url, 'Folder Level 1.2');
-    c.setParent(ctx.request.origin + prefix + '/collection/nestedStructure', 'Collection');
+const c11 = new RootCollection( '/collection/nestedStructure11', 'Folder Level 1.1');
+c11.setParent('/collection/nestedStructure', 'Collection');
+c11.setItems(c111);
+addCollectionRoute(router, c11);
 
-    return c;
-}
 
-export function getNestedStructure111(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/nestedStructure111';
-    const c = new RootCollection(url, 'Folder Level 1.1.1');
-    c.setParent(ctx.request.origin + prefix + '/collection/nestedStructure11', 'Collection');
-    c.setItems(getNestedStructure1111(ctx, prefix))
+const c1 = new RootCollection('/collection/nestedStructure', 'Folder Level 1');
+c1.setItems([
+    c11,
+    c12
+]);
+addCollectionRoute(router, c1);
 
-    return c;
-}
 
-export function getNestedStructure1111(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/nestedStructure1111';
-    const c = new RootCollection(url, 'Folder Level 1.1.1.1');
-    c.setParent(ctx.request.origin + prefix + '/collection/nestedStructure111', 'Collection');
 
-    return c;
-}
+export default router.routes();

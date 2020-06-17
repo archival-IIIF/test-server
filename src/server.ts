@@ -29,8 +29,6 @@ import manifestationsV3 from './manifestations/manifestationsV3';
 import mirador from './mirador/mirador'
 import multiPageV2 from './multiPage/multiPageV2';
 import multiPageV3 from './multiPage/multiPageV3';
-import nestedStructureV2 from './nestedStructure/nestedStructureV2';
-import nestedStructureV3 from './nestedStructure/nestedStructureV3';
 import pdfFiles from "./pdf/pdfFiles";
 import pdfV2 from './pdf/pdfV2';
 import pdfV3 from './pdf/pdfV3';
@@ -43,6 +41,7 @@ import validation from './validation/validation';
 import authMixed from "./authMixed/authMixed";
 import authKiosk from "./authKiosk/authKiosk";
 import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
+import nestedStructure from "./nestedStructure/nestedStructure";
 
 
 const app: Koa = new Koa();
@@ -96,8 +95,7 @@ app.use(rightsInformationV2);
 app.use(rightsInformationV3);
 app.use(thumbnailV2);
 app.use(thumbnailV3);
-app.use(nestedStructureV2);
-app.use(nestedStructureV3);
+app.use(nestedStructure);
 app.use(languageV2);
 app.use(languageV3);
 app.use(languageFiles);
@@ -125,4 +123,5 @@ app.keys = ['secret'];
 
 
 app.listen(config.port);
+
 console.info(`Listening to http://localhost:${config.port} 🚀`);
