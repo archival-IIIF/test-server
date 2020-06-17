@@ -3,7 +3,6 @@ import Collection from "../presentation-builder/v3/Collection";
 import {transformCollectionToV2} from "./Transform";
 import Base from "../presentation-builder/v3/Base";
 import {hasAccess} from "./Security";
-import {ParameterizedContext} from "koa";
 
 export function addCollectionRoute(
     router: Router,
@@ -35,7 +34,7 @@ export function addCollectionRoute(
     }
 }
 
-function addOriginToManifest(manifest: any, origin: string, prefix: string): Base {
+function addOriginToManifest(manifest: Base, origin: string, prefix: string): Base {
 
     if (!manifest.id.startsWith('http')) {
         if (manifest.id.startsWith('/manifest/') || manifest.id.startsWith('/collection/')) {
@@ -45,9 +44,9 @@ function addOriginToManifest(manifest: any, origin: string, prefix: string): Bas
         }
     }
 
-    for (const key of Object.keys(manifest)) {
-        if (Array.isArray(manifest[key])) {
-            for (const subManifest of manifest[key]) {
+    for (const value of Object.values(manifest)) {
+        if (Array.isArray(value)) {
+            for (const subManifest of value) {
                 addOriginToManifest(subManifest, origin, prefix);
             }
         }
