@@ -1,4 +1,3 @@
-import Collection from "../presentation-builder/v3/Collection";
 import RootCollection from "../lib/RootCollection";
 import * as Router from "koa-router";
 import {addCollectionRoute} from "../lib/Route";
