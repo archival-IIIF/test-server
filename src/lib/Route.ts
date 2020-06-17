@@ -4,13 +4,15 @@ import {transformCollectionToV2} from "./Transform";
 import Base from "../presentation-builder/v3/Base";
 import {hasAccess} from "./Security";
 import {cloneDeep} from 'lodash';
+import {ParameterizedContext} from "koa";
 
 export function addCollectionRoute(
     router: Router,
     collection: Collection,
     cookieName?: string,
     cookieToken?: string,
-    viewerToken?: string
+    viewerToken?: string,
+    changeFunc?: (ctx: ParameterizedContext, collection: Collection, hasAccess0: boolean) => void
 ) {
     const versions = ['v2', 'v3'];
     for (const version of versions) {
@@ -18,14 +20,22 @@ export function addCollectionRoute(
 
         router.get( prefix + collection.id, ctx => {
 
+            let hasAccess0 = true;
             if (cookieName || cookieToken || viewerToken) {
                 if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
                     ctx.status = 401;
+                    hasAccess0 = false;
                 }
             }
 
             const collectionWithOrigin = cloneDeep(collection)
+
+            if (changeFunc) {
+                changeFunc(ctx, collectionWithOrigin, hasAccess0);
+            }
+
             addOriginToManifest(collectionWithOrigin, ctx.request.origin, prefix);
+
 
             if (version === 'v2') {
                 ctx.body = transformCollectionToV2(collectionWithOrigin);
