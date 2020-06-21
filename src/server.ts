@@ -43,6 +43,7 @@ import authKiosk from "./authKiosk/authKiosk";
 import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
 import nestedStructure from "./nestedStructure/nestedStructure";
 import authLoginRestrictedLabels2 from "./authLoginRestrictedLabels2/authLoginRestrictedLabels2";
+import multiLang from "./multiLang/multiLang";
 
 
 const app: Koa = new Koa();
@@ -109,6 +110,7 @@ app.use(multiPageV3);
 app.use(pdfFiles);
 app.use(pdfV2);
 app.use(pdfV3);
+app.use(multiLang);
 app.use(common);
 
 app.use(validation);
