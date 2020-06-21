@@ -5,7 +5,7 @@ const router: Router = new Router({prefix});
 
 router.get('/collection/multiLang', ctx => {
     ctx.body = {
-        "id": "http://localhost:3333/iiif/v3/collection/multiLang",
+        "id": ctx.request.origin + prefix +  "/collection/multiLang",
         "type": "Collection",
         "label": {
             "en": ["Folder"],
@@ -13,7 +13,7 @@ router.get('/collection/multiLang', ctx => {
         },
         "@context": "http://iiif.io/api/presentation/3/context.json",
         "items": [{
-            "id": "http://localhost:3333/iiif/v3/manifest/multiLang",
+            "id": ctx.request.origin + prefix + "/manifest/multiLang",
             "type": "Manifest",
             "label": {
                 "en": ["File"],
@@ -39,14 +39,14 @@ router.get('/collection/multiLang', ctx => {
 
 router.get('/manifest/multiLang', ctx => {
     ctx.body = {
-        "id": "http://localhost:3333/iiif/v3/manifest/multiLang",
+        "id": ctx.request.origin + prefix + "/manifest/multiLang",
         "type": "Manifest",
         "label": {
             "en": ["File"],
             "de": ["Datei"],
         },
         "@context": "http://iiif.io/api/presentation/3/context.json",
-        "partOf": '/collection/multiLang',
+        "partOf": ctx.request.origin + prefix + "collection/multiLang",
         "metadata": [
             {
                 "label": { "en": [ "Title" ], "de": [ "Titel" ] },

@@ -5,7 +5,7 @@ const router: Router = new Router({prefix});
 
 router.get('/collection/multiLang', ctx => {
     ctx.body = {
-        "@id": "http://localhost:3333/iiif/v2/collection/multiLang",
+        "@id": ctx.request.origin + prefix +  "/collection/multiLang",
         "@type": "sc:Collection",
         "label": {
             "en": ["Folder"],
@@ -13,7 +13,7 @@ router.get('/collection/multiLang', ctx => {
         },
         "@context": "http://iiif.io/api/presentation/2/context.json",
         "manifests": [{
-            "id": "http://localhost:3333/iiif/v2/manifest/multiLang",
+            "id": ctx.request.origin + prefix + "/manifest/multiLang",
             "type": "sc:Manifest",
             "label": {
                 "en": ["File"],
@@ -39,14 +39,14 @@ router.get('/collection/multiLang', ctx => {
 
 router.get('/manifest/multiLang', ctx => {
     ctx.body = {
-        "@id": "http://localhost:3333/iiif/v2/manifest/multiLang",
-        "@type": "Manifest",
+        "@id": ctx.request.origin + prefix + "/manifest/multiLang",
+        "@type": "sc:Manifest",
         "label": {
             "en": ["File"],
             "de": ["Datei"],
         },
         "@context": "http://iiif.io/api/presentation/2/context.json",
-        "within": '/collection/multiLang',
+        "within": ctx.request.origin + prefix + "/collection/multiLang",
         "metadata": [
             {
                 "label": { "en": [ "Title" ], "de": [ "Titel" ] },
