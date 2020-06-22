@@ -7,32 +7,38 @@ router.get('/collection/multiLang', ctx => {
     ctx.body = {
         "@id": ctx.request.origin + prefix +  "/collection/multiLang",
         "@type": "sc:Collection",
-        "label": {
-            "en": ["Folder"],
-            "de": ["Ordner"],
-        },
+        "label": [
+            {"@value": "Folder", "@language": "en"},
+            {"@value": "Ordner", "@language": "de"}
+        ],
         "@context": "http://iiif.io/api/presentation/2/context.json",
         "manifests": [{
             "id": ctx.request.origin + prefix + "/manifest/multiLang",
             "type": "sc:Manifest",
-            "label": {
-                "en": ["File"],
-                "de": ["Datei"],
-            }
+            "label": [
+                {"@value": "File", "@language": "en"},
+                {"@value": "Datei", "@language": "de"}
+            ]
         }],
         "metadata": [
             {
-                "label": { "en": [ "Title" ], "de": [ "Titel" ] },
-                "value": { "en": [ "Folder" ], "de": [ "Ordner"] }
+                "label": [
+                    {"@value": "Title", "@language": "en"},
+                    {"@value": "Titel", "@language": "de"}
+                ],
+                "value": [
+                    {"@value": "Folder", "@language": "en"},
+                    {"@value": "Ordner", "@language": "de"}
+                ]
             },
             {
-                "label": { "en": [ "Only en label" ] },
-                "value": { "en": [ "Only en value" ] }
+                "label": [{"@value": "Only en label", "@language": "en"}],
+                "value": [{"@value": "Only en value", "@language": "en"}]
             },
             {
-                "label": { "en": [ "Only de label" ] },
-                "value": { "en": [ "Only de value" ] }
-            }
+                "label": [{"@value": "Nur de label", "@language": "de"}],
+                "value": [{"@value": "Nur de value", "@language": "de"}]
+            },
         ]
     }
 });
@@ -41,16 +47,22 @@ router.get('/manifest/multiLang', ctx => {
     ctx.body = {
         "@id": ctx.request.origin + prefix + "/manifest/multiLang",
         "@type": "sc:Manifest",
-        "label": {
-            "en": ["File"],
-            "de": ["Datei"],
-        },
+        "label": [
+            {"@value": "File", "@language": "en"},
+            {"@value": "Datei", "@language": "de"}
+        ],
         "@context": "http://iiif.io/api/presentation/2/context.json",
         "within": ctx.request.origin + prefix + "/collection/multiLang",
         "metadata": [
             {
-                "label": { "en": [ "Title" ], "de": [ "Titel" ] },
-                "value": { "en": [ "File" ], "de": [ "Datei"] }
+                "label": [
+                    {"@value": "Title", "@language": "en"},
+                    {"@value": "Titel", "@language": "de"}
+                ],
+                "value": [
+                    {"@value": "File", "@language": "en"},
+                    {"@value": "Datei", "@language": "de"}
+                ]
             },
         ]
     }
