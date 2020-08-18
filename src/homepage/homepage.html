@@ -145,6 +145,14 @@
                 mirador: 'manifest/multiPage1'
             },
         },
+        'No parent': {
+            noParent: {
+                uri: 'manifest/noParent',
+                label: 'Test case without parent',
+                uv: true,
+                mirador: 'manifest/noParent'
+            },
+        },
         'Directory': {
             emptyCollection: 'Empty collection test case',
             emptyFolder: 'Empty folder test case',
@@ -192,9 +200,13 @@
             let testCase;
             if (testCases[groupLabel][id].hasOwnProperty('label')) {
                 testCase = testCases[groupLabel][id];
-                testCase.id = id;
             } else {
-                testCase = {id, label: testCases[groupLabel][id]};
+                testCase = {label: testCases[groupLabel][id]};
+            }
+            if (testCases[groupLabel][id].hasOwnProperty('uri')) {
+                testCase.id = testCases[groupLabel][id].uri;
+            } else {
+                testCase.id = id;
             }
             const baseUrl = window.location.href;
             const manifestUrlV3 = baseUrl + 'iiif/v3/collection/' + testCase.id;

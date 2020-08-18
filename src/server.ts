@@ -44,6 +44,7 @@ import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRest
 import nestedStructure from "./nestedStructure/nestedStructure";
 import authLoginRestrictedLabels2 from "./authLoginRestrictedLabels2/authLoginRestrictedLabels2";
 import multiLang from "./multiLang/multiLang";
+import noParent from "./noParent/noParent";
 
 
 const app: Koa = new Koa();
@@ -121,6 +122,7 @@ app.use(manifestationsV3);
 app.use(manifestationsFiles);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);
+app.use(noParent);
 app.use(universalViewer);
 app.use(mirador);
 app.keys = ['secret'];
