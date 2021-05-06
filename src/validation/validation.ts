@@ -1,5 +1,5 @@
 import * as Router from 'koa-router';
-import * as Ajv from 'ajv';
+import Ajv from 'ajv';
 import * as fs from 'fs';
 import * as http from 'http';
 import {ErrorObject} from "ajv";
@@ -7,7 +7,7 @@ import {ErrorObject} from "ajv";
 const router: Router = new Router();
 
 router.get('/validate', async ctx => {
-    const manifestUrl = ctx.request.query.manifest;
+    const manifestUrl = ctx.request.query.manifest as string;
     ctx.body = await validateUrl(manifestUrl);
 });
 

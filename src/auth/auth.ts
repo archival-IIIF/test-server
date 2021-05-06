@@ -47,7 +47,7 @@ export function tokenPage(ctx: ParameterizedContext, cookieName: string, cookieT
     }
 
     if (ctx.query.messageId && ctx.query.origin) {
-        message.messageId = ctx.query.messageId;
+        message.messageId = ctx.query.messageId as string;
 
         ctx.body = `<html>
             <body>
