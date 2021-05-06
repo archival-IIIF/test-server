@@ -14,15 +14,18 @@
 
 <script>
 
-    function gup( name, url ) {
-        if (!url) url = location.href;
-        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-        var regexS = "[\\?&]"+name+"=([^&#]*)";
-        var regex = new RegExp( regexS );
-        var results = regex.exec( url );
-        return results == null ? null : results[1];
+    function findGetParameter(parameterName) {
+        let result = null, tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
     }
-    const manifest = gup('manifest', window.location.href);
+    const manifest = findGetParameter('manifest');
     const args = {
         id: 'mirador',
         "windows": [
