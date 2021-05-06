@@ -20,4 +20,9 @@ router.get('/file/f113', async ctx => {
     await download(ctx, filePath);
 });
 
+router.get('/file/elephantsDream', async ctx => {
+    const filePath = path.join(__dirname, 'elephants-dream-medium.webm');
+    await download(ctx, filePath);
+});
+
 export default router.routes();
