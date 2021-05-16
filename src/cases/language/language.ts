@@ -1,21 +1,8 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../../presentation-builder/v3/Collection";
 import FileManifest from "../../lib/FileManifest";
-import RootCollection from "../../lib/RootCollection";
+import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
 
-export function getLanguage(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/language';
-    const c = new RootCollection(url, 'Language test case');
-    c.setItems([
-        getLanguageFile1(ctx, prefix),
-        getLanguageFile2(ctx, prefix),
-        getLanguageFile3(ctx, prefix),
-        getLanguageFile4(ctx, prefix),
-        getLanguageFile5(ctx, prefix),
-    ]);
-
-    return c;
-}
 
 export function getLanguageFilePresentation(ctx: ParameterizedContext, prefix: string, fileId: string, label: string) {
     const url = ctx.request.origin + prefix + '/manifest/' + fileId;
@@ -50,3 +37,35 @@ export function getLanguageFile4(ctx: ParameterizedContext, prefix: string) {
 export function getLanguageFile5(ctx: ParameterizedContext, prefix: string) {
     return getLanguageFilePresentation(ctx, prefix, 'languageFile5', '流入數字館藏.docx');
 }
+
+
+export default getIIIFRouteTree([
+    {
+        path: '/collection/language',
+        body: getCollectionBody,
+        label: 'Language test case',
+        children: [
+            {
+                path: '/manifest/languageFile1',
+                body: getLanguageFile1
+            },
+            {
+                path: '/manifest/languageFile2',
+                body: getLanguageFile2
+            },
+            {
+                path: '/manifest/languageFile3',
+                body: getLanguageFile3
+            },
+            {
+                path: '/manifest/languageFile4',
+                body: getLanguageFile4
+            },
+            {
+                path: '/manifest/languageFile5',
+                body: getLanguageFile5
+            },
+        ]
+    }
+]);
+

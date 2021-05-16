@@ -1,9 +1,8 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../../presentation-builder/v3/Collection";
 import Resource from "../../presentation-builder/v3/Resource";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";
-import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
+import {getIIIFRouteTree} from "../../lib/Route";
 
 
 const logoContainer = (ctx: ParameterizedContext, prefix: string, path: string) => {

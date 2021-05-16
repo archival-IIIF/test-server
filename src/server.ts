@@ -14,25 +14,19 @@ import emptyFolder from './cases/emptyFolder/emptyFolder';
 import homepage from './homepage/homepage';
 import image from './cases/image/image';
 import languageFiles from "./cases/language/languageFiles";
-import languageV2 from './cases/language/languageV2';
-import languageV3 from './cases/language/languageV3';
+import language from './cases/language/language';
 import logoFiles from "./cases/logo/logoFiles";
 import logo from './cases/logo/logo';
 import manifestErrorsV2 from './cases/manifestErrors/manifestErrorsV2';
 import manifestErrorsV3 from './cases/manifestErrors/manifestErrorsV3';
 import manifestationsFiles from "./cases/manifestations/manifestationsFiles";
-import manifestationsV2 from './cases/manifestations/manifestationsV2';
-import manifestationsV3 from './cases/manifestations/manifestationsV3';
+import manifestations from './cases/manifestations/manifestations';
 import mirador from './mirador/mirador'
-import multiPageV2 from './cases/multiPage/multiPageV2';
-import multiPageV3 from './cases/multiPage/multiPageV3';
+import multiPage from './cases/multiPage/multiPage';
 import pdfFiles from "./cases/pdf/pdfFiles";
-import pdfV2 from './cases/pdf/pdfV2';
-import pdfV3 from './cases/pdf/pdfV3';
-import rightsInformationV2 from './cases/rightsInformation/rightsInformationV2';
-import rightsInformationV3 from './cases/rightsInformation/rightsInformationV3';
-import thumbnailV2 from './cases/thumbnail/thumbnailV2';
-import thumbnailV3 from './cases/thumbnail/thumbnailV3';
+import pdf from './cases/pdf/pdf';
+import rightsInformation from './cases/rightsInformation/rightsInformation';
+import thumbnail from './cases/thumbnail/thumbnail';
 import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
 import authMixed from "./authMixed/authMixed";
@@ -89,30 +83,24 @@ app.use(homepage);
 
 app.use(logo);
 app.use(logoFiles);
-app.use(rightsInformationV2);
-app.use(rightsInformationV3);
-app.use(thumbnailV2);
-app.use(thumbnailV3);
+app.use(rightsInformation);
+app.use(thumbnail);
 app.use(nestedStructure);
-app.use(languageV2);
-app.use(languageV3);
+app.use(language);
 app.use(languageFiles);
 
 app.use(image);
-app.use(multiPageV2);
-app.use(multiPageV3);
+app.use(multiPage);
 
 app.use(pdfFiles);
-app.use(pdfV2);
-app.use(pdfV3);
+app.use(pdf);
 app.use(multiLang);
 app.use(common);
 
 app.use(validation);
 
 app.use(dynamicDemo);
-app.use(manifestationsV2);
-app.use(manifestationsV3);
+app.use(manifestations);
 app.use(manifestationsFiles);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);

@@ -1,27 +1,14 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../../presentation-builder/v3/Collection";
 import Resource from "../../presentation-builder/v3/Resource";
 import FileManifest from "../../lib/FileManifest";
 import Service from "../../presentation-builder/v3/Service";
 import RootCollection from "../../lib/RootCollection";
+import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
+import ThumbnailService from "../../lib/ThumbnailService";
 
-export function getThumbnail(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/thumbnail';
-    const c = new RootCollection(url, 'Thumbnail test case');
-    c.setItems([
-        getFolderWithThumbnail(ctx, prefix),
-        getFolderWithoutThumbnail(ctx, prefix),
-        getFolderWithThumbnailService(ctx, prefix),
-        getFileWithoutThumbnail(ctx, prefix),
-    ]);
 
-    return c;
-}
-
-export function getFolderWithThumbnail(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/folderWithThumbnail';
-    const c = new RootCollection(url, 'Folder with thumbnail');
-    c.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
+const folderWithThumbnail = (ctx: ParameterizedContext, prefix: string, path: string) => {
+    const c = new RootCollection(ctx.request.origin + prefix + path, 'Folder with thumbnail');
     c.setThumbnail(new Resource(
         ctx.request.origin + '/file-icon/folder.svg',
         'Image',
@@ -31,37 +18,51 @@ export function getFolderWithThumbnail(ctx: ParameterizedContext, prefix: string
     return c;
 }
 
-export function getFolderWithoutThumbnail(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/folderWithoutThumbnail';
-    const c = new RootCollection(url, 'Folder without thumbnail');
-    c.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
+const folderWithoutThumbnail = (ctx: ParameterizedContext, prefix: string, path: string) =>
+    new RootCollection(ctx.request.origin + prefix + path, 'Folder without thumbnail');
+
+const folderWithThumbnailService = (ctx: ParameterizedContext, prefix: string, path: string) => {
+    const c = new RootCollection(ctx.request.origin + prefix + path, 'Folder with image thumbnail service');
+    c.setThumbnail(new ThumbnailService(ctx.request.origin + prefix + '/image/image1_0'));
 
     return c;
 }
 
-export function getFolderWithThumbnailService(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/folderWithThumbnailService';
-    const c = new RootCollection(url, 'Folder with image thumbnail service');
-    c.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
-    const service = new Service(
-        ctx.request.origin + '/image-service/v3/ariel',
-        'ImageService3',
-        'level2'
+
+const fileWithoutThumbnail = (ctx: ParameterizedContext, prefix: string, path: string) =>
+    new FileManifest(
+        ctx.request.origin + prefix + path,
+        ctx.request.origin + '/file/pdf1',
+        'File without thumbnail.pdf',
+        'Text',
+        'application/pdf'
     );
-    c.setThumbnail(new Resource(
-        ctx.request.origin + '/image-service/v3/ariel/full/!100,100/0/default.jpg',
-        'Image',
-        'image/jpeg'
-    ));
-
-    return c;
-}
 
 
-export function getFileWithoutThumbnail(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/manifest/fileWithoutThumbnail';
-    const m = new FileManifest(url, ctx.request.origin + '/file/pdf1', 'File without thumbnail.pdf', 'Text', 'application/pdf');
-    m.setParent(ctx.request.origin + prefix + '/collection/thumbnail', 'Collection');
 
-    return m;
-}
+export default getIIIFRouteTree([
+    {
+        path: '/collection/thumbnail',
+        body: getCollectionBody,
+        label: 'Thumbnail test case',
+        children: [
+            {
+                path: '/manifest/folderWithThumbnail',
+                body: folderWithThumbnail,
+            },
+            {
+                path: '/manifest/folderWithoutThumbnail',
+                body: folderWithoutThumbnail,
+            },
+            {
+                path: '/manifest/folderWithThumbnailService',
+                body: folderWithThumbnailService,
+            },
+            {
+                path: '/manifest/fileWithoutThumbnail',
+                body: fileWithoutThumbnail,
+            }
+        ]
+    }
+]);
+
