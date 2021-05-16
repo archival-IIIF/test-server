@@ -1,8 +1,10 @@
-import * as Router from 'koa-router';
-import {addArielRoute} from "../../imageService/imageBase";
+import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
 
-const router: Router = new Router();
-
-addArielRoute(router, 'noParent', '')
-
-export default router.routes();
+export default getIIIFRouteTree([
+    {
+        path: '/manifest/noParent',
+        body: getImageBody,
+        label: 'Ariel_-_LoC_4a15521.jpg',
+        images: [__dirname + '/../../imageService/Ariel_-_LoC_4a15521.jpg']
+    }
+]);

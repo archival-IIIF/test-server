@@ -3,14 +3,11 @@ import Collection from "../../presentation-builder/v3/Collection";
 import Resource from "../../presentation-builder/v3/Resource";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";
+import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
 
-export function getLogo(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/logo';
-    const c = new RootCollection(url, 'Logo test case');
-    c.setItems([
-        getFileWithLogo(ctx, prefix),
-        getFileWithoutLogo(ctx, prefix),
-    ]);
+
+const logoContainer = (ctx: ParameterizedContext, prefix: string, path: string) => {
+    const c = new RootCollection(ctx.request.origin + prefix + path, 'Logo test case');
     c.setLogo(new Resource(
         ctx.request.origin + '/logo',
         'Image',
@@ -22,10 +19,14 @@ export function getLogo(ctx: ParameterizedContext, prefix: string) {
     return c;
 }
 
-export function getFileWithLogo(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/manifest/fileWithLogo';
-    const m = new FileManifest(url, ctx.request.origin + '/file/txt', 'File with logo.txt', 'Text', 'text/plain');
-    m.setParent(ctx.request.origin + prefix + '/collection/logo', 'Collection');
+
+const fileWithLogo = (ctx: ParameterizedContext, prefix: string, path: string) => {
+    const m = new FileManifest(
+        ctx.request.origin + prefix + path,
+        ctx.request.origin + '/file/txt', 'File with logo.txt',
+        'Text',
+        'text/plain'
+    );
     m.setLogo(new Resource(
         ctx.request.origin + '/logo',
         'Image',
@@ -38,11 +39,29 @@ export function getFileWithLogo(ctx: ParameterizedContext, prefix: string) {
     return m;
 }
 
-export function getFileWithoutLogo(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/manifest/fileWithoutLogo';
-    const m = new FileManifest(url, ctx.request.origin + '/file/txt', 'File without logo.txt', 'Text', 'text/plain');
-    m.setParent(ctx.request.origin + prefix + '/collection/logo', 'Collection');
+const fileWithoutLogo = (ctx: ParameterizedContext, prefix: string, path: string) =>
+    new FileManifest(ctx.request.origin + prefix + path, ctx.request.origin + '/file/txt', 'File without logo.txt', 'Text', 'text/plain');
 
-    return m;
-}
+
+
+export default getIIIFRouteTree([
+    {
+        path: '/collection/logo',
+        body: logoContainer,
+        label: 'Empty collection test case',
+        children: [
+            {
+                path: '/collection/fileWithLogo',
+                body: fileWithLogo
+            },
+            {
+                path: '/collection/fileWithoutLogo',
+                body: fileWithoutLogo
+            },
+        ]
+    }
+]);
+
+
+
 

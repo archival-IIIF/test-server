@@ -1,32 +1,31 @@
-import * as Router from 'koa-router';
-import {transformCollectionToV2} from "../../lib/Transform";
-import {addArielRoute, addImageRoute, getArielManifestChild} from "../../imageService/imageBase";
 import {ParameterizedContext} from "koa";
-import Manifest from "../../presentation-builder/v3/Manifest";
 import RootCollection from "../../lib/RootCollection";
+import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
+import Collection from "../../presentation-builder/v3/Collection";
 
-const router: Router = new Router();
+const imageContainer = (ctx: ParameterizedContext, prefix: string, path: string): Collection =>
+    new RootCollection(
+        ctx.request.origin + prefix + path,
+        'Image test case'
+    );
 
-let prefix = '/iiif/v2';
-router.get(prefix + '/collection/image', ctx => {
-    ctx.body = transformCollectionToV2(getImage(ctx, prefix));
-});
-
-prefix = '/iiif/v3';
-router.get(prefix + '/collection/image', ctx => {
-    ctx.body = getImage(ctx, prefix);
-});
-
-addArielRoute(router, 'ariel', '/collection/image')
-addImageRoute(router, 'arielDark', '/collection/image',
-    __dirname + '/Ariel_-_LoC_4a15521_dark.jpg')
-
-function getImage(ctx: ParameterizedContext, prefix: string): Manifest {
-    const c = new RootCollection(ctx.request.origin + ctx.request.url, 'Image test case');
-    c.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
-    c.setItems(getArielManifestChild(ctx, prefix, 'ariel'));
-
-    return c;
-}
-
-export default router.routes();
+export default getIIIFRouteTree([
+    {
+        path: '/collection/image',
+        body: imageContainer,
+        children: [
+            {
+                path: '/manifest/image1',
+                body: getImageBody,
+                label: 'Ariel_-_LoC_4a15521.jpg',
+                images: [__dirname + '/../../imageService/Ariel_-_LoC_4a15521.jpg']
+            },
+            {
+                path: '/manifest/image2',
+                label: 'Ariel_-_LoC_4a15521_dark.jpg',
+                body: getImageBody,
+                images: [__dirname + '/../../imageService/Ariel_-_LoC_4a15521_dark.jpg']
+            }
+        ]
+    }
+]);

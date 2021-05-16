@@ -17,8 +17,7 @@ import languageFiles from "./cases/language/languageFiles";
 import languageV2 from './cases/language/languageV2';
 import languageV3 from './cases/language/languageV3';
 import logoFiles from "./cases/logo/logoFiles";
-import logoV2 from './cases/logo/logoV2';
-import logoV3 from './cases/logo/logoV3';
+import logo from './cases/logo/logo';
 import manifestErrorsV2 from './cases/manifestErrors/manifestErrorsV2';
 import manifestErrorsV3 from './cases/manifestErrors/manifestErrorsV3';
 import manifestationsFiles from "./cases/manifestations/manifestationsFiles";
@@ -88,8 +87,7 @@ app.use(emptyFolder);
 app.use(homepage);
 
 
-app.use(logoV2);
-app.use(logoV3);
+app.use(logo);
 app.use(logoFiles);
 app.use(rightsInformationV2);
 app.use(rightsInformationV3);
