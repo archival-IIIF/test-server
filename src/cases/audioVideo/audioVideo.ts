@@ -1,28 +1,25 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../../presentation-builder/v3/Collection";
 import Resource from "../../presentation-builder/v3/Resource";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";
 import * as path from "path";
 import * as fs from "fs";
-
-export function getAudioVideo(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/audioVideo';
-    const c = new RootCollection(url, 'Audio & video test case');
-    c.setItems([
-        getDieInternationale(ctx, prefix),
-        getF113(ctx, prefix),
-        getElephantsDream(ctx, prefix),
-    ]);
-
-    return c;
-}
+import {getIIIFRouteTree} from "../../lib/Route";
 
 
-export function getDieInternationale(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/manifest/die_internationale_as_mp3';
-    const m = new FileManifest(url, ctx.request.origin + '/file/die_internationale_as_mp3', 'Die_Internationale as mp3.mp3', 'Audio', 'audio/mp3');
-    m.setParent(ctx.request.origin + prefix + '/collection/audioVideo', 'Collection');
+const audioVideoContainer = (ctx: ParameterizedContext, prefix: string) => new RootCollection(
+    ctx.request.origin + prefix + '/collection/audioVideo',
+    'Audio & video test case'
+);
+
+const dieInternationale = (ctx: ParameterizedContext, prefix: string) => {
+    const m = new FileManifest(
+        ctx.request.origin + prefix + '/manifest/die_internationale_as_mp3',
+        ctx.request.origin + '/file/die_internationale_as_mp3',
+        'Die_Internationale as mp3.mp3',
+        'Audio',
+        'audio/mp3'
+    );
     m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/mp3.svg', 'Image', 'image/svg+xml'));
     m.setMetadata([
         {
@@ -41,12 +38,11 @@ export function getDieInternationale(ctx: ParameterizedContext, prefix: string) 
     m.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
 
     return m;
-}
+};
 
-export function getF113(ctx: ParameterizedContext, prefix: string) {
+const f113 = (ctx: ParameterizedContext, prefix: string) => {
     const url = ctx.request.origin + prefix + '/manifest/f113';
     const m = new FileManifest(url, ctx.request.origin + '/file/f113', 'F113.mp4', 'Video', 'video/mp4');
-    m.setParent(ctx.request.origin + prefix + '/collection/audioVideo', 'Collection');
     m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/mp4.svg', 'Image', 'image/svg+xml'));
     m.setMetadata([
         {
@@ -67,10 +63,9 @@ export function getF113(ctx: ParameterizedContext, prefix: string) {
     return m;
 }
 
-export function getElephantsDream(ctx: ParameterizedContext, prefix: string) {
+const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
     const url = ctx.request.origin + prefix + '/manifest/elephantsDream';
     const m = new FileManifest(url, ctx.request.origin + '/file/elephantsDream', 'elephants-dream-medium.webm', 'Video', 'video/webm');
-    m.setParent(ctx.request.origin + prefix + '/collection/audioVideo', 'Collection');
     m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/mp4.svg', 'Image', 'image/svg+xml'));
     m.setMetadata([
         {
@@ -127,4 +122,23 @@ export function getElephantsDream(ctx: ParameterizedContext, prefix: string) {
     return n;
 }
 
-
+export default getIIIFRouteTree([
+    {
+        path: '/collection/audioVideo',
+        body: audioVideoContainer,
+        children: [
+            {
+                path: '/manifest/die_internationale_as_mp3',
+                body: dieInternationale,
+            },
+            {
+                path: '/manifest/f113',
+                body: f113,
+            },
+            {
+                path: '/manifest/elephantsDream',
+                body: elephantsDream,
+            },
+        ]
+    }
+]);

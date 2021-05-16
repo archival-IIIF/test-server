@@ -1,8 +1,7 @@
 import * as Koa from 'koa';
 import * as path from 'path';
 import audioVideoFiles from './cases/audioVideo/audioVideoFiles';
-import audioVideoV2 from './cases/audioVideo/audioVideoV2';
-import audioVideoV3 from './cases/audioVideo/audioVideoV3';
+import audioVideo from './cases/audioVideo/audioVideo';
 import authClickThrough from './authClickThrough/authClickThrough';
 import authExternal from './authExternal/authExternal';
 import authInfo from "./authInfo/authInfo";
@@ -70,8 +69,7 @@ app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'), rootPath: '/miradorJS'}));
 app.use(bodyParser());
 
-app.use(audioVideoV2);
-app.use(audioVideoV3);
+app.use(audioVideo);
 app.use(audioVideoFiles);
 
 app.use(authLogin);
