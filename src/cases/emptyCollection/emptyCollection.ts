@@ -1,21 +1,13 @@
-import * as Router from 'koa-router';
-import Collection from "../../presentation-builder/v3/Collection";
-import {ParameterizedContext} from "koa";
-import {transformCollectionToV2} from "../../lib/Transform";
 import RootCollection from "../../lib/RootCollection";
+import {getIIIFRouteTree} from "../../lib/Route";
 
-const router: Router = new Router();
 
-router.get('/iiif/v2/collection/emptyCollection', ctx => {
-    ctx.body = transformCollectionToV2(getEmptyCollection(ctx));
-});
-
-router.get('/iiif/v3/collection/emptyCollection', ctx => {
-    ctx.body = getEmptyCollection(ctx);
-});
-
-function getEmptyCollection(ctx: ParameterizedContext) {
-    return new RootCollection(ctx.request.origin + ctx.request.url, 'Empty collection test case')
-}
-
-export default router.routes();
+export default getIIIFRouteTree([
+    {
+        path: '/collection/emptyCollection',
+        body: (ctx) => new RootCollection(
+            ctx.request.origin + ctx.request.url,
+            'Empty collection test case'
+        )
+    }
+]);

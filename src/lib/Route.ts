@@ -66,3 +66,44 @@ function addOriginToManifest(manifest: Base, origin: string, prefix: string): Ba
 
     return manifest;
 }
+
+interface iRoute {
+    path: string;
+    body: (ctx: ParameterizedContext, prefix: string) => Collection;
+    children?: iRoute[];
+}
+
+export function getIIIFRouteTree(routes: iRoute[]) {
+    const router: Router = new Router();
+
+    addIIIFRoutes(routes, router);
+
+    return router.routes();
+}
+
+export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: string) {
+
+    for (const route of routes) {
+
+        router.get('/iiif/v2' + route.path, ctx => {
+            ctx.body = transformCollectionToV2(route.body(ctx, '/iiif/v2'));
+        });
+        router.get('/iiif/v3' + route.path, ctx => {
+            const prefix = '/iiif/v3';
+            const body = route.body(ctx, prefix);
+            if (parentPath) {
+                body.setParent(ctx.request.origin + prefix + parentPath, 'Collection')
+            }
+            if (route.children) {
+                for (const child of route.children) {
+                    body.setItems(child.body(ctx, prefix));
+                }
+            }
+            ctx.body = body;
+        });
+
+        if (route.children) {
+            addIIIFRoutes(route.children, router, route.path);
+        }
+    }
+}

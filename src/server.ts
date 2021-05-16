@@ -11,8 +11,7 @@ import authLogin from "./authLogin/authLogin";
 import common from './common/common';
 import dynamicDemo from './dynamicDemo/routes';
 import emptyCollection from './cases/emptyCollection/emptyCollection';
-import emptyFolderV2 from './cases/emptyFolder/emptyFolderV2';
-import emptyFolderV3 from './cases/emptyFolder/emptyFolderV3';
+import emptyFolder from './cases/emptyFolder/emptyFolder';
 import homepage from './homepage/homepage';
 import image from './cases/image/image';
 import languageFiles from "./cases/language/languageFiles";
@@ -86,8 +85,7 @@ app.use(authKiosk);
 app.use(authMixed);
 
 app.use(emptyCollection);
-app.use(emptyFolderV2);
-app.use(emptyFolderV3);
+app.use(emptyFolder);
 
 app.use(homepage);
 

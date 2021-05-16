@@ -1,19 +1,26 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../../presentation-builder/v3/Collection";
 import RootCollection from "../../lib/RootCollection";
+import {getIIIFRouteTree} from "../../lib/Route";
 
-export function getEmptyFolderContainer(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/emptyFolder';
-    const c = new RootCollection(url, 'Empty collection test case');
-    c.setItems(getEmptyFolder(ctx, prefix));
+const emptyFolderContainer = (ctx: ParameterizedContext, prefix: string): Collection =>
+    new RootCollection(
+        ctx.request.origin + prefix + '/collection/emptyFolder',
+        'Empty collection test case'
+    );
 
-    return c;
-}
+const emptyFolder = (ctx: ParameterizedContext, prefix: string): Collection =>
+    new RootCollection(ctx.request.origin + prefix + '/collection/emptyFolder2', 'Empty folder');
 
-export function getEmptyFolder(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/emptyFolder2';
-    const c = new RootCollection(url, 'Empty folder');
-    c.setParent(ctx.request.origin + prefix + '/collection/emptyFolder', 'Collection')
-
-    return c;
-}
+export default getIIIFRouteTree([
+    {
+        path: '/collection/emptyFolder',
+        body: emptyFolderContainer,
+        children: [
+            {
+                path: '/collection/emptyFolder2',
+                body: emptyFolder
+            },
+        ]
+    }
+]);
