@@ -1,6 +1,6 @@
 import * as Router from 'koa-router';
 import {getAuthLogin, getAuthLoginDegraded, getAuthLoginSubFolder} from "./authLoginRestrictedLabelsCommon";
-import {transformCollectionToV2} from "../lib/Transform";
+import {transformCollectionToV2} from "../../lib/Transform";
 
 const prefix = '/iiif/v2';
 const router: Router = new Router({prefix});

@@ -1,8 +1,8 @@
 import * as Router from 'koa-router';
-import {hasAccess} from '../lib/Security';
-import {responseFile} from "../imageService/imageService";
-import {cookieName, cookieToken, viewerToken, getAuthLoginService} from "../auth/login";
-import {infoV2} from "../imageService/imageBase";
+import {hasAccess} from '../../lib/Security';
+import {responseFile} from "../../imageService/imageService";
+import {cookieName, cookieToken, viewerToken, getAuthLoginService} from "../../auth/login";
+import {infoV2} from "../../imageService/imageBase";
 
 
 const imageWith = 1840;

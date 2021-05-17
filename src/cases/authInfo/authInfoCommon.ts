@@ -1,5 +1,5 @@
-import ImageManifest from "../lib/ImageManifest";
-import RootCollection from "../lib/RootCollection";
+import ImageManifest from "../../lib/ImageManifest";
+import RootCollection from "../../lib/RootCollection";
 import {ParameterizedContext} from "koa";
 
 const imageWith = 1840;
