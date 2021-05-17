@@ -105,7 +105,7 @@
             image: {
                 label: 'Test case with images',
                 uv: true,
-                mirador: 'manifest/ariel'
+                mirador: true
             },
             audioVideo: {
                 label: 'Test case with audio and video files',
@@ -142,7 +142,7 @@
             multiPage: {
                 label: 'Test case with a multi page',
                 uv: true,
-                mirador: 'manifest/multiPage1'
+                mirador: true
             },
         },
         'No parent': {
@@ -150,7 +150,7 @@
                 uri: 'manifest/noParent',
                 label: 'Test case without parent',
                 uv: true,
-                mirador: 'manifest/noParent'
+                mirador: true
             },
         },
         'Directory': {
@@ -170,7 +170,7 @@
             authInfo: {
                 label: 'Token login test case with a locked info.json',
                 uv: true,
-                mirador: 'manifest/authInfo2'
+                mirador: true
             },
             authExternalAccept: 'External auth test (accept)',
             authExternalDeny: 'External auth test (deny)',
@@ -284,10 +284,8 @@
             output += '<a class="universal-viewer" href="' + uvUrl + '" target="_blank">UV</a>';
         }
 
-        if (testCase.mirador ) {
-            let prefix = '';
-            prefix += 'iiif/' + version + '/';
-            const mirardorUrl = baseUrl + 'mirador?manifest=' + baseUrl + prefix + testCase.mirador;
+        if (testCase.mirador === true) {
+            const mirardorUrl = baseUrl + 'mirador?manifest=' + manifestUrl;
             output += '<a class="mirador" href="' + mirardorUrl + '" target="_blank">' +
                 '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
                 '</a>';

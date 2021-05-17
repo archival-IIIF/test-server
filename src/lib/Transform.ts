@@ -44,81 +44,79 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
     const m2 = new ManifestV2(m3.id, getInternational(m3.label));
     baseTransformation(m2, m3);
 
-    return m2;
-}
-
-export function transformImageManifestToV2(m3: ManifestV3): ManifestV2 {
-
-    const m2 = transformManifestToV2(m3);
     const sequence2: SequenceV2 = new SequenceV2(m3.id + '/sequence', null);
-    for (const item of m3.items) {
-        const itemAny: any = item;
-        const canvas3: CanvasV3 = itemAny;
-        const annotation3: AnnotationV3 = itemAny.items[0].items[0];
-
-        const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
-        const imageService2 = new ImageV2(
-            annotation3.body.service[0].id.replace('/v3/', '/v2/'),
-            canvas3.width,
-            canvas3.height
-        );
-        if (imageService2.profile === 'level2') {
-            imageService2.profile = 'http://iiif.io/api/image/2/level2.json'
-        }
-        resource2.setService(imageService2);
-        const annotation: AnnotationV2 = new AnnotationV2(annotation3.id, resource2);
-        annotation.on = canvas3.id;
-        const canvas2: CanvasV2 = new CanvasV2(item.id, annotation);
-        sequence2.addCanvas(canvas2);
-    }
-    m2.setSequence(sequence2);
-
-    if (m3.metadata) {
-        for (const metaData of m3.metadata) {
-            m2.addMetadata(getInternational(metaData.label), getInternational(metaData.value));
-        }
-    }
-
-    return m2;
-}
-
-export function transformFileManifestToV2(m3: FileManifest): ManifestV2 {
-
-    const m2 = transformManifestToV2(m3);
     const mediaSequence2 = new MediaSequenceV2(m3.id + '/sequence', null);
+
     for (const item of m3.items) {
         const itemAny: any = item;
         const canvas3: CanvasV3 = itemAny;
         const annotation3: AnnotationV3 = itemAny.items[0].items[0];
-        const resource2: ResourceV2 = new ResourceV2(
-            annotation3.body.id,
-            canvas3.width,
-            canvas3.height,
-            annotation3.body.format,
-            'foaf:Document'
-        );
-        if (annotation3.body.format)
-
-        if (canvas3.rendering && canvas3.rendering.length > 0) {
-            for (const rendering3 of canvas3.rendering) {
-                resource2.addRendering(
-                    new RenderingV2(rendering3.id, getInternational(rendering3.label), rendering3.format)
-                );
+        if (annotation3.body.type === 'Image') {
+            const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
+            const imageService2 = new ImageV2(
+                annotation3.body.service[0].id.replace('/v3/', '/v2/'),
+                canvas3.width,
+                canvas3.height
+            );
+            if (imageService2.profile === 'level2') {
+                imageService2.profile = 'http://iiif.io/api/image/2/level2.json'
             }
-        }
+            resource2.setService(imageService2);
+            const annotation: AnnotationV2 = new AnnotationV2(annotation3.id, resource2);
+            annotation.on = canvas3.id;
+            const canvas2: CanvasV2 = new CanvasV2(item.id, annotation);
+            sequence2.addCanvas(canvas2);
+        } else if (annotation3.body.type === 'Audio' || annotation3.body.type === 'Video') {
+            const resource2: ResourceV2 = new ResourceV2(
+                annotation3.body.id,
+                canvas3.width,
+                canvas3.height,
+                annotation3.body.format,
+                'foaf:Document'
+            );
 
-        mediaSequence2.addElement(resource2);
+            if (annotation3.body.format)
+
+                if (canvas3.rendering && canvas3.rendering.length > 0) {
+                    for (const rendering3 of canvas3.rendering) {
+                        resource2.addRendering(
+                            new RenderingV2(rendering3.id, getInternational(rendering3.label), rendering3.format)
+                        );
+                    }
+                }
+
+            mediaSequence2.addElement(resource2);
+        } else {
+            const resource2: ResourceV2 = new ResourceV2(
+                annotation3.body.id,
+                canvas3.width,
+                canvas3.height,
+                annotation3.body.format,
+                'foaf:Document'
+            );
+            if (annotation3.body.format)
+
+                if (canvas3.rendering && canvas3.rendering.length > 0) {
+                    for (const rendering3 of canvas3.rendering) {
+                        resource2.addRendering(
+                            new RenderingV2(rendering3.id, getInternational(rendering3.label), rendering3.format)
+                        );
+                    }
+                }
+
+            mediaSequence2.addElement(resource2);
+        }
     }
-    m2.setMediaSequence(mediaSequence2);
-
-    if (m3.metadata) {
-        for (const metaData of m3.metadata) {
-            m2.addMetadata(getInternational(metaData.label), getInternational(metaData.value));
-        }
+    if (sequence2.canvases) {
+        m2.setSequence(sequence2);
+    }
+    if (mediaSequence2.elements) {
+        m2.setMediaSequence(mediaSequence2);
     }
 
     return m2;
 }
+
 
 export function transformRefToV2(m3: RefV3): any {
     const m2 = new ManifestV2(m3.id, getInternational(m3.label));

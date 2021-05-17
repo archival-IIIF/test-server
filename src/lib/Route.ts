@@ -1,9 +1,7 @@
 import * as Router from "koa-router";
 import Collection from "../presentation-builder/v3/Collection";
-import {transformCollectionToV2} from "./Transform";
-import Base from "../presentation-builder/v3/Base";
+import {transformCollectionToV2, transformManifestToV2} from "./Transform";
 import {hasAccess} from "./Security";
-import {cloneDeep} from 'lodash';
 import {ParameterizedContext} from "koa";
 import RootCollection from "./RootCollection";
 import Manifest from "../presentation-builder/v3/Manifest";
@@ -61,7 +59,11 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                 }
 
                 if (version === 'v2') {
-                    ctx.body = transformCollectionToV2(body);
+                    if (body.type === 'Collection') {
+                        ctx.body = transformCollectionToV2(body);
+                    } else {
+                        ctx.body = transformManifestToV2(body);
+                    }
                 } else {
                     ctx.body = body;
                 }
