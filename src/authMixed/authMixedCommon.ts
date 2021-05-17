@@ -5,7 +5,7 @@ import {
     cookieName as cookieNameClickThrough,
     cookieToken as cookieTokenClickThrough,
     viewerToken as viewerTokenClickThrough,
-} from "../authClickThrough/authClickThroughCommon";
+} from "../auth/clickThrough";
 import {hasAccess} from "../lib/Security";
 import RootCollection from "../lib/RootCollection";
 import {getAuthClickThroughService} from "../auth/clickThrough";

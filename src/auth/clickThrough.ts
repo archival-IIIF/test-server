@@ -1,10 +1,13 @@
 import * as Router from 'koa-router';
 import {loginPage, tokenPage, logoutPage} from "../auth/auth";
 import {ParameterizedContext} from "koa";
-import {cookieName, cookieToken, viewerToken} from "../authClickThrough/authClickThroughCommon";
 import AuthService from "../presentation-builder/v3/AuthService";
 
 const router: Router = new Router();
+
+export const cookieName = 'access-click-through';
+export const cookieToken = 'click-through-cookie-abc';
+export const viewerToken = 'click-through-viewer-123';
 
 router.get('/token/clickThrough',  (ctx: Router.RouterContext) => {
     tokenPage(ctx, cookieName, cookieToken, viewerToken);
