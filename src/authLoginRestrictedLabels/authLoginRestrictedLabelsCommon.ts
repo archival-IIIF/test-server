@@ -3,7 +3,7 @@ import Collection from "../presentation-builder/v3/Collection";
 import AuthService from "../presentation-builder/v3/AuthService";
 import RootCollection from "../lib/RootCollection";
 import {hasAccess} from "../lib/Security";
-import {getAuthLoginService} from "../authLogin/authLoginCommon";
+import {getAuthLoginService} from "../auth/login";
 
 export const cookieName = 'access';
 export const cookieToken = '4321';

@@ -1,6 +1,6 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import {getAuthLoginService, viewerToken} from "../authLogin/authLoginCommon";
+import {getAuthLoginService, viewerToken} from "../auth/login";
 import {hasAccess} from "../lib/Security";
 import RootCollection from "../lib/RootCollection";
 import {getArielManifestChild} from "../imageService/imageBase";

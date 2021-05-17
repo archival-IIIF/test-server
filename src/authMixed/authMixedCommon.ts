@@ -1,6 +1,6 @@
 import {ParameterizedContext} from "koa";
 import Collection from "../presentation-builder/v3/Collection";
-import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../authLogin/authLoginCommon";
+import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../auth/login";
 import {
     cookieName as cookieNameClickThrough,
     cookieToken as cookieTokenClickThrough,

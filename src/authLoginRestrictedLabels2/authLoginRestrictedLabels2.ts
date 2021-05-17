@@ -4,7 +4,7 @@ import {
     cookieToken,
     viewerToken,
     getAuthLoginService,
-} from "../authLogin/authLoginCommon";
+} from "../auth/login";
 import {ParameterizedContext} from "koa";
 import RootCollection from "../lib/RootCollection";
 import {addCollectionRoute} from "../lib/Route";

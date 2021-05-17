@@ -1,7 +1,7 @@
 import * as Router from 'koa-router';
 import {getAuthLoginPartly, getAuthLoginPartly1} from "./authLoginPartlyCommon";
 import {addArielRoute} from "../imageService/imageBase";
-import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../authLogin/authLoginCommon";
+import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../auth/login";
 
 const prefix = '/iiif/v3';
 const router: Router = new Router({prefix});

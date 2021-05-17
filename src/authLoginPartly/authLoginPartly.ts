@@ -2,7 +2,7 @@ import * as Router from 'koa-router';
 import authLoginPartlyV2 from "./authLoginPartlyV2";
 import authLoginPartlyV3 from "./authLoginPartlyV3";
 import {addArielRoute} from "../imageService/imageBase";
-import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../authLogin/authLoginCommon";
+import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../auth/login";
 
 const router: Router = new Router();
 

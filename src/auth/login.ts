@@ -1,5 +1,9 @@
 import {ParameterizedContext} from "koa";
 import AuthService from "../presentation-builder/v3/AuthService";
+import * as Router from "koa-router";
+import {createReadStream} from "fs";
+import * as path from "path";
+import {loginPage, logoutPage, tokenPage} from "./auth";
 
 export const cookieName = 'access';
 export const cookieToken = '4321';
@@ -38,3 +42,33 @@ export function getAuthLoginService(ctx?: ParameterizedContext) {
 
     return authService;
 }
+
+const router: Router = new Router();
+
+
+router.get('/login', (ctx: Router.RouterContext) => {
+    ctx.type = 'text/html';
+    ctx.body = createReadStream(path.join(__dirname, 'token-login.html'));
+});
+
+router.post('/login', async (ctx: ParameterizedContext) => {
+
+    const request: any = ctx.request;
+    const token = request.body.token;
+    if (token === userToken) {
+        loginPage(ctx, cookieName, cookieToken);
+    } else {
+        loginPage(ctx);
+    }
+});
+
+router.get('/token', async (ctx: ParameterizedContext) => {
+    tokenPage(ctx, cookieName, cookieToken, viewerToken);
+});
+
+router.get('/logout', async (ctx: ParameterizedContext) => {
+    logoutPage(ctx, cookieName);
+});
+
+export default router.routes();
+

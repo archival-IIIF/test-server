@@ -8,7 +8,8 @@ import authExternal from './cases/authExternal/authExternal';
 import external from './auth/external';
 import authInfo from "./authInfo/authInfo";
 import authLoginPartly from "./authLoginPartly/authLoginPartly";
-import authLogin from "./authLogin/authLogin";
+import login from "./auth/login";
+import authLogin from "./cases/authLogin/authLogin";
 import common from './common/common';
 import dynamicDemo from './dynamicDemo/routes';
 import emptyCollection from './cases/emptyCollection/emptyCollection';
@@ -109,6 +110,7 @@ app.use(validation);
 app.use(clickThrough);
 app.use(kiosk);
 app.use(external);
+app.use(login);
 
 
 app.keys = ['secret'];

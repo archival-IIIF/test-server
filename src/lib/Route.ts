@@ -184,10 +184,20 @@ export function getImageBody(ctx: ParameterizedContext, prefix: string, path: st
     return i;
 }
 
-export function getCollectionBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined): RootCollection
+export function getCollectionBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
+                                  route: iRoute): RootCollection
 {
-    return new RootCollection(
+    const c = new RootCollection(
         ctx.request.origin + prefix + path,
         label ?? '-'
     );
+    if (route.authService) {
+        c.setService(route.authService(ctx));
+        if (route.cookieName && route.cookieToken && route.viewerToken &&
+            !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
+            ctx.status = 401;
+        }
+    }
+
+    return c;
 }
