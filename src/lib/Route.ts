@@ -12,6 +12,7 @@ import {infoV2, infoV3} from "../imageService/imageBase";
 import {basename} from "../../../viewer/src/lib/ManifestHelpers";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
+import AuthService from "../presentation-builder/v3/AuthService";
 
 export function addCollectionRoute(
     router: Router,
@@ -76,11 +77,15 @@ function addOriginToManifest(manifest: Base, origin: string, prefix: string): Ba
 
 interface iRoute {
     path: string;
-    body: (ctx: ParameterizedContext, prefix: string, path: string, label?: string, images?: string[])
+    body: (ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined, route: iRoute, auth?: boolean)
         => Collection | Manifest;
     label?: string;
     children?: iRoute[];
-    images?: string[]
+    images?: string[];
+    cookieName?: string;
+    cookieToken?: string;
+    viewerToken?: string;
+    authService?: (ctx: ParameterizedContext) => AuthService;
 }
 
 export function getIIIFRouteTree(routes: iRoute[]) {
@@ -97,13 +102,14 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
         for (const version of ['v2', 'v3']) {
             const prefix = '/iiif/' + version;
             router.get(prefix + route.path, ctx => {
-                const body = route.body(ctx, prefix, route.path, route.label, route.images);
+                const body = route.body(ctx, prefix, route.path, route.label, route);
                 if (parentPath) {
                     body.setParent(ctx.request.origin + prefix + parentPath, 'Collection')
                 }
                 if (route.children) {
                     for (const child of route.children) {
-                        body.setItems(child.body(ctx, prefix, child.path, child.label));
+                        const miniRoute: iRoute = {path: child.path, body: child.body};
+                        body.setItems(child.body(ctx, prefix, child.path, child.label, miniRoute));
                     }
                 }
                 if (version === 'v2') {
@@ -128,10 +134,10 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                         }
                     });
                     router.get('/iiif/'  +version + '/image/' + imageId + '/:region/:size/:rotation/:quality.:format', async ctx => {
-                        /*if (cookieName && cookieToken && viewerToken && !hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
+                        if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
                             ctx.status = 401;
                             return;
-                        }*/
+                        }
 
                         await responseFile(ctx, imagePath, size.width, size.height);
                     });
@@ -148,16 +154,24 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
     }
 }
 
-export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label?: string, images?: string[]): Manifest
+export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined, route: iRoute): Manifest
 {
-    return new ImageManifest2(
+    const i = new ImageManifest2(
         ctx.request.origin + prefix + path,
-        images ?? [],
+        route.images ?? [],
         label ?? '-'
     );
+    if (route.authService) {
+        i.setService(route.authService(ctx));
+        if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
+            ctx.status = 401;
+        }
+    }
+
+    return i;
 }
 
-export function getCollectionBody(ctx: ParameterizedContext, prefix: string, path: string, label?: string): RootCollection
+export function getCollectionBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined): RootCollection
 {
     return new RootCollection(
         ctx.request.origin + prefix + path,

@@ -5,10 +5,10 @@ import {
     cookieName as cookieNameClickThrough,
     cookieToken as cookieTokenClickThrough,
     viewerToken as viewerTokenClickThrough,
-    getAuthClickThroughService
 } from "../authClickThrough/authClickThroughCommon";
 import {hasAccess} from "../lib/Security";
 import RootCollection from "../lib/RootCollection";
+import {getAuthClickThroughService} from "../auth/clickThrough";
 
 export function getAuthMixed(ctx: ParameterizedContext, prefix: string) {
     const url = ctx.request.origin + prefix + '/collection/authMixed';

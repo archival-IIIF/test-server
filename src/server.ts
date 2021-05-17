@@ -2,7 +2,8 @@ import * as Koa from 'koa';
 import * as path from 'path';
 import audioVideoFiles from './cases/audioVideo/audioVideoFiles';
 import audioVideo from './cases/audioVideo/audioVideo';
-import authClickThrough from './authClickThrough/authClickThrough';
+import clickThrough from './auth/clickThrough';
+import authClickThrough from './cases/authClickThrough/authClickThrough';
 import authExternal from './authExternal/authExternal';
 import authInfo from "./authInfo/authInfo";
 import authLoginPartly from "./authLoginPartly/authLoginPartly";
@@ -62,9 +63,9 @@ app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'), rootPath: '/miradorJS'}));
 app.use(bodyParser());
 
+// cases
 app.use(audioVideo);
 app.use(audioVideoFiles);
-
 app.use(authLogin);
 app.use(authLoginPartly);
 app.use(authLoginRestrictedLabels);
@@ -74,13 +75,8 @@ app.use(authExternal);
 app.use(authClickThrough);
 app.use(authKiosk);
 app.use(authMixed);
-
 app.use(emptyCollection);
 app.use(emptyFolder);
-
-app.use(homepage);
-
-
 app.use(logo);
 app.use(logoFiles);
 app.use(rightsInformation);
@@ -88,25 +84,28 @@ app.use(thumbnail);
 app.use(nestedStructure);
 app.use(language);
 app.use(languageFiles);
-
 app.use(image);
 app.use(multiPage);
-
 app.use(pdfFiles);
 app.use(pdf);
 app.use(multiLang);
-app.use(common);
-
-app.use(validation);
-
-app.use(dynamicDemo);
 app.use(manifestations);
 app.use(manifestationsFiles);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);
 app.use(noParent);
+
+
+app.use(dynamicDemo);
+
+app.use(homepage);
+app.use(common);
+app.use(clickThrough);
 app.use(universalViewer);
 app.use(mirador);
+app.use(validation);
+
+
 app.keys = ['secret'];
 
 
