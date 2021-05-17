@@ -28,7 +28,7 @@ router.get('/image-service/v2/authInfo/:region/:size/:rotation/:quality.:format'
         return;
     }
 
-    await responseFile(ctx, __dirname + '/../imageService/Ariel_-_LoC_4a15521_dark.jpg', imageWith, imageHeight);
+    await responseFile(ctx, __dirname + '/../../imageService/Ariel_-_LoC_4a15521_dark.jpg', imageWith, imageHeight);
 });
 
 
