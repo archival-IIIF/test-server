@@ -75,13 +75,14 @@ function addOriginToManifest(manifest: Base, origin: string, prefix: string): Ba
     return manifest;
 }
 
-interface iRoute {
+export interface iRoute {
     path: string;
     body: (ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined, route: iRoute, auth?: boolean)
         => Collection | Manifest;
     label?: string;
     children?: iRoute[];
     images?: string[];
+    noImageAuth?: boolean;
     cookieName?: string;
     cookieToken?: string;
     viewerToken?: string;
@@ -112,6 +113,14 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                         body.setItems(child.body(ctx, prefix, child.path, child.label, miniRoute));
                     }
                 }
+
+                if (
+                    (route.cookieName || route.cookieToken || route.viewerToken) &&
+                    !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)
+                ) {
+                    ctx.status = 401;
+                }
+
                 if (version === 'v2') {
                     ctx.body = transformCollectionToV2(body);
                 } else {
@@ -134,7 +143,11 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                         }
                     });
                     router.get('/iiif/'  +version + '/image/' + imageId + '/:region/:size/:rotation/:quality.:format', async ctx => {
-                        if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
+                        if (
+                            route.noImageAuth !== true &&
+                            (route.cookieName || route.cookieToken || route.viewerToken) &&
+                            !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)
+                        ) {
                             ctx.status = 401;
                             return;
                         }

@@ -4,7 +4,8 @@ import audioVideoFiles from './cases/audioVideo/audioVideoFiles';
 import audioVideo from './cases/audioVideo/audioVideo';
 import clickThrough from './auth/clickThrough';
 import authClickThrough from './cases/authClickThrough/authClickThrough';
-import authExternal from './authExternal/authExternal';
+import authExternal from './cases/authExternal/authExternal';
+import external from './auth/external';
 import authInfo from "./authInfo/authInfo";
 import authLoginPartly from "./authLoginPartly/authLoginPartly";
 import authLogin from "./authLogin/authLogin";
@@ -31,7 +32,8 @@ import thumbnail from './cases/thumbnail/thumbnail';
 import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
 import authMixed from "./authMixed/authMixed";
-import authKiosk from "./authKiosk/authKiosk";
+import kiosk from "./auth/kiosk";
+import authKiosk from "./cases/authKiosk/authKiosk";
 import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
 import nestedStructure from "./cases/nestedStructure/nestedStructure";
 import authLoginRestrictedLabels2 from "./authLoginRestrictedLabels2/authLoginRestrictedLabels2";
@@ -100,10 +102,13 @@ app.use(dynamicDemo);
 
 app.use(homepage);
 app.use(common);
-app.use(clickThrough);
 app.use(universalViewer);
 app.use(mirador);
 app.use(validation);
+
+app.use(clickThrough);
+app.use(kiosk);
+app.use(external);
 
 
 app.keys = ['secret'];
