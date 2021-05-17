@@ -37,7 +37,7 @@ import kiosk from "./auth/kiosk";
 import authKiosk from "./cases/authKiosk/authKiosk";
 import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
 import nestedStructure from "./cases/nestedStructure/nestedStructure";
-import authLoginRestrictedLabels2 from "./authLoginRestrictedLabels2/authLoginRestrictedLabels2";
+import authLoginRestrictedLabels2 from "./cases/authLoginRestrictedLabels2/authLoginRestrictedLabels2";
 import multiLang from "./cases/multiLang/multiLang";
 import noParent from "./cases/noParent/noParent";
 
