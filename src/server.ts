@@ -31,7 +31,7 @@ import rightsInformation from './cases/rightsInformation/rightsInformation';
 import thumbnail from './cases/thumbnail/thumbnail';
 import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
-import authMixed from "./authMixed/authMixed";
+import authMixed from "./cases/authMixed/authMixed";
 import kiosk from "./auth/kiosk";
 import authKiosk from "./cases/authKiosk/authKiosk";
 import authLoginRestrictedLabels from "./authLoginRestrictedLabels/authLoginRestrictedLabels";
