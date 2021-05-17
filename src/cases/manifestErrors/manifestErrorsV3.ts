@@ -1,6 +1,4 @@
 import * as Router from 'koa-router';
-import FileManifest from "../../lib/FileManifest";
-import {getArielBase} from "../../imageService/imageBase";
 
 const prefix = '/iiif/v3';
 const router: Router = new Router({prefix});
@@ -69,10 +67,6 @@ router.get('/collection/missingParent', ctx => {
         '@context': 'http://iiif.io/api/presentation/3/context.json',
         partOf: [{id: ctx.request.origin + prefix + '/collection/missingParent2', type: 'Collection'}],
     };
-});
-
-router.get('/manifest/withoutParent', ctx => {
-    ctx.body = getArielBase(ctx, prefix, '/manifest/withoutParent');
 });
 
 router.get('/collection/loop', ctx => {
