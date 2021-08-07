@@ -31,37 +31,35 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
     const mediaSequence2 = new MediaSequenceV2(m3.id + '/sequence', null);
 
     for (const item of m3.items) {
-        const itemAny: any = item;
-        const canvas3: CanvasV3 = itemAny;
-        const annotation3: AnnotationV3 = itemAny.items[0].items[0];
+        const annotation3: AnnotationV3 = item.items[0].items[0];
         if (annotation3.body.type === 'Image') {
-            const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, canvas3.width, canvas3.height, annotation3.body.format)
+            const resource2: ResourceV2 = new ResourceV2(annotation3.body.id, item.width, item.height, annotation3.body.format)
             const imageService2 = new ImageV2(
                 annotation3.body.service[0].id.replace('/v3/', '/v2/'),
-                canvas3.width,
-                canvas3.height
+                item.width,
+                item.height
             );
             if (imageService2.profile === 'level2') {
                 imageService2.profile = 'http://iiif.io/api/image/2/level2.json'
             }
             resource2.setService(imageService2);
             const annotation: AnnotationV2 = new AnnotationV2(annotation3.id, resource2);
-            annotation.on = canvas3.id;
+            annotation.on = item.id;
             const canvas2: CanvasV2 = new CanvasV2(item.id, annotation);
             sequence2.addCanvas(canvas2);
         } else if (annotation3.body.type === 'Audio' || annotation3.body.type === 'Video') {
             const resource2: ResourceV2 = new ResourceV2(
                 annotation3.body.id,
-                canvas3.width,
-                canvas3.height,
+                item.width,
+                item.height,
                 annotation3.body.format,
                 'foaf:Document'
             );
 
             if (annotation3.body.format)
 
-                if (canvas3.rendering && canvas3.rendering.length > 0) {
-                    for (const rendering3 of canvas3.rendering) {
+                if (item.rendering && item.rendering.length > 0) {
+                    for (const rendering3 of item.rendering) {
                         resource2.addRendering(
                             new RenderingV2(rendering3.id, getInternational(rendering3.label), rendering3.format)
                         );
@@ -72,15 +70,15 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
         } else {
             const resource2: ResourceV2 = new ResourceV2(
                 annotation3.body.id,
-                canvas3.width,
-                canvas3.height,
+                item.width,
+                item.height,
                 annotation3.body.format,
                 'foaf:Document'
             );
             if (annotation3.body.format)
 
-                if (canvas3.rendering && canvas3.rendering.length > 0) {
-                    for (const rendering3 of canvas3.rendering) {
+                if (item.rendering && item.rendering.length > 0) {
+                    for (const rendering3 of item.rendering) {
                         resource2.addRendering(
                             new RenderingV2(rendering3.id, getInternational(rendering3.label), rendering3.format)
                         );
