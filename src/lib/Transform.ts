@@ -1,24 +1,7 @@
-import CollectionV3 from "../presentation-builder/v3/Collection";
-import CollectionV2 from "../presentation-builder/v2/Collection";
-import ManifestV3 from "../presentation-builder/v3/Manifest";
-import ManifestV2 from "../presentation-builder/v2/Manifest";
-import {Internationalized as InternationalizedV3, Ref as RefV3} from "../presentation-builder/v3/Base";
-import ResourceV2 from "../presentation-builder/v2/Resource";
-import ImageV2 from "../presentation-builder/v2/Image";
-import SequenceV2 from "../presentation-builder/v2/Sequence";
-import CanvasV2 from "../presentation-builder/v2/Canvas";
-import AnnotationV2 from "../presentation-builder/v2/Annotation";
-import RenderingV2 from "../presentation-builder/v2/Rendering";
-import CanvasV3 from "../presentation-builder/v3/Canvas";
-import AnnotationV3 from "../presentation-builder/v3/Annotation";
-import ResourceV3 from "../presentation-builder/v3/Resource";
-import FileManifest from "./FileManifest";
-import MediaSequenceV2 from "../presentation-builder/v2/MediaSequence";
-import BaseV3 from "../presentation-builder/v3/Base";
-import BaseV2 from "../presentation-builder/v2/Base";
-import ServiceV3 from "../presentation-builder/v3/Service";
-import AuthServiceV2 from "../presentation-builder/v2/AuthService";
-import AuthServiceV3 from "../presentation-builder/v3/AuthService";
+import {Collection as CollectionV3, CollectionV2, Manifest as ManifestV3, ManifestV2, ResourceV2, ImageV2, SequenceV2,
+    CanvasV2, AnnotationV2, RenderingV2, Canvas as CanvasV3, Annotation as AnnotationV3, Resource as ResourceV3,
+    MediaSequenceV2, Base as BaseV3, BaseV2, Service as ServiceV3, AuthServiceV2, AuthService as AuthServiceV3} from "@archival-iiif/presentation-builder";
+import {Internationalized as InternationalizedV3, Ref as RefV3} from "@archival-iiif/presentation-builder/dist/v3/Base";
 
 export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
 

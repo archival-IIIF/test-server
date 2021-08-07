@@ -1,7 +1,6 @@
 import {ParameterizedContext} from "koa";
-import Resource from "../../presentation-builder/v3/Resource";
+import {Resource} from "@archival-iiif/presentation-builder";
 import FileManifest from "../../lib/FileManifest";
-import Service from "../../presentation-builder/v3/Service";
 import RootCollection from "../../lib/RootCollection";
 import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
 import ThumbnailService from "../../lib/ThumbnailService";

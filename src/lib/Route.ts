@@ -1,16 +1,14 @@
 import * as Router from "koa-router";
-import Collection from "../presentation-builder/v3/Collection";
+import {Collection, Manifest, AuthService} from "@archival-iiif/presentation-builder";
 import {transformCollectionToV2, transformManifestToV2} from "./Transform";
 import {hasAccess} from "./Security";
 import {ParameterizedContext} from "koa";
 import RootCollection from "./RootCollection";
-import Manifest from "../presentation-builder/v3/Manifest";
 import imageSize from "image-size";
 import {infoV2, infoV3} from "../imageService/imageBase";
 import {basename} from "../../../viewer/src/lib/ManifestHelpers";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
-import AuthService from "../presentation-builder/v3/AuthService";
 
 export interface iRoute {
     path: string;

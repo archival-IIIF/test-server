@@ -1,5 +1,4 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../../presentation-builder/v3/Collection";
 import FileManifest from "../../lib/FileManifest";
 import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
 

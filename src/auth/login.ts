@@ -1,5 +1,5 @@
 import {ParameterizedContext} from "koa";
-import AuthService from "../presentation-builder/v3/AuthService";
+import {AuthService} from "@archival-iiif/presentation-builder";
 import * as Router from "koa-router";
 import {createReadStream} from "fs";
 import * as path from "path";

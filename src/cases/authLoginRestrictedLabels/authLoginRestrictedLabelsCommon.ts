@@ -1,5 +1,4 @@
 import {ParameterizedContext} from "koa";
-import Collection from "../../presentation-builder/v3/Collection";
 import RootCollection from "../../lib/RootCollection";
 import {hasAccess} from "../../lib/Security";
 import {getAuthLoginService} from "../../auth/login";

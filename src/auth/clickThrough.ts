@@ -1,7 +1,7 @@
 import * as Router from 'koa-router';
 import {loginPage, tokenPage, logoutPage} from "../auth/auth";
 import {ParameterizedContext} from "koa";
-import AuthService from "../presentation-builder/v3/AuthService";
+import {AuthService} from "@archival-iiif/presentation-builder";
 
 const router: Router = new Router();
 

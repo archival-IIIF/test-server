@@ -1,4 +1,4 @@
-import Manifest from "../presentation-builder/v3/Manifest";
+import {Manifest} from "@archival-iiif/presentation-builder";
 
 export default class RootManifest extends Manifest {
 

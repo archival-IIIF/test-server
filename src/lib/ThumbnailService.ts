@@ -1,5 +1,4 @@
-import Resource from "../presentation-builder/v3/Resource";
-import Service from "../presentation-builder/v3/Service";
+import {Resource, Service} from "@archival-iiif/presentation-builder";
 
 export default class ThumbnailService extends Resource {
 

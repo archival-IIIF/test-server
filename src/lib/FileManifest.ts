@@ -1,11 +1,6 @@
-import Service from "../presentation-builder/v3/Service";
-import Canvas from "../presentation-builder/v3/Canvas";
-import AnnotationPage from "../presentation-builder/v3/AnnotationPage";
-import Resource from "../presentation-builder/v3/Resource";
-import Annotation from "../presentation-builder/v3/Annotation";
-import Manifest from "../presentation-builder/v3/Manifest";
-import ThumbnailService from "./ThumbnailService";
-import {Internationalize} from "../presentation-builder/v3/Base";
+import {Canvas, AnnotationPage, Resource, Annotation, Manifest} from "@archival-iiif/presentation-builder";
+import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
+
 
 type I18nExtendedRef = { id?: string; type?: string; label?: Internationalize; format?: string; profile?: string; };
 

@@ -1,7 +1,7 @@
 import * as Router from "koa-router";
 import {loginPage, logoutPage, tokenPage} from "./auth";
 import {ParameterizedContext} from "koa";
-import AuthService from "../presentation-builder/v3/AuthService";
+import {AuthService} from "@archival-iiif/presentation-builder";
 
 export const cookieName = 'access-kiosk';
 export const cookieToken = 'kiosk-cookie-abc';

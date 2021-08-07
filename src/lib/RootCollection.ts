@@ -1,5 +1,5 @@
-import Collection from "../presentation-builder/v3/Collection";
-import Base, {Internationalized} from "../presentation-builder/v3/Base";
+import {Collection} from "@archival-iiif/presentation-builder";
+import Base, {Internationalized} from "@archival-iiif/presentation-builder/dist/v3/Base";
 
 export default class RootCollection extends Collection {
 
