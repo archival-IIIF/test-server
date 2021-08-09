@@ -91,7 +91,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                             return;
                         }
 
-                        await responseFile(ctx, imagePath, size.width, size.height);
+                        await responseFile(ctx, imagePath);
                     });
 
                     i++;

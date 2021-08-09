@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@archival-iiif/image-server-core@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@archival-iiif/image-server-core/-/image-server-core-1.0.5.tgz#c7ea38624b87794175eb5d5517a56fc6febdf914"
+  integrity sha512-Xfj3guBR5+wkF+TvkrT3GLZDlQyVdsPSv6ZdOZT+t/jtkPrI/P+2UMgcgHXIQBu7QoDGgUoQT7Y65yrrvjYicg==
+  dependencies:
+    "@types/sharp" "0.28.5"
+    sharp "0.28.3"
+
 "@archival-iiif/presentation-builder@^1.0.13":
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/@archival-iiif/presentation-builder/-/presentation-builder-1.0.13.tgz#44449ae80aa5bcf044c8d1010f50a298fa149dfb"
@@ -572,7 +580,7 @@
     "@types/mime" "^1"
     "@types/node" "*"
 
-"@types/sharp@^0.28.0":
+"@types/sharp@0.28.5", "@types/sharp@^0.28.0":
   version "0.28.5"
   resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.28.5.tgz#2095c304e24c310945d6ece7a9fd44b34272c93f"
   integrity sha512-+RYU1NdKeDtTMau6HBbcVUCWjMiDydW4nRIGnOviwRxZxjJy0LqRdx0+YdxBKHcSlUWIYhD1XtiGQsUtInsjBQ==
@@ -1274,7 +1282,7 @@ event-emitter@^0.3.5:
     d "1"
     es5-ext "~0.10.14"
 
-"exjs@github:BSick7/exjs#0.5.1":
+exjs@BSick7/exjs#0.5.1:
   version "0.5.1"
   resolved "https://codeload.github.com/BSick7/exjs/tar.gz/87f638b98635fe8ddee36ce964e64bcce6e2bb6d"
 
@@ -1548,7 +1556,7 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-"http-status-codes@github:edsilv/http-status-codes#v0.0.7":
+http-status-codes@edsilv/http-status-codes#v0.0.7:
   version "0.0.7"
   resolved "https://codeload.github.com/edsilv/http-status-codes/tar.gz/af3a8ab9970b1f291a79b03c7382dc16aebee749"
 
@@ -2962,7 +2970,7 @@ shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharp@^0.28.1:
+sharp@0.28.3, sharp@^0.28.1:
   version "0.28.3"
   resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.28.3.tgz#ecd74cefd020bee4891bb137c9850ee2ce277a8b"
   integrity sha512-21GEP45Rmr7q2qcmdnjDkNP04Ooh5v0laGS5FDpojOO84D1DJwUijLiSq8XNNM6e8aGXYtoYRh3sVNdm8NodMA==

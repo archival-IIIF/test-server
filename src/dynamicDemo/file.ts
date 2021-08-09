@@ -46,8 +46,7 @@ router.get('/image/dynamicDemo/:image/:region/:size/:rotation/:quality.:format',
     const id = dynamicDemoCommon.decode(ctx.params.image);
     const objectPath = path.join(dynamicDemoCommon.getDemoDataPath(), id);
 
-    const dimensions = imageSize(dynamicDemoCommon.getFullPath(ctx.params.image));
-    const result = await responseFile(ctx, objectPath, dimensions.width, dimensions.height);
+    const result = await responseFile(ctx, objectPath);
 
     fs.mkdirSync(path.dirname(tilePath), {recursive: true});
     fs.writeFileSync(tilePath, result.image);
