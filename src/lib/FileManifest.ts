@@ -18,8 +18,8 @@ export default class FileManifest extends Manifest {
         const resource = new Resource(fileId, type, format);
         const annotation = new Annotation(id + '/annotation', resource);
         annotation.target = id + '/canvas';
-        annotationPage.setItems(annotation);
-        canvas.setItems(annotationPage);
+        annotationPage.setItems([annotation]);
+        canvas.setItems([annotationPage]);
         if (rendering) {
             canvas.setRendering(rendering);
         } else {
@@ -31,7 +31,7 @@ export default class FileManifest extends Manifest {
             });
         }
 
-        this.setItems(canvas);
+        this.setItems([canvas]);
     }
 }
 

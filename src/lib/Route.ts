@@ -45,7 +45,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                 if (route.children) {
                     for (const child of route.children) {
                         const miniRoute: iRoute = {path: child.path, body: child.body};
-                        body.setItems(child.body(ctx, prefix, child.path, child.label, miniRoute));
+                        body.setItems([child.body(ctx, prefix, child.path, child.label, miniRoute) as any]);
                     }
                 }
 
