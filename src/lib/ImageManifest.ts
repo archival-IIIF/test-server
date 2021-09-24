@@ -35,7 +35,9 @@ export default class ImageManifest extends Manifest {
             const resource = new Resource(
                 imageServiceId0 + '/full/!100,100/0/default.jpg',
                 'Image',
+                undefined,
                 'image/jpeg',
+                undefined,
                 imageWith,
                 imageHeight
             );

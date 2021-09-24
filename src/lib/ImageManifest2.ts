@@ -1,6 +1,6 @@
 import {Service, Canvas, AnnotationPage, Resource, Annotation, Manifest} from "@archival-iiif/presentation-builder";
 import {imageSize} from "image-size";
-import {basename} from "../../../viewer/src/lib/ManifestHelpers";
+import {basename} from "./helper";
 import ThumbnailService from "./ThumbnailService";
 
 export default class ImageManifest2 extends Manifest {
@@ -34,7 +34,9 @@ export default class ImageManifest2 extends Manifest {
             const resource = new Resource(
                 baseId + '/image/' + imageId + '/full/!100,100/0/default.jpg',
                 'Image',
+                undefined,
                 'image/jpeg',
+                undefined,
                 size.width,
                 size.height
             );

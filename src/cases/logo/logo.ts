@@ -10,7 +10,9 @@ const logoContainer = (ctx: ParameterizedContext, prefix: string, path: string) 
     c.setLogo(new Resource(
         ctx.request.origin + '/logo',
         'Image',
+        undefined,
         'image/jpeg',
+        undefined,
         120,
         120
     ));
@@ -29,7 +31,9 @@ const fileWithLogo = (ctx: ParameterizedContext, prefix: string, path: string) =
     m.setLogo(new Resource(
         ctx.request.origin + '/logo',
         'Image',
+        undefined,
         'image/jpeg',
+        undefined,
         120,
         120
     ));

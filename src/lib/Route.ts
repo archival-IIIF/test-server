@@ -6,7 +6,7 @@ import {ParameterizedContext} from "koa";
 import RootCollection from "./RootCollection";
 import imageSize from "image-size";
 import {infoV2, infoV3} from "../imageService/imageBase";
-import {basename} from "../../../viewer/src/lib/ManifestHelpers";
+import {basename} from "./helper";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
 
@@ -47,9 +47,9 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                         const miniRoute: iRoute = {path: child.path, body: child.body};
                         const childBody = child.body(ctx, prefix, child.path, child.label, miniRoute);
                         if (childBody instanceof Collection) {
-                            body.addCollection(childBody);
+                            body.setItems(childBody);
                         } else {
-                            body.addManifest(childBody);
+                            body.setItems(childBody);
                         }
                     }
                 }
@@ -62,7 +62,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                 }
 
                 if (version === 'v2') {
-                    if (body.type === 'Collection') {
+                    if (body instanceof Collection) {
                         ctx.body = transformCollectionToV2(body);
                     } else {
                         ctx.body = transformManifestToV2(body);

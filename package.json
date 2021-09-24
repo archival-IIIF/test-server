@@ -18,17 +18,17 @@
     "lodash.clonedeep": "^4.5.0",
     "mime-types": "^2.1.30",
     "mirador": "^3.1.1",
-    "moment": "^2.29.1",
-    "sharp": "^0.28.1",
-    "universalviewer": "^3.1.1"
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@types/koa": "^2.13.1",
     "@types/koa-router": "^7.4.2",
     "@types/mime-types": "^2.1.0",
     "@types/sharp": "^0.28.0",
-    "typescript": "^4.2.4",
-    "typescript-tslint-plugin": "^1.0.1"
+    "typescript": "^4.4.3",
+    "typescript-tslint-plugin": "^1.0.1",
+    "nodemon": "^2.0.13",
+    "ts-node": "^10.1.0"
   },
   "scripts": {
     "watch-server": "nodemon --watch \"src/**/*\" -e ts,tsx --exec ts-node ./src/server.ts",
