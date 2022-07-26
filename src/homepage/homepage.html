@@ -27,10 +27,16 @@
             padding: 6px 12px;
             font-size: 1.4em;
             color: #0E7BA6;
+            display: flex;
         }
 
         #topbar > img {
             width: 36px;
+            margin-right: 6px;
+        }
+
+        #topbar > a {
+            margin-left: auto;
         }
 
         input {
@@ -67,7 +73,8 @@
 <body>
 
 <div id="topbar">
-    <img src="/public/iiif.png" /> archival IIIF test server
+    <img src="/public/iiif.png" />
+    <div>archival IIIF test server</div>
     <a href="https://github.com/archival-IIIF/test-server" target="_blank" rel="noopener">
         <img src="/public/github-brands.svg" id="github" class="float-right"/>
     </a>
