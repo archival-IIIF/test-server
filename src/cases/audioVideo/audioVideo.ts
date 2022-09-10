@@ -90,11 +90,11 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
     const data = fs.readFileSync(filePath, {encoding:'utf8', flag:'r'});
 
     const items: any = [];
-    for(const e of data.split("\r\n\r\n")) {
+    for(const e of data.split("\n\n\r\n")) {
         if (e.trim() === 'WEBVTT') {
             continue;
         }
-        const lines = e.split("\r\n");
+        const lines = e.split("\n\n");
         const t = parseInt(lines[1].substr(0, 2)) * 3600 +
             parseInt(lines[1].substr(3, 2)) * 60 +
             parseInt(lines[1].substr(6, 2));
