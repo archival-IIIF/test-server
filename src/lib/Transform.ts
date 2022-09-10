@@ -31,6 +31,7 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
 
     const sequence2: SequenceV2 = new SequenceV2(m3.id + '/sequence', null);
     const mediaSequence2 = new MediaSequenceV2(m3.id + '/sequence', new ResourceV2('', null, null, ''));
+    mediaSequence2.elements?.shift();
 
     for (const item of m3.items ?? []) {
         if (!item.items?.[0]?.items?.[0]) {
@@ -57,7 +58,7 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
                 annotation3.body.id ?? '',
                 item.width ?? null,
                 item.height ?? null,
-                annotation3.body.format ?? '',
+                annotation3.body.format ?? annotation3.body.value  ?? '',
                 'foaf:Document'
             );
 
