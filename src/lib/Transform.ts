@@ -1,6 +1,8 @@
-import {Collection as CollectionV3, CollectionV2, Manifest as ManifestV3, ManifestV2, ResourceV2, ImageV2, SequenceV2,
-    CanvasV2, AnnotationV2, RenderingV2, Canvas as CanvasV3, Annotation as AnnotationV3, Resource as ResourceV3,
-    MediaSequenceV2, Base as BaseV3, BaseV2, Service as ServiceV3, AuthServiceV2, AuthService as AuthServiceV3} from "@archival-iiif/presentation-builder";
+import {Collection as CollectionV3, Manifest as ManifestV3, Canvas as CanvasV3, Annotation as AnnotationV3, Resource as ResourceV3,
+    Base as BaseV3, Service as ServiceV3, AuthService as AuthServiceV3} from "@archival-iiif/presentation-builder/v3";
+import {Collection as CollectionV2, Manifest as ManifestV2, Resource as ResourceV2, Image as ImageV2, Sequence as SequenceV2,
+    Canvas as CanvasV2, Annotation as AnnotationV2, Rendering as RenderingV2,
+    MediaSequence as MediaSequenceV2, Base as BaseV2, AuthService as AuthServiceV2} from "@archival-iiif/presentation-builder/v2";
 import {Internationalized as InternationalizedV3, Ref as RefV3} from "@archival-iiif/presentation-builder/dist/v3/Base";
 
 export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
