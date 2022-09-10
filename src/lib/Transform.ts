@@ -105,7 +105,7 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
     if (sequence2.canvases) {
         m2.setSequence(sequence2);
     }
-    if (mediaSequence2.elements) {
+    if (mediaSequence2.elements && mediaSequence2.elements.length > 0) {
         m2.setMediaSequence(mediaSequence2);
     }
 
