@@ -33,7 +33,7 @@ function getAuthService(ctx: any, accept: boolean): AuthService {
     authService.failureDescription = 'This material is not viewable without prior agreement!';
     const tokenService = new AuthService(
         tokenUrl,
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/token'
     );
     authService.service = [tokenService];

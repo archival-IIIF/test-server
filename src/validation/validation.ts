@@ -17,27 +17,25 @@ interface IResult {
 
 async function validateUrl(manifestUrl?: string, result?: IResult) {
 
-    if (!result) {
-        result = {};
-    }
+    let result2 = result ?? {};
 
     if (!manifestUrl) {
-        result['-'] = 'Missing url';
-        return result;
+        result2['-'] = 'Missing url';
+        return result2;
     }
 
     if (manifestUrl === '') {
-        result['-'] = 'Empty url';
-        return result;
+        result2['-'] = 'Empty url';
+        return result2;
     }
 
     if (!manifestUrl || !isUrl(manifestUrl)) {
-        result['-'] = 'Invalid url';
-        return result;
+        result2['-'] = 'Invalid url';
+        return result2;
     }
 
     try {
-        let manifestData = await new Promise((resolve, reject) => {
+        let manifestData: any = await new Promise((resolve, reject) => {
             http.get(manifestUrl, (response) => {
                 let chunksOfData: any = [];
 
@@ -70,29 +68,29 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
         let errors = ajv.errors;
 
         if (errors) {
-            result[manifestUrl] = errors;
+            result2[manifestUrl] = errors;
         } else {
-            result[manifestUrl] = 'Validation successful';
+            result2[manifestUrl] = 'Validation successful';
         }
 
         if (data.hasOwnProperty('items')) {
             for (const item of data.items) {
-                if (result.hasOwnProperty(item.id)) {
-                    result[item.id] = 'Loop';
+                if (result2.hasOwnProperty(item.id)) {
+                    result2[item.id] = 'Loop';
                     continue;
                 }
                 if (item.type !== 'Manifest' && item.type !== 'Collection') {
                     continue;
                 }
-                const childResult = await validateUrl(item.id, result);
-                result = Object.assign(result, childResult);
+                const childResult: any = await validateUrl(item.id, result2);
+                result2 = Object.assign(result2, childResult);
             }
         }
 
-        return result;
-    } catch (e) {
-        result[manifestUrl] = e.message;
-        return result;
+        return result2;
+    } catch (e: any) {
+        result2[manifestUrl] = e.message;
+        return result2;
     }
 }
 

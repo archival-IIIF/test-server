@@ -25,17 +25,17 @@ router.get('/logout/clickThrough',  (ctx: ParameterizedContext) => {
 export function getAuthClickThroughService(ctx: ParameterizedContext) {
     const authService = new AuthService(
         ctx.request.origin + '/login/clickThrough',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/clickthrough'
     );
     const tokenService = new AuthService(
         ctx.request.origin + '/token/clickThrough',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/token'
     );
     const logoutService = new AuthService(
         ctx.request.origin + '/logout/clickThrough',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/logout'
     );
     logoutService.label = 'Logout from Example Institution';

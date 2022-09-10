@@ -56,8 +56,8 @@ router.get('/image/dynamicDemo/:image/info.json', ctx => {
     const dimensions = imageSize(dynamicDemoCommon.getFullPath(ctx.params.image));
     ctx.body = infoV2(
         ctx.request.origin + '/image/dynamicDemo/' + ctx.params.image,
-        dimensions.width,
-        dimensions.height
+        dimensions.width ?? 0,
+        dimensions.height ?? 0
     );
 });
 

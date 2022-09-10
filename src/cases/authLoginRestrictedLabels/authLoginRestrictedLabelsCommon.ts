@@ -8,7 +8,7 @@ export const cookieToken = '4321';
 export const viewerToken = 'abcd';
 export const userToken = '1234';
 
-export function getAuthLogin(ctx: ParameterizedContext, prefix: string): RootCollection {
+export function getAuthLogin(ctx: ParameterizedContext, prefix: string): RootCollection | void {
     const url = ctx.request.origin + prefix + '/collection/authLoginRestrictedLabels';
 
 

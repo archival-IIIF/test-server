@@ -11,17 +11,17 @@ export const viewerToken = 'kiosk-viewer-123';
 export function getAuthKioskService(ctx: ParameterizedContext) {
     const authService = new AuthService(
         ctx.request.origin + '/login/kiosk',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/kiosk'
     );
     const tokenService = new AuthService(
         ctx.request.origin + '/token/kiosk',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/token'
     );
     const logoutService = new AuthService(
         ctx.request.origin + '/logout/kiosk',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/logout'
     );
     logoutService.label = 'Logout from Example Institution';

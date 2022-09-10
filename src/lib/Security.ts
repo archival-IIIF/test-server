@@ -17,7 +17,7 @@ export function hasAccess(
 
 
     if (ctx.headers.hasOwnProperty('authorization')) {
-        const headerToken = ctx.headers.authorization.replace('Bearer', '').trim();
+        const headerToken = ctx.headers.authorization?.replace('Bearer', '').trim();
 
         if (headerToken === viewerToken) {
             return true;

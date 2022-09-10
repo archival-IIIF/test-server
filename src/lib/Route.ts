@@ -81,9 +81,9 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
 
                         const id =  ctx.request.origin + ctx.request.url.replace('/info.json', '');
                         if (version === 'v2') {
-                            ctx.body = infoV2(id, size.width, size.height);
+                            ctx.body = infoV2(id, size.width ?? 0, size.height ?? 0);
                         } else {
-                            ctx.body = infoV3(id, size.width, size.height);
+                            ctx.body = infoV3(id, size.width ?? 0, size.height ?? 0);
                         }
                     });
                     router.get('/iiif/'  +version + '/image/' + imageId + '/:region/:size/:rotation/:quality.:format', async ctx => {

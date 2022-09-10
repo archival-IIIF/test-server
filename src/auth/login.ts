@@ -16,17 +16,17 @@ export function getAuthLoginService(ctx?: ParameterizedContext) {
 
     const authService = new AuthService(
         origin + '/login',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/login'
     );
     const tokenService = new AuthService(
         origin + '/token',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/token'
     );
     const logoutService = new AuthService(
         origin + '/logout',
-        undefined,
+        '',
         'http://iiif.io/api/auth/1/logout'
     );
     logoutService.label = 'Logout from Example Institution';

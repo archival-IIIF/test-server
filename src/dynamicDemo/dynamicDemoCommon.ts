@@ -202,11 +202,13 @@ class DynamicDemoCommon {
 
         if (Pronoms.has(extension)) {
             const pronom = Pronoms.get(extension);
-            metadata.push({
-                label: 'Original file type',
-                value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status='+
-                'detailReport&id=' + pronom.id + '\"> '+pronom.name+' (.' + extension + ')</a>'
-            });
+            if (pronom) {
+                metadata.push({
+                    label: 'Original file type',
+                    value: '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status='+
+                        'detailReport&id=' + pronom.id + '\"> '+pronom.name+' (.' + extension + ')</a>'
+                });
+            }
         }
 
         const stats = fs.statSync(objectPath);
