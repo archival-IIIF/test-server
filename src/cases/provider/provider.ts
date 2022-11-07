@@ -1,10 +1,15 @@
 import {ParameterizedContext} from "koa";
-import {getIIIFRouteTree, getImageBody2} from "../../lib/Route";
+import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
 import {Base} from "@archival-iiif/presentation-builder";
+
+const images = [
+    __dirname + '/../../imageService/Ariel_-_LoC_4a15521.jpg',
+];
 
 const providerManifest = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
-    const manifest = getImageBody2(ctx, prefix, path, 'Image with provider information');
+    const manifest = getImageBody(ctx, prefix, path, 'Image with provider information', undefined,
+        undefined, images);
     // provider
     const provider = new Base('https://example.org/about', 'Agent', { "en": [ "Example Organization" ] });
     provider.setHomepage({
@@ -28,8 +33,6 @@ export default getIIIFRouteTree([
     {
         path: '/manifest/provider',
         body: providerManifest,
-        images: [
-            __dirname + '/../../imageService/Ariel_-_LoC_4a15521.jpg',
-        ]
+        images
     }
 ]);

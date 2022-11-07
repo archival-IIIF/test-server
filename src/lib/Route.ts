@@ -13,7 +13,7 @@ import ImageManifest from "./ImageManifest";
 
 export interface iRoute {
     path: string;
-    body: (ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined, route: iRoute, auth?: boolean)
+    body: (ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined, route: iRoute, auth?: boolean, images?: string[])
         => Collection | Manifest;
     label?: string;
     children?: iRoute[];
@@ -112,14 +112,15 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
     }
 }
 
-export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined, route: iRoute): Manifest
+export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
+                             route?: iRoute, auth?: boolean, images?: string[]): Manifest
 {
     const i = new ImageManifest2(
         ctx.request.origin + prefix + path,
-        route.images ?? [],
+        route?.images ?? images ?? [],
         label ?? '-'
     );
-    if (route.authService) {
+    if (route &&  route.authService) {
         i.setService(route.authService(ctx));
         if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
             ctx.status = 401;
@@ -127,29 +128,6 @@ export function getImageBody(ctx: ParameterizedContext, prefix: string, path: st
     }
 
     return i;
-}
-
-export function getImageBody2(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
-                              route?: iRoute, images?: string[]): Manifest
-{
-
-    const size = images && images.length > 0 ? imageSize(images[0]) :undefined;
-    const manifest = new ImageManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + prefix + path.replace('/manifest/', '/image/') + '_0',
-        label ?? '-',
-        size?.width ?? 0,
-        size?.height ?? 0,
-    );
-
-    if (route && route.authService) {
-        manifest.setService(route.authService(ctx));
-        if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
-            ctx.status = 401;
-        }
-    }
-
-    return manifest;
 }
 
 export function getCollectionBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
