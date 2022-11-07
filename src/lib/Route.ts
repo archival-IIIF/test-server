@@ -9,6 +9,7 @@ import {infoV2, infoV3} from "../imageService/imageBase";
 import {basename} from "./helper";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
+import ImageManifest from "./ImageManifest";
 
 export interface iRoute {
     path: string;
@@ -126,6 +127,29 @@ export function getImageBody(ctx: ParameterizedContext, prefix: string, path: st
     }
 
     return i;
+}
+
+export function getImageBody2(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
+                              route?: iRoute, images?: string[]): Manifest
+{
+
+    const size = images && images.length > 0 ? imageSize(images[0]) :undefined;
+    const manifest = new ImageManifest(
+        ctx.request.origin + prefix + path,
+        ctx.request.origin + prefix + path.replace('/manifest/', '/image/') + '_0',
+        label ?? '-',
+        size?.width ?? 0,
+        size?.height ?? 0,
+    );
+
+    if (route && route.authService) {
+        manifest.setService(route.authService(ctx));
+        if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
+            ctx.status = 401;
+        }
+    }
+
+    return manifest;
 }
 
 export function getCollectionBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
