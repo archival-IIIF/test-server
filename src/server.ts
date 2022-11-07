@@ -28,6 +28,7 @@ import multiPage from './cases/multiPage/multiPage';
 import pdfFiles from "./cases/pdf/pdfFiles";
 import pdf from './cases/pdf/pdf';
 import rightsInformation from './cases/rightsInformation/rightsInformation';
+import provider from './cases/provider/provider';
 import thumbnail from './cases/thumbnail/thumbnail';
 import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
@@ -89,6 +90,7 @@ app.use(image);
 app.use(multiPage);
 app.use(pdfFiles);
 app.use(pdf);
+app.use(provider);
 app.use(multiLang);
 app.use(manifestations);
 app.use(manifestationsFiles);
