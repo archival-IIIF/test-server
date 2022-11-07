@@ -27,8 +27,9 @@ import mirador from './mirador/mirador'
 import multiPage from './cases/multiPage/multiPage';
 import pdfFiles from "./cases/pdf/pdfFiles";
 import pdf from './cases/pdf/pdf';
-import rightsInformation from './cases/rightsInformation/rightsInformation';
 import provider from './cases/provider/provider';
+import rendering from './cases/rendering/rendering';
+import rightsInformation from './cases/rightsInformation/rightsInformation';
 import thumbnail from './cases/thumbnail/thumbnail';
 import universalViewer from './universalViewer/universalViewer'
 import validation from './validation/validation';
@@ -81,6 +82,7 @@ app.use(emptyCollection);
 app.use(emptyFolder);
 app.use(logo);
 app.use(logoFiles);
+app.use(rendering);
 app.use(rightsInformation);
 app.use(thumbnail);
 app.use(nestedStructure);
