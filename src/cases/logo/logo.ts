@@ -20,7 +20,6 @@ const logoContainer = (ctx: ParameterizedContext, prefix: string, path: string) 
     return c;
 }
 
-
 const fileWithLogo = (ctx: ParameterizedContext, prefix: string, path: string) => {
     const m = new FileManifest(
         ctx.request.origin + prefix + path,
@@ -38,14 +37,17 @@ const fileWithLogo = (ctx: ParameterizedContext, prefix: string, path: string) =
         120
     ));
 
-
     return m;
 }
 
 const fileWithoutLogo = (ctx: ParameterizedContext, prefix: string, path: string) =>
-    new FileManifest(ctx.request.origin + prefix + path, ctx.request.origin + '/file/txt', 'File without logo.txt', 'Text', 'text/plain');
-
-
+    new FileManifest(
+        ctx.request.origin + prefix + path,
+        ctx.request.origin + '/file/txt',
+        'File without logo.txt',
+        'Text',
+        'text/plain'
+    );
 
 export default getIIIFRouteTree([
     {
@@ -64,7 +66,3 @@ export default getIIIFRouteTree([
         ]
     }
 ]);
-
-
-
-

@@ -20,6 +20,7 @@ export default class ImageManifest2 extends Manifest {
             const imageId = basename(id) + '_' + i.toString()
             const canvas = new Canvas(
                 baseId + '/canvas/' + imageId,
+                '',
                 size.width,
                 size.height
             );

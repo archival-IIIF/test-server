@@ -38,7 +38,7 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
             continue;
         }
         const annotation3: AnnotationV3 = item.items[0].items[0];
-        if (annotation3.body.type === 'Image') {
+        if (annotation3.body.type === 'Image' && annotation3.body instanceof ResourceV3) {
             const resource2: ResourceV2 = new ResourceV2(annotation3.body.id ?? '', item.width ?? null, item.height ?? null, annotation3.body.format ?? '')
             const imageService2 = new ImageV2(
                 annotation3.body?.service?.[0]?.id?.replace('/v3/', '/v2/') ?? '',
@@ -53,7 +53,7 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
             annotation.on = item.id;
             const canvas2: CanvasV2 = new CanvasV2(item.id ?? '', annotation);
             sequence2.addCanvas(canvas2);
-        } else if (annotation3.body.type === 'Audio' || annotation3.body.type === 'Video') {
+        } else if ((annotation3.body.type === 'Audio' || annotation3.body.type === 'Video') && annotation3.body instanceof ResourceV3) {
             const resource2: ResourceV2 = new ResourceV2(
                 annotation3.body.id ?? '',
                 item.width ?? null,
@@ -77,7 +77,7 @@ export function transformManifestToV2(m3: ManifestV3): ManifestV2 {
                 }
 
             mediaSequence2.addElement(resource2);
-        } else {
+        } else if (annotation3.body instanceof ResourceV3) {
             const resource2: ResourceV2 = new ResourceV2(
                 annotation3.body.id ?? '',
                 item.width ?? null,

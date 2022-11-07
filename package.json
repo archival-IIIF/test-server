@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@archival-iiif/presentation-builder": "^1.5.1",
+    "@archival-iiif/presentation-builder": "^1.5.2",
     "@archival-iiif/image-server-core": "^2.0.5",
     "ajv": "^8.11.0",
     "bootstrap": "^5.2.1",
