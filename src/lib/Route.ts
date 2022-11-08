@@ -25,12 +25,12 @@ export interface iRoute {
     authService?: (ctx: ParameterizedContext) => AuthService;
 }
 
-export function getIIIFRouteTree(routes: iRoute[]) {
-    const router: Router = new Router();
+export function getIIIFRouteTree(routes: iRoute[], router?: Router) {
+    const router2 = router ?? new Router();
 
-    addIIIFRoutes(routes, router);
+    addIIIFRoutes(routes, router2);
 
-    return router.routes();
+    return router2.routes();
 }
 
 export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: string) {
