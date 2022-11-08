@@ -43,10 +43,6 @@
             margin-bottom: 32px;
         }
 
-        .open-in-viewer {
-            display: none
-        }
-
         td:nth-of-type(1) {
             width: 140px;
         }
@@ -82,7 +78,7 @@
 
 <div class="container">
 
-    <input id="viewer-url" type="url" class="form-control" placeholder="Add viewer url (e.g. http://localhost:3000/)" aria-label="viewer-url" aria-describedby="viewer-url" onkeyup="openInViewer(this.value)">
+    <input id="viewer-url" type="url" class="form-control" placeholder="Add viewer url (e.g. http://localhost:3000/)" aria-label="viewer-url" aria-describedby="viewer-url" onkeyup="viewerUrlChanged(this.value)">
 
     <table id="test-cases" class="table table-striped">
         <thead>
@@ -104,167 +100,55 @@
     </ul>
 </div>
 
-<script type="text/javascript" src="/jquery/jquery.slim.min.js"></script>
 <script type="text/javascript">
-
-    let testCases = {
-        'General': {
-            image: {
-                label: 'Test case with images',
-                uv: true,
-                mirador: true
-            },
-            audioVideo: {
-                label: 'Test case with audio and video files',
-                uv: true
-            },
-            logo: {
-                label: 'Test case with a logo',
-                uv: true
-            },
-            rightsInformation: {
-                label: 'Test case with license and attribution data',
-                uv: true
-            },
-            thumbnail: {
-                label: 'Test case with different thumbnail settings',
-                uv: true
-            },
-            language: {
-                label: 'Test case with files in different languages',
-                uv: true
-            },
-            multiLang: {
-                label: 'Test case with metadata in different languages',
-                uv: true
-            },
-            pdf: {
-                label: 'Test case with pdf files',
-                uv: true
-            },
-            manifestations: {
-                label: 'File with two manifestations',
-                uv: true
-            },
-            multiPage: {
-                label: 'Test case with a multi page',
-                uv: true,
-                mirador: true
-            },
-            provider: {
-                uri: 'manifest/provider',
-                label: 'Test case with provider information',
-                uv: true,
-                mirador: true
-            },
-            rendering: {
-                uri: 'manifest/rendering',
-                label: 'Test case with rendering',
-                uv: true,
-                mirador: true
-            },
-        },
-        'No parent': {
-            noParent: {
-                uri: 'manifest/noParent',
-                label: 'Test case without parent',
-                uv: true,
-                mirador: true
-            },
-        },
-        'Directory': {
-            emptyCollection: 'Empty collection test case',
-            emptyFolder: 'Empty folder test case',
-            nestedStructure: 'Test case with a nested structure',
-            dynamicDemo: {
-                label: 'Dynamic demo',
-                v3: false
-            },
-        },
-        'Authentication': {
-            authLogin: 'Token login test case with a locked collection',
-            authLoginRestrictedLabels: 'Token login test case with locked labels',
-            authLoginRestrictedLabels2:
-                'Locked labels without additional manifest (non-standard)',
-            authInfo: {
-                label: 'Token login test case with a locked info.json',
-                uv: true,
-                mirador: true
-            },
-            authExternalAccept: 'External auth test (accept)',
-            authExternalDeny: 'External auth test (deny)',
-            authClickThrough: 'Click-through auth test',
-            authKiosk: 'Kiosk auth test',
-            authMixed: 'Mixed test with login and click-through auth',
-        },
-        'Invalid manifests': {
-            missingManifest: 'Missing manifest',
-            noJson: 'No json output',
-            noId: 'Missing id in manifest',
-            noLabel: 'Missing label in manifest',
-            wrongManifestType: 'Wrong manifest type',
-            missingSubfolder: 'Missing subfolder in manifest',
-            missingParent: 'Missing parent in manifest',
-            missingInfoJson: 'Missing info.json',
-            loop: 'Loop',
-        }
-    };
-
-    let table = '';
-    for (let groupLabel in testCases) {
-        const testCasesGroup = testCases[groupLabel];
-        table += '<tr><th colspan="4"><strong>' + groupLabel + '</strong></th></tr>';
-        for (let id in testCasesGroup) {
-            let testCase;
-            if (testCases[groupLabel][id].hasOwnProperty('label')) {
-                testCase = testCases[groupLabel][id];
-            } else {
-                testCase = {label: testCases[groupLabel][id]};
-            }
-            testCase.id = id;
-            const baseUrl = window.location.href;
-            const manifestUrlV3 = testCases[groupLabel][id].hasOwnProperty('uri') ?
-                baseUrl + 'iiif/v3/' + testCases[groupLabel][id].uri :
-                baseUrl + 'iiif/v3/collection/' + testCase.id;
-            table +=
-                '<tr>' +
-                '<td><a class="open" href="' + manifestUrlV3 + '" target="_blank">' + id + '</td>' +
-                '<td>' + testCase.label + '</td>' +
-                getLinks(testCase, 'v2') +
-                getLinks(testCase, 'v3') +
-                '</tr>';
-        }
-    }
-    $('#test-cases > tbody').append(table);
 
     let viewerUrl = localStorage.getItem('viewer-url');
     if (viewerUrl) {
-        openInViewer(viewerUrl);
-        $('#viewer-url').val(viewerUrl);
+        document.getElementById('viewer-url').value = viewerUrl;
+    }
+    let testCases = [];
+
+    fetch('testCases.json').then(
+        response => response.json().then(result => {
+            testCases = result;
+            drawTable();
+        })
+    );
+
+    function viewerUrlChanged(value) {
+        viewerUrl = value;
+        localStorage.setItem('viewer-url', value);
+        drawTable()
     }
 
-    function openInViewer(value) {
-        let $openInViewer = $('.open-in-viewer');
-        let $openManifest = $('.open-manifest');
-
-        if (value === '' || !isURL(value)) {
-            $openInViewer.hide();
-            localStorage.removeItem('viewer-url');
-            $openManifest.each(function () {
-                $(this).parent().parent().find('.open').attr('href', this.href);
-            });
-
-        } else {
-            $openInViewer.show();
-            localStorage.setItem('viewer-url', value);
-            $openManifest.each(function () {
-                let $element = $(this);
-                $element.parent().find('.open-in-viewer').attr('href', value + '?manifest=' + this.href);
-                $element.parent().parent().find('.open').attr('href', value + '?manifest=' + this.href);
-            });
+    function drawTable() {
+        let table = '';
+        for (let groupLabel in testCases) {
+            const testCasesGroup = testCases[groupLabel];
+            table += '<tr><th colspan="4"><strong>' + groupLabel + '</strong></th></tr>';
+            for (let id in testCasesGroup) {
+                let testCase;
+                if (testCases[groupLabel][id].hasOwnProperty('label')) {
+                    testCase = testCases[groupLabel][id];
+                } else {
+                    testCase = {label: testCases[groupLabel][id]};
+                }
+                testCase.id = id;
+                const baseUrl = window.location.href;
+                const manifestUrlV3 = testCases[groupLabel][id].hasOwnProperty('uri') ?
+                    baseUrl + 'iiif/v3/' + testCases[groupLabel][id].uri :
+                    baseUrl + 'iiif/v3/collection/' + testCase.id;
+                const openUrl = isURL(viewerUrl) ? viewerUrl + '?manifest=' + manifestUrlV3 : manifestUrlV3;
+                table +=
+                    '<tr>' +
+                    '<td><a class="open" href="' + openUrl + '" target="_blank">' + id + '</td>' +
+                    '<td>' + testCase.label + '</td>' +
+                    getLinks(testCase, 'v2') +
+                    getLinks(testCase, 'v3') +
+                    '</tr>';
+            }
         }
-
-
+        document.querySelector('#test-cases > tbody').innerHTML = table;
     }
 
     function isURL(str) {
@@ -289,9 +173,11 @@
             '/collection/' + testCase.id;
         const manifestUrl = baseUrl + 'iiif/' + version + route;
 
-        let output = '<td>' +
-            '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>' +
-            '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>';
+        let output = '<td>';
+        if (isURL(viewerUrl)) {
+            output += '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
+        }
+        output += '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>';
 
         if (version === 'v3') {
             const validationUrl = baseUrl + 'validate?manifest=' + manifestUrl;
