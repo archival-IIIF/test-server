@@ -10,6 +10,15 @@ router.get('/', async ctx => {
     ctx.body = createReadStream(path.join(__dirname, 'homepage.html'));
 });
 
+router.get('/homepage.css', async ctx => {
+    ctx.type = 'text/css';
+    ctx.body = createReadStream(path.join(__dirname, 'homepage.css'));
+});
+
+router.get('/main.js', async ctx => {
+    ctx.type = 'text/javascript';
+    ctx.body = createReadStream(path.join(__dirname, 'main.js'));
+});
 
 router.get('/testCases.json', async ctx => {
     ctx.body = {
