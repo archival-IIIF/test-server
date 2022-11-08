@@ -7,12 +7,12 @@ const router: Router = new Router();
 
 router.get('/', async ctx => {
     ctx.type = 'text/html';
-    ctx.body = createReadStream(path.join(__dirname, 'homepage.html'));
+    ctx.body = createReadStream(path.join(__dirname, 'index.html'));
 });
 
-router.get('/homepage.css', async ctx => {
+router.get('/index.css', async ctx => {
     ctx.type = 'text/css';
-    ctx.body = createReadStream(path.join(__dirname, 'homepage.css'));
+    ctx.body = createReadStream(path.join(__dirname, 'index.css'));
 });
 
 router.get('/main.js', async ctx => {

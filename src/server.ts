@@ -14,7 +14,8 @@ import dynamicDemo from './dynamicDemo/routes';
 import emptyCollection from './cases/emptyCollection/emptyCollection';
 import emptyFolder from './cases/emptyFolder/emptyFolder';
 import encoding from './cases/encoding/encoding';
-import homepage from './homepage/homepage';
+import index from './index/index';
+import homepage from './cases/homepage/homepage';
 import image from './cases/image/image';
 import languageFiles from "./cases/language/languageFiles";
 import language from './cases/language/language';
@@ -82,6 +83,7 @@ app.use(authMixed);
 app.use(emptyCollection);
 app.use(emptyFolder);
 app.use(encoding);
+app.use(homepage);
 app.use(logo);
 app.use(logoFiles);
 app.use(rendering);
@@ -105,7 +107,7 @@ app.use(noParent);
 
 app.use(dynamicDemo);
 
-app.use(homepage);
+app.use(index);
 app.use(common);
 app.use(universalViewer);
 app.use(mirador);

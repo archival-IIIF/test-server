@@ -2,8 +2,7 @@
     "General": {
         "image": {
             "label": "Test case with images",
-            "uv": true,
-            "mirador": true
+            "uv": true
         },
         "audioVideo": {
             "label": "Test case with audio and video files",
@@ -39,32 +38,30 @@
         },
         "multiPage": {
             "label": "Test case with a multi page",
-            "uv": true,
-            "mirador": true
+            "uv": true
         },
         "provider": {
             "uri": "manifest/provider",
             "label": "Test case with provider information",
-            "uv": true,
-            "mirador": true
+            "uv": true
         },
         "rendering": {
             "uri": "manifest/rendering",
             "label": "Test case with rendering",
-            "uv": true,
-            "mirador": true
+            "uv": true
         },
         "encoding": {
-            "label": "Test case with encoding",
-            "mirador": true
+            "label": "Test case with encoding"
+        },
+        "homepage": {
+            "label": "Test case with a homepage"
         }
     },
     "No parent": {
         "noParent": {
             "uri": "manifest/noParent",
             "label": "Test case without parent",
-            "uv": true,
-            "mirador": true
+            "uv": true
         }
     },
     "Directory": {
@@ -82,8 +79,7 @@
         "authLoginRestrictedLabels2": "Locked labels without additional manifest (non-standard)",
         "authInfo": {
             "label": "Token login test case with a locked info.json",
-            "uv": true,
-            "mirador": true
+            "uv": true
         },
         "authExternalAccept": "External auth test (accept)",
         "authExternalDeny": "External auth test (deny)",

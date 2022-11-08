@@ -80,16 +80,14 @@ function getLinks(testCase, version) {
         output += '<a href="' + validationUrl + '" target="_blank"><img class="icon" title="Validate" alt="Validate" src="/public/check-circle-regular.svg" /></a>';
     }
 
+    const mirardorUrl = baseUrl + 'mirador?manifest=' + manifestUrl;
+    output += '<a class="mirador" href="' + mirardorUrl + '" target="_blank">' +
+        '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
+        '</a>';
+
     if (testCase.uv === true) {
         let uvUrl = baseUrl + 'universalViewer?manifest=' + manifestUrl;
         output += '<a class="universal-viewer" href="' + uvUrl + '" target="_blank">UV</a>';
-    }
-
-    if (testCase.mirador === true) {
-        const mirardorUrl = baseUrl + 'mirador?manifest=' + manifestUrl;
-        output += '<a class="mirador" href="' + mirardorUrl + '" target="_blank">' +
-            '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
-            '</a>';
     }
 
     output += '</td>';
