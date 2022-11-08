@@ -79,8 +79,7 @@
     "Authentication": {
         "authLogin": "Token login test case with a locked collection",
         "authLoginRestrictedLabels": "Token login test case with locked labels",
-        "authLoginRestrictedLabels2":
-        "Locked labels without additional manifest (non-standard)",
+        "authLoginRestrictedLabels2": "Locked labels without additional manifest (non-standard)",
         "authInfo": {
             "label": "Token login test case with a locked info.json",
             "uv": true,
