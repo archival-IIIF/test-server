@@ -2,6 +2,10 @@ body {
     margin: 92px 0 46px 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 .icon {
     width: 22px;
     height: 22px;
@@ -34,12 +38,12 @@ input {
     margin-bottom: 32px;
 }
 
-td:nth-of-type(1) {
-    width: 140px;
+td:nth-of-type(2) {
+    width: 160px;
 }
 
 td:nth-of-type(3) {
-    width: 140px;
+    width: 160px;
 }
 
 .universal-viewer {

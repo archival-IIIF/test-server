@@ -1,66 +1,74 @@
 {
     "General": {
         "image": {
-            "label": "Test case with images",
-            "uv": true
-        },
-        "audioVideo": {
-            "label": "Test case with audio and video files",
-            "uv": true
-        },
-        "logo": {
-            "label": "Test case with a logo",
-            "uv": true
-        },
-        "rightsInformation": {
-            "label": "Test case with license and attribution data",
-            "uv": true
-        },
-        "thumbnail": {
-            "label": "Test case with different thumbnail settings",
-            "uv": true
-        },
-        "language": {
-            "label": "Test case with files in different languages",
-            "uv": true
-        },
-        "multiLang": {
-            "label": "Test case with metadata in different languages",
-            "uv": true
-        },
-        "pdf": {
-            "label": "Test case with pdf files",
-            "uv": true
-        },
-        "manifestations": {
-            "label": "File with two manifestations",
+            "uri": "manifest/image",
+            "label": "Image",
             "uv": true
         },
         "multiPage": {
-            "label": "Test case with a multi page",
+            "uri": "manifest/multiPage",
+            "label": "Multi page item",
             "uv": true
         },
-        "provider": {
-            "uri": "manifest/provider",
-            "label": "Test case with provider information",
+        "metadata": {
+            "uri": "manifest/metadata",
+            "label": "Image with metadata",
+            "uv": true
+        },
+        "multiLang": {
+            "uri": "manifest/multiLang",
+            "label": "Image with metadata in different languages",
+            "uv": true
+        },
+        "logo": {
+            "uri": "manifest/logo",
+            "label": "Image with a logo",
+            "uv": true
+        },
+        "rightsInformation": {
+            "uri": "manifest/rightsInformation",
+            "label": "Image case with license",
+            "uv": true
+        },
+        "attribution": {
+            "uri": "manifest/attribution",
+            "label": "Image with attribution",
             "uv": true
         },
         "rendering": {
             "uri": "manifest/rendering",
-            "label": "Test case with rendering",
+            "label": "Image with rendering (see download)",
+            "uv": true
+        },
+        "provider": {
+            "uri": "manifest/provider",
+            "label": "Image with provider information",
+            "uv": true
+        },
+        "homepage": {
+            "label": "Image with homepage"
+        },
+        "audioVideo": {
+            "label": "Audio and video files",
+            "uv": true
+        },
+        "thumbnail": {
+            "label": "Different thumbnail settings",
+            "uv": true
+        },
+        "language": {
+            "label": "Text files with file names in different writing systems",
             "uv": true
         },
         "encoding": {
-            "label": "Test case with encoding"
+            "label": "Text files with different file encodings"
         },
-        "homepage": {
-            "label": "Test case with a homepage"
-        }
-    },
-    "No parent": {
-        "noParent": {
-            "uri": "manifest/noParent",
-            "label": "Test case without parent",
+        "pdf": {
+            "label": "PDF files",
+            "uv": true
+        },
+        "manifestations": {
+            "label": "File with two manifestations",
             "uv": true
         }
     },

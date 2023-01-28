@@ -1,5 +1,6 @@
 import * as Koa from 'koa';
 import * as path from 'path';
+import attribution from "./cases/attribution/attribution";
 import audioVideoFiles from './cases/audioVideo/audioVideoFiles';
 import audioVideo from './cases/audioVideo/audioVideo';
 import clickThrough from './auth/clickThrough';
@@ -42,7 +43,7 @@ import authLoginRestrictedLabels from "./cases/authLoginRestrictedLabels/authLog
 import nestedStructure from "./cases/nestedStructure/nestedStructure";
 import authLoginRestrictedLabels2 from "./cases/authLoginRestrictedLabels2/authLoginRestrictedLabels2";
 import multiLang from "./cases/multiLang/multiLang";
-import noParent from "./cases/noParent/noParent";
+import metadata from "./cases/metadata/metadata";
 
 
 const app: Koa = new Koa();
@@ -70,6 +71,7 @@ app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'),
 app.use(bodyParser());
 
 // cases
+app.use(attribution);
 app.use(audioVideo);
 app.use(audioVideoFiles);
 app.use(authLogin);
@@ -102,7 +104,7 @@ app.use(manifestations);
 app.use(manifestationsFiles);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);
-app.use(noParent);
+app.use(metadata);
 
 
 app.use(dynamicDemo);

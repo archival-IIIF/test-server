@@ -2,10 +2,11 @@ import {Service, Canvas, AnnotationPage, Resource, Annotation, Manifest} from "@
 import {imageSize} from "image-size";
 import {basename} from "./helper";
 import ThumbnailService from "./ThumbnailService";
+import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
 
 export default class ImageManifest2 extends Manifest {
 
-    constructor(id: string, images: string[], label: string) {
+    constructor(id: string, images: string[], label: Internationalize) {
         super(id, label);
 
         this.setContext('http://iiif.io/api/presentation/3/context.json');

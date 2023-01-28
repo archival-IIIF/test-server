@@ -9,7 +9,7 @@ import {infoV2, infoV3} from "../imageService/imageBase";
 import {basename} from "./helper";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
-import ImageManifest from "./ImageManifest";
+import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
 
 export interface iRoute {
     path: string;
@@ -112,7 +112,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
     }
 }
 
-export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label: string | undefined,
+export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label: Internationalize | undefined,
                              route?: iRoute, auth?: boolean, images?: string[]): Manifest
 {
     const i = new ImageManifest2(

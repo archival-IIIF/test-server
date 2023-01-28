@@ -37,8 +37,7 @@ function drawTable() {
             const openUrl = isURL(viewerUrl) ? viewerUrl + '?manifest=' + manifestUrlV3 : manifestUrlV3;
             table +=
                 '<tr>' +
-                '<td><a class="open" href="' + openUrl + '" target="_blank">' + id + '</td>' +
-                '<td>' + testCase.label + '</td>' +
+                '<td><a class="open" href="' + openUrl + '" target="_blank">' + testCase.label + '</td>' +
                 getLinks(testCase, 'v2') +
                 getLinks(testCase, 'v3') +
                 '</tr>';
@@ -71,7 +70,8 @@ function getLinks(testCase, version) {
 
     let output = '<td>';
     if (isURL(viewerUrl)) {
-        output += '<a class="open-in-viewer" href="" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
+        const openUrl = viewerUrl + '?manifest=' + manifestUrl;
+        output += '<a class="open-in-viewer" href="'+openUrl+'" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
     }
     output += '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>';
 
