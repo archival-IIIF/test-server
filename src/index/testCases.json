@@ -72,10 +72,10 @@
             "uv": true
         }
     },
-    "Directory": {
-        "emptyCollection": "Empty collection test case",
-        "emptyFolder": "Empty folder test case",
-        "nestedStructure": "Test case with a nested structure"
+    "Collection": {
+        "emptyCollection": "Empty collection",
+        "emptyFolder": "Empty sub collection",
+        "nestedStructure": "Nested structure"
     },
     "Authentication": {
         "authLogin": "Token login test case with a locked collection",
@@ -97,7 +97,7 @@
         "noId": "Missing id in manifest",
         "nolabel": "Missing label in manifest",
         "wrongManifestType": "Wrong manifest type",
-        "missingSubfolder": "Missing subfolder in manifest",
+        "missingSubfolder": "Missing sub collection",
         "missingParent": "Missing parent in manifest",
         "missingInfoJson": "Missing info.json",
         "loop": "Loop"
