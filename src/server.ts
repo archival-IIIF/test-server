@@ -11,7 +11,6 @@ import authInfo from "./cases/authInfo/authInfo";
 import login from "./auth/login";
 import authLogin from "./cases/authLogin/authLogin";
 import common from './common/common';
-import dynamicDemo from './dynamicDemo/routes';
 import emptyCollection from './cases/emptyCollection/emptyCollection';
 import emptyFolder from './cases/emptyFolder/emptyFolder';
 import encoding from './cases/encoding/encoding';
@@ -105,9 +104,6 @@ app.use(manifestationsFiles);
 app.use(manifestErrorsV2);
 app.use(manifestErrorsV3);
 app.use(metadata);
-
-
-app.use(dynamicDemo);
 
 app.use(index);
 app.use(common);

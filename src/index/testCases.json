@@ -75,11 +75,7 @@
     "Directory": {
         "emptyCollection": "Empty collection test case",
         "emptyFolder": "Empty folder test case",
-        "nestedStructure": "Test case with a nested structure",
-        "dynamicDemo": {
-            "label": "Dynamic demo",
-            "v3": false
-        }
+        "nestedStructure": "Test case with a nested structure"
     },
     "Authentication": {
         "authLogin": "Token login test case with a locked collection",
