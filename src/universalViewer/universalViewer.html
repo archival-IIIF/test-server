@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/uv/uv.css">
-    <script src="/uv/lib/offline.js"></script>
-    <script src="/uv/helpers.js"></script>
+    <script type="text/javascript" src="/uv/umd/UV.js"></script>
     <title>Universalviewer</title>
     <style>
+        body {
+            margin: 0;
+        }
         #uv {
-            width: 800px;
-            height: 600px;
+            width: 100%;
+            height: 100vh;
         }
     </style>
 </head>
@@ -20,8 +22,7 @@
 <div id="uv" class="uv"></div>
 
 <script>
-
-
+    
     function findGetParameter(parameterName) {
         let result = null, tmp = [];
         location.search
@@ -35,20 +36,11 @@
     }
 
 
-    let uv;
-    window.addEventListener('uvLoaded', function (e) {
-        uv = createUV(
-            '#uv',
-            {
-                iiifResourceUri: findGetParameter('manifest')
-            },
-            new UV.URLDataProvider()
-        );
-
-    }, false);
+    const urlAdapter = new UV.IIIFURLAdapter();
+    const data = urlAdapter.getInitialData({iiifManifestId: findGetParameter('manifest')});
+    const uv = UV.init("uv", data);
 
 </script>
 
-<script src="/uv/uv.js"></script>
 </body>
 </html>
