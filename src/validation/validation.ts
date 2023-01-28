@@ -3,6 +3,7 @@ import Ajv from 'ajv';
 import * as fs from 'fs';
 import * as http from 'http';
 import {ErrorObject} from "ajv";
+import addFormats from "ajv-formats"
 
 const router: Router = new Router();
 
@@ -63,6 +64,7 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
         const data: any = JSON.parse(manifestData.toString());
 
         const ajv = new Ajv({logger: false});
+        addFormats(ajv);
 
         ajv.validate(schema, data);
         let errors = ajv.errors;

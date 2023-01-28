@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "$comment": "IIIF basic types",
-    "types": {
+    "$defs": {
         "id": {
             "type": "string",
             "format": "uri",
@@ -28,8 +28,8 @@
             "$id": "#keyValueString",
             "type": "object",
             "properties": {
-                "label": {"$ref": "#/types/lngString" },
-                "value": {"$ref": "#/types/lngString" }
+                "label": {"$ref": "#/$defs/lngString" },
+                "value": {"$ref": "#/$defs/lngString" }
             },
             "required": ["label", "value"]
         },
@@ -53,9 +53,9 @@
             "title": "Classes MUST have an id and type property and MAY have a label.",
             "type": "object",
             "properties": {
-                "id": { "$ref": "#/types/id" },
+                "id": { "$ref": "#/$defs/id" },
                 "type": { "type": "string" },
-                "label": { "$ref": "#/types/lngString" }
+                "label": { "$ref": "#/$defs/lngString" }
             },
             "required": ["id", "type"]
         },
@@ -67,11 +67,11 @@
             "type": "array",
             "items": {
                 "allOf": [
-                    { "$ref": "#/types/class" },
+                    { "$ref": "#/$defs/class" },
                     {
                         "type": "object",
                         "properties": {
-                            "format": { "$ref": "#/types/format" },
+                            "format": { "$ref": "#/$defs/format" },
                             "profile": {
                                 "type": "string"
                             }
@@ -83,25 +83,25 @@
     },
 
     "$comment": "IIIF Classes",
-    "classes": {
+    "properties": {
         "metadata": {
             "type": "array",
             "items": {
-                "$ref": "#/types/keyValueString"
+                "$ref": "#/$defs/keyValueString"
             }
         },
         "homepage": {
             "type": "array",
             "items": {
                 "allOf": [
-                    { "$ref": "#/types/class" },
+                    { "$ref": "#/$defs/class" },
                     {
                         "type": "object",
                         "properties": {
-                            "format": { "$ref": "#/types/format" },
+                            "format": { "$ref": "#/$defs/format" },
                             "language": {
                                 "type": "array",
-                                "items": { "$ref": "#/types/BCP47" }
+                                "items": { "$ref": "#/$defs/BCP47" }
                             }
                         }
                     }
@@ -109,12 +109,12 @@
             }
         },
         "seeAlso": {
-            "$ref": "#/types/external"
+            "$ref": "#/$defs/external"
         },
         "partOf": {
             "type": "array",
             "items": {
-                "$ref": "#/types/class"
+                "$ref": "#/$defs/class"
             }
         },
         "choice": {
@@ -136,7 +136,7 @@
                     "title": "Annotation bodies MUST have an id and type property.",
                     "type": "object",
                     "properties": {
-                        "id": { "$ref": "#/types/id" },
+                        "id": { "$ref": "#/$defs/id" },
                         "type": {
                             "type": "string"
                         },
@@ -147,12 +147,12 @@
                             "type": "integer"
                         },
                         "duration": {
-                            "$ref": "#/types/duration"
+                            "$ref": "#/$defs/duration"
                         },
                         "language": { "type": "string"},
-                        "service": { "$ref": "#/classes/service" },
-                        "format": { "$ref": "#/types/format" },
-                        "label": {"$ref": "#/types/lngString" }
+                        "service": { "$ref": "#/properties/service" },
+                        "format": { "$ref": "#/$defs/format" },
+                        "label": {"$ref": "#/$defs/lngString" }
                     },
                     "required": ["id", "type"]
                 },
@@ -160,13 +160,13 @@
                     "title": "Annotation bodies which are TextualBody MUST have an type and value property.",
                     "type": "object",
                     "properties": {
-                        "id": { "$ref": "#/types/id" },
+                        "id": { "$ref": "#/$defs/id" },
                         "type": {
                             "type": "string",
                             "pattern": "^TextualBody$"
                         },
                         "value": { "type": "string" },
-                        "format": { "$ref": "#/types/format" },
+                        "format": { "$ref": "#/$defs/format" },
                         "language": { "type": "string"}
                     },
                     "required": ["value", "type"]
@@ -175,11 +175,11 @@
         },
         "imgSvr": {
             "allOf": [
-                { "$ref": "#/classes/service" },
+                { "$ref": "#/properties/service" },
                 {
                     "properties": {
                         "profile": { "type": "string" },
-                        "@id": { "$ref": "#/types/id" },
+                        "@id": { "$ref": "#/$defs/id" },
                         "@type": { "type": "string" }
                     }
                 }
@@ -191,12 +191,12 @@
                 "oneOf": [
                     {
                         "allOf": [
-                            { "$ref": "#/types/class" },
+                            { "$ref": "#/$defs/class" },
                             {
                                 "type": "object",
                                 "properties": {
                                     "profile": { "type": "string" },
-                                    "service": { "$ref": "#/classes/service" }
+                                    "service": { "$ref": "#/properties/service" }
                                 }
                             }
                         ]
@@ -204,10 +204,10 @@
                     {
                         "type": "object",
                         "properties": {
-                            "@id": { "$ref": "#/types/id" },
+                            "@id": { "$ref": "#/$defs/id" },
                             "@type": { "type": "string" },
                             "profile": { "type": "string" },
-                            "service": { "$ref": "#/classes/service" }
+                            "service": { "$ref": "#/properties/service" }
                         },
                         "required": ["@id", "@type"]
                     }
@@ -333,7 +333,7 @@
             "type": "array",
             "items": {
                 "allOf": [
-                    { "$ref": "#/types/class" },
+                    { "$ref": "#/$defs/class" },
                     {
                         "type": "object",
                         "properties": {
@@ -341,12 +341,12 @@
                                 "type": "string",
                                 "pattern": "^Agent$"
                             },
-                            "homepage": { "$ref": "#/classes/homepage" },
+                            "homepage": { "$ref": "#/properties/homepage" },
                             "logo": {
                                 "type": "array",
-                                "items": { "$ref": "#/classes/resource" }
+                                "items": { "$ref": "#/properties/resource" }
                             },
-                            "seeAlso": { "$ref": "#/classes/seeAlso" }
+                            "seeAlso": { "$ref": "#/properties/seeAlso" }
                         }
                     }
                 ]
@@ -354,7 +354,7 @@
         },
         "collection": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "properties": {
@@ -364,33 +364,33 @@
                             "title": "Are you validating a collection?",
                             "description":"If you are validating a manifest, you may get this error if there are errors in the manifest. The validator first validates it as a manifest and if that fails it will try and validate it using the other types."
                         },
-                        "metadata": { "$ref": "#/classes/metadata" },
-                        "summary": { "$ref": "#/types/lngString" },
-                        "requiredStatement": { "$ref": "#/types/keyValueString" },
-                        "rights": { "$ref": "#/classes/rights" },
-                        "navDate": { "$ref": "#/classes/navDate" },
-                        "provider": { "$ref": "#/classes/provider" },
-                        "seeAlso": { "$ref": "#/classes/seeAlso" },
+                        "metadata": { "$ref": "#/properties/metadata" },
+                        "summary": { "$ref": "#/$defs/lngString" },
+                        "requiredStatement": { "$ref": "#/$defs/keyValueString" },
+                        "rights": { "$ref": "#/properties/rights" },
+                        "navDate": { "$ref": "#/properties/navDate" },
+                        "provider": { "$ref": "#/properties/provider" },
+                        "seeAlso": { "$ref": "#/properties/seeAlso" },
                         "thumbnail": {
                             "type": "array",
-                            "items": { "$ref": "#/classes/resource" }
+                            "items": { "$ref": "#/properties/resource" }
                         },
-                        "homepage": { "$ref": "#/classes/homepage" },
-                        "behavior": { "$ref": "#/classes/behavior" },
-                        "partOf": { "$ref": "#/classes/partOf" },
+                        "homepage": { "$ref": "#/properties/homepage" },
+                        "behavior": { "$ref": "#/properties/behavior" },
+                        "partOf": { "$ref": "#/properties/partOf" },
                         "items": {
                             "type": "array",
                             "items": {
                               "oneOf": [
-                                { "$ref": "#/classes/manifest" },
-                                { "$ref": "#/classes/collection" }
+                                { "$ref": "#/properties/manifest" },
+                                { "$ref": "#/properties/collection" }
                               ]
                             }
                         },
                         "annotations": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/annotationPage"
+                                "$ref": "#/properties/annotationPage"
                             }
                         }
                     },
@@ -400,7 +400,7 @@
         },
         "manifest": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "additionalProperties": false,
@@ -427,44 +427,44 @@
                             "type": "string",
                             "pattern": "^Manifest"
                         },
-                        "metadata": { "$ref": "#/classes/metadata" },
-                        "summary": { "$ref": "#/types/lngString" },
-                        "requiredStatement": { "$ref": "#/types/keyValueString" },
-                        "rendering": { "$ref": "#/types/external" },
-                        "service": { "$ref": "#/classes/service" },
-                        "viewingDirection": { "$ref": "#/classes/viewingDirection" },
-                        "rights": { "$ref": "#/classes/rights" },
+                        "metadata": { "$ref": "#/properties/metadata" },
+                        "summary": { "$ref": "#/$defs/lngString" },
+                        "requiredStatement": { "$ref": "#/$defs/keyValueString" },
+                        "rendering": { "$ref": "#/$defs/external" },
+                        "service": { "$ref": "#/properties/service" },
+                        "viewingDirection": { "$ref": "#/properties/viewingDirection" },
+                        "rights": { "$ref": "#/properties/rights" },
                         "start": {},
                         "logo": {
                             "type": "array",
-                            "items": { "$ref": "#/classes/resource" }
+                            "items": { "$ref": "#/properties/resource" }
                         },
-                        "navDate": { "$ref": "#/classes/navDate" },
-                        "provider": { "$ref": "#/classes/provider" },
-                        "seeAlso": { "$ref": "#/classes/seeAlso" },
+                        "navDate": { "$ref": "#/properties/navDate" },
+                        "provider": { "$ref": "#/properties/provider" },
+                        "seeAlso": { "$ref": "#/properties/seeAlso" },
                         "thumbnail": {
                             "type": "array",
-                            "items": { "$ref": "#/classes/resource" }
+                            "items": { "$ref": "#/properties/resource" }
                         },
-                        "homepage": { "$ref": "#/classes/homepage" },
-                        "behavior": { "$ref": "#/classes/behavior" },
-                        "partOf": { "$ref": "#/classes/partOf" },
+                        "homepage": { "$ref": "#/properties/homepage" },
+                        "behavior": { "$ref": "#/properties/behavior" },
+                        "partOf": { "$ref": "#/properties/partOf" },
                         "items": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/canvas"
+                                "$ref": "#/properties/canvas"
                             }
                         },
                         "structures": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/range"
+                                "$ref": "#/properties/range"
                             }
                         },
                         "annotations": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/annotationPage"
+                                "$ref": "#/properties/annotationPage"
                             }
                         }
                     }
@@ -473,7 +473,7 @@
         },
         "canvas": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "properties": {
@@ -488,32 +488,32 @@
                             "type": "integer"
                         },
                         "duration": {
-                            "$ref": "#/types/duration"
+                            "$ref": "#/$defs/duration"
                         },
-                        "metadata": { "$ref": "#/classes/metadata" },
-                        "summary": { "$ref": "#/types/lngString" },
-                        "requiredStatement": { "$ref": "#/types/keyValueString" },
-                        "rights": { "$ref": "#/classes/rights" },
-                        "navDate": { "$ref": "#/classes/navDate" },
-                        "provider": { "$ref": "#/classes/provider" },
-                        "seeAlso": { "$ref": "#/classes/seeAlso" },
+                        "metadata": { "$ref": "#/properties/metadata" },
+                        "summary": { "$ref": "#/$defs/lngString" },
+                        "requiredStatement": { "$ref": "#/$defs/keyValueString" },
+                        "rights": { "$ref": "#/properties/rights" },
+                        "navDate": { "$ref": "#/properties/navDate" },
+                        "provider": { "$ref": "#/properties/provider" },
+                        "seeAlso": { "$ref": "#/properties/seeAlso" },
                         "thumbnail": {
                             "type": "array",
-                            "items": { "$ref": "#/classes/resource" }
+                            "items": { "$ref": "#/properties/resource" }
                         },
-                        "homepage": { "$ref": "#/classes/homepage" },
-                        "behavior": { "$ref": "#/classes/behavior" },
-                        "partOf": { "$ref": "#/classes/partOf" },
+                        "homepage": { "$ref": "#/properties/homepage" },
+                        "behavior": { "$ref": "#/properties/behavior" },
+                        "partOf": { "$ref": "#/properties/partOf" },
                         "items": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/annotationPage"
+                                "$ref": "#/properties/annotationPage"
                             }
                         },
                         "annotations": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/annotationPage"
+                                "$ref": "#/properties/annotationPage"
                             }
                         }
                     },
@@ -531,7 +531,7 @@
         },
         "annotationCollection": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "properties": {
@@ -539,14 +539,14 @@
                             "type": "string",
                             "pattern": "^AnnotationCollection$"
                         },
-                        "partOf": { "$ref": "#/classes/partOf" },
-                        "next": { "$ref": "#/classes/annotationPage" },
-                        "first": { "$ref": "#/classes/annotationPage" },
-                        "last": { "$ref": "#/classes/annotationPage" },
+                        "partOf": { "$ref": "#/properties/partOf" },
+                        "next": { "$ref": "#/properties/annotationPage" },
+                        "first": { "$ref": "#/properties/annotationPage" },
+                        "last": { "$ref": "#/properties/annotationPage" },
                         "items": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/annotation"
+                                "$ref": "#/properties/annotation"
                             }
                         }
                     }
@@ -555,11 +555,11 @@
         },
         "annotationPage": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "properties": {
-                        "id": { "$ref": "#/types/id" },
+                        "id": { "$ref": "#/$defs/id" },
                         "@context": {},
                         "type": {
                             "type": "string",
@@ -568,7 +568,7 @@
                         "items": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/classes/annotation"
+                                "$ref": "#/properties/annotation"
                             }
                         }
                     },
@@ -578,7 +578,7 @@
         },
         "annotation": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "properties": {
@@ -595,21 +595,21 @@
                                         "type": "string"
                                     }
                                 }
-                            ]    
+                            ]
                         },
                         "body": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/classes/resource"
+                                    "$ref": "#/properties/resource"
                                 },
                                 {
                                     "allOf":[
-                                        { "$ref": "#/classes/choice" },
+                                        { "$ref": "#/properties/choice" },
                                         {
                                             "properties": {
                                                 "items": {
                                                     "type": "array",
-                                                    "items": {"$ref": "#/classes/resource"}
+                                                    "items": {"$ref": "#/properties/resource"}
                                                 }
                                             },
                                             "required": ["items"]
@@ -620,11 +620,11 @@
                         },
                         "target": {
                             "oneOf": [
-                                { "$ref": "#/classes/annoTarget" },
+                                { "$ref": "#/properties/annoTarget" },
                                 {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/classes/annoTarget"
+                                        "$ref": "#/properties/annoTarget"
                                     }
                                 }
                             ]
@@ -642,22 +642,22 @@
                     "pattern": "^http.*$"
                 },
                 {
-                    "$ref": "#/classes/specificResource"
+                    "$ref": "#/properties/specificResource"
                 }
             ]
         },
         "specificResource": {
             "type": "object",
             "properties": {
-                "id": { "$ref": "#/types/id" },
-                "type": { 
+                "id": { "$ref": "#/$defs/id" },
+                "type": {
                     "type": "string",
                     "pattern": "^SpecificResource$"
                 },
-                "format": { "$ref": "#/types/format" },
+                "format": { "$ref": "#/$defs/format" },
                 "accessibility": { "type": "string"},
-                "source": { "$ref": "#/types/id" },
-                "selector": { "$ref": "#/classes/annoSelector" }
+                "source": { "$ref": "#/$defs/id" },
+                "selector": { "$ref": "#/properties/annoSelector" }
             },
             "required": ["source", "selector"]
         },
@@ -672,7 +672,7 @@
                     "type": "object",
                     "properties": {
                         "type": { "type": "string" },
-                        "t": { "$ref": "#/types/duration" }
+                        "t": { "$ref": "#/$defs/duration" }
                     },
                     "required": ["type"]
                 }
@@ -680,7 +680,7 @@
         },
         "range": {
             "allOf": [
-                { "$ref": "#/types/class" },
+                { "$ref": "#/$defs/class" },
                 {
                     "type": "object",
                     "properties": {
@@ -688,17 +688,17 @@
                             "type": "string",
                             "pattern": "^Range$"
                         },
-                        "supplementary": { "$ref": "#/classes/annotationCollection" },
+                        "supplementary": { "$ref": "#/properties/annotationCollection" },
                         "items": {
                             "type": "array",
                             "items": {
                                 "oneOf": [
                                     {
-                                        "$ref": "#/classes/specificResource"
+                                        "$ref": "#/properties/specificResource"
                                     },
                                     {
                                         "allOf": [
-                                            { "$ref": "#/types/class" },
+                                            { "$ref": "#/$defs/class" },
                                             {
                                                 "type": "object",
                                                 "properties": {
@@ -712,7 +712,7 @@
                                         ]
                                     },
                                     {
-                                        "$ref": "#/classes/range"
+                                        "$ref": "#/properties/range"
                                     }
                                 ]
                             }
@@ -724,12 +724,12 @@
     },
     "$id": "http://iiif.io/api/presentation/3/schema.json" ,
     "allOf": [
-        { "$ref": "#/types/class" },
+        { "$ref": "#/$defs/class" },
         {
           "oneOf": [
-            { "$ref": "#/classes/manifest" },
-            { "$ref": "#/classes/collection" },
-            { "$ref": "#/classes/annotationPage" }
+            { "$ref": "#/properties/manifest" },
+            { "$ref": "#/properties/collection" },
+            { "$ref": "#/properties/annotationPage" }
           ]
         }
     ]
