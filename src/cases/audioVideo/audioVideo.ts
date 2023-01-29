@@ -35,7 +35,7 @@ const dieInternationale = (ctx: ParameterizedContext, prefix: string) => {
             value: {none: [ 'July 11th 2018']}
         }
     ]);
-    m.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
+    m.setRights('https://creativecommons.org/licenses/by-sa/3.0/');
 
     return m;
 };
@@ -58,7 +58,7 @@ const f113 = (ctx: ParameterizedContext, prefix: string) => {
             value: {none: [ 'July 11th 2018']}
         }
     ]);
-    m.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
+    m.setRights('https://creativecommons.org/licenses/by-sa/3.0/');
 
     return m;
 }
@@ -81,7 +81,7 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
             value: {none: [ 'July 11th 2018']}
         }
     ]);
-    m.setRights('http://creativecommons.org/licenses/by-sa/3.0/');
+    m.setRights('https://creativecommons.org/licenses/by-sa/3.0/');
     const n = m as any;
     let i = 0;
 
@@ -90,14 +90,17 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
     const data = fs.readFileSync(filePath, {encoding:'utf8', flag:'r'});
 
     const items: any = [];
-    for(const e of data.split("\n\n\r\n")) {
+    for(const e of data.split("\n\n")) {
         if (e.trim() === 'WEBVTT') {
             continue;
         }
-        const lines = e.split("\n\n");
-        const t = parseInt(lines[1].substr(0, 2)) * 3600 +
-            parseInt(lines[1].substr(3, 2)) * 60 +
-            parseInt(lines[1].substr(6, 2));
+        const lines = e.split("\n");
+        if (lines.length < 3) {
+            continue;
+        }
+        const t = parseInt(lines[1].slice(0, 2)) * 3600 +
+            parseInt(lines[1].slice(3, 5)) * 60 +
+            parseInt(lines[1].slice(6, 8));
         items.push({
             id:	ctx.request.origin + prefix + '/manifest/elephantsDream/Annotation/' + (i++).toString(),
             motivation:	"supplementing",
