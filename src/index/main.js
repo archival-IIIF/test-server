@@ -1,7 +1,25 @@
+let viewerUrlEle = document.getElementById('viewer-url');
+let viewerTypeEle = document.getElementById('viewer-type');
+
+
 let viewerUrl = localStorage.getItem('viewer-url');
-if (viewerUrl) {
-    document.getElementById('viewer-url').value = viewerUrl;
+if (!viewerUrl || viewerUrl === '') {
+    viewerUrl = 'archivalIIIF';
 }
+viewerUrlEle.value = viewerUrl;
+let viewerType = viewerUrl;
+let lastViewerUrl = '';
+const viewers = ['archivalIIIF', 'mirador', 'universalViewer'];
+if (!viewers.includes(viewerType)) {
+    viewerType = 'customUrl';
+    viewerUrlEle.style.display = 'block';
+    lastViewerUrl = viewerUrl;
+} else {
+    viewerUrlEle.style.display = 'none';
+}
+viewerTypeEle.value = viewerType;
+
+
 let testCases = [];
 
 fetch('testCases.json').then(
@@ -17,6 +35,23 @@ function viewerUrlChanged(value) {
     drawTable()
 }
 
+function viewerTypeChanged(value) {
+    if (viewers.includes(value)) {
+        if (!viewers.includes(viewerUrl)) {
+            lastViewerUrl = viewerUrl;
+        }
+        viewerUrl = value;
+        viewerUrlEle.style.display = 'none';
+    } else {
+        viewerUrl = lastViewerUrl;
+        viewerUrlEle.style.display = 'block';
+        viewerUrlEle.value = viewerUrl;
+    }
+
+    localStorage.setItem('viewer-url', viewerUrl);
+    drawTable()
+}
+
 function drawTable() {
     let table = '';
     for (let groupLabel in testCases) {
@@ -25,7 +60,7 @@ function drawTable() {
         for (let testCase of testCasesGroup) {
             const baseUrl = window.location.href;
             const manifestUrlV3 = baseUrl + 'iiif/v3/' + testCase.uri
-            const openUrl = isURL(viewerUrl) ? viewerUrl + '?manifest=' + manifestUrlV3 : manifestUrlV3;
+            const openUrl = getViewerUrl()  + '?manifest=' + manifestUrlV3;
             table +=
                 '<tr>' +
                 '<td><a class="open" href="' + openUrl + '" target="_blank">' + testCase.label + '</td>' +
@@ -35,6 +70,14 @@ function drawTable() {
         }
     }
     document.querySelector('#test-cases > tbody').innerHTML = table;
+}
+
+function getViewerUrl() {
+    if (isURL(viewerUrl) || viewers.includes(viewerUrl)) {
+        return viewerUrl;
+    }
+
+    return 'archivalIIIF';
 }
 
 function isURL(str) {
@@ -58,11 +101,9 @@ function getLinks(testCase, version) {
     const manifestUrl = baseUrl + 'iiif/' + version + route;
 
     let output = '<td>';
-    if (isURL(viewerUrl)) {
-        const openUrl = viewerUrl + '?manifest=' + manifestUrl;
-        output += '<a class="open-in-viewer" href="'+openUrl+'" target="_blank"><img class="icon" ' +
-            'title="Open in default viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
-    }
+    const openUrl = getViewerUrl() + '?manifest=' + manifestUrl;
+    output += '<a class="open-in-viewer" href="'+openUrl+'" target="_blank"><img class="icon" ' +
+        'title="Open in default viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
     output += '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open manifest" ' +
         'alt="Open manifest" src="/public/file-solid.svg" /></a>';
 

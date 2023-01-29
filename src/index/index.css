@@ -34,10 +34,6 @@ a {
     margin-left: auto;
 }
 
-input {
-    margin-bottom: 32px;
-}
-
 td > a {
     margin-right: 6px;
 }
@@ -65,4 +61,34 @@ td:nth-of-type(3) {
 
 #github {
     width: 32px !important;
+}
+
+#viewer-url {
+    display: none;
+}
+
+#viewer-settings {
+    margin: 15px 0 36px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#viewer-settings > * {
+    margin-bottom: 12px;
+}
+
+#viewer-settings > input {
+    flex-grow: 2;
+    width: auto;
+}
+
+#viewer-settings > select {
+    width: 200px;
+    margin-right: 18px;
+}
+
+#viewer-settings > strong {
+    margin-right: 18px;
+    font-size: 1.1rem;
 }

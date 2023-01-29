@@ -19,7 +19,17 @@
 
 <div class="container">
 
-    <input id="viewer-url" type="url" class="form-control" placeholder="Add viewer url (e.g. http://localhost:3000/)" aria-label="viewer-url" aria-describedby="viewer-url" onkeyup="viewerUrlChanged(this.value)">
+
+    <div id="viewer-settings">
+        <strong>Default viewer</strong>
+        <select id="viewer-type" class="form-control" onchange="viewerTypeChanged(this.value)">
+            <option value="archivalIIIF">Archival IIIF</option>
+            <option value="mirador">Mirador</option>
+            <option value="universalViewer">UniversalViewer</option>
+            <option value="customUrl">Custom viewer URL</option>
+        </select>
+        <input id="viewer-url" class="form-control" placeholder="Add viewer url (e.g. http://localhost:3000/)" aria-label="viewer-url" aria-describedby="viewer-url" onkeyup="viewerUrlChanged(this.value)">
+    </div>
 
     <table id="test-cases" class="table table-striped">
         <thead>
