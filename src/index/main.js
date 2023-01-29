@@ -22,18 +22,9 @@ function drawTable() {
     for (let groupLabel in testCases) {
         const testCasesGroup = testCases[groupLabel];
         table += '<tr><th colspan="4"><strong>' + groupLabel + '</strong></th></tr>';
-        for (let id in testCasesGroup) {
-            let testCase;
-            if (testCases[groupLabel][id].hasOwnProperty('label')) {
-                testCase = testCases[groupLabel][id];
-            } else {
-                testCase = {label: testCases[groupLabel][id]};
-            }
-            testCase.id = id;
+        for (let testCase of testCasesGroup) {
             const baseUrl = window.location.href;
-            const manifestUrlV3 = testCases[groupLabel][id].hasOwnProperty('uri') ?
-                baseUrl + 'iiif/v3/' + testCases[groupLabel][id].uri :
-                baseUrl + 'iiif/v3/collection/' + testCase.id;
+            const manifestUrlV3 = baseUrl + 'iiif/v3/' + testCase.uri
             const openUrl = isURL(viewerUrl) ? viewerUrl + '?manifest=' + manifestUrlV3 : manifestUrlV3;
             table +=
                 '<tr>' +
@@ -63,31 +54,38 @@ function getLinks(testCase, version) {
     }
 
     let baseUrl = window.location.href;
-    const route = testCase.hasOwnProperty('uri') ?
-        '/' + testCase.uri :
-        '/collection/' + testCase.id;
+    const route =  '/' + testCase.uri;
     const manifestUrl = baseUrl + 'iiif/' + version + route;
 
     let output = '<td>';
     if (isURL(viewerUrl)) {
         const openUrl = viewerUrl + '?manifest=' + manifestUrl;
-        output += '<a class="open-in-viewer" href="'+openUrl+'" target="_blank"><img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
+        output += '<a class="open-in-viewer" href="'+openUrl+'" target="_blank"><img class="icon" ' +
+            'title="Open in default viewer" alt="Open in viewer" src="/public/eye-regular.svg" /></a>';
     }
-    output += '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open" alt="Open" src="/public/file-solid.svg" /></a>';
+    output += '<a class="open-manifest" href="' + manifestUrl + '" target="_blank"><img class="icon" title="Open manifest" ' +
+        'alt="Open manifest" src="/public/file-solid.svg" /></a>';
 
     if (version === 'v3') {
         const validationUrl = baseUrl + 'validate?manifest=' + manifestUrl;
-        output += '<a href="' + validationUrl + '" target="_blank"><img class="icon" title="Validate" alt="Validate" src="/public/check-circle-regular.svg" /></a>';
+        output += '<a href="' + validationUrl + '" target="_blank"><img class="icon" title="Validate manifest" ' +
+            'alt="Validate manifest" src="/public/check-circle-regular.svg" /></a>';
     }
 
-    const mirardorUrl = baseUrl + 'mirador?manifest=' + manifestUrl;
-    output += '<a class="mirador" href="' + mirardorUrl + '" target="_blank">' +
-        '<img class="icon" title="Open in viewer" alt="Open in viewer" src="/public/mirador-logo.png" />' +
+    const archivalIIIFUrl = baseUrl + 'archivalIIIF?manifest=' + manifestUrl;
+    output += '<a class="mirador" href="' + archivalIIIFUrl + '" target="_blank">' +
+        '<img class="icon" title="Open in Archival IIIF viewer" alt="Open in Archival IIIF viewer" src="/public/folder-tree-solid.svg" />' +
+        '</a>';
+
+    const miradorUrl = baseUrl + 'mirador?manifest=' + manifestUrl;
+    output += '<a class="mirador" href="' + miradorUrl + '" target="_blank">' +
+        '<img class="icon" title="Open in mirador viewer" alt="Open in mirador viewer" src="/public/mirador-logo.png" />' +
         '</a>';
 
     if (testCase.uv === true) {
         let uvUrl = baseUrl + 'universalViewer?manifest=' + manifestUrl;
-        output += '<a class="universal-viewer" href="' + uvUrl + '" target="_blank">UV</a>';
+        output += '<a class="universal-viewer" href="' + uvUrl + '" target="_blank" title="pen in UniversalViewer viewer"' +
+            '>UV</a>';
     }
 
     output += '</td>';

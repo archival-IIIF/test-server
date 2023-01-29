@@ -25,7 +25,7 @@ import manifestErrorsV2 from './cases/manifestErrors/manifestErrorsV2';
 import manifestErrorsV3 from './cases/manifestErrors/manifestErrorsV3';
 import manifestationsFiles from "./cases/manifestations/manifestationsFiles";
 import manifestations from './cases/manifestations/manifestations';
-import mirador from './mirador/mirador'
+import mirador from './viewer/mirador/mirador'
 import multiPage from './cases/multiPage/multiPage';
 import pdfFiles from "./cases/pdf/pdfFiles";
 import pdf from './cases/pdf/pdf';
@@ -33,7 +33,7 @@ import provider from './cases/provider/provider';
 import rendering from './cases/rendering/rendering';
 import rightsInformation from './cases/rightsInformation/rightsInformation';
 import thumbnail from './cases/thumbnail/thumbnail';
-import universalViewer from './universalViewer/universalViewer'
+import universalViewer from './viewer/universalViewer/universalViewer'
 import validation from './validation/validation';
 import authMixed from "./cases/authMixed/authMixed";
 import kiosk from "./auth/kiosk";
@@ -43,6 +43,7 @@ import nestedStructure from "./cases/nestedStructure/nestedStructure";
 import authLoginRestrictedLabels2 from "./cases/authLoginRestrictedLabels2/authLoginRestrictedLabels2";
 import multiLang from "./cases/multiLang/multiLang";
 import metadata from "./cases/metadata/metadata";
+import archivalIIIF from "./viewer/archivalIIIF/archivalIIIF";
 
 
 const app: Koa = new Koa();
@@ -67,9 +68,11 @@ app.use(serve({rootDir: path.join(__dirname, './../node_modules/jquery/dist/'), 
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/bootstrap/dist/'), rootPath: '/bootstrap'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/dist/'), rootPath: '/uv'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'), rootPath: '/miradorJS'}));
+app.use(serve({rootDir: path.join(__dirname, './../node_modules/@archival-iiif/viewer/dist/'), rootPath: '/archival-iiif'}));
 app.use(bodyParser());
 
 // cases
+app.use(archivalIIIF);
 app.use(attribution);
 app.use(audioVideo);
 app.use(audioVideoFiles);

@@ -15,6 +15,11 @@
   resolved "https://registry.yarnpkg.com/@archival-iiif/presentation-builder/-/presentation-builder-1.5.2.tgz#850c94ce2105980af0f113c0a63bf62e2b6583ce"
   integrity sha512-x45m0BRsGZd0dPPT+9AciBF9BNh5geGTDBHpzwKm4i37MOR0MsiuAy0/MEP9wBykvqCfFgSLjFGKjvFPmsYEbg==
 
+"@archival-iiif/viewer@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@archival-iiif/viewer/-/viewer-2.0.7.tgz#87c09546783470703b4130a6c226d22dbe6204ab"
+  integrity sha512-CxG91oK9UyaqaYKgoLQ6dgmxDTPaT1K5DL86tpg0/56a/PXE5K5EwpSfQbmzZ92MPtQK65PczUiz9tb4BPlHXA==
+
 "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.14.5", "@babel/runtime@^7.15.4", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.20.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"

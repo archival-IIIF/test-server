@@ -1,105 +1,173 @@
 {
-    "General": {
-        "image": {
+    "General": [
+        {
             "uri": "manifest/image",
             "label": "Image",
             "uv": true
         },
-        "multiPage": {
+        {
             "uri": "manifest/multiPage",
             "label": "Multi page item",
             "uv": true
         },
-        "metadata": {
+        {
             "uri": "manifest/metadata",
             "label": "Image with metadata",
             "uv": true
         },
-        "multiLang": {
+        {
             "uri": "manifest/multiLang",
             "label": "Image with metadata in different languages",
             "uv": true
         },
-        "logo": {
+        {
             "uri": "manifest/logo",
             "label": "Image with a logo",
             "uv": true
         },
-        "rightsInformation": {
+        {
             "uri": "manifest/rightsInformation",
             "label": "Image case with license",
             "uv": true
         },
-        "attribution": {
+        {
             "uri": "manifest/attribution",
             "label": "Image with attribution",
             "uv": true
         },
-        "rendering": {
+        {
             "uri": "manifest/rendering",
             "label": "Image with rendering (see download)",
             "uv": true
         },
-        "provider": {
+        {
             "uri": "manifest/provider",
             "label": "Image with provider information",
             "uv": true
         },
-        "homepage": {
+        {
+            "uri": "collection/homepage",
             "label": "Image with homepage"
         },
-        "audioVideo": {
+        {
+            "uri": "collection/audioVideo",
             "label": "Audio and video files",
             "uv": true
         },
-        "thumbnail": {
+        {
+            "uri": "collection/thumbnail",
             "label": "Different thumbnail settings",
             "uv": true
         },
-        "language": {
+        {
+            "uri": "collection/language",
             "label": "Text files with file names in different writing systems",
             "uv": true
         },
-        "encoding": {
+        {
+            "uri": "collection/encoding",
             "label": "Text files with different file encodings"
         },
-        "pdf": {
+        {
+            "uri": "collection/pdf",
             "label": "PDF files",
             "uv": true
         },
-        "manifestations": {
+        {
+            "uri": "collection/manifestations",
             "label": "File with two manifestations",
             "uv": true
         }
-    },
-    "Collection": {
-        "emptyCollection": "Empty collection",
-        "emptyFolder": "Empty sub collection",
-        "nestedStructure": "Nested structure"
-    },
-    "Authentication": {
-        "authLogin": "Token login test case with a locked collection",
-        "authLoginRestrictedLabels": "Token login test case with locked labels",
-        "authLoginRestrictedLabels2": "Locked labels without additional manifest (non-standard)",
-        "authInfo": {
+    ],
+    "Collection": [
+        {
+            "uri": "collection/emptyCollection",
+            "label": "Empty collection"
+        },
+        {
+            "uri": "collection/emptyFolder",
+            "label": "Empty sub collection"
+        },
+        {
+            "uri": "collection/nestedStructure",
+            "label": "Nested structure"
+        }
+    ],
+    "Authentication": [
+        {
+            "uri": "collection/authLogin",
+            "label": "Token login test case with a locked collection"
+        },
+        {
+            "uri": "collection/authLoginRestrictedLabels",
+            "label": "Token login test case with locked labels"
+        },
+        {
+            "uri": "collection/authLoginRestrictedLabels2",
+            "label": "Locked labels without additional manifest (non-standard)"
+        },
+        {
+            "uri": "collection/authInfo",
             "label": "Token login test case with a locked info.json",
             "uv": true
         },
-        "authExternalAccept": "External auth test (accept)",
-        "authExternalDeny": "External auth test (deny)",
-        "authClickThrough": "Click-through auth test",
-        "authKiosk": "Kiosk auth test",
-        "authMixed": "Mixed test with login and click-through auth"
-    },
-    "Invalid manifests": {
-        "missingManifest": "Missing manifest",
-        "noJson": "No json output",
-        "noId": "Missing id in manifest",
-        "nolabel": "Missing label in manifest",
-        "wrongManifestType": "Wrong manifest type",
-        "missingSubfolder": "Missing sub collection",
-        "missingParent": "Missing parent in manifest",
-        "missingInfoJson": "Missing info.json",
-        "loop": "Loop"
-    }
+        {
+            "uri": "collection/authExternalAccept",
+            "label": "External auth test (accept)"
+        },
+        {
+            "uri": "collection/authExternalDeny",
+            "label": "External auth test (deny)"
+        },
+        {
+            "uri": "collection/authClickThrough",
+            "label": "Click-through auth test"
+        },
+        {
+            "uri": "collection/authKiosk",
+            "label": "Kiosk auth test"
+        },
+        {
+            "uri": "collection/authMixed",
+            "label": "Mixed test with login and click-through auth"
+        }
+    ],
+    "Invalid manifests": [
+        {
+            "uri": "collection/missingManifest",
+            "label": "Missing manifest"
+        },
+        {
+            "uri": "collection/noJson",
+            "label": "No json output"
+        },
+        {
+            "uri": "collection/noId",
+            "label": "Missing id in manifest"
+        },
+        {
+            "uri": "collection/nolabel",
+            "label": "Missing label in manifest"
+        },
+        {
+            "uri": "collection/wrongManifestType",
+            "label": "Wrong manifest type"
+        },
+        {
+            "uri": "collection/missingSubfolder",
+            "label": "Missing sub collection"
+        },
+        {
+            "uri": "collection/missingParent",
+            "label": "Missing parent in manifest"
+        },
+        {
+            "uri": "collection/missingInfoJson",
+            "label": "Missing info.json"
+        },
+        {
+            "uri": "collection/loop",
+            "label": "Loop"
+        }
+    ]
 }
