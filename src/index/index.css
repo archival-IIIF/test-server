@@ -92,3 +92,7 @@ td:nth-of-type(3) {
     margin-right: 18px;
     font-size: 1.1rem;
 }
+
+#demo-notice {
+    display: none;
+}

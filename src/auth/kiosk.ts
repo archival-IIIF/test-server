@@ -1,4 +1,4 @@
-import * as Router from "koa-router";
+import Router from "koa-router";
 import {loginPage, logoutPage, tokenPage} from "./auth";
 import {ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";

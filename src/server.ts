@@ -1,4 +1,4 @@
-import * as Koa from 'koa';
+import Koa from 'koa';
 import * as path from 'path';
 import attribution from "./cases/attribution/attribution";
 import audioVideoFiles from './cases/audioVideo/audioVideoFiles';

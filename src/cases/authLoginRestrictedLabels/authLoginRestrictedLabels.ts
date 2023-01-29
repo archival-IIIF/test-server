@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import authLoginRestrictedLabelsV2 from "./authLoginRestrictedLabelsV2";
 import authLoginRestrictedLabelsV3 from "./authLoginRestrictedLabelsV3";
 

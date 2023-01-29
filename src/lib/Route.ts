@@ -1,4 +1,4 @@
-import * as Router from "koa-router";
+import Router from "koa-router";
 import {Collection, Manifest, AuthService} from "@archival-iiif/presentation-builder";
 import {transformCollectionToV2, transformManifestToV2} from "./Transform";
 import {hasAccess} from "./Security";

@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import {getAuthInfo, getAuthInfo2} from "./authInfoCommon";
 
 const prefix = '/iiif/v3';

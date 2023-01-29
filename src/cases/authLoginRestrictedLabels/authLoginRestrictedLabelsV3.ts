@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 
 const prefix = '/iiif/v3';
 const router: Router = new Router({prefix});

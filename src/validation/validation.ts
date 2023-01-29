@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import Ajv from 'ajv';
 import * as fs from 'fs';
 import * as http from 'http';

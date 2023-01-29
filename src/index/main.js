@@ -1,6 +1,9 @@
 let viewerUrlEle = document.getElementById('viewer-url');
 let viewerTypeEle = document.getElementById('viewer-type');
 
+if (window.location.href.startsWith('https://iiif-testing.sozialarchiv.ch')) {
+    document.getElementById('demo-notice').style.display = 'block';
+}
 
 let viewerUrl = localStorage.getItem('viewer-url');
 if (!viewerUrl || viewerUrl === '') {

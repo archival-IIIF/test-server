@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import download from '../lib/Download';
 import * as path from 'path';
 

@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import * as path from 'path';
 import * as mime from 'mime-types';
 import * as fs from 'fs';

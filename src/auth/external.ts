@@ -1,5 +1,5 @@
 import {AuthService} from "@archival-iiif/presentation-builder";
-import * as Router from "koa-router";
+import Router from "koa-router";
 
 export const cookieName = 'access-external';
 export const cookieToken = 'external-cookie-abc';

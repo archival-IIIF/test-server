@@ -1,6 +1,6 @@
 import {ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";
-import * as Router from "koa-router";
+import Router from "koa-router";
 import {createReadStream} from "fs";
 import * as path from "path";
 import {loginPage, logoutPage, tokenPage} from "./auth";
