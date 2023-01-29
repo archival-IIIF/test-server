@@ -3,6 +3,7 @@ import {hasAccess} from '../../lib/Security';
 import {responseFile} from "../../imageService/imageService";
 import {cookieName, cookieToken, viewerToken, getAuthLoginService} from "../../auth/login";
 import {infoV2} from "../../imageService/imageBase";
+import getBaseUrl from "../../lib/BaseUrl";
 
 
 const imageWith = 1840;
@@ -15,7 +16,7 @@ router.get('/image-service/v2/authInfo/info.json', ctx => {
         ctx.status = 401;
     }
 
-    const output: any = infoV2(ctx.request.origin + '/image-service/v2/authInfo', imageWith, imageHeight);
+    const output: any = infoV2(getBaseUrl(ctx) + '/image-service/v2/authInfo', imageWith, imageHeight);
     output.service = [getAuthLoginService(ctx)];
 
     ctx.body = output;

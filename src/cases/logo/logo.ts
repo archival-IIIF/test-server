@@ -3,13 +3,14 @@ import {Resource} from "@archival-iiif/presentation-builder";
 import FileManifest from "../../lib/FileManifest";
 import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
 import {defaultImage} from "../../lib/Image";
+import getBaseUrl from "../../lib/BaseUrl";
 
 
 const logoManifest = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
     const manifest = getImageBody(ctx, prefix, path, 'Image with logo', undefined, undefined, defaultImage);
     manifest.setLogo(new Resource(
-        ctx.request.origin + '/logo',
+        getBaseUrl(ctx) + '/logo',
         'Image',
         undefined,
         'image/jpeg',

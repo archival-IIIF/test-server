@@ -2,6 +2,7 @@ import Router from "koa-router";
 import {loginPage, logoutPage, tokenPage} from "./auth";
 import {ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";
+import getBaseUrl from "../lib/BaseUrl";
 
 export const cookieName = 'access-kiosk';
 export const cookieToken = 'kiosk-cookie-abc';
@@ -10,17 +11,17 @@ export const viewerToken = 'kiosk-viewer-123';
 
 export function getAuthKioskService(ctx: ParameterizedContext) {
     const authService = new AuthService(
-        ctx.request.origin + '/login/kiosk',
+        getBaseUrl(ctx) + '/login/kiosk',
         '',
         'http://iiif.io/api/auth/1/kiosk'
     );
     const tokenService = new AuthService(
-        ctx.request.origin + '/token/kiosk',
+        getBaseUrl(ctx) + '/token/kiosk',
         '',
         'http://iiif.io/api/auth/1/token'
     );
     const logoutService = new AuthService(
-        ctx.request.origin + '/logout/kiosk',
+        getBaseUrl(ctx) + '/logout/kiosk',
         '',
         'http://iiif.io/api/auth/1/logout'
     );

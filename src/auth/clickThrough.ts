@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import {loginPage, tokenPage, logoutPage} from "../auth/auth";
 import {ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";
+import getBaseUrl from "../lib/BaseUrl";
 
 const router: Router = new Router();
 
@@ -24,17 +25,17 @@ router.get('/logout/clickThrough',  (ctx: ParameterizedContext) => {
 
 export function getAuthClickThroughService(ctx: ParameterizedContext) {
     const authService = new AuthService(
-        ctx.request.origin + '/login/clickThrough',
+        getBaseUrl(ctx) + '/login/clickThrough',
         '',
         'http://iiif.io/api/auth/1/clickthrough'
     );
     const tokenService = new AuthService(
-        ctx.request.origin + '/token/clickThrough',
+        getBaseUrl(ctx) + '/token/clickThrough',
         '',
         'http://iiif.io/api/auth/1/token'
     );
     const logoutService = new AuthService(
-        ctx.request.origin + '/logout/clickThrough',
+        getBaseUrl(ctx) + '/logout/clickThrough',
         '',
         'http://iiif.io/api/auth/1/logout'
     );

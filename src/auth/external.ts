@@ -1,5 +1,6 @@
 import {AuthService} from "@archival-iiif/presentation-builder";
 import Router from "koa-router";
+import getBaseUrl from "../lib/BaseUrl";
 
 export const cookieName = 'access-external';
 export const cookieToken = 'external-cookie-abc';
@@ -18,13 +19,13 @@ function getAuthService(ctx: any, accept: boolean): AuthService {
 
     let tokenUrl;
     if (accept) {
-        tokenUrl = ctx.request.origin + '/auth/external/accept/token';
+        tokenUrl = getBaseUrl(ctx) + '/auth/external/accept/token';
     } else {
-        tokenUrl = ctx.request.origin + '/auth/external/deny/token';
+        tokenUrl = getBaseUrl(ctx) + '/auth/external/deny/token';
     }
 
     const authService = new AuthService(
-        ctx.request.origin + '/external',
+        getBaseUrl(ctx) + '/external',
         '',
         'http://iiif.io/api/auth/1/external'
     );

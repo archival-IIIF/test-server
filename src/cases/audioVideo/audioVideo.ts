@@ -5,22 +5,23 @@ import RootCollection from "../../lib/RootCollection";
 import * as path from "path";
 import * as fs from "fs";
 import {getIIIFRouteTree} from "../../lib/Route";
+import getBaseUrl from "../../lib/BaseUrl";
 
 
 const audioVideoContainer = (ctx: ParameterizedContext, prefix: string) => new RootCollection(
-    ctx.request.origin + prefix + '/collection/audioVideo',
+    getBaseUrl(ctx) + prefix + '/collection/audioVideo',
     'Audio & video test case'
 );
 
 const dieInternationale = (ctx: ParameterizedContext, prefix: string) => {
     const m = new FileManifest(
-        ctx.request.origin + prefix + '/manifest/die_internationale_as_mp3',
-        ctx.request.origin + '/file/die_internationale_as_mp3',
+        getBaseUrl(ctx) + prefix + '/manifest/die_internationale_as_mp3',
+        getBaseUrl(ctx) + '/file/die_internationale_as_mp3',
         'Die_Internationale as mp3.mp3',
         'Audio',
         'audio/mp3'
     );
-    m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/mp3.svg', 'Image', 'image/svg+xml'));
+    m.setThumbnail(new Resource(getBaseUrl(ctx) + '/file-icon/mp3.svg', 'Image', 'image/svg+xml'));
     m.setMetadata([
         {
             label: {none: ['Original file type']},
@@ -41,9 +42,9 @@ const dieInternationale = (ctx: ParameterizedContext, prefix: string) => {
 };
 
 const f113 = (ctx: ParameterizedContext, prefix: string) => {
-    const url = ctx.request.origin + prefix + '/manifest/f113';
-    const m = new FileManifest(url, ctx.request.origin + '/file/f113', 'F113.mp4', 'Video', 'video/mp4');
-    m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/mp4.svg', 'Image', 'image/svg+xml'));
+    const url = getBaseUrl(ctx) + prefix + '/manifest/f113';
+    const m = new FileManifest(url, getBaseUrl(ctx) + '/file/f113', 'F113.mp4', 'Video', 'video/mp4');
+    m.setThumbnail(new Resource(getBaseUrl(ctx) + '/file-icon/mp4.svg', 'Image', 'image/svg+xml'));
     m.setMetadata([
         {
             label: {none: ['Original file type']},
@@ -64,9 +65,9 @@ const f113 = (ctx: ParameterizedContext, prefix: string) => {
 }
 
 const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
-    const url = ctx.request.origin + prefix + '/manifest/elephantsDream';
-    const m = new FileManifest(url, ctx.request.origin + '/file/elephantsDream', 'elephants-dream-medium.webm', 'Video', 'video/webm');
-    m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/mp4.svg', 'Image', 'image/svg+xml'));
+    const url = getBaseUrl(ctx) + prefix + '/manifest/elephantsDream';
+    const m = new FileManifest(url, getBaseUrl(ctx) + '/file/elephantsDream', 'elephants-dream-medium.webm', 'Video', 'video/webm');
+    m.setThumbnail(new Resource(getBaseUrl(ctx) + '/file-icon/mp4.svg', 'Image', 'image/svg+xml'));
     m.setMetadata([
         {
             label: {none: ['Original file type']},
@@ -102,7 +103,7 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
             parseInt(lines[1].slice(3, 5)) * 60 +
             parseInt(lines[1].slice(6, 8));
         items.push({
-            id:	ctx.request.origin + prefix + '/manifest/elephantsDream/Annotation/' + (i++).toString(),
+            id:	getBaseUrl(ctx) + prefix + '/manifest/elephantsDream/Annotation/' + (i++).toString(),
             motivation:	"supplementing",
             type: "Annotation",
             body: {
@@ -110,13 +111,13 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
                 type:	"TextualBody",
                 value:	lines[2]
             },
-            target:	ctx.request.origin + prefix + "/manifest/elephantsDream/canvas/arthur.mp4#t=" + t.toString()
+            target:	getBaseUrl(ctx) + prefix + "/manifest/elephantsDream/canvas/arthur.mp4#t=" + t.toString()
         });
     }
 
     n.items[0].annotations = [
         {
-            id: ctx.request.origin + prefix + '/manifest/elephantsDream/AnnotationPage',
+            id: getBaseUrl(ctx) + prefix + '/manifest/elephantsDream/AnnotationPage',
             type: "AnnotationPage",
             items
         }

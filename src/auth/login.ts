@@ -4,6 +4,7 @@ import Router from "koa-router";
 import {createReadStream} from "fs";
 import * as path from "path";
 import {loginPage, logoutPage, tokenPage} from "./auth";
+import getBaseUrl from "../lib/BaseUrl";
 
 export const cookieName = 'access';
 export const cookieToken = '4321';
@@ -12,7 +13,7 @@ export const userToken = '1234';
 
 export function getAuthLoginService(ctx?: ParameterizedContext) {
 
-    const  origin = ctx ? ctx.request.origin : '';
+    const  origin = ctx ? getBaseUrl(ctx) : '';
 
     const authService = new AuthService(
         origin + '/login',

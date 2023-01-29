@@ -1,18 +1,19 @@
 import {ParameterizedContext} from "koa";
 import FileManifest from "../../lib/FileManifest";
 import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
+import getBaseUrl from "../../lib/BaseUrl";
 
 
 export function getLanguageFilePresentation(ctx: ParameterizedContext, prefix: string, fileId: string, label: string) {
-    const url = ctx.request.origin + prefix + '/manifest/' + fileId;
+    const url = getBaseUrl(ctx) + prefix + '/manifest/' + fileId;
     const m = new FileManifest(
         url,
-        ctx.request.origin + '/file/' + fileId,
+        getBaseUrl(ctx) + '/file/' + fileId,
         label,
         'Text',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     );
-    m.setParent(ctx.request.origin + prefix + '/collection/language', 'Collection');
+    m.setParent(getBaseUrl(ctx) + prefix + '/collection/language', 'Collection');
 
     return m;
 }

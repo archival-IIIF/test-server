@@ -10,6 +10,7 @@ import {basename} from "./helper";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
 import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import getBaseUrl from "./BaseUrl";
 
 export interface iRoute {
     path: string;
@@ -41,7 +42,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
             router.get(prefix + route.path, ctx => {
                 const body = route.body(ctx, prefix, route.path, route.label, route);
                 if (parentPath) {
-                    body.setParent(ctx.request.origin + prefix + parentPath, 'Collection')
+                    body.setParent(getBaseUrl(ctx) + prefix + parentPath, 'Collection')
                 }
                 if (route.children && body instanceof Collection) {
                     for (const child of route.children) {
@@ -80,7 +81,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                     const size = imageSize(imagePath);
                     router.get('/iiif/'  +version + '/image/' + imageId + '/info.json', ctx => {
 
-                        const id =  ctx.request.origin + ctx.request.url.replace('/info.json', '');
+                        const id =  getBaseUrl(ctx) + ctx.request.url.replace('/info.json', '');
                         if (version === 'v2') {
                             ctx.body = infoV2(id, size.width ?? 0, size.height ?? 0);
                         } else {
@@ -116,7 +117,7 @@ export function getImageBody(ctx: ParameterizedContext, prefix: string, path: st
                              route?: iRoute, auth?: boolean, images?: string[]): Manifest
 {
     const i = new ImageManifest2(
-        ctx.request.origin + prefix + path,
+        getBaseUrl(ctx) + prefix + path,
         route?.images ?? images ?? [],
         label ?? '-'
     );
@@ -134,7 +135,7 @@ export function getCollectionBody(ctx: ParameterizedContext, prefix: string, pat
                                   route: iRoute): RootCollection
 {
     const c = new RootCollection(
-        ctx.request.origin + prefix + path,
+        getBaseUrl(ctx) + prefix + path,
         label ?? '-'
     );
     if (route.authService) {

@@ -5,40 +5,41 @@ import RootCollection from "../../lib/RootCollection";
 import Router from 'koa-router';
 import * as path from 'path';
 import download from '../../lib/Download';
+import getBaseUrl from "../../lib/BaseUrl";
 
 const router: Router = new Router();
 
 const collection = (ctx: ParameterizedContext, prefix: string, path: string) =>
-    new RootCollection(ctx.request.origin + prefix + path, 'Encoding test case');
+    new RootCollection(getBaseUrl(ctx) + prefix + path, 'Encoding test case');
 
 const fileUtf8 = (ctx: ParameterizedContext, prefix: string, path: string) =>
     new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/utf8', 'UTF-8 file',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/utf8', 'UTF-8 file',
         'Text',
         'text/plain'
     );
 
 const fileUtf8Explicit = (ctx: ParameterizedContext, prefix: string, path: string) =>
     new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/utf8Explicit', 'UTF-8 file with explicit html header',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/utf8Explicit', 'UTF-8 file with explicit html header',
         'Text',
         'text/plain'
     );
 
 const file8859 = (ctx: ParameterizedContext, prefix: string, path: string) =>
     new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/8859', 'ISO 8859-1 file',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/8859', 'ISO 8859-1 file',
         'Text',
         'text/plain'
     );
 
 const file8859Explicit = (ctx: ParameterizedContext, prefix: string, path: string) =>
     new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/8859Explicit', 'ISO 8859-1 file with explicit html header',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/8859Explicit', 'ISO 8859-1 file with explicit html header',
         'Text',
         'text/plain'
     );

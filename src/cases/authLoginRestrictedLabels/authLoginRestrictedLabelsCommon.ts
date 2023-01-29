@@ -2,6 +2,7 @@ import {ParameterizedContext} from "koa";
 import RootCollection from "../../lib/RootCollection";
 import {hasAccess} from "../../lib/Security";
 import {getAuthLoginService} from "../../auth/login";
+import getBaseUrl from "../../lib/BaseUrl";
 
 export const cookieName = 'access';
 export const cookieToken = '4321';
@@ -9,7 +10,7 @@ export const viewerToken = 'abcd';
 export const userToken = '1234';
 
 export function getAuthLogin(ctx: ParameterizedContext, prefix: string): RootCollection | void {
-    const url = ctx.request.origin + prefix + '/collection/authLoginRestrictedLabels';
+    const url = getBaseUrl(ctx) + prefix + '/collection/authLoginRestrictedLabels';
 
 
     if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
@@ -28,7 +29,7 @@ export function getAuthLogin(ctx: ParameterizedContext, prefix: string): RootCol
 }
 
 export function getAuthLoginDegraded(ctx: ParameterizedContext, prefix: string) {
-    const url = ctx.request.origin + prefix + '/collection/authLoginRestrictedLabels_degraded';
+    const url = getBaseUrl(ctx) + prefix + '/collection/authLoginRestrictedLabels_degraded';
     const c = new RootCollection(url, 'Access denied');
 
     c.setService(getAuthLoginService(ctx));
@@ -37,10 +38,10 @@ export function getAuthLoginDegraded(ctx: ParameterizedContext, prefix: string) 
 }
 
 export function getAuthLoginSubFolder(ctx: ParameterizedContext, prefix: string, isChild?: boolean) {
-    const url = ctx.request.origin + prefix + '/collection/authLoginRestrictedLabelsSubfolder';
+    const url = getBaseUrl(ctx) + prefix + '/collection/authLoginRestrictedLabelsSubfolder';
     const c = new RootCollection(url, 'Subfolder with access restriction');
     c.setService(getAuthLoginService(ctx));
-    c.setParent(ctx.request.origin + prefix + '/collection/authLoginRestrictedLabels', 'Collection');
+    c.setParent(getBaseUrl(ctx) + prefix + '/collection/authLoginRestrictedLabels', 'Collection');
 
     if (!hasAccess(ctx, cookieName, cookieToken, viewerToken)) {
         if (isChild !== true) {

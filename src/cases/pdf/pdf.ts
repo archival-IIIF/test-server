@@ -2,17 +2,18 @@ import {ParameterizedContext} from "koa";
 import {Resource} from "@archival-iiif/presentation-builder";
 import FileManifest from "../../lib/FileManifest";
 import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
+import getBaseUrl from "../../lib/BaseUrl";
 
 
 
 const pdf1 = (ctx: ParameterizedContext, prefix: string, path: string) => {
     const m = new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/pdf1', 'test.pdf',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/pdf1', 'test.pdf',
         'Text',
         'application/pdf'
     );
-    m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/pdf.svg', 'Image', 'image/svg+xml'));
+    m.setThumbnail(new Resource(getBaseUrl(ctx) + '/file-icon/pdf.svg', 'Image', 'image/svg+xml'));
 
 
     return m;
@@ -20,13 +21,13 @@ const pdf1 = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
 const docx = (ctx: ParameterizedContext, prefix: string, path: string) => {
     const m = new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/docx',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/docx',
         'test.docx',
         'Text',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     );
-    m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/docx.svg', 'Image', 'image/svg+xml'));
+    m.setThumbnail(new Resource(getBaseUrl(ctx) + '/file-icon/docx.svg', 'Image', 'image/svg+xml'));
 
 
     return m;
@@ -34,13 +35,13 @@ const docx = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
 const pdfa = (ctx: ParameterizedContext, prefix: string, path: string) => {
     const m = new FileManifest(
-        ctx.request.origin + prefix + path,
-        ctx.request.origin + '/file/pdfa',
+        getBaseUrl(ctx) + prefix + path,
+        getBaseUrl(ctx) + '/file/pdfa',
         'pdfa.pdf',
         'Text',
         'application/pdf'
     );
-    m.setThumbnail(new Resource(ctx.request.origin + '/file-icon/pdf.svg', 'Image', 'image/svg+xml'));
+    m.setThumbnail(new Resource(getBaseUrl(ctx) + '/file-icon/pdf.svg', 'Image', 'image/svg+xml'));
 
 
     return m;

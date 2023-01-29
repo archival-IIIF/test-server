@@ -2,13 +2,14 @@ import {ParameterizedContext} from "koa";
 import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
 import {Base} from "@archival-iiif/presentation-builder";
 import RootCollection from "../../lib/RootCollection";
+import getBaseUrl from "../../lib/BaseUrl";
 
 const images = [
     __dirname + '/../../imageService/Ariel_-_LoC_4a15521.jpg',
 ];
 
 const collection = (ctx: ParameterizedContext, prefix: string, path: string) =>
-    new RootCollection(ctx.request.origin + prefix + path, 'Homepage test case');
+    new RootCollection(getBaseUrl(ctx) + prefix + path, 'Homepage test case');
 
 
 const homepage = (ctx: ParameterizedContext, prefix: string, path: string) => {
