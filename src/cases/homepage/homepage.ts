@@ -11,7 +11,7 @@ const collection = (ctx: ParameterizedContext, prefix: string, path: string) =>
     new RootCollection(ctx.request.origin + prefix + path, 'Homepage test case');
 
 
-const homepage1 = (ctx: ParameterizedContext, prefix: string, path: string) => {
+const homepage = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
     const manifest = getImageBody(ctx, prefix, path, 'Image with homepage', undefined,
         undefined, images);
@@ -20,10 +20,10 @@ const homepage1 = (ctx: ParameterizedContext, prefix: string, path: string) => {
         id: 'https://example.org',
         label: {
             en: [
-                'Home page for Image 1'
+                'Image homepage'
             ],
             de: [
-                'Homepage für Bild 1'
+                'Bild-Homepage'
             ]
         },
         type: 'Text'
@@ -32,23 +32,47 @@ const homepage1 = (ctx: ParameterizedContext, prefix: string, path: string) => {
     return manifest;
 }
 
-const homepage2 = (ctx: ParameterizedContext, prefix: string, path: string) => {
+const severalHomepages = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
-    const manifest = getImageBody(ctx, prefix, path, 'Image with multi lang homepages', undefined,
+    const manifest = getImageBody(ctx, prefix, path, 'Several homepages', undefined,
+        undefined, images);
+    manifest.setHomepage(
+        [
+            {
+                format: 'text/html',
+                id: 'https://example.org/1',
+                label: {none: ['Image homepage 1']},
+                type: 'Text',
+            },
+            {
+                format: 'text/html',
+                id: 'https://example.org/2',
+                label: {none: ['Image homepage 2']},
+                type: 'Text',
+            }
+        ] as any
+    );
+
+    return manifest;
+}
+
+const severalHomepagesWithDifferentLanguages = (ctx: ParameterizedContext, prefix: string, path: string) => {
+
+    const manifest = getImageBody(ctx, prefix, path, 'Homepages in different languages', undefined,
         undefined, images);
     manifest.setHomepage(
         [
             {
                 format: 'text/html',
                 id: 'https://example.org',
-                label: {en: ['Home page for Image 1']},
+                label: {en: ['Image homepage']},
                 type: 'Text',
                 language: ['en']
             },
             {
                 format: 'text/html',
                 id: 'https://example.org/de',
-                label: {de: ['Homepage für Bild 1']},
+                label: {de: ['Bild-Homepage']},
                 type: 'Text',
                 language: ['de']
             }
@@ -58,7 +82,33 @@ const homepage2 = (ctx: ParameterizedContext, prefix: string, path: string) => {
     return manifest;
 }
 
-const homepage3 = (ctx: ParameterizedContext, prefix: string, path: string) => {
+const severalHomepagesWithUnsupportedLanguages = (ctx: ParameterizedContext, prefix: string, path: string) => {
+
+    const manifest = getImageBody(ctx, prefix, path, 'Homepage with unsupported languages', undefined,
+        undefined, images);
+    manifest.setHomepage(
+        [
+            {
+                format: 'text/html',
+                id: 'https://example.org/xx',
+                label: {xx: ['Homepage xx']},
+                type: 'Text',
+                language: ['xx']
+            },
+            {
+                format: 'text/html',
+                id: 'https://example.org/yy',
+                label: {yy: ['Homepage yy']},
+                type: 'Text',
+                language: ['yy']
+            }
+        ] as any
+    );
+
+    return manifest;
+}
+
+const providerHomepage = (ctx: ParameterizedContext, prefix: string, path: string) => {
 
     const manifest = getImageBody(ctx, prefix, path, 'Image with provider homepage', undefined,
         undefined, images);
@@ -88,17 +138,27 @@ export default getIIIFRouteTree([
         children: [
             {
                 path: '/manifest/homepage1',
-                body: homepage1,
+                body: homepage,
                 images
             },
             {
-                path: '/manifest/homepage2',
-                body: homepage2,
+                path: '/manifest/severalHomepages',
+                body: severalHomepages,
+                images
+            },
+            {
+                path: '/manifest/severalHomepagesWithDifferentLanguages',
+                body: severalHomepagesWithDifferentLanguages,
+                images
+            },
+            {
+                path: '/manifest/severalHomepagesWithUnsupportedLanguages',
+                body: severalHomepagesWithUnsupportedLanguages,
                 images
             },
             {
                 path: '/manifest/homepage3',
-                body: homepage3,
+                body: providerHomepage,
                 images
             }
         ]
