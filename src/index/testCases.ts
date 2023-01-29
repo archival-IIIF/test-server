@@ -1,4 +1,4 @@
-{
+export const testCases = {
     "General": [
         {
             "uri": "manifest/image",

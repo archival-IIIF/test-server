@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import {createReadStream} from 'fs';
 import * as path from 'path';
+import {testCases} from "./testCases";
 
 const router: Router = new Router();
 
@@ -22,7 +23,7 @@ router.get('/main.js', async ctx => {
 
 router.get('/testCases.json', async ctx => {
     ctx.type = 'application/json';
-    ctx.body = createReadStream(path.join(__dirname, 'testCases.json'));
+    ctx.body = testCases;
 });
 
 export default router.routes();
