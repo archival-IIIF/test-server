@@ -33,7 +33,7 @@
   "scripts": {
     "watch": "nodemon --watch \"src/**/*\" -e ts,tsx --exec ts-node ./src/server.ts",
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.mp3 src/**/*.webm src/**/*.vttt src/**/*.mp4 src/**/*.txt src/**/*.docx src/**/*.pdf src/**/*.png src/**/*.jpg src/**/*.png src/**/*.css src/**/*.svg src/**/*.js dist/",
+    "copy-files": "copyfiles -u 1 \"src/**/*.html\" \"src/**/*.mp3\" \"src/**/*.webm\" \"src/**/*.vttt\" \"src/**/*.mp4\" \"src/**/*.txt\" \"src/**/*.docx\" \"src/**/*.pdf\" \"src/**/*.png\" \"src/**/*.jpg\" \"src/**/*.png\" \"src/**/*.css\" \"src/**/*.svg\" \"src/**/*.js\" dist/",
     "build": "yarn clean && tsc && yarn copy-files"
   }
 }
