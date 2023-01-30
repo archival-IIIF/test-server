@@ -63,7 +63,7 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
         const schema = JSON.parse(rawdata.toString());
         const data: any = JSON.parse(manifestData.toString());
 
-        const ajv = new Ajv({logger: false});
+        const ajv = new Ajv();
         addFormats(ajv);
 
         ajv.validate(schema, data);
