@@ -9,9 +9,21 @@ const providerManifest = (ctx: ParameterizedContext, prefix: string, path: strin
 
     const manifest = getImageBody(ctx, prefix, path, 'Image with rendering', undefined, undefined, images);
     manifest.setRendering([{
-        id: "https://example.org/iiif/book1.pdf",
+        id: "https://example.org/book1.pdf",
         type: "Text",
         label: { en: [ "Download as PDF" ], de: ["Als PDF herunterladen"] },
+        format: "application/pdf"
+    }]);
+    manifest.setRendering([{
+        id: "https://example.org/book2.pdf",
+        type: "Text",
+        label: { en: [ "Download as PDF-A" ]},
+        format: "application/pdf"
+    }]);
+    manifest.setRendering([{
+        id: "https://example.org/book3.pdf",
+        type: "Text",
+        label: {de: ["Als PDF herunterladen"] },
         format: "application/pdf"
     }]);
 
