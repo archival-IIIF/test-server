@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import Ajv from 'ajv/dist/2020';
 import * as fs from 'fs';
 import * as http from 'http';
+import * as https from 'https';
 import {ErrorObject} from "ajv";
 import addFormats from "ajv-formats"
 
@@ -37,7 +38,8 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
 
     try {
         let manifestData: any = await new Promise((resolve, reject) => {
-            http.get(manifestUrl, (response) => {
+            const h = manifestUrl.startsWith('https') ? https : http;
+            h.get(manifestUrl, (response) => {
                 let chunksOfData: any = [];
 
                 response.on('data', (fragments) => {
@@ -68,6 +70,7 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
 
         ajv.validate(schema, data);
         let errors = ajv.errors;
+        console.log(errors, 'oo')
 
         if (errors) {
             result2[manifestUrl] = errors;
