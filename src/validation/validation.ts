@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import Ajv from 'ajv';
+import Ajv from 'ajv/dist/2020';
 import * as fs from 'fs';
 import * as http from 'http';
 import {ErrorObject} from "ajv";
