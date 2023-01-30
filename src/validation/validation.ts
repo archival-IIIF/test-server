@@ -70,7 +70,6 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
 
         ajv.validate(schema, data);
         let errors = ajv.errors;
-        console.log(errors, 'oo')
 
         if (errors) {
             result2[manifestUrl] = errors;
