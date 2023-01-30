@@ -15,10 +15,10 @@
   resolved "https://registry.yarnpkg.com/@archival-iiif/presentation-builder/-/presentation-builder-1.5.2.tgz#850c94ce2105980af0f113c0a63bf62e2b6583ce"
   integrity sha512-x45m0BRsGZd0dPPT+9AciBF9BNh5geGTDBHpzwKm4i37MOR0MsiuAy0/MEP9wBykvqCfFgSLjFGKjvFPmsYEbg==
 
-"@archival-iiif/viewer@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@archival-iiif/viewer/-/viewer-3.0.0.tgz#9dd7596c0c574957fd0f3104a48e53c9bd9980d8"
-  integrity sha512-fEEAK2NeYNlw3YOR7wP/o/1UI6E6/izbCIuj+pLgDoNKG9tx0f60hmIuIj1n6HdOzxG2zSgwUIm0Cqr3FoQPog==
+"@archival-iiif/viewer@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@archival-iiif/viewer/-/viewer-3.1.0.tgz#d9ac3866e74b39ce633d245cadc2358acdab5657"
+  integrity sha512-fmj9GleG2MkKIgbbATENfurl538Ref8V7fEozyuTX0SoKaWZcHi+SmJGt8HuvVynqyZbUNAqVk4kQDF3KPSWgg==
 
 "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.14.5", "@babel/runtime@^7.15.4", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.20.13"
