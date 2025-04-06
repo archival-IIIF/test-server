@@ -2,7 +2,8 @@ import {Service, Canvas, AnnotationPage, Resource, Annotation, Manifest} from "@
 import {imageSize} from "image-size";
 import {basename} from "./helper";
 import ThumbnailService from "./ThumbnailService";
-import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import {Internationalize} from "@archival-iiif/presentation-builder/v3";
+import { readFileSync } from 'node:fs'
 
 export default class ImageManifest2 extends Manifest {
 
@@ -17,7 +18,9 @@ export default class ImageManifest2 extends Manifest {
         const items: Canvas[] = [];
         let i = 0;
         for (let image of images) {
-            const size = imageSize(image);
+            // https://github.com/image-size/image-size?tab=readme-ov-file#reading-from-a-file-syncronously-not-recommended-%EF%B8%8F
+            const buffer = readFileSync(image)
+            const size = imageSize(buffer)
             const imageId = basename(id) + '_' + i.toString()
             const canvas = new Canvas(
                 baseId + '/canvas/' + imageId,

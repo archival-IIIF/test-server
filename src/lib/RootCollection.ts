@@ -1,5 +1,5 @@
-import {Collection, Manifest} from "@archival-iiif/presentation-builder";
-import Base, {Internationalized} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import {Collection} from "@archival-iiif/presentation-builder";
+import {Internationalized} from "@archival-iiif/presentation-builder/v3";
 
 export default class RootCollection extends Collection {
 

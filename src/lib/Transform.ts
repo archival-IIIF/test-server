@@ -3,7 +3,7 @@ import {Collection as CollectionV3, Manifest as ManifestV3, Annotation as Annota
 import {Collection as CollectionV2, Manifest as ManifestV2, Resource as ResourceV2, Image as ImageV2, Sequence as SequenceV2,
     Canvas as CanvasV2, Annotation as AnnotationV2, Rendering as RenderingV2,
     MediaSequence as MediaSequenceV2, Base as BaseV2, AuthService as AuthServiceV2} from "@archival-iiif/presentation-builder/v2";
-import {Internationalized as InternationalizedV3, Ref as RefV3} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import {Internationalized as InternationalizedV3, Ref as RefV3} from "@archival-iiif/presentation-builder/v3";
 
 export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
 

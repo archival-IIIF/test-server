@@ -1,7 +1,7 @@
 import {ParameterizedContext} from "koa";
 import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
 import {defaultImage} from "../../lib/Image";
-import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import {Internationalize} from "@archival-iiif/presentation-builder/v3";
 
 
 const multiLangManifest = (ctx: ParameterizedContext, prefix: string, path: string) => {

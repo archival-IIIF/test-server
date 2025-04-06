@@ -1,5 +1,5 @@
 import {Canvas, AnnotationPage, Resource, Annotation, Manifest} from "@archival-iiif/presentation-builder";
-import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import {Internationalize} from "@archival-iiif/presentation-builder/v3";
 
 
 type I18nExtendedRef = { id?: string; type?: string; label?: Internationalize; format?: string; profile?: string; };

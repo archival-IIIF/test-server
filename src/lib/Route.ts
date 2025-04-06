@@ -4,12 +4,12 @@ import {transformCollectionToV2, transformManifestToV2} from "./Transform";
 import {hasAccess} from "./Security";
 import {ParameterizedContext} from "koa";
 import RootCollection from "./RootCollection";
-import imageSize from "image-size";
+import {imageSizeFromFile} from "image-size/fromFile";
 import {infoV2, infoV3} from "../imageService/imageBase";
 import {basename} from "./helper";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
-import {Internationalize} from "@archival-iiif/presentation-builder/dist/v3/Base";
+import {Internationalize} from "@archival-iiif/presentation-builder/v3";
 import getBaseUrl from "./BaseUrl";
 
 export interface iRoute {
@@ -34,7 +34,7 @@ export function getIIIFRouteTree(routes: iRoute[], router?: Router) {
     return router2.routes();
 }
 
-export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: string) {
+export async function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: string) {
 
     for (const route of routes) {
         for (const version of ['v2', 'v3']) {
@@ -78,7 +78,7 @@ export function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: str
                 let i = 0;
                 for (const imagePath of route.images) {
                     const imageId = basename(route.path) + '_' + i.toString();
-                    const size = imageSize(imagePath);
+                    const size = await imageSizeFromFile(imagePath);
                     router.get('/iiif/'  +version + '/image/' + imageId + '/info.json', ctx => {
 
                         const id =  getBaseUrl(ctx) + ctx.request.url.replace('/info.json', '');
