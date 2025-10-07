@@ -18,7 +18,7 @@
     "mime-types": "^2.1.35",
     "mirador": "^3.4.3",
     "moment": "^2.30.1",
-    "universalviewer": "4.2.0-rc2"
+    "universalviewer": "^4.2.1"
   },
   "devDependencies": {
     "@swc/core": "^1.13.5",
