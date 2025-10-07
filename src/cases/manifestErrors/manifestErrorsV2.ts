@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import getBaseUrl from "../../lib/BaseUrl";
 
 const prefix = '/iiif/v2';

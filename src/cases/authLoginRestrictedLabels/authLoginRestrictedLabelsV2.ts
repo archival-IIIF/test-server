@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import {getAuthLogin, getAuthLoginDegraded, getAuthLoginSubFolder} from "./authLoginRestrictedLabelsCommon";
 import {transformCollectionToV2} from "../../lib/Transform";
 

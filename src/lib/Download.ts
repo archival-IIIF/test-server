@@ -1,13 +1,13 @@
-import Router from 'koa-router';
 import * as path from 'path';
 import * as mime from 'mime-types';
 import * as fs from 'fs';
 import {promisify} from 'util';
 const readFileAsync = promisify(fs.readFile);
 import HttpError from '../lib/HttpError';
+import {Context} from "koa";
 
 
-async function download(ctx: Router.RouterContext, filePath: string, fileName?: string, encoding?: string) {
+async function download(ctx: Context, filePath: string, fileName?: string, encoding?: string) {
     try {
         if (!fileName) {
             fileName = path.basename(filePath);

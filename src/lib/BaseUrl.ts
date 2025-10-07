@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import {ParameterizedContext} from "koa";
 
 export default function getBaseUrl(ctx: Router.RouterContext | ParameterizedContext): string {

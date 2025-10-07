@@ -1,6 +1,7 @@
 import {AuthService} from "@archival-iiif/presentation-builder";
-import Router from "koa-router";
+import Router from "@koa/router";
 import getBaseUrl from "../lib/BaseUrl";
+import {Context} from "koa";
 
 export const cookieName = 'access-external';
 export const cookieToken = 'external-cookie-abc';
@@ -53,14 +54,14 @@ interface IMessage {
     messageId?: string;
 }
 
-router.get('/auth/external/accept/token', async (ctx: Router.RouterContext) => {
+router.get('/auth/external/accept/token', async (ctx: Context) => {
     const message: IMessage = {};
     message.accessToken = viewerToken;
     message.expiresIn = 3600;
     ctx.body = message;
 });
 
-router.get('/auth/external/deny/token', async (ctx: Router.RouterContext) => {
+router.get('/auth/external/deny/token', async (ctx: Context) => {
 
     const message: IMessage = {};
     message.error = 'missingCredentials';

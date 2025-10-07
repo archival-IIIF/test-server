@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import authInfoV2 from "./authInfoV2";
 import authInfoV3 from "./authInfoV3";
 import authInfoImageService from "./authInfoImageService";

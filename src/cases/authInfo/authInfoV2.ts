@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import {getAuthInfo, getAuthInfo2} from "./authInfoCommon";
 import {transformCollectionToV2, transformManifestToV2} from "../../lib/Transform";
 

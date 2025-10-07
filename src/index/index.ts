@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import {createReadStream} from 'fs';
 import * as path from 'path';
 import {testCases} from "./testCases";

@@ -1,6 +1,6 @@
-import Router from "koa-router";
+import Router from '@koa/router'
 import {loginPage, logoutPage, tokenPage} from "./auth";
-import {ParameterizedContext} from "koa";
+import {Context, ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";
 import getBaseUrl from "../lib/BaseUrl";
 
@@ -38,7 +38,7 @@ export function getAuthKioskService(ctx: ParameterizedContext) {
 
 const router: Router = new Router();
 
-router.get('/token/kiosk',  (ctx: Router.RouterContext) => {
+router.get('/token/kiosk',  (ctx: Context) => {
     tokenPage(ctx, cookieName, cookieToken, viewerToken);
 });
 

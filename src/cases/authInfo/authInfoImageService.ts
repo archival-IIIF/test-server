@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from '@koa/router';
 import {hasAccess} from '../../lib/Security';
 import {responseFile} from "../../imageService/imageService";
 import {cookieName, cookieToken, viewerToken, getAuthLoginService} from "../../auth/login";
