@@ -16,7 +16,7 @@
     "koa-route": "^3.2.0",
     "koa-static-server": "^1.5.2",
     "mime-types": "^2.1.35",
-    "mirador": "^3.4.3",
+    "mirador": "^4.0.0",
     "moment": "^2.30.1",
     "universalviewer": "^4.2.1"
   },
