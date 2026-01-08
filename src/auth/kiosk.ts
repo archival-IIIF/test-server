@@ -36,7 +36,7 @@ export function getAuthKioskService(ctx: ParameterizedContext) {
     return authService;
 }
 
-const router: Router = new Router();
+const router = new Router();
 
 router.get('/token/kiosk',  (ctx: Context) => {
     tokenPage(ctx, cookieName, cookieToken, viewerToken);

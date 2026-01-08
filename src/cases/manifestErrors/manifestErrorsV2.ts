@@ -2,7 +2,7 @@ import Router from '@koa/router';
 import getBaseUrl from "../../lib/BaseUrl";
 
 const prefix = '/iiif/v2';
-const router: Router = new Router({prefix});
+const router = new Router({prefix});
 
 router.get('/collection/missingManifest', ctx => {
     ctx.status = 404;

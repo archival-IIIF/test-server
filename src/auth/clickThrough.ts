@@ -4,7 +4,7 @@ import {Context, ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";
 import getBaseUrl from "../lib/BaseUrl";
 
-const router: Router = new Router();
+const router = new Router();
 
 export const cookieName = 'access-click-through';
 export const cookieToken = 'click-through-cookie-abc';

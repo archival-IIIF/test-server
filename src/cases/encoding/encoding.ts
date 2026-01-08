@@ -7,7 +7,7 @@ import * as path from 'path';
 import download from '../../lib/Download';
 import getBaseUrl from "../../lib/BaseUrl";
 
-const router: Router = new Router();
+const router = new Router();
 
 const collection = (ctx: ParameterizedContext, prefix: string, path: string) =>
     new RootCollection(getBaseUrl(ctx) + prefix + path, 'Encoding test case');

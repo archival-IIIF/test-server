@@ -8,7 +8,7 @@ import getBaseUrl from "../../lib/BaseUrl";
 
 const imageWith = 1840;
 const imageHeight = 1450;
-const router: Router = new Router();
+const router = new Router();
 
 
 router.get('/image-service/v2/authInfo/info.json', ctx => {

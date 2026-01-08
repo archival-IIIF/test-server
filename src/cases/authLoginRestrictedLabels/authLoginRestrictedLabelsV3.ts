@@ -1,7 +1,7 @@
 import Router from '@koa/router';
 
 const prefix = '/iiif/v3';
-const router: Router = new Router({prefix});
+const router = new Router({prefix});
 import {getAuthLogin, getAuthLoginSubFolder, getAuthLoginDegraded} from "./authLoginRestrictedLabelsCommon";
 
 router.get('/collection/authLoginRestrictedLabels', ctx => {

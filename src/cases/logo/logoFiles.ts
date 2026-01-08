@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import download from '../../lib/Download';
 import {Context} from "koa";
-const router: Router = new Router();
+const router = new Router();
 
 router.get('/logo', async (ctx: Context) => {
     const filePath = path.join(__dirname, 'logo.png');

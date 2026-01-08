@@ -3,7 +3,7 @@ import * as path from 'path';
 import {createReadStream} from 'fs';
 import {Context} from "koa";
 
-const router: Router = new Router();
+const router = new Router();
 
 router.get('/mirador', async (ctx: Context) => {
     ctx.type = 'text/html';

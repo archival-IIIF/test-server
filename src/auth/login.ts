@@ -44,7 +44,7 @@ export function getAuthLoginService(ctx?: ParameterizedContext) {
     return authService;
 }
 
-const router: Router = new Router();
+const router = new Router();
 
 
 router.get('/login', (ctx: Context) => {

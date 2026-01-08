@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 
-const router: Router = new Router();
+const router = new Router();
 
 import * as path from 'path';
 import download from '../../lib/Download';

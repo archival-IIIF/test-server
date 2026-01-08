@@ -3,7 +3,7 @@ import {getAuthLogin, getAuthLoginDegraded, getAuthLoginSubFolder} from "./authL
 import {transformCollectionToV2} from "../../lib/Transform";
 
 const prefix = '/iiif/v2';
-const router: Router = new Router({prefix});
+const router = new Router({prefix});
 
 router.get('/collection/authLoginRestrictedLabels', ctx => {
     const result = getAuthLogin(ctx, prefix);

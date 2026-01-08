@@ -2,7 +2,7 @@ import Router from '@koa/router';
 import * as path from 'path';
 import download from '../../lib/Download';
 
-const router: Router = new Router();
+const router = new Router();
 
 
 router.get('/file/die_internationale_as_mp3', async ctx => {

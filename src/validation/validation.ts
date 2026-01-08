@@ -6,7 +6,7 @@ import * as https from 'https';
 import {ErrorObject} from "ajv";
 import addFormats from "ajv-formats"
 
-const router: Router = new Router();
+const router = new Router();
 
 router.get('/validate', async ctx => {
     const manifestUrl = ctx.request.query.manifest as string;

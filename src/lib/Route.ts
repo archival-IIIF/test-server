@@ -1,4 +1,4 @@
-import Router from '@koa/router'
+import {Router, RouterInstance} from '@koa/router'
 import {Collection, Manifest, AuthService} from "@archival-iiif/presentation-builder";
 import {transformCollectionToV2, transformManifestToV2} from "./Transform";
 import {hasAccess} from "./Security";
@@ -26,7 +26,7 @@ export interface iRoute {
     authService?: (ctx: ParameterizedContext) => AuthService;
 }
 
-export function getIIIFRouteTree(routes: iRoute[], router?: Router) {
+export function getIIIFRouteTree(routes: iRoute[], router?: RouterInstance) {
     const router2 = router ?? new Router();
 
     addIIIFRoutes(routes, router2);
@@ -34,7 +34,7 @@ export function getIIIFRouteTree(routes: iRoute[], router?: Router) {
     return router2.routes();
 }
 
-export async function addIIIFRoutes(routes: iRoute[], router: Router, parentPath?: string) {
+export async function addIIIFRoutes(routes: iRoute[], router: RouterInstance, parentPath?: string) {
 
     for (const route of routes) {
         for (const version of ['v2', 'v3']) {

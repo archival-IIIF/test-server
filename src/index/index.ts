@@ -3,7 +3,7 @@ import {createReadStream} from 'fs';
 import * as path from 'path';
 import {testCases} from "./testCases";
 
-const router: Router = new Router();
+const router = new Router();
 
 
 router.get('/', async ctx => {

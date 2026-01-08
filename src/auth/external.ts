@@ -44,7 +44,7 @@ function getAuthService(ctx: any, accept: boolean): AuthService {
     return authService;
 }
 
-const router: Router = new Router();
+const router = new Router();
 
 interface IMessage {
     accessToken?: string;

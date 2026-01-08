@@ -1,8 +1,8 @@
-import Router from '@koa/router';
 import {ParameterizedContext} from "koa";
+import {RouterContext} from "@koa/router";
 
 export function hasAccess(
-    ctx: Router.RouterContext | ParameterizedContext,
+    ctx: RouterContext | ParameterizedContext,
     cookieName?: string,
     cookieToken?: string,
     viewerToken?: string) {

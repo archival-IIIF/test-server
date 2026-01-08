@@ -3,7 +3,7 @@ import {getAuthInfo, getAuthInfo2} from "./authInfoCommon";
 import {transformCollectionToV2, transformManifestToV2} from "../../lib/Transform";
 
 const prefix = '/iiif/v2';
-const router: Router = new Router({prefix});
+const router = new Router({prefix});
 
 
 router.get('/collection/authInfo', ctx => {

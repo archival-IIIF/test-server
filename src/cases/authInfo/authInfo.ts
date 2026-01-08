@@ -3,7 +3,7 @@ import authInfoV2 from "./authInfoV2";
 import authInfoV3 from "./authInfoV3";
 import authInfoImageService from "./authInfoImageService";
 
-const router: Router = new Router();
+const router = new Router();
 
 router.use(authInfoV2);
 router.use(authInfoV3);
