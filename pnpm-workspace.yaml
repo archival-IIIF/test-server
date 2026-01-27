@@ -4,4 +4,3 @@ packages:
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
   - '@archival-iiif/*'
-
