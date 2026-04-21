@@ -19,7 +19,7 @@ This project can also run in Docker.
 1. Copy `env.example` to `.env` if you want to customize the port
 2. Build and start the container:
    ```bash
-   docker compose up --build
+   docker-compose up --build
    ```
 3. Open `http://localhost:3333`
 

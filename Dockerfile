@@ -1,4 +1,4 @@
-# Shared base image for all stages. We keep Node 22 to match the project setup.
+# Shared base image for all stages. Built on debian 12 Bookworm. We keep Node 22 to match the project setup.
 FROM node:22-bookworm-slim AS base
 
 WORKDIR /app
