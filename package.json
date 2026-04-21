@@ -31,6 +31,7 @@
   },
   "scripts": {
     "start": "ts-node ./src/server.ts",
+    "start:prod": "node ./dist/server.js",
     "watch": "node --watch -r ts-node/register ./src/server.ts",
     "build": "rimraf dist/ && tsc && copyfiles -u 1 \"src/**/*.html\" \"src/**/*.mp3\" \"src/**/*.webm\" \"src/**/*.vtt\" \"src/**/*.mp4\" \"src/**/*.txt\" \"src/**/*.docx\" \"src/**/*.pdf\" \"src/**/*.png\" \"src/**/*.jpg\" \"src/**/*.png\" \"src/**/*.css\" \"src/**/*.svg\" \"src/**/*.js\" \"src/**/*.json\" dist/"
   },

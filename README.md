@@ -12,6 +12,23 @@ It contains test cases of Image API (v2 and v3), Presentation API (v2 and v3) ab
 4. ```yarn install``` or ```npm install```
 5. ```yarn run start``` or  ```npm run start```
 
+## Docker
+
+This project can also run in Docker.
+
+1. Copy `env.example` to `.env` if you want to customize the port
+2. Build and start the container:
+   ```bash
+   docker compose up --build
+   ```
+3. Open `http://localhost:3333`
+
+To stop the container:
+
+```bash
+docker compose down
+```
+
 ## Demo
 
 https://iiif-testing.sozialarchiv.ch
