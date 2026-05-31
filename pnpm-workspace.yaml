@@ -1,8 +1,8 @@
 packages:
   - '**'
 allowBuilds:
-  '@swc/core': set this to true or false
-  sharp: set this to true or false
+  '@swc/core': true
+  sharp: true
 # 1 week (in minutes)
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
