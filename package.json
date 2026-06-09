@@ -3,7 +3,7 @@
     "@archival-iiif/image-server-core": "^2.2.0",
     "@archival-iiif/presentation-builder": "^1.5.3",
     "@archival-iiif/viewer": "^3.1.0",
-    "@koa/router": "^15.5.0",
+    "@koa/router": "^15.6.0",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "bootstrap": "^5.3.8",
@@ -20,7 +20,6 @@
     "moment": "^2.30.1"
   },
   "devDependencies": {
-    "@swc/core": "1.13.5",
     "@types/koa": "^3.0.3",
     "@types/mime-types": "^2.1.4",
     "@types/node": "^24.12.4",
