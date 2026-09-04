@@ -9,14 +9,14 @@ export const cookieToken = '4321';
 export const viewerToken = 'abcd';
 export const userToken = '1234';
 
-export function getAuthLogin(ctx: ParameterizedContext, prefix: string): RootCollection | void {
+export function getAuthLogin(ctx: ParameterizedContext, prefix: string): RootCollection | false {
     const url = getBaseUrl(ctx) + prefix + '/collection/authLoginRestrictedLabels';
 
 
     if (!hasAccess(ctx, undefined, undefined, viewerToken)) {
         ctx.status = 302;
         ctx.redirect(url + '_degraded');
-        return;
+        return false;
     }
 
     const c = new RootCollection(url, 'Collection with access restriction');

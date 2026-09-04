@@ -1,6 +1,6 @@
 import Router from '@koa/router';
-import * as path from 'path';
-import {createReadStream} from 'fs';
+import * as path from 'node:path';
+import {createReadStream} from 'node:fs';
 import type {Context} from "koa";
 
 const router = new Router();

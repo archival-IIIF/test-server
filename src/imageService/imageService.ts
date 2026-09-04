@@ -1,6 +1,5 @@
 import type {ParameterizedContext} from "koa";
 import {serveImage} from "@archival-iiif/image-server-core";
-import {imageSize} from "image-size";
 
 export async function responseFile(ctx: ParameterizedContext, uri: string) {
 

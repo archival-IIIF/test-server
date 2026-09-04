@@ -18,12 +18,8 @@ export function getAuthServiceDeny(ctx: any): AuthService {
 
 function getAuthService(ctx: any, accept: boolean): AuthService {
 
-    let tokenUrl;
-    if (accept) {
-        tokenUrl = getBaseUrl(ctx) + '/auth/external/accept/token';
-    } else {
-        tokenUrl = getBaseUrl(ctx) + '/auth/external/deny/token';
-    }
+    const tokenUrl = accept ? getBaseUrl(ctx) + '/auth/external/accept/token' :
+        getBaseUrl(ctx) + '/auth/external/deny/token';
 
     const authService = new AuthService(
         getBaseUrl(ctx) + '/external',

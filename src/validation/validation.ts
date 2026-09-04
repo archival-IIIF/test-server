@@ -1,8 +1,8 @@
 import Router from '@koa/router';
 import Ajv from 'ajv/dist/2020';
-import * as fs from 'fs';
-import * as http from 'http';
-import * as https from 'https';
+import * as fs from 'node:fs';
+import * as http from 'node:http';
+import * as https from 'node:https';
 import type {ErrorObject} from "ajv";
 import addFormats from "ajv-formats"
 
@@ -100,15 +100,12 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
 
 
 function isUrl(input: string) {
-    let url;
-
     try {
-        url = new URL(input);
+        const url = new URL(input);
+        return url.protocol === "http:" || url.protocol === "https:";
     } catch (_) {
         return false;
     }
-
-    return url.protocol === "http:" || url.protocol === "https:";
 }
 
 export default router.routes();

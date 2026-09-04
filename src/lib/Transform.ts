@@ -196,7 +196,7 @@ function baseTransformation(v2: BaseV2, v3: BaseV3) {
         v2.setLogo(new ResourceV2(logo.id ?? '', logo.width ?? 0, logo.height ?? 0, logo.format ?? '', logo.type));
     }
     v2.setLicense(v3.rights ?? '');
-    if (v3.requiredStatement && v3.requiredStatement.value) {
+    if (v3.requiredStatement?.value) {
         v2.setAttribution(getInternational(v3.requiredStatement.value));
     }
 

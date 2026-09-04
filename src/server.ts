@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import * as path from 'path';
+import * as path from 'node:path';
 import attribution from "./cases/attribution/attribution";
 import audioVideoFiles from './cases/audioVideo/audioVideoFiles';
 import audioVideo from './cases/audioVideo/audioVideo';
@@ -52,7 +52,7 @@ const serve = require('koa-static-server');
 const config = require('./lib/Config');
 const bodyParser = require('koa-bodyparser');
 
-app.use(async (ctx: Koa.Context, next: Function) => {
+app.use(async (ctx: Koa.Context, next: () => void) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 

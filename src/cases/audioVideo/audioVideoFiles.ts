@@ -1,5 +1,5 @@
 import Router from '@koa/router';
-import * as path from 'path';
+import * as path from 'node:path';
 import download from '../../lib/Download';
 
 const router = new Router();

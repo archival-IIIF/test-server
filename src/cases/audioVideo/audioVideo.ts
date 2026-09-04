@@ -2,8 +2,8 @@ import type {ParameterizedContext} from "koa";
 import {Resource} from "@archival-iiif/presentation-builder";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";
-import * as path from "path";
-import * as fs from "fs";
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 import {getIIIFRouteTree} from "../../lib/Route";
 import getBaseUrl from "../../lib/BaseUrl";
 
@@ -99,9 +99,9 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
         if (lines.length < 3) {
             continue;
         }
-        const t = parseInt(lines[1].slice(0, 2)) * 3600 +
-            parseInt(lines[1].slice(3, 5)) * 60 +
-            parseInt(lines[1].slice(6, 8));
+        const t = parseInt(lines[1].slice(0, 2), 10) * 3600 +
+            parseInt(lines[1].slice(3, 5), 10) * 60 +
+            parseInt(lines[1].slice(6, 8), 10);
         items.push({
             id:	getBaseUrl(ctx) + prefix + '/manifest/elephantsDream/Annotation/' + (i++).toString(),
             motivation:	"supplementing",

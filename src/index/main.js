@@ -32,12 +32,14 @@ fetch('testCases.json').then(
     })
 );
 
+// biome-ignore lint/correctness/noUnusedVariables: used in index.html
 function viewerUrlChanged(value) {
     viewerUrl = value;
     localStorage.setItem('viewer-url', value);
     drawTable()
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: used in index.html
 function viewerTypeChanged(value) {
     if (viewers.includes(value)) {
         if (!viewers.includes(viewerUrl)) {

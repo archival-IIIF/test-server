@@ -3,7 +3,7 @@ import {getIIIFRouteTree} from "../../lib/Route";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";
 import Router from '@koa/router';
-import * as path from 'path';
+import * as path from 'node:path';
 import download from '../../lib/Download';
 import getBaseUrl from "../../lib/BaseUrl";
 

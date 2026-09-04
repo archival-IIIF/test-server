@@ -15,7 +15,8 @@
                 "noExplicitAny": "off"
             },
             "complexity": {
-                "noStaticOnlyClass": "off"
+                "noStaticOnlyClass": "off",
+                "noImportantStyles": "off"
             }
         }
     }

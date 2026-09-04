@@ -1,5 +1,5 @@
-import * as path from 'path';
-import {createReadStream} from 'fs';
+import * as path from 'node:path';
+import {createReadStream} from 'node:fs';
 import {hasAccess} from '../lib/Security';
 import moment from 'moment';
 import type {ParameterizedContext} from "koa";

@@ -13,5 +13,5 @@ export default function getBaseUrl(ctx: Context | ParameterizedContext): string 
 
     const protocol = 'http';
 
-    return protocol + '://' + ctx.headers['host'];
+    return protocol + '://' + ctx.headers.host;
 }

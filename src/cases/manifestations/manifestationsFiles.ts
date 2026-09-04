@@ -2,7 +2,7 @@ import Router from '@koa/router';
 
 const router = new Router();
 
-import * as path from 'path';
+import * as path from 'node:path';
 import download from '../../lib/Download';
 
 router.get('/file/manifestation', async  ctx => {

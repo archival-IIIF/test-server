@@ -1,7 +1,7 @@
-import * as path from 'path';
+import * as path from 'node:path';
 import * as mime from 'mime-types';
-import * as fs from 'fs';
-import {promisify} from 'util';
+import * as fs from 'node:fs';
+import {promisify} from 'node:util';
 const readFileAsync = promisify(fs.readFile);
 import HttpError from '../lib/HttpError';
 import type {Context} from "koa";
@@ -24,7 +24,7 @@ async function download(ctx: Context, filePath: string, fileName?: string, encod
         ctx.set('Content-Disposition', 'inline; filename="' + fileName + '"');
         ctx.body = await readFileAsync(filePath);
     }
-    catch (err) {
+    catch (_err) {
         throw new HttpError(404);
     }
 }

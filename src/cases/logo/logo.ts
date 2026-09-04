@@ -1,6 +1,5 @@
 import type {ParameterizedContext} from "koa";
 import {Resource} from "@archival-iiif/presentation-builder";
-import FileManifest from "../../lib/FileManifest";
 import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
 import {defaultImage} from "../../lib/Image";
 import getBaseUrl from "../../lib/BaseUrl";

@@ -114,14 +114,14 @@ export async function addIIIFRoutes(routes: iRoute[], router: RouterInstance, pa
 }
 
 export function getImageBody(ctx: ParameterizedContext, prefix: string, path: string, label: Internationalize | undefined,
-                             route?: iRoute, auth?: boolean, images?: string[]): Manifest
+                             route?: iRoute, _auth?: boolean, images?: string[]): Manifest
 {
     const i = new ImageManifest2(
         getBaseUrl(ctx) + prefix + path,
         route?.images ?? images ?? [],
         label ?? '-'
     );
-    if (route &&  route.authService) {
+    if (route?.authService) {
         i.setService(route.authService(ctx));
         if (route.cookieName && route.cookieToken && route.viewerToken && !hasAccess(ctx, route.cookieName, route.cookieToken, route.viewerToken)) {
             ctx.status = 401;

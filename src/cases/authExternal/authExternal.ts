@@ -1,4 +1,4 @@
-import {getCollectionBody, getIIIFRouteTree, getImageBody, iRoute} from "../../lib/Route";
+import {getCollectionBody, getIIIFRouteTree, getImageBody} from "../../lib/Route";
 import type {ParameterizedContext} from "koa";
 import {getAuthServiceAccept, getAuthServiceDeny, viewerToken, cookieName, cookieToken} from "../../auth/external";
 
