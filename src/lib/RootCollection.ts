@@ -1,5 +1,5 @@
 import {Collection} from "@archival-iiif/presentation-builder";
-import {Internationalized} from "@archival-iiif/presentation-builder/v3";
+import type {Internationalized} from "@archival-iiif/presentation-builder/v3";
 
 export default class RootCollection extends Collection {
 

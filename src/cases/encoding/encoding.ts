@@ -1,4 +1,4 @@
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {getIIIFRouteTree} from "../../lib/Route";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";

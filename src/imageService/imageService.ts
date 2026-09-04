@@ -1,10 +1,10 @@
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {serveImage} from "@archival-iiif/image-server-core";
 import {imageSize} from "image-size";
 
 export async function responseFile(ctx: ParameterizedContext, uri: string) {
 
-    let result = await serveImage(uri, null, {
+    const result = await serveImage(uri, null, {
         region: ctx.params.region,
         size: ctx.params.size,
         rotation: ctx.params.rotation,

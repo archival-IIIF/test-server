@@ -1,5 +1,5 @@
 import {getCollectionBody, getIIIFRouteTree, getImageBody} from "../../lib/Route";
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {cookieName, cookieToken, viewerToken} from "../../auth/clickThrough";
 import {getAuthClickThroughService} from "../../auth/clickThrough";
 

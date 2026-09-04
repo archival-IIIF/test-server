@@ -1,4 +1,4 @@
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {cookieName, cookieToken, getAuthKioskService, viewerToken} from "../../auth/kiosk";
 import {getCollectionBody, getIIIFRouteTree, getImageBody} from "../../lib/Route";
 

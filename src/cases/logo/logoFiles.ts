@@ -2,7 +2,7 @@ import Router from '@koa/router';
 import * as path from 'path';
 
 import download from '../../lib/Download';
-import {Context} from "koa";
+import type {Context} from "koa";
 const router = new Router();
 
 router.get('/logo', async (ctx: Context) => {

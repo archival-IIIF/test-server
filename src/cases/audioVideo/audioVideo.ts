@@ -1,4 +1,4 @@
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {Resource} from "@archival-iiif/presentation-builder";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";
@@ -25,7 +25,7 @@ const dieInternationale = (ctx: ParameterizedContext, prefix: string) => {
     m.setMetadata([
         {
             label: {none: ['Original file type']},
-            value: {none: [ '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=687\">MPEG 1/2 Audio Layer 3 (.mp3)</a>']}
+            value: {none: [ '<a href="https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=687">MPEG 1/2 Audio Layer 3 (.mp3)</a>']}
         },
         {
             label: {none: ['Original file size']},
@@ -48,7 +48,7 @@ const f113 = (ctx: ParameterizedContext, prefix: string) => {
     m.setMetadata([
         {
             label: {none: ['Original file type']},
-            value: {none: [ '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=924\">MPEG-4 Media File (.f4a, .f4v, .m4a, .m4v, .mp4)</a>']}
+            value: {none: [ '<a href="https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=924">MPEG-4 Media File (.f4a, .f4v, .m4a, .m4v, .mp4)</a>']}
         },
         {
             label: {none: ['Original file size']},
@@ -71,7 +71,7 @@ const elephantsDream = (ctx: ParameterizedContext, prefix: string) => {
     m.setMetadata([
         {
             label: {none: ['Original file type']},
-            value: {none: [ '<a href=\"https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=1361\">WebM</a>']}
+            value: {none: [ '<a href="https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=1361">WebM</a>']}
         },
         {
             label: {none: ['Original file size']},

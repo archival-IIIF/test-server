@@ -1,9 +1,9 @@
-import {Collection as CollectionV3, Manifest as ManifestV3, Annotation as AnnotationV3, Resource as ResourceV3,
-    Base as BaseV3, Service as ServiceV3, AuthService as AuthServiceV3} from "@archival-iiif/presentation-builder/v3";
+import {type Collection as CollectionV3, type Manifest as ManifestV3, type Annotation as AnnotationV3, Resource as ResourceV3,
+    type Base as BaseV3, type Service as ServiceV3, AuthService as AuthServiceV3} from "@archival-iiif/presentation-builder/v3";
 import {Collection as CollectionV2, Manifest as ManifestV2, Resource as ResourceV2, Image as ImageV2, Sequence as SequenceV2,
     Canvas as CanvasV2, Annotation as AnnotationV2, Rendering as RenderingV2,
-    MediaSequence as MediaSequenceV2, Base as BaseV2, AuthService as AuthServiceV2} from "@archival-iiif/presentation-builder/v2";
-import {Internationalized as InternationalizedV3, Ref as RefV3} from "@archival-iiif/presentation-builder/v3";
+    MediaSequence as MediaSequenceV2, type Base as BaseV2, AuthService as AuthServiceV2} from "@archival-iiif/presentation-builder/v2";
+import type {Internationalized as InternationalizedV3, Ref as RefV3} from "@archival-iiif/presentation-builder/v3";
 
 export function transformCollectionToV2(c3: CollectionV3): CollectionV2 {
 
@@ -161,7 +161,7 @@ export function transformServiceToV2(serviceV3?: AuthServiceV3 | AuthServiceV3[]
     const serviceV2: BaseV2[] = [];
     for (const s3 of serviceV3) {
 
-        let s2 = new AuthServiceV2(s3.id, s3.type ?? '');
+        const s2 = new AuthServiceV2(s3.id, s3.type ?? '');
 
         if (s3 instanceof AuthServiceV3) {
             s2.label = s3.label;

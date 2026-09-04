@@ -1,15 +1,15 @@
-import {Router, RouterInstance} from '@koa/router'
-import {Collection, Manifest, AuthService} from "@archival-iiif/presentation-builder";
+import {Router, type RouterInstance} from '@koa/router'
+import {Collection, type Manifest, type AuthService} from "@archival-iiif/presentation-builder";
 import {transformCollectionToV2, transformManifestToV2} from "./Transform";
 import {hasAccess} from "./Security";
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import RootCollection from "./RootCollection";
 import {imageSizeFromFile} from "image-size/fromFile";
 import {infoV2, infoV3} from "../imageService/imageBase";
 import {basename} from "./helper";
 import {responseFile} from "../imageService/imageService";
 import ImageManifest2 from "./ImageManifest2";
-import {Internationalize} from "@archival-iiif/presentation-builder/v3";
+import type {Internationalize} from "@archival-iiif/presentation-builder/v3";
 import getBaseUrl from "./BaseUrl";
 
 export interface iRoute {

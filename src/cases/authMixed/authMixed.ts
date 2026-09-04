@@ -2,7 +2,7 @@ import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
 import {cookieName, cookieToken, getAuthLoginService, viewerToken} from "../../auth/login";
 import {cookieName as cookieNameClickThrough, cookieToken as cookieTokenClickThrough,
     viewerToken as viewerTokenClickThrough, getAuthClickThroughService} from "../../auth/clickThrough";
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 
 export default getIIIFRouteTree([
     {

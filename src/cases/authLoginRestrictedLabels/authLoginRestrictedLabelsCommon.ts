@@ -1,4 +1,4 @@
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import RootCollection from "../../lib/RootCollection";
 import {hasAccess} from "../../lib/Security";
 import {getAuthLoginService} from "../../auth/login";

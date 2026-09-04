@@ -1,5 +1,5 @@
-let viewerUrlEle = document.getElementById('viewer-url');
-let viewerTypeEle = document.getElementById('viewer-type');
+const viewerUrlEle = document.getElementById('viewer-url');
+const viewerTypeEle = document.getElementById('viewer-type');
 
 if (window.location.href.startsWith('https://iiif-testing.sozialarchiv.ch')) {
     document.getElementById('demo-notice').style.display = 'block';
@@ -57,10 +57,10 @@ function viewerTypeChanged(value) {
 
 function drawTable() {
     let table = '';
-    for (let groupLabel in testCases) {
+    for (const groupLabel in testCases) {
         const testCasesGroup = testCases[groupLabel];
         table += '<tr><th colspan="4"><strong>' + groupLabel + '</strong></th></tr>';
-        for (let testCase of testCasesGroup) {
+        for (const testCase of testCasesGroup) {
             const baseUrl = window.location.href;
             const manifestUrlV3 = baseUrl + 'iiif/v3/' + testCase.uri
             const openUrl = getViewerUrl()  + '?manifest=' + manifestUrlV3;
@@ -95,11 +95,11 @@ function isURL(str) {
 
 function getLinks(testCase, version) {
 
-    if (testCase.hasOwnProperty(version) && testCase[version] === false) {
+    if (Object.hasOwn(testCase, version) && testCase[version] === false) {
         return '<td></td>'
     }
 
-    let baseUrl = window.location.href;
+    const baseUrl = window.location.href;
     const route =  '/' + testCase.uri;
     const manifestUrl = baseUrl + 'iiif/' + version + route;
 
@@ -127,7 +127,7 @@ function getLinks(testCase, version) {
         '</a>';
 
     if (testCase.uv === true) {
-        let uvUrl = baseUrl + 'universalViewer?manifest=' + manifestUrl;
+        const uvUrl = baseUrl + 'universalViewer?manifest=' + manifestUrl;
         output += '<a class="universal-viewer" href="' + uvUrl + '" target="_blank" title="pen in UniversalViewer viewer"' +
             '>UV</a>';
     }

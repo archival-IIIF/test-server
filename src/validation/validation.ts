@@ -3,7 +3,7 @@ import Ajv from 'ajv/dist/2020';
 import * as fs from 'fs';
 import * as http from 'http';
 import * as https from 'https';
-import {ErrorObject} from "ajv";
+import type {ErrorObject} from "ajv";
 import addFormats from "ajv-formats"
 
 const router = new Router();
@@ -37,17 +37,17 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
     }
 
     try {
-        let manifestData: any = await new Promise((resolve, reject) => {
+        const manifestData: any = await new Promise((resolve, reject) => {
             const h = manifestUrl.startsWith('https') ? https : http;
             h.get(manifestUrl, (response) => {
-                let chunksOfData: any = [];
+                const chunksOfData: any = [];
 
                 response.on('data', (fragments) => {
                     chunksOfData.push(fragments);
                 });
 
                 response.on('end', () => {
-                    let response_body = Buffer.concat(chunksOfData);
+                    const response_body = Buffer.concat(chunksOfData);
 
                     // promise resolved on success
                     resolve(response_body.toString());
@@ -69,7 +69,7 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
         addFormats(ajv);
 
         ajv.validate(schema, data);
-        let errors = ajv.errors;
+        const errors = ajv.errors;
 
         if (errors) {
             result2[manifestUrl] = errors;
@@ -77,9 +77,9 @@ async function validateUrl(manifestUrl?: string, result?: IResult) {
             result2[manifestUrl] = 'Validation successful';
         }
 
-        if (data.hasOwnProperty('items')) {
+        if (Object.hasOwn(data, 'items')) {
             for (const item of data.items) {
-                if (result2.hasOwnProperty(item.id)) {
+                if (Object.hasOwn(result2, item.id)) {
                     result2[item.id] = 'Loop';
                     continue;
                 }

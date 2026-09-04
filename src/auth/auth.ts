@@ -2,7 +2,7 @@ import * as path from 'path';
 import {createReadStream} from 'fs';
 import {hasAccess} from '../lib/Security';
 import moment from 'moment';
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 
 export function loginPage(ctx: ParameterizedContext, cookieName?: string, cookieToken?: string) {
 

@@ -1,4 +1,4 @@
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {Resource} from "@archival-iiif/presentation-builder";
 import FileManifest from "../../lib/FileManifest";
 import RootCollection from "../../lib/RootCollection";

@@ -1,7 +1,7 @@
 import {cookieName, cookieToken, viewerToken, getAuthLoginService} from "../../auth/login";
-import {ParameterizedContext} from "koa";
-import {getCollectionBody, getIIIFRouteTree, iRoute,} from "../../lib/Route";
-import RootCollection from "../../lib/RootCollection";
+import type {ParameterizedContext} from "koa";
+import {getCollectionBody, getIIIFRouteTree, type iRoute,} from "../../lib/Route";
+import type RootCollection from "../../lib/RootCollection";
 import {hasAccess} from "../../lib/Security";
 
 

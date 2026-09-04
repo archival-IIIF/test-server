@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 import {loginPage, tokenPage, logoutPage} from "../auth/auth";
-import {Context, ParameterizedContext} from "koa";
+import type {Context, ParameterizedContext} from "koa";
 import {AuthService} from "@archival-iiif/presentation-builder";
 import getBaseUrl from "../lib/BaseUrl";
 

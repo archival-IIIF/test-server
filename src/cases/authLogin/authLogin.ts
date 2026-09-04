@@ -4,7 +4,7 @@ import {
     viewerToken,
     getAuthLoginService,
 } from "../../auth/login";
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {getCollectionBody, getIIIFRouteTree} from "../../lib/Route";
 
 

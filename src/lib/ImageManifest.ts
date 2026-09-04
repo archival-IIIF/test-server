@@ -18,7 +18,7 @@ export default class ImageManifest extends Manifest {
 
         const items: Canvas[] = [];
         let i = 1;
-        for (let imageServiceId0 of imageServiceIds) {
+        for (const imageServiceId0 of imageServiceIds) {
             const canvas = new Canvas(
                 id + '/' + i.toString() + '/canvas',
                 '',

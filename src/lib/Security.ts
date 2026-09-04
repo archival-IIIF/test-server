@@ -1,5 +1,5 @@
-import {ParameterizedContext} from "koa";
-import {RouterContext} from "@koa/router";
+import type {ParameterizedContext} from "koa";
+import type {RouterContext} from "@koa/router";
 
 export function hasAccess(
     ctx: RouterContext | ParameterizedContext,
@@ -8,7 +8,7 @@ export function hasAccess(
     viewerToken?: string) {
 
     if (cookieName) {
-        let cookieValue = ctx.cookies.get(cookieName);
+        const cookieValue = ctx.cookies.get(cookieName);
         if (cookieToken && cookieValue === cookieToken) {
             return true;
         }
@@ -16,7 +16,7 @@ export function hasAccess(
 
 
 
-    if (ctx.headers.hasOwnProperty('authorization')) {
+    if (Object.hasOwn(ctx.headers, 'authorization')) {
         const headerToken = ctx.headers.authorization?.replace('Bearer', '').trim();
 
         if (headerToken === viewerToken) {

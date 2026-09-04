@@ -1,5 +1,5 @@
 import {getIIIFRouteTree, getImageBody} from "../../lib/Route";
-import {ParameterizedContext} from "koa";
+import type {ParameterizedContext} from "koa";
 import {defaultImage} from "../../lib/Image";
 
 const body = (ctx: ParameterizedContext, prefix: string, path: string) => {

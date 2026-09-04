@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import {promisify} from 'util';
 const readFileAsync = promisify(fs.readFile);
 import HttpError from '../lib/HttpError';
-import {Context} from "koa";
+import type {Context} from "koa";
 
 
 async function download(ctx: Context, filePath: string, fileName?: string, encoding?: string) {
