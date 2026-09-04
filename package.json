@@ -26,13 +26,14 @@
     "copyfiles": "^2.4.1",
     "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.0",
+    "@biomejs/biome": "^2.5.11"
   },
   "scripts": {
-    "start": "ts-node ./src/server.ts",
-    "start:prod": "node ./dist/server.js",
-    "watch": "node --watch -r ts-node/register ./src/server.ts",
-    "build": "rimraf dist/ && tsc && copyfiles -u 1 \"src/**/*.html\" \"src/**/*.mp3\" \"src/**/*.webm\" \"src/**/*.vtt\" \"src/**/*.mp4\" \"src/**/*.txt\" \"src/**/*.docx\" \"src/**/*.pdf\" \"src/**/*.png\" \"src/**/*.jpg\" \"src/**/*.png\" \"src/**/*.css\" \"src/**/*.svg\" \"src/**/*.js\" \"src/**/*.json\" dist/"
+    "dev": "node --watch -r ts-node/register ./src/server.ts",
+    "build": "rimraf dist/ && tsc && copyfiles -u 1 \"src/**/*.html\" \"src/**/*.mp3\" \"src/**/*.webm\" \"src/**/*.vtt\" \"src/**/*.mp4\" \"src/**/*.txt\" \"src/**/*.docx\" \"src/**/*.pdf\" \"src/**/*.png\" \"src/**/*.jpg\" \"src/**/*.png\" \"src/**/*.css\" \"src/**/*.svg\" \"src/**/*.js\" \"src/**/*.json\" dist/",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write ."
   },
-  "packageManager": "pnpm@11.5.0"
+  "packageManager": "pnpm@12.0.0"
 }
