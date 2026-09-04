@@ -1,5 +1,5 @@
 # Shared base image for all stages. Built on debian 12 Bookworm. We keep Node 22 to match the project setup.
-FROM node:22-bookworm-slim AS base
+FROM node:24-bookworm-slim AS base
 
 WORKDIR /app
 
@@ -26,7 +26,7 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 RUN pnpm install --prod --frozen-lockfile
 
 # Final image: only the compiled app and runtime dependencies.
-FROM node:22-bookworm-slim AS runtime
+FROM base AS runtime
 
 WORKDIR /app
 

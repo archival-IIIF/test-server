@@ -4,6 +4,8 @@ This a test server to test iiif clients.
 
 It contains test cases of Image API (v2 and v3), Presentation API (v2 and v3) abd Auth API (v1).
 
+![CI](https://github.com/archival-IIIF/test-server/actions/workflows/ci.yml/badge.svg)
+
 ## Installation
 
 1. Install [Node.js](https://nodejs.org/en/https://nodejs.org/en/)
