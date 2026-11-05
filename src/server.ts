@@ -67,6 +67,7 @@ app.use(serve({rootDir: path.join(__dirname, './public'), rootPath: '/public'}))
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/jquery/dist/'), rootPath: '/jquery'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/bootstrap/dist/'), rootPath: '/bootstrap'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/mirador/dist/'), rootPath: '/miradorJS'}));
+app.use(serve({rootDir: path.join(__dirname, './../node_modules/universalviewer/dist/'), rootPath: '/uvJS'}));
 app.use(serve({rootDir: path.join(__dirname, './../node_modules/@archival-iiif/viewer/dist/'), rootPath: '/archival-iiif'}));
 app.use(bodyParser());
 
