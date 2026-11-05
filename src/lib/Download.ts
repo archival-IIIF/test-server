@@ -21,7 +21,9 @@ async function download(ctx: Context, filePath: string, fileName?: string, encod
             contentType.push('charset=' + encoding);
         }
         ctx.set('Content-Type', contentType.join('; '));
-        ctx.set('Content-Disposition', 'inline; filename="' + fileName + '"');
+        ctx.set('X-Content-Type-Options', 'nosniff');
+        const safeFileName = fileName.replace(/["\\\r\n]/g, '_');
+        ctx.set('Content-Disposition', 'inline; filename="' + safeFileName + '"');
         ctx.body = await readFileAsync(filePath);
     }
     catch (_err) {

@@ -35,6 +35,32 @@ export function logoutPage(ctx: ParameterizedContext, cookieName: string) {
     ctx.body = createReadStream(path.join(__dirname, 'logout.html'));
 }
 
+/**
+ * Returns the origin (scheme://host[:port]) of an http(s) URL, or undefined for anything else.
+ */
+function normalizeOrigin(value: string | string[]): string | undefined {
+    const raw = Array.isArray(value) ? value[0] : value;
+    try {
+        const url = new URL(raw);
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+            return undefined;
+        }
+        return url.origin;
+    } catch (_err) {
+        return undefined;
+    }
+}
+
+/**
+ * Serializes a value for safe embedding inside an inline <script> block.
+ */
+function toScriptLiteral(value: unknown): string {
+    return JSON.stringify(value)
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026');
+}
+
 export function tokenPage(ctx: ParameterizedContext, cookieName: string, cookieToken: string, viewerToken: string) {
     const message: IMessage = {};
 
@@ -47,12 +73,17 @@ export function tokenPage(ctx: ParameterizedContext, cookieName: string, cookieT
     }
 
     if (ctx.query.messageId && ctx.query.origin) {
-        message.messageId = ctx.query.messageId as string;
+        const origin = normalizeOrigin(ctx.query.origin);
+        if (!origin) {
+            ctx.throw(400, 'Invalid origin');
+        }
+        message.messageId = String(ctx.query.messageId);
 
+        ctx.type = 'text/html';
         ctx.body = `<html>
             <body>
-            <script>    
-                window.parent.postMessage(${JSON.stringify(message)}, "${ctx.query.origin}");    
+            <script>
+                window.parent.postMessage(${toScriptLiteral(message)}, ${toScriptLiteral(origin)});
             </script>
             </body>
             </html>`;

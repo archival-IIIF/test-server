@@ -1,10 +1,9 @@
-# Shared base image for all stages. Built on debian 12 Bookworm. We keep Node 22 to match the project setup.
-FROM node:24-bookworm-slim AS base
+FROM node:26-trixie-slim AS base
 
 WORKDIR /app
 
-# Enable pnpm via Corepack so we can use the repo's existing pnpm lockfile.
-RUN corepack enable
+COPY package.json ./
+RUN npm install -g "$(node -p "require('./package.json').packageManager.split('+')[0]")"
 
 # Install all dependencies once so the build stage has everything it needs.
 FROM base AS deps
@@ -37,6 +36,8 @@ ENV PORT=3333
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY package.json ./
+
+USER node
 
 EXPOSE 3333
 
